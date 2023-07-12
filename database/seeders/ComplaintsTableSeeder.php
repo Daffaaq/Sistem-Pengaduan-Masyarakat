@@ -37,7 +37,7 @@ class ComplaintsTableSeeder extends Seeder
                 'title' => 'Keluhan 2',
                 'complaint_date' => Carbon::now(),
                 'description' => 'Ini adalah contoh keluhan 2',
-                'status' => 'in progress',
+                'status' => 'pending',
                 'department_id' => $department_id,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
@@ -47,7 +47,7 @@ class ComplaintsTableSeeder extends Seeder
                 'title' => 'Keluhan 3',
                 'complaint_date' => Carbon::now(),
                 'description' => 'Ini adalah contoh keluhan 3',
-                'status' => 'resolved',
+                'status' => 'pending',
                 'department_id' => $department_id,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
@@ -58,12 +58,12 @@ class ComplaintsTableSeeder extends Seeder
         Complaint::insert($complaints);
 
         // Mengubah status contoh komplain
-        $complaintToUpdate = Complaint::where('title', 'Keluhan 1')->first();
-        $complaintToUpdate->status = 'in progress';
-        $complaintToUpdate->save();
+        // $complaintToUpdate = Complaint::where('title', 'Keluhan 1')->first();
+        // $complaintToUpdate->status = 'in progress';
+        // $complaintToUpdate->save();
 
-        $complaintToUpdate = Complaint::where('title', 'Keluhan 2')->first();
-        $complaintToUpdate->status = 'resolved';
-        $complaintToUpdate->save();
+        // $complaintToUpdate = Complaint::where('title', 'Keluhan 2')->first();
+        // $complaintToUpdate->status = 'resolved';
+        // $complaintToUpdate->save();
     }
 }

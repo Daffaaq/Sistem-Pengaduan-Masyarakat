@@ -54,8 +54,17 @@ class AnswerComplaintsTableSeeder extends Seeder
         // Mengubah status komplain yang terkait
         foreach ($complaints as $complaint) {
             $complaintToUpdate = Complaint::find($complaint['complaint_id']);
-            $complaintToUpdate->status = 'resolved';
-            $complaintToUpdate->save();
+
+            // Cek apakah terdapat jawaban pengaduan dengan departemen yang sama
+            $hasSameDepartmentAnswer = Answercomplaints::where('complaint_id', $complaintToUpdate->id)
+                ->where('department_id', $complaintToUpdate->department_id)
+                ->exists();
+
+            // Jika tidak ada jawaban pengaduan dengan departemen yang sama, status tidak berubah
+            if ($hasSameDepartmentAnswer) {
+                $complaintToUpdate->status = 'resolved';
+                $complaintToUpdate->save();
+            }
         }
     }
 }
