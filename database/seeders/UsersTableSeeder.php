@@ -22,9 +22,12 @@ class UsersTableSeeder extends Seeder
         $departmentC = Departements::create(['name' => 'Departemen C']);
 
         // Create roles
-        $roleUser = Roles::create(['name' => 'user']);
-        $roleSuperAdmin = Roles::create(['name' => 'superadmin']);
-        $roleAdmin = Roles::create(['name' => 'admin']);
+        $roleUser = Roles::where('name', 'user')->first();
+        $roleSuperAdmin = Roles::where('name', 'superadmin')->first();
+        $roleAdmin = Roles::where('name', 'admin')->first();
+        // $roleUser = Roles::create(['name' => 'user']);
+        // $roleSuperAdmin = Roles::create(['name' => 'superadmin']);
+        // $roleAdmin = Roles::create(['name' => 'admin']);
 
         // Create users
         User::create([

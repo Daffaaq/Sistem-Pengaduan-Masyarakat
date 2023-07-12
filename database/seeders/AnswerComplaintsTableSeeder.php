@@ -48,22 +48,20 @@ class AnswerComplaintsTableSeeder extends Seeder
             ],
         ];
 
-        // Insert data ke tabel answercomplaints
-        Answercomplaints::insert($complaints);
-
-        // Mengubah status komplain yang terkait
         foreach ($complaints as $complaint) {
             $complaintToUpdate = Complaint::find($complaint['complaint_id']);
 
-            // Cek apakah terdapat jawaban pengaduan dengan departemen yang sama
-            $hasSameDepartmentAnswer = Answercomplaints::where('complaint_id', $complaintToUpdate->id)
-                ->where('department_id', $complaintToUpdate->department_id)
-                ->exists();
+            // Cek apakah komplain dan jawaban pengaduan memiliki departemen yang sama
+            if ($complaintToUpdate->department_id == $complaint['department_id']) {
+                // Insert data jawaban pengaduan jika departemen sama
+                Answercomplaints::create($complaint);
 
-            // Jika tidak ada jawaban pengaduan dengan departemen yang sama, status tidak berubah
-            if ($hasSameDepartmentAnswer) {
+                // Ubah status komplain menjadi 'resolved'
                 $complaintToUpdate->status = 'resolved';
                 $complaintToUpdate->save();
+            } else {
+                // Tidak menyimpan data jawaban pengaduan jika departemen tidak sama
+                // Status komplain tetap 'pending'
             }
         }
     }
