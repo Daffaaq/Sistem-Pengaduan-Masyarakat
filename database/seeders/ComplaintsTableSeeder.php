@@ -31,7 +31,7 @@ class ComplaintsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
 
-                 ],
+            ],
             [
                 'user_id' => $user_id,
                 'title' => 'Keluhan 2',

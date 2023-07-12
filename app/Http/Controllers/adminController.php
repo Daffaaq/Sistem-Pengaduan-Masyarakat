@@ -14,7 +14,9 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $users = User::where('role_id', '=', 1)->with('department')->get();
+        $users = User::whereHas('role', function ($query) {
+            $query->where('name', 'admin');
+        })->whereNotNull('department_id')->get();
 
         return view('admin.index', compact('users'));
     }
@@ -26,7 +28,6 @@ class AdminController extends Controller
      */
     public function create()
     {
-        // Show the form to create a new admin user
         return view('admin.create');
     }
 
@@ -38,24 +39,19 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        // Validate the input data
-        $validatedData = $request->validate([
+        $data = $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:users',
+            'email' => 'required|email',
             'password' => 'required',
             'department_id' => 'required',
+            'role_user' => 'required',
         ]);
 
-        // Create a new admin user
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = bcrypt($request->password);
-        $user->department_id = $request->department_id;
-        $user->role_id = 3; // Assuming the role_id for admin is 3
-        $user->save();
+        $data['password'] = bcrypt($data['password']);
 
-        return redirect()->route('admin.index')->with('success', 'Admin user created successfully.');
+        User::create($data);
+
+        return redirect()->route('admin.index')->with('success', 'User created successfully.');
     }
 
     /**
@@ -67,7 +63,6 @@ class AdminController extends Controller
     public function show($id)
     {
         $user = User::findOrFail($id);
-
         return view('admin.show', compact('user'));
     }
 
@@ -80,7 +75,6 @@ class AdminController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-
         return view('admin.edit', compact('user'));
     }
 
@@ -93,21 +87,20 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Validate the input data
-        $validatedData = $request->validate([
+        $data = $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:users,email,' . $id,
+            'email' => 'required|email',
+            'password' => 'required',
             'department_id' => 'required',
+            'role_user' => 'required',
         ]);
 
-        // Update the admin user
-        $user = User::findOrFail($id);
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->department_id = $request->department_id;
-        $user->save();
+        $data['password'] = bcrypt($data['password']);
 
-        return redirect()->route('admin.index')->with('success', 'Admin user updated successfully.');
+        $user = User::findOrFail($id);
+        $user->update($data);
+
+        return redirect()->route('admin.index')->with('success', 'User updated successfully.');
     }
 
     /**
@@ -118,10 +111,9 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        // Delete the admin user
         $user = User::findOrFail($id);
         $user->delete();
 
-        return redirect()->route('admin.index')->with('success', 'Admin user deleted successfully.');
+        return redirect()->route('admin.index')->with('success', 'User deleted successfully.');
     }
 }

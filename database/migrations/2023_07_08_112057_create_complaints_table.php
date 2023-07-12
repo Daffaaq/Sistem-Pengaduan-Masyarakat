@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('title');
             $table->date('complaint_date');
             $table->longText('description');
-            $table->enum('status', ['pending', 'in progress', 'resolved']);
+            $table->enum('status', ['pending', 'in progress', 'resolved'])->nullable()->default(null);
             $table->unsignedBigInteger('department_id');
             $table->timestamps();
 
