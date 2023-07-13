@@ -1,51 +1,53 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 
 class LoginController extends Controller
 {
-    public function showLoginForm()
+    /**
+     * Where to redirect users after login.
+     *
+     * @var string
+     */
+    protected $redirectTo = '/dashboard';
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
     {
-        return view('login');
+        $this->middleware('guest')->except('logout');
     }
 
+    /**
+     * Handle a login request to the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Http\JsonResponse
+     */
     public function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
+        $this->validateLogin($request);
 
-        if (Auth::attempt($credentials)) {
-            return $this->redirectToDashboard();
+        if ($this->attemptLogin($request)) {
+            $user = Auth::user();
+
+            // Redirect users based on their role
+            if ($user->role_user === 'admin') {
+                return redirect()->route('admin.dashboard');
+            } elseif ($user->role_user === 'superadmin') {
+                return redirect()->route('superadmin.dashboard');
+            } else {
+                return redirect()->route('user.dashboard');
+            }
         }
 
-        // Jika autentikasi gagal, arahkan kembali ke halaman login dengan pesan error
-        return redirect()->back()->withInput()->withErrors(['login' => 'Invalid credentials']);
-    }
-
-    protected function redirectToDashboard()
-    {
-        $user = Auth::user();
-
-        if ($user->role_id === 3) {
-            return redirect()->intended('/admin/dashboard');
-        } elseif ($user->role_id === 2) {
-            return redirect()->intended('/superadmin/dashboard');
-        } else {
-            return redirect()->intended('/user/dashboard');
-        }
-    }
-
-    public function logout(Request $request)
-    {
-        Auth::logout();
-
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
-
-        return redirect('/');
+        return $this->sendFailedLoginResponse($request);
     }
 }
