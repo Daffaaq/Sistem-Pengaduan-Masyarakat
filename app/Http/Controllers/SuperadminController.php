@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 
-class AdminController extends Controller
+class SuperadminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +18,7 @@ class AdminController extends Controller
             $query->where('name', 'admin');
         })->whereNotNull('department_id')->get();
 
-        return view('admin.index', compact('users'));
+        return view('superadmin.layouts.master', compact('users'));
     }
 
     /**

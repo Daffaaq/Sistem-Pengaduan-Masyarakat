@@ -10,12 +10,20 @@ class CheckRole
 {
     public function handle(Request $request, Closure $next, ...$roles)
     {
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+
         $user = Auth::user();
 
-        if (!$user || !in_array($user->role_user, $roles)) {
-            return redirect()->route('login')->with('error', 'Unauthorized');
+        if (!$this->hasRequiredRole($user->role, $roles)) {
+            abort(403, 'Unauthorized');
         }
 
         return $next($request);
+    }
+    private function hasRequiredRole($userRole, $requiredRoles)
+    {
+        return in_array($userRole, $requiredRoles);
     }
 }

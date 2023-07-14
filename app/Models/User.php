@@ -8,7 +8,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Departements;
-use App\Models\Roles;
 
 
 class User extends Authenticatable
@@ -25,17 +24,11 @@ class User extends Authenticatable
         'email',
         'password',
         'department_id',
-        'role_id',
     ];
 
     public function department()
     {
         return $this->belongsTo(Departements::class);
-    }
-
-    public function role()
-    {
-        return $this->belongsTo(Roles::class);
     }
 
     public function answerComplaints()

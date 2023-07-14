@@ -22,26 +22,22 @@ class UsersTableSeeder extends Seeder
         $departmentC = Departements::create(['name' => 'Departemen C']);
 
         // Create roles
-        $roleUser = Roles::where('name', 'user')->first();
-        $roleSuperAdmin = Roles::where('name', 'superadmin')->first();
-        $roleAdmin = Roles::where('name', 'admin')->first();
-        // $roleUser = Roles::create(['name' => 'user']);
-        // $roleSuperAdmin = Roles::create(['name' => 'superadmin']);
-        // $roleAdmin = Roles::create(['name' => 'admin']);
 
         // Create users
         User::create([
             'name' => 'User 1',
             'email' => 'user1@gmail.com',
             'password' => bcrypt('password'),
-            'role_user' => $roleUser->id,
+            'department_id' => null,
+            'role' => 'user',
         ]);
 
         User::create([
             'name' => 'Super Admin',
             'email' => 'superadmin@gmail.com',
             'password' => bcrypt('password'),
-            'role_user' => $roleSuperAdmin->id,
+            'department_id' => null,
+            'role' => 'superadmin',
         ]);
 
         User::create([
@@ -49,7 +45,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'admin1@gmail.com',
             'password' => bcrypt('password'),
             'department_id' => $departmentA->id,
-            'role_user' => $roleAdmin->id,
+            'role' => 'admin',
         ]);
     }
 }

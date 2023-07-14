@@ -19,13 +19,12 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('role')->default('user')->comment('superadmin, admin, user');
             $table->unsignedBigInteger('department_id')->nullable();
-            $table->unsignedBigInteger('role_user');
             $table->rememberToken();
             $table->timestamps();
 
             $table->foreign('department_id')->references('id')->on('departements');
-            $table->foreign('role_user')->references('id')->on('roles');
         });
     }
 
