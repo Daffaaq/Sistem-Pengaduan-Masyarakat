@@ -32,7 +32,7 @@ class DepartementController extends Controller
     public function edit($id)
     {
         $departement = Departements::findOrFail($id);
-        return view('departements.edit', compact('departement'));
+        return view('superadmin.departements.edit-departements', compact('departement'));
     }
 
     public function update(Request $request, $id)

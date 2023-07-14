@@ -32,16 +32,21 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $dpt->name }}</td>
-                            <td>{{ $dpt->email }}</td>
                             <td class="d-flex justify-content-evenly">
                                 {{-- <a href="/dashboard_superadmin/users/{{ $dpt->id }}" class="badge bg-success"><i
-                                        class="bi bi-eye-fill" style="font-size: 18px;"></i></a>
-                                <a href="{{ route('users.edit', $dpt->id) }}" class="badge bg-warning"><i
-                                        class="bi bi-pencil-square" style="font-size: 18px;"></i></a> --}}
+                                        class="bi bi-eye-fill" style="font-size: 18px;"></i></a> --}}
+                                <form action="{{ route('superadmin.departement.edit', $dpt->id) }}" method="GET"
+                                    class="d-inline" target="_blank">
+                                    @csrf
+                                    <button type="submit" class="btn btn-warning">
+                                        <i class="bi bi-pencil-square" style="font-size: 18px;"></i> Edit
+                                    </button>
+                                </form>
                                 <form action="{{ route('superadmin.departement.destroy', $dpt->id) }}" method="POST">
                                     @method('DELETE')
                                     @csrf
-                                    <button class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus?')">Hapus</button>
+                                    <button class="btn btn-danger"
+                                        onclick="return confirm('Apakah Anda yakin ingin menghapus?')">Hapus</button>
                                 </form>
                                 {{-- <!-- <a href="barang/{{ $dpt->id }}" class="badge bg-warning"><i class="bi bi-pencil-square" style="font-size: 18px;"></i></a> --> --}}
                             </td>
