@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Departements;
 
-class SuperadminController extends Controller
+class AdminDepartementsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,11 +15,12 @@ class SuperadminController extends Controller
      */
     public function index()
     {
-        $users = User::whereHas('role', function ($query) {
-            $query->where('name', 'admin');
-        })->whereNotNull('department_id')->get();
+        $admins = User::where('role', 'admin')
+            ->whereNotNull('department_id')
+            ->with('department') // Load the related department
+            ->get();
 
-        return view('superadmin.layouts.master', compact('users'));
+        return view('superadmin.admin.index', compact('admins'));
     }
 
     /**
@@ -28,7 +30,8 @@ class SuperadminController extends Controller
      */
     public function create()
     {
-        return view('admin.create');
+        $departements = Departements::all();
+        return view('superadmin.admin.tambah-admin', compact('departements'));
     }
 
     /**
@@ -44,14 +47,16 @@ class SuperadminController extends Controller
             'email' => 'required|email',
             'password' => 'required',
             'department_id' => 'required',
-            'role_user' => 'required',
         ]);
 
         $data['password'] = bcrypt($data['password']);
 
+        // Tambahkan role sebagai 'admin' secara otomatis
+        $data['role'] = 'admin';
+
         User::create($data);
 
-        return redirect()->route('admin.index')->with('success', 'User created successfully.');
+        return redirect()->route('superadmin.admin.index')->with('success', 'User created successfully.');
     }
 
     /**
@@ -74,8 +79,9 @@ class SuperadminController extends Controller
      */
     public function edit($id)
     {
-        $user = User::findOrFail($id);
-        return view('admin.edit', compact('user'));
+        $admin = User::findOrFail($id);
+        $departements = Departements::all();
+        return view('superadmin.admin.edit-admin', compact('admin', 'departements'));
     }
 
     /**
@@ -92,15 +98,15 @@ class SuperadminController extends Controller
             'email' => 'required|email',
             'password' => 'required',
             'department_id' => 'required',
-            'role_user' => 'required',
         ]);
 
         $data['password'] = bcrypt($data['password']);
+        $data['role'] = 'admin';
 
         $user = User::findOrFail($id);
         $user->update($data);
 
-        return redirect()->route('admin.index')->with('success', 'User updated successfully.');
+        return redirect()->route('superadmin.admin.index')->with('success', 'User updated successfully.');
     }
 
     /**
@@ -109,11 +115,10 @@ class SuperadminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $admin)
     {
-        $user = User::findOrFail($id);
-        $user->delete();
+        $admin->delete();
 
-        return redirect()->route('admin.index')->with('success', 'User deleted successfully.');
+        return redirect()->route('superadmin.admin.index')->with('success', 'User deleted successfully.');
     }
 }

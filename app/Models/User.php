@@ -24,18 +24,19 @@ class User extends Authenticatable
         'email',
         'password',
         'department_id',
+        'role',
     ];
 
     public function department()
     {
-        return $this->belongsTo(Departements::class);
+        return $this->belongsTo(Departements::class, 'department_id');
     }
 
     public function answerComplaints()
     {
         return $this->hasMany(AnswerComplaint::class);
     }
-    
+
     /**
      * The attributes that should be hidden for serialization.
      *

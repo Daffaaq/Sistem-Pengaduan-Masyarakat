@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\SuperadminController;
+use App\Http\Controllers\AdminDepartementsController;
 use App\Http\Controllers\DashboardSuperadminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DepartementController;
@@ -49,14 +49,14 @@ Route::middleware(['auth', 'check.role:superadmin'])->prefix('superadmin')->grou
         Route::delete('/departement/{departement}', [DepartementController::class, 'destroy'])->name('superadmin.departement.destroy');
     });
     Route::prefix('dashboard_superadmin')->group(function () {
-        // Rute-rute Departemen di sini
-        Route::get('/admin', [DepartementController::class, 'index'])->name('superadmin.departement.index');
-        Route::get('/admin/create', [DepartementController::class, 'create'])->name('superadmin.departement.create');
-        Route::post('/admin', [DepartementController::class, 'store'])->name('superadmin.departement.store');
-        Route::get('/admin/{admin}', [DepartementController::class, 'show'])->name('superadmin.departement.show');
-        Route::get('/admin/{admin}/edit', [DepartementController::class, 'edit'])->name('superadmin.departement.edit');
-        Route::put('/admin/{admin}', [DepartementController::class, 'update'])->name('superadmin.departement.update');
-        Route::delete('/admin/{admin}', [DepartementController::class, 'destroy'])->name('superadmin.departement.destroy');
+        // Rute-rute Admin Departemen di sini
+        Route::get('/admin', [AdminDepartementsController::class, 'index'])->name('superadmin.admin.index');
+        Route::get('/admin/create', [AdminDepartementsController::class, 'create'])->name('superadmin.admin.create');
+        Route::post('/admin', [AdminDepartementsController::class, 'store'])->name('superadmin.admin.store');
+        Route::get('/admin/{admin}', [AdminDepartementsController::class, 'show'])->name('superadmin.admin.show');
+        Route::get('/admin/{admin}/edit', [AdminDepartementsController::class, 'edit'])->name('superadmin.admin.edit');
+        Route::put('/admin/{admin}', [AdminDepartementsController::class, 'update'])->name('superadmin.admin.update');
+        Route::delete('/admin/{admin}', [AdminDepartementsController::class, 'destroy'])->name('superadmin.admin.destroy');
     });
 });
 

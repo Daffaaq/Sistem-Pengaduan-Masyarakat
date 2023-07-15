@@ -8,7 +8,7 @@
                 </div>
             </div>
             <div class="float-right my-2">
-                <a class="btn btn-success" href="{{ route('superadmin.departement.create') }}"> Input Departemen</a>
+                <a class="btn btn-success" href="{{ route('superadmin.admin.create') }}"> Input admin</a>
             </div>
 
             @if ($message = Session::get('success'))
@@ -25,25 +25,33 @@
                 <table class="table table-bordered" style="background-color: grey">
                     <tr>
                         <th>No</th>
-                        <th>nama Departement</th>
+                        <th>nama</th>
+                        <th>email</th>
+                        <th>nama Departements</th>
                         <th width="auto">Action</th>
                     </tr>
-                    @foreach ($users as $u)
+                    @foreach ($admins as $admin)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $dpt->name }}</td>
-                            <td>{{ $dpt->email }}</td>
+                            <td>{{ $admin->name }}</td>
+                            <td>{{ $admin->email }}</td>
+                            <td>{{ $admin->department->name }}</td>
                             <td class="d-flex justify-content-evenly">
                                 {{-- <a href="/dashboard_superadmin/users/{{ $dpt->id }}" class="badge bg-success"><i
-                                        class="bi bi-eye-fill" style="font-size: 18px;"></i></a>
-                                <a href="{{ route('users.edit', $dpt->id) }}" class="badge bg-warning"><i
-                                        class="bi bi-pencil-square" style="font-size: 18px;"></i></a> --}}
-                                <form action="{{ route('superadmin.departement.destroy', $u->id) }}" method="POST">
+                                        class="bi bi-eye-fill" style="font-size: 18px;"></i></a> --}}
+                                <form action="{{ route('superadmin.admin.edit', $admin->id) }}" method="GET"
+                                    class="d-inline" target="_blank">
+                                    @csrf
+                                    <button type="submit" class="btn btn-warning">
+                                        <i class="bi bi-pencil-square" style="font-size: 18px;"></i> Edit
+                                    </button>
+                                </form>
+                                <form action="{{ route('superadmin.admin.destroy', $admin->id) }}" method="POST">
                                     @method('DELETE')
                                     @csrf
-                                    <button class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus?')">Hapus</button>
+                                    <button class="btn btn-danger"
+                                        onclick="return confirm('Apakah Anda yakin ingin menghapus?')">Hapus</button>
                                 </form>
-                                {{-- <!-- <a href="barang/{{ $dpt->id }}" class="badge bg-warning"><i class="bi bi-pencil-square" style="font-size: 18px;"></i></a> --> --}}
                             </td>
                         </tr>
                     @endforeach
