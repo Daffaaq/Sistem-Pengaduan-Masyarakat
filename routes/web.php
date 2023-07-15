@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminDepartementsController;
+use App\Http\Controllers\ComplaintSuperadminController;
 use App\Http\Controllers\DashboardSuperadminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DepartementController;
@@ -57,6 +58,10 @@ Route::middleware(['auth', 'check.role:superadmin'])->prefix('superadmin')->grou
         Route::get('/admin/{admin}/edit', [AdminDepartementsController::class, 'edit'])->name('superadmin.admin.edit');
         Route::put('/admin/{admin}', [AdminDepartementsController::class, 'update'])->name('superadmin.admin.update');
         Route::delete('/admin/{admin}', [AdminDepartementsController::class, 'destroy'])->name('superadmin.admin.destroy');
+    });
+    Route::prefix('dashboard_superadmin')->group(function () {
+        // Rute-rute Admin Departemen di sini
+        Route::get('/complaints', [ComplaintSuperadminController::class, 'index'])->name('superadmin.complaints.index');
     });
 });
 
