@@ -6,6 +6,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminDepartementsController;
 use App\Http\Controllers\ComplaintSuperadminController;
 use App\Http\Controllers\DashboardSuperadminController;
+use App\Http\Controllers\ComplaintsToAdminController;
+use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DepartementController;
 use Illuminate\Support\Facades\Auth;
@@ -34,6 +36,11 @@ Auth::routes();
 
 Route::middleware(['auth', 'check.role:admin'])->prefix('admin')->group(function () {
     // Rute-rute admin di sini
+    Route::get('/dashboard_admin', [DashboardAdminController::class, 'index'])->name('admin.dashboard');
+    Route::prefix('dashboard_admin')->group(function () {
+        // Rute-rute Departemen di sini
+        Route::get('/complaints', [ComplaintsToAdminController::class, 'index'])->name('admin.complaints.index');
+    });
 });
 
 Route::middleware(['auth', 'check.role:superadmin'])->prefix('superadmin')->group(function () {
