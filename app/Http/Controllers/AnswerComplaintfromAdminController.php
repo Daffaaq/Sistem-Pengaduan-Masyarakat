@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class DashboardAdminController extends Controller
+class AnswerComplaintfromAdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +13,7 @@ class DashboardAdminController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-        $departmentName = $user->department->name;
-        return view('admin.dashboard_admin.index', compact('departmentName'));
-        // return view('admin.layouts.master');
+        //
     }
 
     /**
