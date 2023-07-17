@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminDepartementsController;
+use App\Http\Controllers\AnswerComplaintfromAdminController;
 use App\Http\Controllers\ComplaintSuperadminController;
 use App\Http\Controllers\DashboardSuperadminController;
 use App\Http\Controllers\ComplaintsToAdminController;
@@ -40,6 +41,9 @@ Route::middleware(['auth', 'check.role:admin'])->prefix('admin')->group(function
     Route::prefix('dashboard_admin')->group(function () {
         // Rute-rute Departemen di sini
         Route::get('/complaints', [ComplaintsToAdminController::class, 'index'])->name('admin.complaints.index');
+        Route::get('/complaints/{complaint}/answer/create', [AnswerComplaintfromAdminController::class, 'create'])->name('admin.complaints.answer.create');
+        Route::put('/complaints/{complaint}/status/update', [ComplaintsToAdminController::class, 'updateStatus'])->name('admin.complaints.status.update');
+        Route::post('/complaints/{complaint}/answer/store', [AnswerComplaintfromAdminController::class, 'store'])->name('admin.complaints.answer.store');
     });
 });
 

@@ -18,8 +18,6 @@ class UsersTableSeeder extends Seeder
     {
         // Create departments
         $departmentA = Departements::create(['name' => 'Departemen A']);
-        $departmentB = Departements::create(['name' => 'Departemen B']);
-        $departmentC = Departements::create(['name' => 'Departemen C']);
 
         // Create roles
 

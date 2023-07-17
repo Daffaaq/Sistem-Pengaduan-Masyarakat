@@ -28,6 +28,7 @@
                         <th width="auto">Date</th>
                         <th width="auto">Description</th>
                         <th width="auto">Status</th>
+                        <th width="auto">Action</th>
                     </tr>
                     @foreach ($complaints as $cp)
                         <tr>
@@ -35,7 +36,34 @@
                             <td>{{ $cp->title }}</td>
                             <td>{{ $cp->complaint_date }}</td>
                             <td>{{ $cp->description }}</td>
-                            <td>{{ $cp->status }}</td>
+                            <td>
+                                @if ($cp->status != 'resolved')
+                                    <form action="{{ route('admin.complaints.status.update', ['complaint' => $cp->id]) }}"
+                                        method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="input-group">
+                                            <select name="status" class="form-control" onchange="this.form.submit()">
+                                                <option value="pending" {{ $cp->status == 'pending' ? 'selected' : '' }}>
+                                                    Pending</option>
+                                                <option value="in progress"
+                                                    {{ $cp->status == 'in progress' ? 'selected' : '' }}>In Progress
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </form>
+                                @else
+                                    Resolved
+                                @endif
+                            </td>
+                            <td>
+                                @if ($cp->status != 'resolved')
+                                    <a href="{{ route('admin.complaints.answer.create', ['complaint' => $cp->id]) }}"
+                                        class="btn btn-primary">Tambah Jawaban</a>
+                                @else
+                                    <button class="btn btn-primary" disabled>Tambah Jawaban</button>
+                                @endif
+                            </td>
                         </tr>
                     @endforeach
                 </table>

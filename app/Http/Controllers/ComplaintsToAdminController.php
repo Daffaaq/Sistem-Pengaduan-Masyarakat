@@ -73,10 +73,23 @@ class ComplaintsToAdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updateStatus(Request $request, $complaintId)
     {
-        //
+        // Temukan pengaduan berdasarkan ID
+        $complaint = Complaint::findOrFail($complaintId);
+
+        // Validasi data yang dikirim melalui permintaan
+        $request->validate([
+            'status' => 'required|in:pending,in progress',
+        ]);
+
+        // Perbarui status pengaduan
+        $complaint->status = $request->status;
+        $complaint->save();
+
+        return redirect()->route('admin.complaints.index')->with('success', 'Status updated successfully.');
     }
+
 
     /**
      * Remove the specified resource from storage.
