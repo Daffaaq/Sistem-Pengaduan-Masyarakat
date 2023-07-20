@@ -33,7 +33,7 @@
                     <button type="submit" class="btn btn-primary">Filter</button>
                 </form>
                 <br>
-                <table class="table table-bordered" style="background-color: grey">
+                <table class="table table-bordered" style="background-color: #78C1F3">
                     <tr>
                         <th width="auto">No</th>
                         <th width="auto">Title</th>

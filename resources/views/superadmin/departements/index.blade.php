@@ -22,7 +22,7 @@
                 </div>
             @endif
             <div class="text-center">
-                <table class="table table-bordered" style="background-color: grey">
+                <table class="table table-bordered" style="background-color: #78C1F3">
                     <tr>
                         <th>No</th>
                         <th>nama Departement</th>
