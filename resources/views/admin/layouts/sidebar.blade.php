@@ -16,7 +16,7 @@
                     alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Alexander Pierce</a>
+                <a href="#" class="d-block">{{ auth()->user()->name }}</a>
             </div>
         </div>
 
@@ -58,7 +58,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="{{ route('admin.answercomplaints.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Answer Complaints

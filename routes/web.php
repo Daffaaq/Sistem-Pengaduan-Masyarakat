@@ -9,6 +9,7 @@ use App\Http\Controllers\ComplaintSuperadminController;
 use App\Http\Controllers\DashboardSuperadminController;
 use App\Http\Controllers\ComplaintsToAdminController;
 use App\Http\Controllers\DashboardAdminController;
+use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DepartementController;
 use Illuminate\Support\Facades\Auth;
@@ -24,9 +25,11 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('Welcome');
-});
+// Route::get('/', function () {
+//     return view('Welcome');
+// });
+
+Route::redirect('/','/login');
 
 Auth::routes();
 // Route::get('/home', [HomeController::class, 'index'])->name('superadmin.dashboard');
@@ -44,6 +47,7 @@ Route::middleware(['auth', 'check.role:admin'])->prefix('admin')->group(function
         Route::get('/complaints/{complaint}/answer/create', [AnswerComplaintfromAdminController::class, 'create'])->name('admin.complaints.answer.create');
         Route::put('/complaints/{complaint}/status/update', [ComplaintsToAdminController::class, 'updateStatus'])->name('admin.complaints.status.update');
         Route::post('/complaints/{complaint}/answer/store', [AnswerComplaintfromAdminController::class, 'store'])->name('admin.complaints.answer.store');
+        Route::get('/answercomplaints', [AnswerComplaintfromAdminController::class, 'index'])->name('admin.answercomplaints.index');
     });
 });
 
@@ -79,5 +83,5 @@ Route::middleware(['auth', 'check.role:superadmin'])->prefix('superadmin')->grou
 
 Route::middleware(['auth', 'check.role:user'])->prefix('user')->group(function () {
     // Rute-rute user di sini
-    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');
+    Route::get('/user', [DashboardUserController::class, 'index'])->name('user.dashboard');
 });
