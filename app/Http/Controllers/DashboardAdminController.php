@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Complaint;
+use App\Models\Answercomplaints;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardAdminController extends Controller
@@ -16,9 +18,25 @@ class DashboardAdminController extends Controller
     {
         $user = Auth::user();
         $departmentName = $user->department->name;
-        return view('admin.dashboard_admin.index', compact('departmentName'));
+
+        // Mendapatkan jumlah total complaints
+        $totalComplaints = Complaint::count();
+
+        // Mendapatkan jumlah complaints dengan status pending
+        $pendingComplaints = Complaint::where('status', 'pending')->count();
+
+        // Mendapatkan jumlah complaints dengan status in progress
+        $inProgressComplaints = Complaint::where('status', 'in progress')->count();
+
+        // Mendapatkan jumlah complaints dengan status resolved
+        $resolvedComplaints = Complaint::where('status', 'resolved')->count();
+        // Mendapatkan jumlah complaints dengan jawaban
+        $answeredComplaints = Answercomplaints::count();
+
+        return view('admin.dashboard_admin.index', compact('departmentName', 'totalComplaints', 'pendingComplaints', 'inProgressComplaints', 'resolvedComplaints', 'answeredComplaints'));
         // return view('admin.layouts.master');
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -47,10 +65,26 @@ class DashboardAdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $user = Auth::user();
+        $departmentName = $user->department->name;
+
+        // Mendapatkan jumlah total complaints
+        $totalComplaints = Complaint::count();
+
+        // Mendapatkan jumlah complaints dengan status pending
+        $pendingComplaints = Complaint::where('status', 'pending')->count();
+
+        // Mendapatkan jumlah complaints dengan status in progress
+        $inProgressComplaints = Complaint::where('status', 'in progress')->count();
+
+        // Mendapatkan jumlah complaints dengan status resolved
+        $resolvedComplaints = Complaint::where('status', 'resolved')->count();
+
+        return view('admin.dashboard_admin.index', compact('departmentName', 'totalComplaints', 'pendingComplaints', 'inProgressComplaints', 'resolvedComplaints'));
     }
+
 
     /**
      * Show the form for editing the specified resource.

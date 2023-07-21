@@ -29,7 +29,7 @@ use Illuminate\Support\Facades\Auth;
 //     return view('Welcome');
 // });
 
-Route::redirect('/','/login');
+Route::redirect('/', '/login');
 
 Auth::routes();
 // Route::get('/home', [HomeController::class, 'index'])->name('superadmin.dashboard');
