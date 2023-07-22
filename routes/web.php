@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminDepartementsController;
@@ -32,7 +33,10 @@ use Illuminate\Support\Facades\Auth;
 Route::redirect('/', '/login');
 
 Auth::routes();
-// Route::get('/home', [HomeController::class, 'index'])->name('superadmin.dashboard');
+
+Route::post('/register', '\App\Http\Controllers\Auth\RegisterController@register')->name('register');
+
+Route::get('/home', [HomeController::class, 'index'])->name('superadmin.dashboard');
 // Rute-rute login disini
 // Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 // Route::post('/login', [LoginController::class, 'login']);
