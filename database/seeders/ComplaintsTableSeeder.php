@@ -60,6 +60,16 @@ class ComplaintsTableSeeder extends Seeder
                         'created_at' => Carbon::now(),
                         'updated_at' => Carbon::now(),
                     ],
+                    [
+                        'user_id' => $user_id,
+                        'title' => 'Keluhan 4',
+                        'complaint_date' => Carbon::now(),
+                        'description' => 'Ini adalah contoh keluhan 4',
+                        'status' => 'pending',
+                        'department_id' => $department_id,
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now(),
+                    ],
                 ];
             }
         }

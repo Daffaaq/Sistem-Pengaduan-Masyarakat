@@ -11,6 +11,7 @@ use App\Http\Controllers\DashboardSuperadminController;
 use App\Http\Controllers\ComplaintsToAdminController;
 use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\DashboardUserController;
+use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DepartementController;
 use Illuminate\Support\Facades\Auth;
@@ -30,18 +31,25 @@ use Illuminate\Support\Facades\Auth;
 //     return view('Welcome');
 // });
 
-Route::redirect('/', '/login');
+// route buat landingpage
+Route::group(['prefix' => '/'], function () {
+    Route::get('/', [LandingPageController::class, 'indexberanda'])->name('beranda');
+    Route::get('/tentang', [LandingPageController::class, 'indexTentang'])->name('tentang');
+    Route::get('/statistik', [LandingPageController::class, 'indexStatik'])->name('statistik');
+    // Tambahkan route lainnya di sini jika ada
+});
 
 Auth::routes();
 
-Route::post('/register', '\App\Http\Controllers\Auth\RegisterController@register')->name('register');
+// Route::post('/register', '\App\Http\Controllers\Auth\RegisterController@register')->name('register');
 
-Route::get('/home', [HomeController::class, 'index'])->name('superadmin.dashboard');
+// Route::get('/home', [HomeController::class, 'index'])->name('superadmin.dashboard');
 // Rute-rute login disini
 // Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 // Route::post('/login', [LoginController::class, 'login']);
 // Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
+// route buat admin
 Route::middleware(['auth', 'check.role:admin'])->prefix('admin')->group(function () {
     // Rute-rute admin di sini
     Route::get('/dashboard_admin', [DashboardAdminController::class, 'index'])->name('admin.dashboard');
@@ -55,6 +63,7 @@ Route::middleware(['auth', 'check.role:admin'])->prefix('admin')->group(function
     });
 });
 
+// route buat superadmin
 Route::middleware(['auth', 'check.role:superadmin'])->prefix('superadmin')->group(function () {
     // Rute-rute superadmin di sini
     Route::get('/dashboard_superadmin', [DashboardSuperadminController::class, 'index'])->name('superadmin.dashboard');
@@ -84,7 +93,7 @@ Route::middleware(['auth', 'check.role:superadmin'])->prefix('superadmin')->grou
     });
 });
 
-
+// route buat user
 Route::middleware(['auth', 'check.role:user'])->prefix('user')->group(function () {
     // Rute-rute user di sini
     Route::get('/user', [DashboardUserController::class, 'index'])->name('user.dashboard');

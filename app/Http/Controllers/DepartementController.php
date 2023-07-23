@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Departements;
+use Illuminate\Support\Facades\Validator;
 
 class DepartementController extends Controller
 {
@@ -20,13 +21,29 @@ class DepartementController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'name' => 'required',
+        // Validate the input data
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|unique:departements,name', // Ensure that 'name' is unique in the 'departements' table
         ]);
 
-        Departements::create($data);
+        // Check if validation fails
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        // Validation passed, create the department
+        Departements::create(['name' => $request->name]);
 
         return redirect()->route('superadmin.departement.index')->with('success', 'Departement created successfully.');
+        // $data = $request->validate([
+        //     'name' => 'required',
+        // ]);
+
+        // Departements::create($data);
+
+        // return redirect()->route('superadmin.departement.index')->with('success', 'Departement created successfully.');
     }
 
     public function edit($id)

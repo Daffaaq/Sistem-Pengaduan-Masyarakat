@@ -34,7 +34,8 @@
                     @enderror
                 </div>
                 <div class="d-flex justify-content-between">
-                    <a href="{{ route('superadmin.departement.index') }}" class="btn btn-outline-secondary mt-3">Kembali</a>
+                    <a href="{{ route('superadmin.departement.index') }}"
+                        class="btn btn-outline-secondary mt-3">Kembali</a>
                     <button type="submit" class="btn btn-primary mt-3">Tambah</button>
                 </div>
             </form>

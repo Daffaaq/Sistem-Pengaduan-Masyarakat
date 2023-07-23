@@ -45,7 +45,6 @@
                         </div>
                     @enderror
                 </div>
-
                 <div class="form-group">
                     <label for="password" class="form-label">Password</label>
                     <input type="password" class="form-control @error('password') is-invalid @enderror" id="password"
