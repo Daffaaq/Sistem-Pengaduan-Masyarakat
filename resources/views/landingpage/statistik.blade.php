@@ -18,9 +18,14 @@
             background-color: #007bff;
             color: #fff;
             padding: 10px;
+            height: 64px;
             text-align: center;
         }
 
+        a.nav-link {
+            color: black
+        }
+        
         nav a {
             color: #fff;
             text-decoration: none;

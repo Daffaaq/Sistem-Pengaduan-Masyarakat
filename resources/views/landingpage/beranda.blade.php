@@ -18,7 +18,12 @@
             background-color: #007bff;
             color: #fff;
             padding: 10px;
+            height: 64px;
             text-align: center;
+        }
+
+        a.nav-link {
+            color: black
         }
 
         nav a {
@@ -292,18 +297,16 @@
         </div>
 
     </div>
-    <footer id="footer" class="inverted">
-        <div class="footer-content">
+    <footer id="footer" class="bg-dark text-white">
+        <div class="footer-content py-5">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="widget">
                             <div class="widget-title">
                                 <img src="http://bkd.pasuruankab.go.id/source/2/index.png" alt="logo"
-                                    style="max-height: 200px">
+                                    style="max-height: 150px">
                             </div>
-
-                            <div id="histats_counter"></div>
                             <div class="footer-social">
                                 <a href="https://www.facebook.com/dikbudmalangkota/?locale=ms_MY"
                                     class="btn btn-facebook" target="_blank">
@@ -320,32 +323,34 @@
                         <div class="widget">
                             <div class="widget-title">Kantor</div>
                             <ul class="list" style="text-align: left;">
-                                <li><a href="#">9RRJ+233, Komplek perkantoran, Karangpanas, Raci, Kec. Bangil,
-                                        Pasuruan,
-                                        Jawa Timur 67153</a></li>
-                                <li><a href="tel:(0343)-429064"><abbr title="Phone">P : (0341)-551333</a></li>
-                                <li><a href="https://www.instagram.com/pemkabpasuruan/"><abbr title="instagram">IG :
-                                            pemkabpasuruan</a></li>
-                                <li><a href="mailto:diskominfo@pasuruankab.go.id">diskominfo@pasuruankab.go.id</a></li>
+                                <li><i class="fas fa-map-marker-alt mr-2"></i><a href="#">9RRJ+233, Komplek
+                                        perkantoran, Karangpanas, Raci, Kec. Bangil, Pasuruan, Jawa Timur 67153</a></li>
+                                <li><i class="fas fa-phone-alt mr-2"></i><a href="tel:(0343)-429064">P :
+                                        (0341)-551333</a></li>
+                                <li><i class="fab fa-instagram mr-2"></i><a
+                                        href="https://www.instagram.com/pemkabpasuruan/">IG : pemkabpasuruan</a></li>
+                                <li><i class="fas fa-envelope mr-2"></i><a
+                                        href="mailto:diskominfo@pasuruankab.go.id">diskominfo@pasuruankab.go.id</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
 
-                    <div class="col-lg-4">
+                    {{-- <div class="col-lg-4">
                         <div class="widget">
                             <div class="widget-title">Map</div>
                             <div class="map-container">
                                 <iframe
                                     src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15805.633305161173!2d112.613599!3d-7.956686!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e78827beffc2665%3A0x9dd38763e9a56b77!2sDinas%20Pendidikan%20dan%20Kebudayaan%20Kota%20Malang!5e0!3m2!1sid!2sid!4v1685023640898!5m2!1sid!2sid"
-                                    width="100%" height="100%" style="border: 0;" allowfullscreen=""
+                                    width="100%" height="150" style="border: 0;" allowfullscreen=""
                                     loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
-        <div class="footer-bar">
+        <div class="footer-bar py-3">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
