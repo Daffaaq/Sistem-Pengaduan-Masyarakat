@@ -9,6 +9,8 @@ use App\Http\Controllers\AnswerComplaintfromAdminController;
 use App\Http\Controllers\ComplaintSuperadminController;
 use App\Http\Controllers\DashboardSuperadminController;
 use App\Http\Controllers\ComplaintsToAdminController;
+use App\Http\Controllers\ComplaintsFromUserController;
+use App\Http\Controllers\AnsweComplaintstoUserController;
 use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\LandingPageController;
@@ -97,4 +99,10 @@ Route::middleware(['auth', 'check.role:superadmin'])->prefix('superadmin')->grou
 Route::middleware(['auth', 'check.role:user'])->prefix('user')->group(function () {
     // Rute-rute user di sini
     Route::get('/user', [DashboardUserController::class, 'index'])->name('user.dashboard');
+    Route::prefix('user')->group(function () {
+        Route::get('/complaints', [ComplaintsFromUserController::class, 'index'])->name('user.complaints.index');
+    });
+    Route::prefix('user')->group(function () {
+        Route::get('/answer_complaints', [AnsweComplaintstoUserController::class, 'index'])->name('user.answercomplaints.index');
+    });
 });

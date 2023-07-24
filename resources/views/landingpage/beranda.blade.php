@@ -2,369 +2,932 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pengaduan ke Dinas</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
-        }
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-        nav {
-            background-color: #007bff;
-            color: #fff;
-            padding: 10px;
-            height: 64px;
-            text-align: center;
-        }
+    <title>SIPMA</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
 
-        a.nav-link {
-            color: black
-        }
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            padding: 10px;
-        }
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
 
-        nav a:hover {
-            background-color: #0056b3;
-            border-radius: 5px;
-        }
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+    <!-- Template Main CSS File -->
+    <link href="assets/css/style.css" rel="stylesheet">
 
-        .card {
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .card img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 5px;
-        }
-
-        .card-content {
-            margin-top: 20px;
-        }
-
-        .card-content h3 {
-            margin-bottom: 10px;
-        }
-
-        .card-content p {
-            color: #666;
-        }
-
-        .cta-button {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .cta-button a {
-            display: inline-block;
-            background-color: #007bff;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-        }
-
-        .cta-button a:hover {
-            background-color: #0056b3;
-        }
-
-        footer {
-            background-color: #333;
-            color: #fff;
-            padding: 30px 0;
-            text-align: center;
-            width: 100%;
-        }
-
-        .footer-content {
-            margin-bottom: 20px;
-        }
-
-        .footer-content img {
-            max-height: 200px;
-            margin-bottom: 20px;
-        }
-
-        .footer-social {
-            display: flex;
-            justify-content: center;
-        }
-
-        .footer-social a {
-            display: inline-block;
-            margin: 0 10px;
-            color: #fff;
-            font-size: 20px;
-        }
-
-        .widget {
-            margin-bottom: 30px;
-        }
-
-        .widget-title {
-            font-weight: bold;
-            font-size: 20px;
-            margin-bottom: 15px;
-        }
-
-        .widget ul {
-            list-style: none;
-            padding-left: 0;
-            margin-bottom: 0;
-        }
-
-        .widget ul li {
-            margin-bottom: 10px;
-        }
-
-        .map-container {
-            position: relative;
-            width: 100%;
-            height: 200px;
-        }
-
-        .map-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-            border-radius: 5px;
-        }
-    </style>
+    <!-- =======================================================
+  * Template Name: Arsha
+  * Updated: Jul 05 2023 with Bootstrap v5.3.0
+  * Template URL: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top ">
         <div class="container d-flex align-items-center">
-            <!-- Added 'd-flex' and 'align-items-center' -->
-            <a class="navbar-brand" href="#">
-                <img src="#" alt="" height="30" class="mr-2" />
-                <span>SIPMA</span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('beranda') }}">Beranda</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('tentang') }}">Tentang</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('statistik') }}">Statistik</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">Register</a>
-                    </li>
+
+            <h1 class="logo me-auto"><a href="index.html">SIPMA</a></h1>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+                    <li><a class="nav-link scrollto" href="#about">About</a></li>
+                    <li><a class="nav-link scrollto" href="#services">Services</a></li>
+                    <li><a class="nav-link   scrollto" href="#portfolio">Portfolio</a></li>
+                    <li><a class="nav-link   scrollto" href="#statistik">Statistik</a></li>
+                    <li><a class="nav-link scrollto" href="#team">Team</a></li>
+                    <li><a class="nav-link" href="{{ route('login') }}">Login</a></li>
+                    <li><a class="nav-link" href="{{ route('register') }}">Register</a></li>
+                    <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
                 </ul>
-            </div>
-        </div>
-    </nav>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 mt-5">
-                <h3 style="text-align: center;">SIPMA (Sistem Pengaduan Masyarakat)</h3>
-                <p style="text-align: justify;">
-                    Sistem Pengaduan Masyarakat (SIPMA) adalah platform yang memungkinkan masyarakat untuk melaporkan
-                    permasalahan atau keluhan yang terjadi di lingkungan sekitar. Melalui SIPMA, pengguna dapat dengan
-                    mudah mengajukan pengaduan mengenai berbagai masalah seperti infrastruktur rusak, kebersihan
-                    lingkungan,
-                    gangguan keamanan, ketertiban, layanan publik, dan banyak lagi. Dengan adanya SIPMA, masyarakat
-                    dapat
-                    dengan cepat dan efisien menyampaikan masalah yang dihadapi kepada pihak berwenang, termasuk
-                    instansi
-                    pemerintah atau lembaga terkait.
-                </p>
-                <p style="text-align: justify;">
-                    Tujuan utama dari SIPMA adalah memberdayakan masyarakat dalam berpartisipasi aktif dalam menjaga
-                    kualitas lingkungan dan fasilitas publik di sekitar mereka. Dengan adanya platform ini, masyarakat
-                    dapat berkontribusi secara langsung untuk meningkatkan kualitas hidup di wilayahnya dan membantu
-                    menciptakan lingkungan yang lebih aman, nyaman, dan berkelanjutan. SIPMA juga berfungsi sebagai alat
-                    untuk memastikan bahwa pemerintah daerah dapat merespons permasalahan dengan lebih baik dan lebih
-                    cepat, sehingga solusi yang tepat dapat diberikan dalam waktu yang singkat.
-                </p>
-                <p style="text-align: justify;">
-                    Proses pengaduan melalui SIPMA sangatlah mudah dan transparan. Pengguna dapat mengisi formulir
-                    pengaduan secara online, yang mencakup informasi tentang masalah yang dihadapi, lokasi kejadian, dan
-                    kontak pengguna. Setelah pengaduan diajukan, sistem akan otomatis menindaklanjuti dan mengarahkan
-                    pengaduan tersebut kepada dinas atau lembaga terkait untuk segera ditangani. Dalam proses ini,
-                    masyarakat
-                    dapat secara real-time melacak status dan perkembangan penanganan pengaduannya, sehingga mereka
-                    dapat
-                    mengetahui kapan masalah tersebut sudah terselesaikan.
-                </p>
-                <p style="text-align: justify;">
-                    Keberadaan SIPMA juga memberikan manfaat bagi pihak pemerintah dan lembaga terkait. Dengan adanya
-                    data
-                    pengaduan yang terkumpul melalui platform ini, pemerintah daerah dapat melakukan analisis terhadap
-                    permasalahan yang sering muncul dan mengambil langkah-langkah yang tepat untuk mencegah dan
-                    menangani
-                    permasalahan tersebut. Informasi yang dikumpulkan juga dapat digunakan sebagai acuan untuk
-                    perencanaan
-                    pembangunan dan perbaikan fasilitas publik, sehingga keputusan pembangunan dapat lebih efektif dan
-                    sesuai
-                    dengan kebutuhan dan aspirasi masyarakat.
-                </p>
-                <p style="text-align: justify;">
-                    Dengan menggunakan SIPMA, diharapkan partisipasi aktif masyarakat dalam melaporkan permasalahan
-                    dapat
-                    meningkat. Selain itu, transparansi dan akuntabilitas dalam penanganan pengaduan dapat ditingkatkan,
-                    sehingga masyarakat merasa yakin bahwa masalah mereka diperhatikan dan diselesaikan dengan baik oleh
-                    pihak berwenang. Sebagai hasilnya, SIPMA dapat menjadi salah satu sarana yang efektif untuk
-                    menciptakan
-                    lingkungan yang lebih baik, harmonis, dan lebih responsif terhadap kebutuhan masyarakat secara
-                    keseluruhan.
-                </p>
-                <p style="text-align: justify;">
-                    SIPMA juga dapat meningkatkan efisiensi dan efektivitas pelayanan publik. Dengan sistem yang
-                    terstruktur dan terotomatisasi, waktu respon terhadap pengaduan dapat dipercepat, dan penyelesaian
-                    masalah dapat dilakukan lebih cepat. Hal ini berarti bahwa masyarakat dapat merasa lebih puas dengan
-                    pelayanan yang diberikan oleh pemerintah dan lembaga terkait.
-                </p>
-                <p style="text-align: justify;">
-                    Selain itu, SIPMA juga menjadi sarana bagi masyarakat untuk menyampaikan aspirasi, keluhan, atau
-                    masalah yang mereka hadapi secara langsung kepada pihak yang berwenang. Ini menciptakan ruang bagi
-                    partisipasi aktif masyarakat dalam proses pembangunan dan perbaikan lingkungan sekitar mereka.
-                    Dengan menggunakan SIPMA, masyarakat dapat memberikan kontribusi yang berarti dalam menciptakan
-                    lingkungan yang lebih baik, aman, dan nyaman untuk semua warga.
-                </p>
-            </div>
         </div>
+    </header><!-- End Header -->
+
+    <!-- ======= Hero Section ======= -->
+    <section id="hero" class="d-flex align-items-center">
+
         <div class="container">
-            <div class="row d-flex justify-content-between">
-                <div class="col-md-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Jumlah Pengaduan</h5>
-                            <p class="card-text">{{ $totalComplaints }}</p>
-                        </div>
+            <div class="row">
+                <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1"
+                    data-aos="fade-up" data-aos-delay="200">
+                    <h1>Kamu Kebanyakan Bacot Tidak Kami Dengar</h1>
+                    <h2>Aspirasi</h2>
+                    <div class="d-flex justify-content-center justify-content-lg-start">
+                        <a href="#about" class="btn-get-started scrollto">Get Started</a>
+                        {{-- <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox btn-watch-video"><i
+                                class="bi bi-play-circle"></i><span>Watch Video</span></a> --}}
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Pengaduan Pending</h5>
-                            <p class="card-text">{{ $pendingComplaints }}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Pengaduan Progress</h5>
-                            <p class="card-text">{{ $inProgressComplaints }}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Pengaduan Resolved</h5>
-                            <p class="card-text">{{ $resolvedComplaints }}</p>
-                        </div>
-                    </div>
+                <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
+                    <img src="assets/img/hero-img.png" class="img-fluid animated" alt="">
                 </div>
             </div>
         </div>
 
-    </div>
-    <footer id="footer" class="bg-dark text-white">
-        <div class="footer-content py-5">
+    </section><!-- End Hero -->
+
+    <main id="main">
+
+        <!-- ======= Clients Section ======= -->
+        <section id="clients" class="clients section-bg">
             <div class="container">
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="widget">
-                            <div class="widget-title">
-                                <img src="http://bkd.pasuruankab.go.id/source/2/index.png" alt="logo"
-                                    style="max-height: 150px">
-                            </div>
-                            <div class="footer-social">
-                                <a href="https://www.facebook.com/dikbudmalangkota/?locale=ms_MY"
-                                    class="btn btn-facebook" target="_blank">
-                                    <i class="fab fa-facebook-f"></i>
-                                </a>
-                                <a href="https://www.instagram.com/dikbudmalangkota/" class="btn btn-instagram"
-                                    target="_blank">
-                                    <i class="fab fa-instagram"></i>
-                                </a>
-                            </div>
-                        </div>
+
+                <div class="row" data-aos="zoom-in">
+
+                    {{-- <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
+                        <img src="assets/img/clients/client-1.png" class="img-fluid" alt="">
                     </div>
-                    <div class="col-lg-4">
-                        <div class="widget">
-                            <div class="widget-title">Kantor</div>
-                            <ul class="list" style="text-align: left;">
-                                <li><i class="fas fa-map-marker-alt mr-2"></i><a href="#">9RRJ+233, Komplek
-                                        perkantoran, Karangpanas, Raci, Kec. Bangil, Pasuruan, Jawa Timur 67153</a></li>
-                                <li><i class="fas fa-phone-alt mr-2"></i><a href="tel:(0343)-429064">P :
-                                        (0341)-551333</a></li>
-                                <li><i class="fab fa-instagram mr-2"></i><a
-                                        href="https://www.instagram.com/pemkabpasuruan/">IG : pemkabpasuruan</a></li>
-                                <li><i class="fas fa-envelope mr-2"></i><a
-                                        href="mailto:diskominfo@pasuruankab.go.id">diskominfo@pasuruankab.go.id</a>
+
+                    <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
+                        <img src="assets/img/clients/client-2.png" class="img-fluid" alt="">
+                    </div>
+
+                    <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
+                        <img src="assets/img/clients/client-3.png" class="img-fluid" alt="">
+                    </div>
+
+                    <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
+                        <img src="assets/img/clients/client-4.png" class="img-fluid" alt="">
+                    </div>
+
+                    <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
+                        <img src="assets/img/clients/client-5.png" class="img-fluid" alt="">
+                    </div>
+
+                    <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
+                        <img src="assets/img/clients/client-6.png" class="img-fluid" alt="">
+                    </div> --}}
+
+                </div>
+
+            </div>
+        </section><!-- End Cliens Section -->
+
+        <!-- ======= About Us Section ======= -->
+        <section id="about" class="about">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>About Us</h2>
+                </div>
+
+                <div class="row content">
+                    <div class="col-lg-6">
+                        <p style="text-align: justify;">
+                            sistem pelayanan masyarakat yang berkomitmen untuk memberikan layanan terbaik kepada seluruh
+                            warga negara. Dengan semangat pelayanan yang unggul, kami bertekad untuk meningkatkan
+                            kualitas hidup masyarakat melalui aksesibilitas, efisiensi, dan kepedulian.
+                        </p>
+                        <ul>
+                            <li><i class="ri-check-double-line"></i> Pelayanan Unggul: Memberikan layanan dengan
+                                profesionalisme, integritas, dan rasa tanggung jawab tinggi.</li>
+                            <li><i class="ri-check-double-line"></i> Inovasi: Mengadopsi teknologi dan metode terbaru
+                                untuk terus meningkatkan kualitas dan efisiensi layanan.</li>
+                            <li><i class="ri-check-double-line"></i> Kolaborasi: Bekerja sama dengan berbagai pihak
+                                untuk mencapai tujuan bersama dan mendukung kemajuan masyarakat.</li>
+                            <li><i class="ri-check-double-line"></i>Kolaborasi: Bekerja sama dengan berbagai pihak untuk
+                                mencapai tujuan bersama dan mendukung kemajuan masyarakat.</li>
+                            <li><i class="ri-check-double-line"></i>Transparansi: Menjaga keterbukaan dalam proses
+                                pelayanan dan pengambilan keputusan.</li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-6 pt-4 pt-lg-0">
+                        <p style="text-align: justify;">
+                            Kami percaya bahwa pelayanan masyarakat yang berkualitas adalah kunci untuk membangun
+                            masyarakat yang lebih maju dan sejahtera. Setiap langkah kecil yang kami ambil untuk
+                            memberikan layanan yang lebih baik merupakan kontribusi nyata bagi kemajuan masyarakat
+                            secara keseluruhan.Kami berkomitmen untuk berkelanjutan dalam usaha kami. Dengan menjaga
+                            lingkungan yang sehat dan berkelanjutan, kami berusaha memberikan dampak positif bagi
+                            masyarakat dan lingkungan di sekitar kami. Kami selalu terbuka untuk mendengar masukan,
+                            kritik, dan saran dari masyarakat. Komunikasi yang jujur dan terbuka merupakan dasar bagi
+                            hubungan yang kuat antara kami dan masyarakat yang kami layani. Perubahan yang kami ciptakan
+                            hari ini adalah
+                            investasi bagi masa depan yang lebih baik. Kami bangga menjadi bagian dari perubahan positif
+                            dalam kehidupan masyarakat dan berkomitmen
+                            untuk terus berusaha meningkatkan kualitas layanan kami. Bersama-sama, mari bangun
+                            masyarakat yang lebih baik dan sejahtera untuk generasi mendatang. Terima kasih atas
+                            dukungan dan kepercayaan Anda. Bersama-sama, mari kita bahu-membahu membangun pelayanan
+                            masyarakat yang lebih baik dan memberdayakan seluruh masyarakat untuk mencapai kesejahteraan
+                            dan kemajuan bersama.
+                        </p>
+                        {{-- <a href="#" class="btn-learn-more">Learn More</a> --}}
+                    </div>
+                </div>
+
+            </div>
+        </section><!-- End About Us Section -->
+
+        <!-- ======= Why Us Section ======= -->
+        <section id="why-us" class="why-us section-bg">
+            <div class="container-fluid" data-aos="fade-up">
+
+                <div class="row">
+
+                    <div
+                        class="col-lg-7 d-flex flex-column justify-content-center align-items-stretch  order-2 order-lg-1">
+
+                        <div class="content">
+                            <h3>Eum ipsam laborum deleniti <strong>velit pariatur architecto aut nihil</strong></h3>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
+                            </p>
+                        </div>
+
+                        <div class="accordion-list">
+                            <ul>
+                                <li>
+                                    <a data-bs-toggle="collapse" class="collapse"
+                                        data-bs-target="#accordion-list-1"><span>01</span> Non consectetur a erat nam
+                                        at lectus urna duis? <i class="bx bx-chevron-down icon-show"></i><i
+                                            class="bx bx-chevron-up icon-close"></i></a>
+                                    <div id="accordion-list-1" class="collapse show"
+                                        data-bs-parent=".accordion-list">
+                                        <p>
+                                            Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus
+                                            laoreet non curabitur gravida. Venenatis lectus magna fringilla urna
+                                            porttitor rhoncus dolor purus non.
+                                        </p>
+                                    </div>
                                 </li>
+
+                                <li>
+                                    <a data-bs-toggle="collapse" data-bs-target="#accordion-list-2"
+                                        class="collapsed"><span>02</span> Feugiat scelerisque varius morbi enim nunc?
+                                        <i class="bx bx-chevron-down icon-show"></i><i
+                                            class="bx bx-chevron-up icon-close"></i></a>
+                                    <div id="accordion-list-2" class="collapse" data-bs-parent=".accordion-list">
+                                        <p>
+                                            Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id
+                                            interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus
+                                            scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper
+                                            dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
+                                        </p>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <a data-bs-toggle="collapse" data-bs-target="#accordion-list-3"
+                                        class="collapsed"><span>03</span> Dolor sit amet consectetur adipiscing elit?
+                                        <i class="bx bx-chevron-down icon-show"></i><i
+                                            class="bx bx-chevron-up icon-close"></i></a>
+                                    <div id="accordion-list-3" class="collapse" data-bs-parent=".accordion-list">
+                                        <p>
+                                            Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci.
+                                            Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet
+                                            nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis
+                                            convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio
+                                            morbi quis
+                                        </p>
+                                    </div>
+                                </li>
+
                             </ul>
                         </div>
+
                     </div>
 
-                    {{-- <div class="col-lg-4">
-                        <div class="widget">
-                            <div class="widget-title">Map</div>
-                            <div class="map-container">
-                                <iframe
-                                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15805.633305161173!2d112.613599!3d-7.956686!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e78827beffc2665%3A0x9dd38763e9a56b77!2sDinas%20Pendidikan%20dan%20Kebudayaan%20Kota%20Malang!5e0!3m2!1sid!2sid!4v1685023640898!5m2!1sid!2sid"
-                                    width="100%" height="150" style="border: 0;" allowfullscreen=""
-                                    loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <div class="col-lg-5 align-items-stretch order-1 order-lg-2 img"
+                        style='background-image: url("assets/img/why-us.png");' data-aos="zoom-in"
+                        data-aos-delay="150">&nbsp;</div>
+                </div>
+
+            </div>
+        </section><!-- End Why Us Section -->
+
+        <!-- ======= Skills Section ======= -->
+        <section id="skills" class="skills">
+            <div class="container" data-aos="fade-up">
+
+                <div class="row">
+                    <div class="col-lg-6 d-flex align-items-center" data-aos="fade-right" data-aos-delay="100">
+                        <img src="assets/img/skills.png" class="img-fluid" alt="">
+                    </div>
+                    <div class="col-lg-6 pt-4 pt-lg-0 content" data-aos="fade-left" data-aos-delay="100">
+                        <h3>Voluptatem dignissimos provident quasi corporis voluptates</h3>
+                        <p class="fst-italic">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore
+                            magna aliqua.
+                        </p>
+
+                        <div class="skills-content">
+
+                            <div class="progress">
+                                <span class="skill">HTML <i class="val">100%</i></span>
+                                <div class="progress-bar-wrap">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="100"
+                                        aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+
+                            <div class="progress">
+                                <span class="skill">CSS <i class="val">90%</i></span>
+                                <div class="progress-bar-wrap">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="90"
+                                        aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+
+                            <div class="progress">
+                                <span class="skill">JavaScript <i class="val">75%</i></span>
+                                <div class="progress-bar-wrap">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="75"
+                                        aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+
+                            <div class="progress">
+                                <span class="skill">Photoshop <i class="val">55%</i></span>
+                                <div class="progress-bar-wrap">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="55"
+                                        aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section><!-- End Skills Section -->
+
+        <!-- ======= Services Section ======= -->
+        <section id="services" class="services section-bg">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>Services</h2>
+                    <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit
+                        sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias
+                        ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in"
+                        data-aos-delay="100">
+                        <div class="icon-box">
+                            <div class="icon"><i class="bx bxl-dribbble"></i></div>
+                            <h4><a href="">Lorem Ipsum</a></h4>
+                            <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in"
+                        data-aos-delay="200">
+                        <div class="icon-box">
+                            <div class="icon"><i class="bx bx-file"></i></div>
+                            <h4><a href="">Sed ut perspici</a></h4>
+                            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in"
+                        data-aos-delay="300">
+                        <div class="icon-box">
+                            <div class="icon"><i class="bx bx-tachometer"></i></div>
+                            <h4><a href="">Magni Dolores</a></h4>
+                            <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in"
+                        data-aos-delay="400">
+                        <div class="icon-box">
+                            <div class="icon"><i class="bx bx-layer"></i></div>
+                            <h4><a href="">Nemo Enim</a></h4>
+                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section><!-- End Services Section -->
+
+        <!-- ======= Cta Section ======= -->
+        <section id="cta" class="cta">
+            <div class="container" data-aos="zoom-in">
+
+                <div class="row">
+                    <div class="col-lg-9 text-center text-lg-start">
+                        <h3>Call To Action</h3>
+                        <p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                            mollit anim id est laborum.</p>
+                    </div>
+                    <div class="col-lg-3 cta-btn-container text-center">
+                        <a class="cta-btn align-middle" href="#">Call To Action</a>
+                    </div>
+                </div>
+
+            </div>
+        </section><!-- End Cta Section -->
+
+        <!-- ======= Portfolio Section ======= -->
+        <section id="portfolio" class="portfolio">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>Portfolio</h2>
+                    <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit
+                        sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias
+                        ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+                </div>
+
+                <ul id="portfolio-flters" class="d-flex justify-content-center" data-aos="fade-up"
+                    data-aos-delay="100">
+                    <li data-filter="*" class="filter-active">All</li>
+                    <li data-filter=".filter-app">App</li>
+                    <li data-filter=".filter-card">Card</li>
+                    <li data-filter=".filter-web">Web</li>
+                </ul>
+
+                <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                        <div class="portfolio-img"><img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid"
+                                alt=""></div>
+                        <div class="portfolio-info">
+                            <h4>App 1</h4>
+                            <p>App</p>
+                            <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery"
+                                class="portfolio-lightbox preview-link" title="App 1"><i class="bx bx-plus"></i></a>
+                            <a href="portfolio-details.html" class="details-link" title="More Details"><i
+                                    class="bx bx-link"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+                        <div class="portfolio-img"><img src="assets/img/portfolio/portfolio-2.jpg" class="img-fluid"
+                                alt=""></div>
+                        <div class="portfolio-info">
+                            <h4>Web 3</h4>
+                            <p>Web</p>
+                            <a href="assets/img/portfolio/portfolio-2.jpg" data-gallery="portfolioGallery"
+                                class="portfolio-lightbox preview-link" title="Web 3"><i class="bx bx-plus"></i></a>
+                            <a href="portfolio-details.html" class="details-link" title="More Details"><i
+                                    class="bx bx-link"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                        <div class="portfolio-img"><img src="assets/img/portfolio/portfolio-3.jpg" class="img-fluid"
+                                alt=""></div>
+                        <div class="portfolio-info">
+                            <h4>App 2</h4>
+                            <p>App</p>
+                            <a href="assets/img/portfolio/portfolio-3.jpg" data-gallery="portfolioGallery"
+                                class="portfolio-lightbox preview-link" title="App 2"><i class="bx bx-plus"></i></a>
+                            <a href="portfolio-details.html" class="details-link" title="More Details"><i
+                                    class="bx bx-link"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+                        <div class="portfolio-img"><img src="assets/img/portfolio/portfolio-4.jpg" class="img-fluid"
+                                alt=""></div>
+                        <div class="portfolio-info">
+                            <h4>Card 2</h4>
+                            <p>Card</p>
+                            <a href="assets/img/portfolio/portfolio-4.jpg" data-gallery="portfolioGallery"
+                                class="portfolio-lightbox preview-link" title="Card 2"><i class="bx bx-plus"></i></a>
+                            <a href="portfolio-details.html" class="details-link" title="More Details"><i
+                                    class="bx bx-link"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+                        <div class="portfolio-img"><img src="assets/img/portfolio/portfolio-5.jpg" class="img-fluid"
+                                alt=""></div>
+                        <div class="portfolio-info">
+                            <h4>Web 2</h4>
+                            <p>Web</p>
+                            <a href="assets/img/portfolio/portfolio-5.jpg" data-gallery="portfolioGallery"
+                                class="portfolio-lightbox preview-link" title="Web 2"><i class="bx bx-plus"></i></a>
+                            <a href="portfolio-details.html" class="details-link" title="More Details"><i
+                                    class="bx bx-link"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                        <div class="portfolio-img"><img src="assets/img/portfolio/portfolio-6.jpg" class="img-fluid"
+                                alt=""></div>
+                        <div class="portfolio-info">
+                            <h4>App 3</h4>
+                            <p>App</p>
+                            <a href="assets/img/portfolio/portfolio-6.jpg" data-gallery="portfolioGallery"
+                                class="portfolio-lightbox preview-link" title="App 3"><i class="bx bx-plus"></i></a>
+                            <a href="portfolio-details.html" class="details-link" title="More Details"><i
+                                    class="bx bx-link"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+                        <div class="portfolio-img"><img src="assets/img/portfolio/portfolio-7.jpg" class="img-fluid"
+                                alt=""></div>
+                        <div class="portfolio-info">
+                            <h4>Card 1</h4>
+                            <p>Card</p>
+                            <a href="assets/img/portfolio/portfolio-7.jpg" data-gallery="portfolioGallery"
+                                class="portfolio-lightbox preview-link" title="Card 1"><i class="bx bx-plus"></i></a>
+                            <a href="portfolio-details.html" class="details-link" title="More Details"><i
+                                    class="bx bx-link"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+                        <div class="portfolio-img"><img src="assets/img/portfolio/portfolio-8.jpg" class="img-fluid"
+                                alt=""></div>
+                        <div class="portfolio-info">
+                            <h4>Card 3</h4>
+                            <p>Card</p>
+                            <a href="assets/img/portfolio/portfolio-8.jpg" data-gallery="portfolioGallery"
+                                class="portfolio-lightbox preview-link" title="Card 3"><i class="bx bx-plus"></i></a>
+                            <a href="portfolio-details.html" class="details-link" title="More Details"><i
+                                    class="bx bx-link"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+                        <div class="portfolio-img"><img src="assets/img/portfolio/portfolio-9.jpg" class="img-fluid"
+                                alt=""></div>
+                        <div class="portfolio-info">
+                            <h4>Web 3</h4>
+                            <p>Web</p>
+                            <a href="assets/img/portfolio/portfolio-9.jpg" data-gallery="portfolioGallery"
+                                class="portfolio-lightbox preview-link" title="Web 3"><i class="bx bx-plus"></i></a>
+                            <a href="portfolio-details.html" class="details-link" title="More Details"><i
+                                    class="bx bx-link"></i></a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section><!-- End Portfolio Section -->
+
+        <!-- ======= Team Section ======= -->
+        <section id="team" class="team section-bg">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>Team</h2>
+                    <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit
+                        sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias
+                        ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-lg-6" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="member d-flex align-items-start">
+                            <div class="pic"><img src="assets/img/team/team-1.jpg" class="img-fluid"
+                                    alt=""></div>
+                            <div class="member-info">
+                                <h4>Walter White</h4>
+                                <span>Chief Executive Officer</span>
+                                <p>Explicabo voluptatem mollitia et repellat qui dolorum quasi</p>
+                                <div class="social">
+                                    <a href=""><i class="ri-twitter-fill"></i></a>
+                                    <a href=""><i class="ri-facebook-fill"></i></a>
+                                    <a href=""><i class="ri-instagram-fill"></i></a>
+                                    <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+                                </div>
                             </div>
                         </div>
-                    </div> --}}
+                    </div>
+
+                    <div class="col-lg-6 mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="member d-flex align-items-start">
+                            <div class="pic"><img src="assets/img/team/team-2.jpg" class="img-fluid"
+                                    alt=""></div>
+                            <div class="member-info">
+                                <h4>Sarah Jhonson</h4>
+                                <span>Product Manager</span>
+                                <p>Aut maiores voluptates amet et quis praesentium qui senda para</p>
+                                <div class="social">
+                                    <a href=""><i class="ri-twitter-fill"></i></a>
+                                    <a href=""><i class="ri-facebook-fill"></i></a>
+                                    <a href=""><i class="ri-instagram-fill"></i></a>
+                                    <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="300">
+                        <div class="member d-flex align-items-start">
+                            <div class="pic"><img src="assets/img/team/team-3.jpg" class="img-fluid"
+                                    alt=""></div>
+                            <div class="member-info">
+                                <h4>William Anderson</h4>
+                                <span>CTO</span>
+                                <p>Quisquam facilis cum velit laborum corrupti fuga rerum quia</p>
+                                <div class="social">
+                                    <a href=""><i class="ri-twitter-fill"></i></a>
+                                    <a href=""><i class="ri-facebook-fill"></i></a>
+                                    <a href=""><i class="ri-instagram-fill"></i></a>
+                                    <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="400">
+                        <div class="member d-flex align-items-start">
+                            <div class="pic"><img src="assets/img/team/team-4.jpg" class="img-fluid"
+                                    alt=""></div>
+                            <div class="member-info">
+                                <h4>Amanda Jepson</h4>
+                                <span>Accountant</span>
+                                <p>Dolorum tempora officiis odit laborum officiis et et accusamus</p>
+                                <div class="social">
+                                    <a href=""><i class="ri-twitter-fill"></i></a>
+                                    <a href=""><i class="ri-facebook-fill"></i></a>
+                                    <a href=""><i class="ri-instagram-fill"></i></a>
+                                    <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section><!-- End Team Section -->
+
+        <!-- ======= Pricing Section ======= -->
+        <section id="pricing" class="pricing">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>Pricing</h2>
+                    <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit
+                        sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias
+                        ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="box">
+                            <h3>Free Plan</h3>
+                            <h4><sup>$</sup>0<span>per month</span></h4>
+                            <ul>
+                                <li><i class="bx bx-check"></i> Quam adipiscing vitae proin</li>
+                                <li><i class="bx bx-check"></i> Nec feugiat nisl pretium</li>
+                                <li><i class="bx bx-check"></i> Nulla at volutpat diam uteera</li>
+                                <li class="na"><i class="bx bx-x"></i> <span>Pharetra massa massa ultricies</span>
+                                </li>
+                                <li class="na"><i class="bx bx-x"></i> <span>Massa ultricies mi quis
+                                        hendrerit</span></li>
+                            </ul>
+                            <a href="#" class="buy-btn">Get Started</a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="200">
+                        <div class="box featured">
+                            <h3>Business Plan</h3>
+                            <h4><sup>$</sup>29<span>per month</span></h4>
+                            <ul>
+                                <li><i class="bx bx-check"></i> Quam adipiscing vitae proin</li>
+                                <li><i class="bx bx-check"></i> Nec feugiat nisl pretium</li>
+                                <li><i class="bx bx-check"></i> Nulla at volutpat diam uteera</li>
+                                <li><i class="bx bx-check"></i> Pharetra massa massa ultricies</li>
+                                <li><i class="bx bx-check"></i> Massa ultricies mi quis hendrerit</li>
+                            </ul>
+                            <a href="#" class="buy-btn">Get Started</a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="300">
+                        <div class="box">
+                            <h3>Developer Plan</h3>
+                            <h4><sup>$</sup>49<span>per month</span></h4>
+                            <ul>
+                                <li><i class="bx bx-check"></i> Quam adipiscing vitae proin</li>
+                                <li><i class="bx bx-check"></i> Nec feugiat nisl pretium</li>
+                                <li><i class="bx bx-check"></i> Nulla at volutpat diam uteera</li>
+                                <li><i class="bx bx-check"></i> Pharetra massa massa ultricies</li>
+                                <li><i class="bx bx-check"></i> Massa ultricies mi quis hendrerit</li>
+                            </ul>
+                            <a href="#" class="buy-btn">Get Started</a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section><!-- End Pricing Section -->
+
+        <!-- ======= Frequently Asked Questions Section ======= -->
+        <section class="block block-counter" id="statistik"
+            style="color: red; padding: 40px 0; background-color: #f3f5fa;">
+            <div class="container" style="max-width: 800px; margin: 0 auto;">
+                <div class="section-title">
+                    <h2>Jumlah Laporan Sekarang</h2>
+                    <div class="container">
+                        <div class="row-flex flex-tablet text-center">
+                            <div class="post post-counter" style="margin-left: auto; margin-right: auto;">
+                                <div class="counter-count">
+                                    <h1 style="font-size: 100px; text-align: center;">{{ $totalComplaints }}</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="footer-bar py-3">
-            <div class="container">
+            <div class="container"
+                style="max-width: 800px; margin: 0 auto; display: flex; justify-content: space-between;">
+                <div class="section-title">
+                    <h2>Jumlah Complaints Pending</h2>
+                    <div class="container">
+                        <div class="row-flex flex-tablet text-center">
+                            <div class="post post-counter" style="margin-left: auto; margin-right: auto;">
+                                <div class="counter-count">
+                                    <h1 style="font-size: 100px; text-align: center;">{{ $pendingComplaints }}</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-title">
+                    <h2>Jumlah Complaints In Progress</h2>
+                    <div class="container">
+                        <div class="row-flex flex-tablet text-center">
+                            <div class="post post-counter" style="margin-left: auto; margin-right: auto;">
+                                <div class="counter-count">
+                                    <h1 style="font-size: 100px; text-align: center;">{{ $inProgressComplaints }}</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-title">
+                    <h2>Jumlah Complaints Resolved</h2>
+                    <div class="container">
+                        <div class="row-flex flex-tablet text-center">
+                            <div class="post post-counter" style="margin-left: auto; margin-right: auto;">
+                                <div class="counter-count">
+                                    <h1 style="font-size: 100px; text-align: center;">{{ $resolvedComplaints }}</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ======= Contact Section ======= -->
+        <section id="contact" class="contact">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>Contact</h2>
+                    <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit
+                        sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias
+                        ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+                </div>
+
                 <div class="row">
-                    <div class="col-lg-12">
-                        <p class="text-center mb-0">&copy;
-                            <script>
-                                document.write(new Date().getFullYear())
-                            </script> DINAS KOMUNIKASI DAN INFORMATIKA KABUPATEN PASURUAN
-                        </p>
+
+                    <div class="col-lg-5 d-flex align-items-stretch">
+                        <div class="info">
+                            <div class="address">
+                                <i class="bi bi-geo-alt"></i>
+                                <h4>Location:</h4>
+                                <p>A108 Adam Street, New York, NY 535022</p>
+                            </div>
+
+                            <div class="email">
+                                <i class="bi bi-envelope"></i>
+                                <h4>Email:</h4>
+                                <p>info@example.com</p>
+                            </div>
+
+                            <div class="phone">
+                                <i class="bi bi-phone"></i>
+                                <h4>Call:</h4>
+                                <p>+1 5589 55488 55s</p>
+                            </div>
+
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621"
+                                frameborder="0" style="border:0; width: 100%; height: 290px;"
+                                allowfullscreen></iframe>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
+                        <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="name">Your Name</label>
+                                    <input type="text" name="name" class="form-control" id="name"
+                                        required>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="name">Your Email</label>
+                                    <input type="email" class="form-control" name="email" id="email"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Subject</label>
+                                <input type="text" class="form-control" name="subject" id="subject" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Message</label>
+                                <textarea class="form-control" name="message" rows="10" required></textarea>
+                            </div>
+                            <div class="my-3">
+                                <div class="loading">Loading</div>
+                                <div class="error-message"></div>
+                                <div class="sent-message">Your message has been sent. Thank you!</div>
+                            </div>
+                            <div class="text-center"><button type="submit">Send Message</button></div>
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+        </section><!-- End Contact Section -->
+
+    </main><!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+
+        <div class="footer-newsletter">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <h4>Join Our Newsletter</h4>
+                        <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+                        <form action="" method="post">
+                            <input type="email" name="email"><input type="submit" value="Subscribe">
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-6 footer-contact">
+                        <h3>Arsha</h3>
+                        <p>
+                            A108 Adam Street <br>
+                            New York, NY 535022<br>
+                            United States <br><br>
+                            <strong>Phone:</strong> +1 5589 55488 55<br>
+                            <strong>Email:</strong> info@example.com<br>
+                        </p>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Useful Links</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Our Services</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Our Social Networks</h4>
+                        <p>Cras fermentum odio eu feugiat lide par naso tierra videa magna derita valies</p>
+                        <div class="social-links mt-3">
+                            <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                            <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                            <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                            <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                            <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container footer-bottom clearfix">
+            <div class="copyright">
+                &copy; Copyright <strong><span>Arsha</span></strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+                <!-- All the links in the footer should remain intact. -->
+                <!-- You can delete the links only if you purchased the pro version. -->
+                <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/ -->
+                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+
+    <div id="preloader"></div>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/aos/aos.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="assets/js/main.js"></script>
+
 </body>
 
 </html>

@@ -15,7 +15,7 @@ class Answercomplaints extends Model
     use HasFactory;
 
     protected $fillable = [
-        'answer', 'answer_complaint_date','department_id', 'user_id', 'complaint_id',
+        'answer', 'answer_complaint_date', 'department_id', 'user_id', 'complaint_id',
     ];
 
     public function department()
@@ -30,7 +30,7 @@ class Answercomplaints extends Model
 
     public function complaint()
     {
-        return $this->belongsTo(Complaint::class);
+        return $this->belongsTo(Complaint::class, 'complaint_id');
     }
     protected static function boot()
     {

@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Answercomplaints;
 use App\Models\Complaint;
 use App\Models\Departements;
 use Illuminate\Support\Facades\Auth;
 
-class ComplaintsFromUserController extends Controller
+class AnsweComplaintstoUserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,10 +20,15 @@ class ComplaintsFromUserController extends Controller
         // Get the authenticated user's ID
         $userId = Auth::id();
 
-        // Get all complaints created by the authenticated user
-        $complaints = Complaint::where('user_id', $userId)->get();
+        // Get all complaints created by the authenticated user along with their answers
+        $complaints = Complaint::with('department',
+            'answerComplaint'
+        )
+        ->where('user_id', $userId)
+        ->get();
 
-        return view('masyarakat.complaints.index', compact('complaints'));
+
+        return view('masyarakat.answer_complaints.index', compact('complaints'));
     }
 
     /**
@@ -32,8 +38,7 @@ class ComplaintsFromUserController extends Controller
      */
     public function create()
     {
-        $departments = Departements::all();
-        return view('user.complaints.create', compact('departments'));
+        //
     }
 
     /**
@@ -44,24 +49,7 @@ class ComplaintsFromUserController extends Controller
      */
     public function store(Request $request)
     {
-        // Validate the request data
-        $request->validate([
-            'title' => 'required|string',
-            'description' => 'required|string',
-            'department_id' => 'required|exists:departments,id',
-        ]);
-
-        // Create the complaint
-        $complaint = new Complaint();
-        $complaint->user_id = Auth::id();
-        $complaint->title = $request->input('title');
-        $complaint->complaint_date = now();
-        $complaint->description = $request->input('description');
-        $complaint->status = 'pending';
-        $complaint->department_id = $request->input('department_id');
-        $complaint->save();
-
-        return redirect()->route('user.dashboard')->with('success', 'Complaint created successfully.');
+        //
     }
 
     /**

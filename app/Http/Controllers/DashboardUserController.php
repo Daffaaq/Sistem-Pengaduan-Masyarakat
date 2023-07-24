@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardUserController extends Controller
 {
@@ -13,7 +14,11 @@ class DashboardUserController extends Controller
      */
     public function index()
     {
-        return view('masyarakat.index');
+        // Get the authenticated user's ID
+        $userId = Auth::id();
+
+        // Get all complaints created by the authenticated user
+        return view('masyarakat.layouts.master');
     }
 
     /**

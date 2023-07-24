@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Department;
 use App\Models\User;
-use App\Models\Answercomplaint;
+use App\Models\Answercomplaints;
 
 class Complaint extends Model
 {
@@ -28,6 +28,6 @@ class Complaint extends Model
 
     public function answerComplaint()
     {
-        return $this->hasOne(Answercomplaint::class);
+        return $this->hasMany(Answercomplaints::class, 'complaint_id');
     }
 }
