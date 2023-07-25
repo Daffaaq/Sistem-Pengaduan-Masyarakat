@@ -583,24 +583,27 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="300">
-                        <div class="member d-flex align-items-start">
-                            <div class="pic"><img src="assets/img/team/team-3.jpg" class="img-fluid"
-                                    alt=""></div>
-                            <div class="member-info">
-                                <h4>Yoby Ryaian pratama</h4>
-                                <span>Front End Web Developer</span>
-                                <p>Quisquam facilis cum velit laborum corrupti fuga rerum quia</p>
-                                <div class="social">
-                                    <a href=""><i class="ri-twitter-fill"></i></a>
-                                    <a href=""><i class="ri-facebook-fill"></i></a>
-                                    <a href="https://www.instagram.com/yobiprtma_/"><i
-                                            class="ri-instagram-fill"></i></a>
-                                    <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="300">
+                            <div class="member d-flex align-items-start">
+                                <div class="pic"><img src="assets/img/team/team-3.jpg" class="img-fluid"
+                                        alt=""></div>
+                                <div class="member-info">
+                                    <h4>Yoby Ryaian pratama</h4>
+                                    <span>Front End Web Developer</span>
+                                    <p>Quisquam facilis cum velit laborum corrupti fuga rerum quia</p>
+                                    <div class="social">
+                                        <a href=""><i class="ri-twitter-fill"></i></a>
+                                        <a href=""><i class="ri-facebook-fill"></i></a>
+                                        <a href="https://www.instagram.com/yobiprtma_/"><i
+                                                class="ri-instagram-fill"></i></a>
+                                        <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
 
                     {{-- <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="400">
                         <div class="member d-flex align-items-start">
