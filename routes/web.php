@@ -101,6 +101,8 @@ Route::middleware(['auth', 'check.role:user'])->prefix('user')->group(function (
     Route::get('/user', [DashboardUserController::class, 'index'])->name('user.dashboard');
     Route::prefix('user')->group(function () {
         Route::get('/complaints', [ComplaintsFromUserController::class, 'index'])->name('user.complaints.index');
+        Route::get('/complaints/create', [ComplaintsFromUserController::class, 'create'])->name('user.complaints.create');
+        Route::post('/complaints', [ComplaintsFromUserController::class, 'store'])->name('user.complaints.store');
     });
     Route::prefix('user')->group(function () {
         Route::get('/answer_complaints', [AnsweComplaintstoUserController::class, 'index'])->name('user.answercomplaints.index');

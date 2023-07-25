@@ -7,6 +7,9 @@
                     <!-- Content -->
                 </div>
             </div>
+            <div class="float-right my-2">
+                <a class="btn btn-success" href="{{ route('user.complaints.create') }}"> Ajukan Complaints</a>
+            </div>
             @if ($message = Session::get('success'))
                 <div class="alert alert-success">
                     <p>{{ $message }}</p>

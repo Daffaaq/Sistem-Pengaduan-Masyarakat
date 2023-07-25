@@ -33,7 +33,7 @@ class ComplaintsFromUserController extends Controller
     public function create()
     {
         $departments = Departements::all();
-        return view('user.complaints.create', compact('departments'));
+        return view('masyarakat.complaints.create-complaints', compact('departments'));
     }
 
     /**
@@ -48,7 +48,7 @@ class ComplaintsFromUserController extends Controller
         $request->validate([
             'title' => 'required|string',
             'description' => 'required|string',
-            'department_id' => 'required|exists:departments,id',
+            'department_id' => 'required|exists:departements,id',
         ]);
 
         // Create the complaint
@@ -61,7 +61,7 @@ class ComplaintsFromUserController extends Controller
         $complaint->department_id = $request->input('department_id');
         $complaint->save();
 
-        return redirect()->route('user.dashboard')->with('success', 'Complaint created successfully.');
+        return redirect()->route('user.complaints.index')->with('success', 'Complaint created successfully.');
     }
 
     /**
