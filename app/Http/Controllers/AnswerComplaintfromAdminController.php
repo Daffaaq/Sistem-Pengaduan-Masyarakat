@@ -16,7 +16,8 @@ class AnswerComplaintfromAdminController extends Controller
      */
     public function index()
     {
-        $answers = Answercomplaints::with('complaint')->get();
+        $departmentId = Auth::user()->department_id;
+        $answers = Answercomplaints::where('department_id', $departmentId)->get();
         return view('admin.answer_complaints.index', compact('answers'));
     }
 

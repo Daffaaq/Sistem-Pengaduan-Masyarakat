@@ -54,12 +54,12 @@
                     <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
                     <li><a class="nav-link scrollto" href="#about">About</a></li>
                     <li><a class="nav-link scrollto" href="#services">Services</a></li>
-                    <li><a class="nav-link   scrollto" href="#portfolio">Portfolio</a></li>
-                    <li><a class="nav-link   scrollto" href="#statistik">Statistik</a></li>
+                    {{-- <li><a class="nav-link   scrollto" href="#portfolio">Portfolio</a></li> --}}
                     <li><a class="nav-link scrollto" href="#team">Team</a></li>
+                    <li><a class="nav-link   scrollto" href="#statistik">Statistik</a></li>
                     <li><a class="nav-link" href="{{ route('login') }}">Login</a></li>
                     <li><a class="nav-link" href="{{ route('register') }}">Register</a></li>
-                    <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
+                    {{-- <li><a class="getstarted scrollto" href="#about">Get Started</a></li> --}}
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
@@ -77,7 +77,7 @@
                     <h1>Kamu Kebanyakan Bacot Tidak Kami Dengar</h1>
                     <h2>Aspirasi</h2>
                     <div class="d-flex justify-content-center justify-content-lg-start">
-                        <a href="#about" class="btn-get-started scrollto">Get Started</a>
+                        <a href="{{ route('register') }}" class="btn-get-started">Get Started</a>
                         {{-- <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox btn-watch-video"><i
                                 class="bi bi-play-circle"></i><span>Watch Video</span></a> --}}
                     </div>
@@ -390,7 +390,7 @@
         </section><!-- End Cta Section -->
 
         <!-- ======= Portfolio Section ======= -->
-        <section id="portfolio" class="portfolio">
+        {{-- <section id="portfolio" class="portfolio">
             <div class="container" data-aos="fade-up">
 
                 <div class="section-title">
@@ -530,7 +530,7 @@
                 </div>
 
             </div>
-        </section><!-- End Portfolio Section -->
+        </section><!-- End Portfolio Section --> --}}
 
         <!-- ======= Team Section ======= -->
         <section id="team" class="team section-bg">
@@ -550,13 +550,14 @@
                             <div class="pic"><img src="assets/img/team/team-1.jpg" class="img-fluid"
                                     alt=""></div>
                             <div class="member-info">
-                                <h4>Walter White</h4>
-                                <span>Chief Executive Officer</span>
+                                <h4>Daffa Aqila Rahmatullah</h4>
+                                <span>Backend Web Developer</span>
                                 <p>Explicabo voluptatem mollitia et repellat qui dolorum quasi</p>
                                 <div class="social">
                                     <a href=""><i class="ri-twitter-fill"></i></a>
                                     <a href=""><i class="ri-facebook-fill"></i></a>
-                                    <a href=""><i class="ri-instagram-fill"></i></a>
+                                    <a href="https://www.instagram.com/daffaaqilar/"><i
+                                            class="ri-instagram-fill"></i></a>
                                     <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
                                 </div>
                             </div>
@@ -568,13 +569,14 @@
                             <div class="pic"><img src="assets/img/team/team-2.jpg" class="img-fluid"
                                     alt=""></div>
                             <div class="member-info">
-                                <h4>Sarah Jhonson</h4>
-                                <span>Product Manager</span>
+                                <h4>Faiza kurnia Putri</h4>
+                                <span>Front End Web Developer</span>
                                 <p>Aut maiores voluptates amet et quis praesentium qui senda para</p>
                                 <div class="social">
                                     <a href=""><i class="ri-twitter-fill"></i></a>
                                     <a href=""><i class="ri-facebook-fill"></i></a>
-                                    <a href=""><i class="ri-instagram-fill"></i></a>
+                                    <a href="https://www.instagram.com/faiza.krnia/"><i
+                                            class="ri-instagram-fill"></i></a>
                                     <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
                                 </div>
                             </div>
@@ -586,20 +588,21 @@
                             <div class="pic"><img src="assets/img/team/team-3.jpg" class="img-fluid"
                                     alt=""></div>
                             <div class="member-info">
-                                <h4>William Anderson</h4>
-                                <span>CTO</span>
+                                <h4>Yoby Ryaian pratama</h4>
+                                <span>Front End Web Developer</span>
                                 <p>Quisquam facilis cum velit laborum corrupti fuga rerum quia</p>
                                 <div class="social">
                                     <a href=""><i class="ri-twitter-fill"></i></a>
                                     <a href=""><i class="ri-facebook-fill"></i></a>
-                                    <a href=""><i class="ri-instagram-fill"></i></a>
+                                    <a href="https://www.instagram.com/yobiprtma_/"><i
+                                            class="ri-instagram-fill"></i></a>
                                     <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="400">
+                    {{-- <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="400">
                         <div class="member d-flex align-items-start">
                             <div class="pic"><img src="assets/img/team/team-4.jpg" class="img-fluid"
                                     alt=""></div>
@@ -615,7 +618,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
                 </div>
 
@@ -623,7 +626,7 @@
         </section><!-- End Team Section -->
 
         <!-- ======= Pricing Section ======= -->
-        <section id="pricing" class="pricing">
+        {{-- <section id="pricing" class="pricing">
             <div class="container" data-aos="fade-up">
 
                 <div class="section-title">
@@ -685,7 +688,7 @@
                 </div>
 
             </div>
-        </section><!-- End Pricing Section -->
+        </section><!-- End Pricing Section --> --}}
 
         <!-- ======= Frequently Asked Questions Section ======= -->
         <section class="block block-counter" id="statistik"

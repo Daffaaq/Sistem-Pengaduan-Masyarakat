@@ -19,7 +19,7 @@
                     <div class="col-lg-6">
                         <div class="card1 pb-5">
                             <div class="row px-3 justify-content-center mt-4 mb-5 border-line">
-                                <img src="{{ asset('assets/images/login.jpg') }}" class="image">
+                                <img src="{{ asset('assets/img/why-us.png') }}" class="img-fluid animated">
                             </div>
                         </div>
                     </div>
@@ -82,6 +82,11 @@
                                 <small class="font-weight-bold">Don't have an account? <a class="text-danger"
                                         href="{{ route('register') }}">Register</a></small>
                             </div>
+                            <div class="row mb-4 px-3">
+                                <a href="{{ route('beranda') }}" class="btn btn-danger font-weight-bold">Back To Landing
+                                    Page</a>
+                            </div>
+
                         </div>
                     </div>
                 </div>

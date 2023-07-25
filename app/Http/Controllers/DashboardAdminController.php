@@ -19,21 +19,29 @@ class DashboardAdminController extends Controller
         $user = Auth::user();
         $departmentName = $user->department->name;
 
-        // Mendapatkan jumlah total complaints
-        $totalComplaints = Complaint::count();
+        // Mendapatkan jumlah total complaints berdasarkan department
+        $totalComplaints = Complaint::where('department_id', $user->department->id)->count();
 
-        // Mendapatkan jumlah complaints dengan status pending
-        $pendingComplaints = Complaint::where('status', 'pending')->count();
+        // Mendapatkan jumlah complaints dengan status pending berdasarkan department
+        $pendingComplaints = Complaint::where('department_id', $user->department->id)
+            ->where('status', 'pending')
+            ->count();
 
-        // Mendapatkan jumlah complaints dengan status in progress
-        $inProgressComplaints = Complaint::where('status', 'in progress')->count();
+        // Mendapatkan jumlah complaints dengan status in progress berdasarkan department
+        $inProgressComplaints = Complaint::where('department_id', $user->department->id)
+            ->where('status', 'in progress')
+            ->count();
 
-        // Mendapatkan jumlah complaints dengan status resolved
-        $resolvedComplaints = Complaint::where('status', 'resolved')->count();
-        // Mendapatkan jumlah complaints dengan jawaban
-        $answeredComplaints = Answercomplaints::count();
+        // Mendapatkan jumlah complaints dengan status resolved berdasarkan department
+        $resolvedComplaints = Complaint::where('department_id', $user->department->id)
+            ->where('status', 'resolved')
+            ->count();
+
+        // Mendapatkan jumlah complaints dengan jawaban berdasarkan department
+        $answeredComplaints = Answercomplaints::where('department_id', $user->department->id)->count();
 
         return view('admin.dashboard_admin.index', compact('departmentName', 'totalComplaints', 'pendingComplaints', 'inProgressComplaints', 'resolvedComplaints', 'answeredComplaints'));
+
         // return view('admin.layouts.master');
     }
 
