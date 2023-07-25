@@ -33,6 +33,27 @@
                         </div>
                     @enderror
                 </div>
+                <div class="mb-3">
+                    <label for="longitude" class="form-label">Longitude (Optional)</label>
+                    <input type="text" class="form-control @error('longitude') is-invalid @enderror" id="longitude"
+                        name="longitude" value="{{ old('longitude') }}">
+                    @error('longitude')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label for="latitude" class="form-label">Latitude (Optional)</label>
+                    <input type="text" class="form-control @error('latitude') is-invalid @enderror" id="latitude"
+                        name="latitude" value="{{ old('latitude') }}">
+                    @error('latitude')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
                 <div class="d-flex justify-content-between">
                     <a href="{{ route('superadmin.departement.index') }}"
                         class="btn btn-outline-secondary mt-3">Kembali</a>

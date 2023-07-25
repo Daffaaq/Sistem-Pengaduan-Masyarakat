@@ -24,6 +24,8 @@ class DepartementController extends Controller
         // Validate the input data
         $validator = Validator::make($request->all(), [
             'name' => 'required|unique:departements,name', // Ensure that 'name' is unique in the 'departements' table
+            'longitude' => 'nullable',
+            'latitude' => 'nullable',
         ]);
 
         // Check if validation fails
@@ -34,7 +36,11 @@ class DepartementController extends Controller
         }
 
         // Validation passed, create the department
-        Departements::create(['name' => $request->name]);
+        Departements::create([
+            'name' => $request->name,
+            'longitude' => $request->longitude,
+            'latitude' => $request->latitude,
+        ]);
 
         return redirect()->route('superadmin.departement.index')->with('success', 'Departement created successfully.');
         // $data = $request->validate([

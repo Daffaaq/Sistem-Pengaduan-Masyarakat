@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Complaint;
+use App\Models\Departements;
 
 class LandingPageController extends Controller
 {
@@ -25,7 +26,8 @@ class LandingPageController extends Controller
 
         // Mendapatkan jumlah complaints dengan status resolved
         $resolvedComplaints = Complaint::where('status', 'resolved')->count();
-        return view('landingpage.beranda', compact('totalComplaints', 'pendingComplaints', 'inProgressComplaints', 'resolvedComplaints',));
+        $departements = Departements::all();
+        return view('landingpage.beranda', compact('departements','totalComplaints', 'pendingComplaints', 'inProgressComplaints', 'resolvedComplaints',));
     }
     public function indexTentang()
     {

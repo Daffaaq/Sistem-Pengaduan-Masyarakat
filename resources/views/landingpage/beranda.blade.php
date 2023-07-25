@@ -13,6 +13,11 @@
     <link href="assets/img/favicon.png" rel="icon">
     <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
     <!-- Google Fonts -->
     <link
         href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
@@ -82,7 +87,7 @@
                                 class="bi bi-play-circle"></i><span>Watch Video</span></a> --}}
                     </div>
                 </div>
-                <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
+                <div class="col-lg-6 order-1 order-lg-2 hero-img text-center" data-aos="zoom-in" data-aos-delay="400">
                     <img src="assets/img/hero-img.png" class="img-fluid animated" alt="">
                 </div>
             </div>
@@ -191,10 +196,11 @@
                         class="col-lg-7 d-flex flex-column justify-content-center align-items-stretch  order-2 order-lg-1">
 
                         <div class="content">
-                            <h3>Eum ipsam laborum deleniti <strong>velit pariatur architecto aut nihil</strong></h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
+                            <h3>Tujuan <strong>Sistem Pengaduan Masyarakat (SIPMA)</strong></h3>
+                            <p style="text-align: justify;">
+                                untuk memfasilitasi dan meningkatkan partisipasi masyarakat dalam menyampaikan pengaduan
+                                terkait berbagai masalah, pelayanan publik, atau isu sosial kepada pihak berwenang atau
+                                instansi yang berwenang untuk menanganinya
                             </p>
                         </div>
 
@@ -202,46 +208,73 @@
                             <ul>
                                 <li>
                                     <a data-bs-toggle="collapse" class="collapse"
-                                        data-bs-target="#accordion-list-1"><span>01</span> Non consectetur a erat nam
-                                        at lectus urna duis? <i class="bx bx-chevron-down icon-show"></i><i
+                                        data-bs-target="#accordion-list-1"><span>01</span> Meningkatkan Transparansi <i
+                                            class="bx bx-chevron-down icon-show"></i><i
                                             class="bx bx-chevron-up icon-close"></i></a>
                                     <div id="accordion-list-1" class="collapse show"
                                         data-bs-parent=".accordion-list">
-                                        <p>
-                                            Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus
-                                            laoreet non curabitur gravida. Venenatis lectus magna fringilla urna
-                                            porttitor rhoncus dolor purus non.
+                                        <p style="text-align: justify;">
+                                            SIPMA bertujuan untuk menciptakan transparansi dalam proses penanganan
+                                            pengaduan. Dengan adanya sistem yang terbuka, informasi mengenai status dan
+                                            penyelesaian pengaduan dapat diakses oleh masyarakat secara mudah dan jelas.
                                         </p>
                                     </div>
                                 </li>
 
                                 <li>
                                     <a data-bs-toggle="collapse" data-bs-target="#accordion-list-2"
-                                        class="collapsed"><span>02</span> Feugiat scelerisque varius morbi enim nunc?
+                                        class="collapsed"><span>02</span> Memperkuat Akuntabilitas
                                         <i class="bx bx-chevron-down icon-show"></i><i
                                             class="bx bx-chevron-up icon-close"></i></a>
                                     <div id="accordion-list-2" class="collapse" data-bs-parent=".accordion-list">
-                                        <p>
-                                            Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id
-                                            interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus
-                                            scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper
-                                            dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
+                                        <p style="text-align: justify;">
+                                            Tujuan lain dari SIPMA adalah meningkatkan akuntabilitas lembaga pemerintah
+                                            dan institusi publik. Dengan adanya mekanisme pengaduan yang efektif, pihak
+                                            berwenang harus merespons laporan masyarakat dan bertanggung jawab atas
+                                            penanganan masalah yang dihadapi oleh warga.
                                         </p>
                                     </div>
                                 </li>
 
                                 <li>
                                     <a data-bs-toggle="collapse" data-bs-target="#accordion-list-3"
-                                        class="collapsed"><span>03</span> Dolor sit amet consectetur adipiscing elit?
+                                        class="collapsed"><span>03</span> Memberdayakan Masyarakat
                                         <i class="bx bx-chevron-down icon-show"></i><i
                                             class="bx bx-chevron-up icon-close"></i></a>
                                     <div id="accordion-list-3" class="collapse" data-bs-parent=".accordion-list">
-                                        <p>
-                                            Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci.
-                                            Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet
-                                            nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis
-                                            convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio
-                                            morbi quis
+                                        <p style="text-align: justify;">
+                                            SIPMA bertujuan untuk memberdayakan masyarakat dalam menyampaikan keluhan
+                                            dan permasalahan yang mereka alami. Dengan adanya sistem ini, masyarakat
+                                            merasa didengar dan memiliki sarana untuk berpartisipasi aktif dalam proses
+                                            perbaikan dan pengawasan pelayanan publik.
+                                        </p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a data-bs-toggle="collapse" data-bs-target="#accordion-list-4"
+                                        class="collapsed"><span>04</span> Meningkatkan Kualitas Pelayanan Publik
+                                        <i class="bx bx-chevron-down icon-show"></i><i
+                                            class="bx bx-chevron-up icon-close"></i></a>
+                                    <div id="accordion-list-4" class="collapse" data-bs-parent=".accordion-list">
+                                        <p style="text-align: justify;">
+                                            Melalui SIPMA, lembaga pemerintah dan institusi publik dapat mendapatkan
+                                            umpan balik dari masyarakat secara langsung. Informasi ini menjadi bahan
+                                            evaluasi dan perbaikan untuk meningkatkan kualitas layanan yang diberikan
+                                            kepada masyarakat.
+                                        </p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a data-bs-toggle="collapse" data-bs-target="#accordion-list-5"
+                                        class="collapsed"><span>05</span> Mendukung Pemantauan dan Evaluasi
+                                        <i class="bx bx-chevron-down icon-show"></i><i
+                                            class="bx bx-chevron-up icon-close"></i></a>
+                                    <div id="accordion-list-5" class="collapse" data-bs-parent=".accordion-list">
+                                        <p style="text-align: justify;">
+                                            Dengan mencatat pengaduan dan respon yang diberikan, SIPMA memberikan basis
+                                            data yang berharga untuk pemantauan dan evaluasi kinerja pelayanan publik.
+                                            Hal ini membantu mengidentifikasi pola permasalahan, kebutuhan prioritas,
+                                            dan mencari solusi yang lebih baik.
                                         </p>
                                     </div>
                                 </li>
@@ -693,8 +726,70 @@
             </div>
         </section><!-- End Pricing Section --> --}}
 
+        <!-- ======= Services Section ======= -->
+        <section id="statistik" class="services section-bg" style="background-color: #37517E;">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title" style="color: #fff;">
+                    <h2 style="color: #fff;">Statistik</h2>
+                    <p>Statistik Sistem Pengaduan Masyarakat adalah kumpulan data yang mencatat laporan pengaduan dari
+                        masyarakat terkait masalah pelayanan publik dan berbagai isu sosial. Angka-angka ini
+                        mencerminkan partisipasi masyarakat dalam menyampaikan keluhan serta respons pihak dinas terkait
+                        dalam menangani laporan tersebut.</p>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in"
+                        data-aos-delay="200">
+                        <div class="icon-box">
+                            <div class="text-center">
+                                <div class="icon"><i class="bx bx-envelope"></i></div>
+                            </div>
+                            <h4 style="font-size:25px", align="center"><a href="">Complaints
+                                    Pending</a></h4>
+                            <p style="font-size:40px", align="center">{{ $pendingComplaints }}</p>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in"
+                        data-aos-delay="300">
+                        <div class="icon-box">
+                            <div class="text-center">
+                                <div class="icon"><i class="bx bx-time"></i></div>
+                            </div>
+                            <h4 style="font-size:25px", align="center"><a href="">Complaints In
+                                    Progress</a></h4>
+                            <p style="font-size:40px", align="center">{{ $inProgressComplaints }}</p>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in"
+                        data-aos-delay="400">
+                        <div class="icon-box">
+                            <div class="text-center">
+                                <div class="icon"><i class="bx bx-task"></i></div>
+                            </div>
+                            <h4 style="font-size:25px", align="center"><a href="">Complaints
+                                    Resolved</a></h4>
+                            <p style="font-size:40px", align="center">{{ $resolvedComplaints }}</p>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in"
+                        data-aos-delay="100">
+                        <div class="icon-box">
+                            <div class="text-center">
+                                <div class="icon"><i class="bx bx-file"></i></div>
+                            </div>
+                            {{-- <div class="icon"><i class="bx bxl-dribbble"></i></div> --}}
+                            <h4 style="font-size:25px", align="center"><a href="">Jumlah Laporan Sekarang</a>
+                            </h4>
+                            <p style="font-size:40px", align="center">{{ $totalComplaints }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!-- End Services Section -->
+
         <!-- ======= Frequently Asked Questions Section ======= -->
-        <section class="block block-counter" id="statistik"
+        {{-- <section class="block block-counter" id="statistik"
             style="color: red; padding: 40px 0; background-color: #f3f5fa;">
             <div class="container" style="max-width: 800px; margin: 0 auto;">
                 <div class="section-title">
@@ -751,7 +846,7 @@
             </div>
 
 
-        </section>
+        </section> --}}
 
 
 
@@ -789,10 +884,35 @@
                                 <p>0343429064</p>
                             </div>
 
-                            <iframe
+                            <div id="map" style="width: 100%; height: 290px;"></div>
+<script>
+    // Initialize the map
+    var map = L.map('map').setView([-7.609531, 112.828478], 15);
+
+    // Add the tile layer (you can use any other tile layer as well)
+    L.tileLayer("https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}", {
+        maxZoom: 100,
+        subdomains: ["mt0", "mt1", "mt2", "mt3"],
+    }).addTo(map);
+
+    // Create a separate layer group for the markers
+    var markerLayer = L.layerGroup().addTo(map);
+
+    // Add a marker for each departement to the markerLayer
+    @foreach ($departements as $departement)
+        @if($departement->latitude && $departement->longitude)
+            var marker = L.marker([{{ $departement->latitude }}, {{ $departement->longitude }}]);
+            markerLayer.addLayer(marker);
+        @endif
+    @endforeach
+</script>
+
+
+
+                            {{-- <iframe
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7909.355553928362!2d112.82271425691395!3d-7.609998628479007!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7c562865d17b5%3A0x45cd669378aa9e84!2sDinas%20Komunikasi%20dan%20Informatika%20Kabupaten%20Pasuruan!5e0!3m2!1sid!2sid!4v1690172591982!5m2!1sid!2sid"
                                 frameborder="0" style="border:0; width: 100%; height: 290px;"
-                                allowfullscreen></iframe>
+                                allowfullscreen></iframe> --}}
                         </div>
 
                     </div>
