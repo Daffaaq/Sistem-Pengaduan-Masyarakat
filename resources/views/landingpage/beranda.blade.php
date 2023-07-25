@@ -885,27 +885,28 @@
                             </div>
 
                             <div id="map" style="width: 100%; height: 290px;"></div>
-<script>
-    // Initialize the map
-    var map = L.map('map').setView([-7.609531, 112.828478], 15);
+                            <script>
+                                // Initialize the map
+                                var map = L.map('map').setView([-7.609531, 112.828478], 15);
 
-    // Add the tile layer (you can use any other tile layer as well)
-    L.tileLayer("https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}", {
-        maxZoom: 100,
-        subdomains: ["mt0", "mt1", "mt2", "mt3"],
-    }).addTo(map);
+                                // Add the tile layer (you can use any other tile layer as well)
+                                L.tileLayer("https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}", {
+                                    maxZoom: 100,
+                                    subdomains: ["mt0", "mt1", "mt2", "mt3"],
+                                }).addTo(map);
 
-    // Create a separate layer group for the markers
-    var markerLayer = L.layerGroup().addTo(map);
+                                // Create a separate layer group for the markers
+                                var markerLayer = L.layerGroup().addTo(map);
 
-    // Add a marker for each departement to the markerLayer
-    @foreach ($departements as $departement)
-        @if($departement->latitude && $departement->longitude)
-            var marker = L.marker([{{ $departement->latitude }}, {{ $departement->longitude }}]);
-            markerLayer.addLayer(marker);
-        @endif
-    @endforeach
-</script>
+                                // Add a marker for each departement to the markerLayer
+                                @foreach ($departements as $departement)
+                                    @if ($departement->latitude && $departement->longitude && $departement->name)
+                                        var marker = L.marker([{{ $departement->latitude }}, {{ $departement->longitude }}])
+                                            .addTo(markerLayer)
+                                            .bindPopup("{{ $departement->name }}");
+                                    @endif
+                                @endforeach
+                            </script>
 
 
 
