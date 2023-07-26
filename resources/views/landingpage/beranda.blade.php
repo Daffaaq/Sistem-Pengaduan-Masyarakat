@@ -355,7 +355,7 @@
             <div class="container" data-aos="fade-up">
 
                 <div class="section-title">
-                    <h2>Services</h2>
+                    <h2>Pelayanan</h2>
                     <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit
                         sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias
                         ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
@@ -365,36 +365,49 @@
                     <div class="col-xl-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in"
                         data-aos-delay="100">
                         <div class="icon-box">
-                            <div class="icon"><i class="bx bxl-dribbble"></i></div>
-                            <h4><a href="">Lorem Ipsum</a></h4>
-                            <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+                            <div class="icon"><i class="bx bx-cast"></i></div>
+                            <h4><a href="">Aksesibilitas Online</a></h4>
+                            <p style="text-align: justify;">Pelayanan SIPMA memberikan kemudahan akses bagi masyarakat
+                                untuk mengakses layanan
+                                publik secara online dari perangkat mereka, seperti komputer atau ponsel pintar, kapan
+                                saja dan di mana saja.</p>
                         </div>
                     </div>
 
                     <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in"
                         data-aos-delay="200">
                         <div class="icon-box">
-                            <div class="icon"><i class="bx bx-file"></i></div>
-                            <h4><a href="">Sed ut perspici</a></h4>
-                            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
+                            <div class="icon"><i class="bx bx-layer"></i></div>
+                            <h4><a href="">Integrasi Layanan</a></h4>
+                            <p style="text-align: justify;">Pelayanan SIPMA mengintegrasikan berbagai layanan publik
+                                dalam satu platform,
+                                memungkinkan masyarakat untuk mengakses berbagai layanan dari instansi yang berbeda
+                                secara terpadu. Dengan demikian, masyarakat tidak perlu berurusan dengan beberapa
+                                platform atau mengulang proses yang sama saat menggunakan layanan yang berbeda.</p>
                         </div>
                     </div>
 
                     <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in"
                         data-aos-delay="300">
                         <div class="icon-box">
-                            <div class="icon"><i class="bx bx-tachometer"></i></div>
-                            <h4><a href="">Magni Dolores</a></h4>
-                            <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
+                            <div class="icon"><i class="bx bx-rss"></i></div>
+                            <h4><a href="">Pemantauan Status Permohonan</a></h4>
+                            <p style="text-align: justify;">Masyarakat dapat memantau status permohonan atau proses
+                                pelayanan mereka secara real-time melalui platform online, sehingga mereka mengetahui
+                                perkembangan prosesnya dengan mudah dan transparan.kami berharap dapat memberikan
+                                layanan yang lebih baik dan memperkuat
+                                hubungan yang saling menguntungkan antara pihak berwenang dan masyarakat.</p>
                         </div>
                     </div>
 
                     <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in"
                         data-aos-delay="400">
                         <div class="icon-box">
-                            <div class="icon"><i class="bx bx-layer"></i></div>
-                            <h4><a href="">Nemo Enim</a></h4>
-                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
+                            <div class="icon"><i class="bx bx-key"></i></div>
+                            <h4><a href="">Keamanan Data</a></h4>
+                            <p style="text-align: justify;">Pelayanan SIPMA dirancang dengan sistem keamanan yang kuat
+                                untuk melindungi data pribadi
+                                dan informasi sensitif masyarakat dari akses yang tidak sah.</p>
                         </div>
                     </div>
 
@@ -409,13 +422,14 @@
 
                 <div class="row">
                     <div class="col-lg-9 text-center text-lg-start">
-                        <h3>Call To Action</h3>
-                        <p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                            mollit anim id est laborum.</p>
+                        <h3>Voice your complaints</h3>
+                        <p style="text-align: justify;"> Your complaints are essential to us. If you have any concerns
+                            or issues to address, our department is here to listen and take appropriate action. Please
+                            don't hesitate to voice your feedback, as it helps us improve our services and ensure your
+                            satisfaction. Thank you for giving us the opportunity to better serve you.</p>
                     </div>
                     <div class="col-lg-3 cta-btn-container text-center">
-                        <a class="cta-btn align-middle" href="#">Call To Action</a>
+                        <a class="cta-btn align-middle" href="#">Voice your complaints</a>
                     </div>
                 </div>
 
@@ -924,12 +938,19 @@
                                 <div id="map" style="width: 100%; height: 290px;"></div>
                                 <script>
                                     // Initialize the map
-                                    var map = L.map('map').setView([-7.609531, 112.828478], 15);
+                                    // var map = L.map('map').setView([-7.609531, 112.828478], 15);
+                                    var map = L.map('map', {
+                                        center: [-7.609531, 112.828478],
+                                        zoom: 15,
+                                        attributionControl: false // Tambahkan opsi ini
+                                    });
+
 
                                     // Add the tile layer (you can use any other tile layer as well)
                                     L.tileLayer("https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}", {
                                         maxZoom: 100,
                                         subdomains: ["mt0", "mt1", "mt2", "mt3"],
+                                        attribution: false,
                                     }).addTo(map);
 
                                     // Create a separate layer group for the markers
@@ -1013,11 +1034,15 @@
                         <h4>Our Social Networks</h4>
                         <p>Cras fermentum odio eu feugiat lide par naso tierra videa magna derita valies</p>
                         <div class="social-links mt-3">
-                            <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                            <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                            <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                            <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                            <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                            <a href="https://www.twitter.com/pemkabpasuruan_" class="twitter"><i
+                                    class="bx bxl-twitter"></i></a>
+                            <a href="https://www.facebook.com/pasuruankab.go.id/" class="facebook"><i
+                                    class="bx bxl-facebook"></i></a>
+                            <a href="https://www.instagram.com/pemkabpasuruan/" class="instagram"><i
+                                    class="bx bxl-instagram"></i></a>
+                            <a href="https://www.youtube.com/@ILOVEPASTV" class="google-plus"><i
+                                    class="bx bxl-youtube"></i></a>
+                            {{-- <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a> --}}
                         </div>
                     </div>
 
@@ -1027,7 +1052,7 @@
 
         <div class="container footer-bottom clearfix">
             <div class="copyright">
-                &copy; Copyright <strong><span>Arsha</span></strong>. All Rights Reserved
+                &copy; Copyright <strong><span>PKL 2023</span></strong>. All Rights Reserved
             </div>
             <div class="credits">
                 <!-- All the links in the footer should remain intact. -->
