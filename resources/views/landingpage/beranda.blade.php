@@ -884,7 +884,7 @@
                                 <p>0343429064</p>
                             </div>
 
-                            <div id="map" style="width: 100%; height: 290px;"></div>
+                            {{-- <div id="map" style="width: 100%; height: 290px;"></div>
                             <script>
                                 // Initialize the map
                                 var map = L.map('map').setView([-7.609531, 112.828478], 15);
@@ -906,7 +906,7 @@
                                             .bindPopup("{{ $departement->name }}");
                                     @endif
                                 @endforeach
-                            </script>
+                            </script> --}}
 
 
 
@@ -919,34 +919,33 @@
                     </div>
 
                     <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
-                        <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                        <div class="php-email-form">
                             <div class="row">
-                                <div class="form-group col-md-6">
-                                    <label for="name">Your Name</label>
-                                    <input type="text" name="name" class="form-control" id="name"
-                                        required>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="name">Your Email</label>
-                                    <input type="email" class="form-control" name="email" id="email"
-                                        required>
-                                </div>
+                                <div id="map" style="width: 100%; height: 290px;"></div>
+                                <script>
+                                    // Initialize the map
+                                    var map = L.map('map').setView([-7.609531, 112.828478], 15);
+
+                                    // Add the tile layer (you can use any other tile layer as well)
+                                    L.tileLayer("https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}", {
+                                        maxZoom: 100,
+                                        subdomains: ["mt0", "mt1", "mt2", "mt3"],
+                                    }).addTo(map);
+
+                                    // Create a separate layer group for the markers
+                                    var markerLayer = L.layerGroup().addTo(map);
+
+                                    // Add a marker for each departement to the markerLayer
+                                    @foreach ($departements as $departement)
+                                        @if ($departement->latitude && $departement->longitude && $departement->name)
+                                            var marker = L.marker([{{ $departement->latitude }}, {{ $departement->longitude }}])
+                                                .addTo(markerLayer)
+                                                .bindPopup("{{ $departement->name }}");
+                                        @endif
+                                    @endforeach
+                                </script>
                             </div>
-                            <div class="form-group">
-                                <label for="name">Subject</label>
-                                <input type="text" class="form-control" name="subject" id="subject" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="name">Message</label>
-                                <textarea class="form-control" name="message" rows="10" required></textarea>
-                            </div>
-                            <div class="my-3">
-                                <div class="loading">Loading</div>
-                                <div class="error-message"></div>
-                                <div class="sent-message">Your message has been sent. Thank you!</div>
-                            </div>
-                            <div class="text-center"><button type="submit">Send Message</button></div>
-                        </form>
+                        </div>
                     </div>
 
                 </div>
