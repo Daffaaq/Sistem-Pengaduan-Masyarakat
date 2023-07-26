@@ -366,7 +366,7 @@
                         data-aos-delay="100">
                         <div class="icon-box">
                             <div class="icon"><i class="bx bx-cast"></i></div>
-                            <h4><a href="">Aksesibilitas Online</a></h4>
+                            <h4><a>Aksesibilitas Online</a></h4>
                             <p style="text-align: justify;">Pelayanan SIPMA memberikan kemudahan akses bagi masyarakat
                                 untuk mengakses layanan
                                 publik secara online dari perangkat mereka, seperti komputer atau ponsel pintar, kapan
@@ -378,7 +378,7 @@
                         data-aos-delay="200">
                         <div class="icon-box">
                             <div class="icon"><i class="bx bx-layer"></i></div>
-                            <h4><a href="">Integrasi Layanan</a></h4>
+                            <h4><a>Integrasi Layanan</a></h4>
                             <p style="text-align: justify;">Pelayanan SIPMA mengintegrasikan berbagai layanan publik
                                 dalam satu platform,
                                 memungkinkan masyarakat untuk mengakses berbagai layanan dari instansi yang berbeda
@@ -391,7 +391,7 @@
                         data-aos-delay="300">
                         <div class="icon-box">
                             <div class="icon"><i class="bx bx-rss"></i></div>
-                            <h4><a href="">Pemantauan Status Permohonan</a></h4>
+                            <h4><a>Pemantauan Status Permohonan</a></h4>
                             <p style="text-align: justify;">Masyarakat dapat memantau status permohonan atau proses
                                 pelayanan mereka secara real-time melalui platform online, sehingga mereka mengetahui
                                 perkembangan prosesnya dengan mudah dan transparan.kami berharap dapat memberikan
@@ -404,7 +404,7 @@
                         data-aos-delay="400">
                         <div class="icon-box">
                             <div class="icon"><i class="bx bx-key"></i></div>
-                            <h4><a href="">Keamanan Data</a></h4>
+                            <h4><a>Keamanan Data</a></h4>
                             <p style="text-align: justify;">Pelayanan SIPMA dirancang dengan sistem keamanan yang kuat
                                 untuk melindungi data pribadi
                                 dan informasi sensitif masyarakat dari akses yang tidak sah.</p>
@@ -429,7 +429,7 @@
                             satisfaction. Thank you for giving us the opportunity to better serve you.</p>
                     </div>
                     <div class="col-lg-3 cta-btn-container text-center">
-                        <a class="cta-btn align-middle" href="#">Voice your complaints</a>
+                        <a class="cta-btn align-middle" href="{{ route('login') }}">Voice your complaints</a>
                     </div>
                 </div>
 
@@ -882,8 +882,8 @@
                             <div class="address">
                                 <i class="bi bi-geo-alt"></i>
                                 <h4>Location:</h4>
-                                <p>9RRJ+233, Komplek perkantoran, Karangpanas, Raci, Kec. Bangil, Pasuruan, Jawa Timur
-                                    67153</p>
+                                <p>Komplek Perkantoran Pemerintah Kabupaten Pasuruan JL.Raya Raci KM - 9 Bangil,
+                                    Pasuruan</p>
                             </div>
 
                             <div class="email">
@@ -895,7 +895,7 @@
                             <div class="phone">
                                 <i class="bi bi-phone"></i>
                                 <h4>Call:</h4>
-                                <p>0343429064</p>
+                                <p>(0343) 429064</p>
                             </div>
 
                             {{-- <div id="map" style="width: 100%; height: 290px;"></div>
@@ -937,26 +937,30 @@
                             <div class="row">
                                 <div id="map" style="width: 100%; height: 290px;"></div>
                                 <script>
-                                    // Initialize the map
-                                    // var map = L.map('map').setView([-7.609531, 112.828478], 15);
                                     var map = L.map('map', {
                                         center: [-7.609531, 112.828478],
                                         zoom: 15,
                                         attributionControl: false // Tambahkan opsi ini
                                     });
 
-
-                                    // Add the tile layer (you can use any other tile layer as well)
-                                    L.tileLayer("https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}", {
+                                    var streets = L.tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
                                         maxZoom: 100,
-                                        subdomains: ["mt0", "mt1", "mt2", "mt3"],
-                                        attribution: false,
-                                    }).addTo(map);
+                                        subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+                                        attribution: false
+                                    });
+
+                                    var satellite = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+                                        maxZoom: 100,
+                                        subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+                                        attribution: false
+                                    });
+
+                                    map.addLayer(streets); // Let's set the street view as default
 
                                     // Create a separate layer group for the markers
                                     var markerLayer = L.layerGroup().addTo(map);
 
-                                    // Add a marker for each departement to the markerLayer
+                                    // Assuming $departements is an array of departement data
                                     @foreach ($departements as $departement)
                                         @if ($departement->latitude && $departement->longitude && $departement->name)
                                             var marker = L.marker([{{ $departement->latitude }}, {{ $departement->longitude }}])
@@ -964,7 +968,44 @@
                                                 .bindPopup("{{ $departement->name }}");
                                         @endif
                                     @endforeach
+
+                                    // Adding the control to switch between street view and satellite view
+                                    var baseLayers = {
+                                        "Streets": streets,
+                                        "Satellite": satellite
+                                    };
+
+                                    // Create a toggle button inside the map
+                                    var toggleButton = L.Control.extend({
+                                        options: {
+                                            position: 'bottomleft'
+                                        },
+
+                                        onAdd: function(map) {
+                                            var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+                                            container.style.backgroundColor = 'white';
+                                            container.style.padding = '5px 10px';
+                                            container.style.borderRadius = '5px';
+                                            container.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.2)';
+                                            container.innerHTML = 'Toggle View';
+
+                                            container.onclick = function() {
+                                                if (map.hasLayer(satellite)) {
+                                                    map.removeLayer(satellite);
+                                                    streets.addTo(map);
+                                                } else {
+                                                    map.removeLayer(streets);
+                                                    satellite.addTo(map);
+                                                }
+                                            }
+
+                                            return container;
+                                        }
+                                    });
+
+                                    map.addControl(new toggleButton());
                                 </script>
+
                             </div>
                         </div>
                     </div>
@@ -1065,7 +1106,7 @@
     </footer><!-- End Footer -->
 
     <div id="preloader"></div>
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+    <a href="" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
