@@ -1918,3 +1918,71 @@ section {
 .member-info span {
     font-size: 14px;
 }
+
+/* Gaya untuk div "poll" */
+.poll {
+    margin-bottom: 10px;
+    transition: all 0.4s;
+}
+
+/* Gaya untuk tombol "Like" */
+.btn-like {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-right: 10px; /* Tambahkan margin kanan 10 pixel */
+    margin-left: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid #ffffff; /* Mengubah warna border menjadi putih */
+    color: #ffffff; /* Mengubah warna teks menjadi putih */
+    background-color: transparent;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-like:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* Gaya untuk tombol "Dislike" */
+.btn-dislike {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-left: 2px; /* Tambahkan margin kiri 10 pixel */
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid #dc3545;
+    color: #dc3545;
+    background-color: transparent;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-dislike:hover {
+    background-color: #dc3545;
+    color: #fff;
+}
+.row clearfix {
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+.btn-like,
+.btn-dislike {
+    border-radius: 50%; /* membuat tombol berbentuk lingkaran */
+    width: 50px; /* menetapkan lebar tombol */
+    height: 50px; /* menetapkan tinggi tombol */
+    padding: 0; /* menghilangkan padding */
+    text-align: center; /* membuat teks berada di tengah tombol */
+    line-height: 50px; /* membuat teks berada di tengah secara vertikal */
+}
+
+.btn-like i,
+.btn-dislike i {
+    line-height: 50px; /* membuat ikon berada di tengah secara vertikal */
+}

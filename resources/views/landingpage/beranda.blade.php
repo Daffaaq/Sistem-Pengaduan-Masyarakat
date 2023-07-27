@@ -9,6 +9,10 @@
     <meta content="" name="description">
     <meta content="" name="keywords">
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+
     <!-- Favicons -->
     <link href="assets/img/favicon.png" rel="icon">
     <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -1094,6 +1098,75 @@
     <div id="preloader"></div>
     <a href="" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Tombol "like" -->
+    <!-- Tombol "like" -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    @foreach ($polls as $poll)
+        <div class="poll" style="position: fixed; bottom: 10px;">
+            <div class="" style="display: flex; margin-right: 50px;">
+                <div class="pr-0">
+                    <a href="{{ route('poll.like', ['id' => $poll->id]) }}" class="btn btn-primary btn-like"
+                        data-poll-id="{{ $poll->id }}">
+                        <div style="text-align: center;">
+                            <i class="bi bi-hand-thumbs-up-fill" style="color:#FFFFFFFF; font-size: 24px;"></i>
+                        </div>
+                    </a>
+                </div>
+                <div class="pr-0">
+                    <a href="{{ route('poll.dislike', ['id' => $poll->id]) }}" class="btn btn-danger btn-dislike"
+                        data-poll-id="{{ $poll->id }}">
+                        <div style="text-align: center;">
+                            <i class="bi bi-hand-thumbs-down-fill" style="color:#FFFFFFFF; font-size: 24px;"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    @endforeach
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        // Fungsi untuk melakukan aksi like atau dislike menggunakan teknik Ajax
+        function doAction(action, pollId) {
+            // Lakukan request ke backend untuk melakukan aksi like atau dislike
+            $.ajax({
+                url: `/poll/${action}/${pollId}`,
+                type: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                dataType: 'json',
+                success: function(data) {
+                    // Tampilkan pesan sukses dari backend
+                    alert(data.message);
+
+                    // Perbarui jumlah like dan dislike di tampilan
+                    $('#likesCount' + pollId).text(data.likes);
+                    $('#dislikesCount' + pollId).text(data.dislikes);
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        }
+
+        // Tangkap klik tombol "like"
+        $('.btn-like').on('click', function(event) {
+            event.preventDefault();
+            var pollId = $(this).data('poll-id');
+            doAction('like', pollId);
+        });
+
+        // Tangkap klik tombol "dislike"
+        $('.btn-dislike').on('click', function(event) {
+            event.preventDefault();
+            var pollId = $(this).data('poll-id');
+            doAction('dislike', pollId);
+        });
+    </script>
 
     <!-- Vendor JS Files -->
     <script src="assets/vendor/aos/aos.js"></script>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Complaint;
 use App\Models\Departements;
+use App\Models\polls;
 
 class LandingPageController extends Controller
 {
@@ -13,6 +14,37 @@ class LandingPageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // Fungsi untuk menangani aksi like
+    public function likePoll($id)
+    {
+        // Cari data polling berdasarkan ID
+        $poll = polls::findOrFail($id);
+
+        // Tingkatkan jumlah likes
+        $poll->likes++;
+
+        // Simpan perubahan ke database
+        $poll->save();
+
+        // Berikan respons bahwa aksi like berhasil
+        return response()->json(['message' => 'Poll liked successfully', 'likes' => $poll->likes]);
+    }
+
+    // Fungsi untuk menangani aksi dislike
+    public function dislikePoll($id)
+    {
+        // Cari data polling berdasarkan ID
+        $poll = polls::findOrFail($id);
+
+        // Tingkatkan jumlah dislikes
+        $poll->dislikes++;
+
+        // Simpan perubahan ke database
+        $poll->save();
+
+        // Berikan respons bahwa aksi dislike berhasil
+        return response()->json(['message' => 'Poll disliked successfully', 'dislikes' => $poll->dislikes]);
+    }
     public function indexberanda()
     {
         // Mendapatkan jumlah total complaints
@@ -27,8 +59,15 @@ class LandingPageController extends Controller
         // Mendapatkan jumlah complaints dengan status resolved
         $resolvedComplaints = Complaint::where('status', 'resolved')->count();
         $departements = Departements::all();
-        return view('landingpage.beranda', compact('departements','totalComplaints', 'pendingComplaints', 'inProgressComplaints', 'resolvedComplaints',));
+        // Mendapatkan data polling
+        $polls = polls::all();
+        // dd($polls);
+        return view('landingpage.beranda', compact('departements', 'totalComplaints', 'pendingComplaints', 'inProgressComplaints', 'resolvedComplaints', 'polls'));
+
+        // return view('landingpage.beranda', compact('departements', 'totalComplaints', 'pendingComplaints', 'inProgressComplaints', 'resolvedComplaints'));
     }
+
+
     public function indexTentang()
     {
         return view('landingpage.tentang');

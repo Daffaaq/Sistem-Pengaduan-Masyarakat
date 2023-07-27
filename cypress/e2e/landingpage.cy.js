@@ -10,7 +10,7 @@ describe('LandingPage', () => {
     cy.wait(2000);
     cy.get(':nth-child(3) > .nav-link').click();
     cy.wait(2000);
-    cy.get('#services > .container > .section-title > h2').should('have.text', 'Services');
+    cy.get('#services > .container > .section-title > h2').should('have.text', 'Pelayanan');
     cy.wait(2000);
     cy.get(':nth-child(5) > .nav-link').click();
     cy.wait(2000);

@@ -36,6 +36,8 @@ use Illuminate\Support\Facades\Auth;
 // route buat landingpage
 Route::group(['prefix' => '/'], function () {
     Route::get('/', [LandingPageController::class, 'indexberanda'])->name('beranda');
+    Route::post('/poll/like/{id}', [LandingPageController::class, 'likePoll'])->name('poll.like');
+    Route::post('/poll/dislike/{id}', [LandingPageController::class, 'dislikePoll'])->name('poll.dislike');
     Route::get('/tentang', [LandingPageController::class, 'indexTentang'])->name('tentang');
     Route::get('/statistik', [LandingPageController::class, 'indexStatik'])->name('statistik');
     // Tambahkan route lainnya di sini jika ada

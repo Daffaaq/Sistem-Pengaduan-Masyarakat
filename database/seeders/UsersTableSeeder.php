@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Departements;
-use App\Models\Roles;
+use App\Models\polls;
 
 class UsersTableSeeder extends Seeder
 {
@@ -45,5 +45,15 @@ class UsersTableSeeder extends Seeder
             'department_id' => $departmentA->id,
             'role' => 'admin',
         ]);
+        $polls = [
+            [
+                'likes' => 0,
+                'dislikes' => 0,
+            ],
+            // Tambahkan data polling lainnya sesuai kebutuhan
+        ];
+        foreach ($polls as $poll) {
+            polls::create($poll);
+        }
     }
 }
