@@ -366,7 +366,7 @@
                         data-aos-delay="100">
                         <div class="icon-box">
                             <div class="icon"><i class="bx bx-cast"></i></div>
-                            <h4><a>Aksesibilitas Online</a></h4>
+                            <h4><a href="">Aksesibilitas Online</a></h4>
                             <p style="text-align: justify;">Pelayanan SIPMA memberikan kemudahan akses bagi masyarakat
                                 untuk mengakses layanan
                                 publik secara online dari perangkat mereka, seperti komputer atau ponsel pintar, kapan
@@ -585,72 +585,58 @@
 
                 <div class="section-title">
                     <h2>Team</h2>
-                    <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit
-                        sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias
-                        ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+                    <p style="text-align: justify;">Team Sistem Pengaduan Masyarakat kami adalah sebuah tim lintas
+                        dinas yang bertanggung jawab atas
+                        pengelolaan dan pengembangan Sistem Pengaduan Masyarakat. Tim ini dibentuk dengan tujuan untuk
+                        memberikan platform yang efisien dan responsif bagi masyarakat dalam menyampaikan pengaduan,
+                        keluhan, atau masukan terkait layanan publik dan isu-isu komunitas.
+
+                        Anggota dalam tim berasal dari berbagai departemen atau dinas yang memiliki keterkaitan dengan
+                        isu-isu yang sering dihadapi oleh masyarakat. Kami memiliki perwakilan dari berbagai bidang,
+                        seperti IT, hukum, layanan publik, dan hubungan masyarakat. Kehadiran anggota dari berbagai
+                        dinas memungkinkan kami untuk merancang solusi yang holistik dan berorientasi pada kebutuhan
+                        masyarakat.
+
+                        Sebagai tim kolaboratif, kami menjunjung tinggi transparansi, kecepatan, dan akurasi dalam
+                        menangani setiap pengaduan yang masuk. Kami terus berupaya meningkatkan layanan dan efisiensi
+                        dalam menangani pengaduan agar setiap masukan masyarakat dapat direspon dengan tepat waktu dan
+                        diberikan tindakan yang sesuai.
+
+                        Selain itu, kami bekerja sama dengan berbagai instansi dan mitra eksternal untuk menyediakan
+                        saluran pengaduan yang lebih luas dan aksesibel bagi masyarakat. Kami berkomitmen untuk
+                        memastikan bahwa setiap pengaduan diperlakukan secara adil, amanah, dan kerahasiaannya terjaga.
+
+                        Sebagai garda terdepan dalam menghadapi isu-isu masyarakat, kami menganggap tanggung jawab kami
+                        sebagai kesempatan untuk melayani dan membantu memajukan kehidupan masyarakat. Kami siap untuk
+                        menghadapi perubahan dan tantangan dalam menerapkan teknologi terbaru dan inovasi dalam Sistem
+                        Pengaduan Masyarakat demi memberikan pelayanan yang lebih baik dan bermanfaat bagi seluruh
+                        komunitas yang kami layani.</p>
                 </div>
 
                 <div class="row">
 
-                    <div class="col-lg-6" data-aos="zoom-in" data-aos-delay="100">
-                        <div class="member d-flex align-items-start">
-                            <div class="pic"><img src="assets/img/team/team-1.jpg" class="img-fluid"
-                                    alt=""></div>
-                            <div class="member-info">
-                                <h4>Daffa Aqila Rahmatullah</h4>
-                                <span>Backend Web Developer</span>
-                                <p>Explicabo voluptatem mollitia et repellat qui dolorum quasi</p>
-                                <div class="social">
-                                    <a href=""><i class="ri-twitter-fill"></i></a>
-                                    <a href=""><i class="ri-facebook-fill"></i></a>
-                                    <a href="https://www.instagram.com/daffaaqilar/"><i
-                                            class="ri-instagram-fill"></i></a>
-                                    <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="200">
-                        <div class="member d-flex align-items-start">
-                            <div class="pic"><img src="assets/img/team/team-2.jpg" class="img-fluid"
-                                    alt=""></div>
-                            <div class="member-info">
-                                <h4>Faiza kurnia Putri</h4>
-                                <span>Front End Web Developer</span>
-                                <p>Aut maiores voluptates amet et quis praesentium qui senda para</p>
-                                <div class="social">
-                                    <a href=""><i class="ri-twitter-fill"></i></a>
-                                    <a href=""><i class="ri-facebook-fill"></i></a>
-                                    <a href="https://www.instagram.com/faiza.krnia/"><i
-                                            class="ri-instagram-fill"></i></a>
-                                    <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="row justify-content-center">
-                        <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="300">
-                            <div class="member d-flex align-items-start">
-                                <div class="pic"><img src="assets/img/team/team-3.jpg" class="img-fluid"
-                                        alt=""></div>
-                                <div class="member-info">
-                                    <h4>Yoby Ryaian pratama</h4>
-                                    <span>Front End Web Developer</span>
-                                    <p>Quisquam facilis cum velit laborum corrupti fuga rerum quia</p>
-                                    <div class="social">
-                                        <a href=""><i class="ri-twitter-fill"></i></a>
-                                        <a href=""><i class="ri-facebook-fill"></i></a>
-                                        <a href="https://www.instagram.com/yobiprtma_/"><i
-                                                class="ri-instagram-fill"></i></a>
-                                        <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+                        <div class="col-lg-12">
+                            <div class="member-carousel">
+                                @foreach ($departements as $departement)
+                                    <div class="member">
+                                        <div class="image-box">
+                                            <img src="assets/img/Lambang_Kabupaten_Pasuruan.png" class="img-fluid"
+                                                alt="{{ $departement->name }}">
+                                            <div class="member-info">
+                                                <h6 style="color: #fff" , align="center">{{ $departement->name }}</h6>
+                                                {{-- <span>{{ $departement->description }}</span> --}}
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+                                @endforeach
+                            </div>
+                            <div class="carousel-buttons">
+                                <button class="carousel-button prev">&#10094;</button>
+                                <button class="carousel-button next">&#10095;</button>
                             </div>
                         </div>
                     </div>
-
 
                     {{-- <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="400">
                         <div class="member d-flex align-items-start">
