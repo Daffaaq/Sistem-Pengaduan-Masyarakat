@@ -65,9 +65,9 @@ class DepartementController extends Controller
         ]);
 
         $departement = Departements::findOrFail($id);
-        $departement->update($data);
+        $departement->update($request->only('name'));
 
-        return redirect('/dashboard_superadmin/departement')->with('success', 'Departement updated successfully.');
+        return redirect()->route('superadmin.departement.index')->with('success', 'Departement updated successfully.');
     }
 
     public function destroy($id)
