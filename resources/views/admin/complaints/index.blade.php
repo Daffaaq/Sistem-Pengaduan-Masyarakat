@@ -30,7 +30,16 @@
                         <th width="auto">Status</th>
                         <th width="auto">Action</th>
                     </tr>
+                    @php
+                        $resolvedComplaints = [];
+                    @endphp
                     @foreach ($complaints as $cp)
+                        @if ($cp->status == 'resolved')
+                            @php
+                                $resolvedComplaints[] = $cp;
+                                continue;
+                            @endphp
+                        @endif
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $cp->title }}</td>
@@ -63,6 +72,18 @@
                                 @else
                                     <button class="btn btn-primary" disabled>Tambah Jawaban</button>
                                 @endif
+                            </td>
+                        </tr>
+                    @endforeach
+                    @foreach ($resolvedComplaints as $cp)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $cp->title }}</td>
+                            <td>{{ $cp->complaint_date }}</td>
+                            <td>{{ $cp->description }}</td>
+                            <td>Resolved</td>
+                            <td>
+                                <button class="btn btn-primary" disabled>Tambah Jawaban</button>
                             </td>
                         </tr>
                     @endforeach
