@@ -118,14 +118,14 @@
                     <div class="col-lg-5">
                         <div class="card">
                             <div class="card-header text-center">
-                                Poling Chart (Pie Chart)
+                                Complaints Chart (Pie Chart)
                             </div>
                             <div class="card-body">
                                 <canvas id="complaintsPieChart"></canvas>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-5">
                         <div class="card">
                             <div class="card-header text-center">
                                 Poling Chart (Pie Chart)

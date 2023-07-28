@@ -743,8 +743,8 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in"
-                        data-aos-delay="200">
+                    <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in"
+                        data-aos-delay="100">
                         <div class="icon-box">
                             <div class="text-center">
                                 <div class="icon"><i class="bx bx-envelope"></i></div>
@@ -755,35 +755,35 @@
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in"
-                        data-aos-delay="300">
+                        data-aos-delay="200">
                         <div class="icon-box">
                             <div class="text-center">
                                 <div class="icon"><i class="bx bx-time"></i></div>
                             </div>
-                            <h4 style="font-size:25px", align="center"><a>Complaints In
+                            <h4 style="font-size:22px", align="center"><a>Complaints In
                                     Progress</a></h4>
                             <p style="font-size:40px", align="center">{{ $inProgressComplaints }}</p>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in"
+                        data-aos-delay="300">
+                        <div class="icon-box">
+                            <div class="text-center">
+                                <div class="icon"><i class="bx bx-task"></i></div>
+                            </div>
+                            <h4 style="font-size:24px", align="center"><a>Complaints
+                                    Resolved</a></h4>
+                            <p style="font-size:40px", align="center">{{ $resolvedComplaints }}</p>
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in"
                         data-aos-delay="400">
                         <div class="icon-box">
                             <div class="text-center">
-                                <div class="icon"><i class="bx bx-task"></i></div>
-                            </div>
-                            <h4 style="font-size:25px", align="center"><a>Complaints
-                                    Resolved</a></h4>
-                            <p style="font-size:40px", align="center">{{ $resolvedComplaints }}</p>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in"
-                        data-aos-delay="100">
-                        <div class="icon-box">
-                            <div class="text-center">
                                 <div class="icon"><i class="bx bx-file"></i></div>
                             </div>
                             {{-- <div class="icon"><i class="bx bxl-dribbble"></i></div> --}}
-                            <h4 style="font-size:25px", align="center"><a>Jumlah Laporan Sekarang</a>
+                            <h4 style="font-size:20px", align="center"><a>Jumlah Laporan Sekarang</a>
                             </h4>
                             <p style="font-size:40px", align="center">{{ $totalComplaints }}</p>
                         </div>
@@ -1141,11 +1141,12 @@
                 dataType: 'json',
                 success: function(data) {
                     // Tampilkan pesan sukses dari backend
-                    alert(data.message);
+                    // alert(data.message);
 
                     // Perbarui jumlah like dan dislike di tampilan
                     $('#likesCount' + pollId).text(data.likes);
                     $('#dislikesCount' + pollId).text(data.dislikes);
+                    location.reload();
                 },
                 error: function(xhr, status, error) {
                     console.error(xhr.responseText);
