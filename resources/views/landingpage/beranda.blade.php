@@ -749,7 +749,7 @@
                             <div class="text-center">
                                 <div class="icon"><i class="bx bx-envelope"></i></div>
                             </div>
-                            <h4 style="font-size:25px", align="center"><a href="">Complaints
+                            <h4 style="font-size:25px", align="center"><a>Complaints
                                     Pending</a></h4>
                             <p style="font-size:40px", align="center">{{ $pendingComplaints }}</p>
                         </div>
@@ -760,7 +760,7 @@
                             <div class="text-center">
                                 <div class="icon"><i class="bx bx-time"></i></div>
                             </div>
-                            <h4 style="font-size:25px", align="center"><a href="">Complaints In
+                            <h4 style="font-size:25px", align="center"><a>Complaints In
                                     Progress</a></h4>
                             <p style="font-size:40px", align="center">{{ $inProgressComplaints }}</p>
                         </div>
@@ -771,7 +771,7 @@
                             <div class="text-center">
                                 <div class="icon"><i class="bx bx-task"></i></div>
                             </div>
-                            <h4 style="font-size:25px", align="center"><a href="">Complaints
+                            <h4 style="font-size:25px", align="center"><a>Complaints
                                     Resolved</a></h4>
                             <p style="font-size:40px", align="center">{{ $resolvedComplaints }}</p>
                         </div>
@@ -783,7 +783,7 @@
                                 <div class="icon"><i class="bx bx-file"></i></div>
                             </div>
                             {{-- <div class="icon"><i class="bx bxl-dribbble"></i></div> --}}
-                            <h4 style="font-size:25px", align="center"><a href="">Jumlah Laporan Sekarang</a>
+                            <h4 style="font-size:25px", align="center"><a>Jumlah Laporan Sekarang</a>
                             </h4>
                             <p style="font-size:40px", align="center">{{ $totalComplaints }}</p>
                         </div>

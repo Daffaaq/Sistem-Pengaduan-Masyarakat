@@ -94,6 +94,7 @@ Route::middleware(['auth', 'check.role:superadmin'])->prefix('superadmin')->grou
     Route::prefix('dashboard_superadmin')->group(function () {
         // Rute-rute Admin Departemen di sini
         Route::get('/complaints', [ComplaintSuperadminController::class, 'index'])->name('superadmin.complaints.index');
+        Route::get('/superadmin/dashboard_superadmin/complaints/cetak_pdf', [ComplaintSuperadminController::class, 'cetak_pdf'])->name('superadmin.complaints.cetak_pdf');
     });
 });
 

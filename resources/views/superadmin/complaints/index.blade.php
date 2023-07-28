@@ -33,6 +33,10 @@
                     <button type="submit" class="btn btn-primary">Filter</button>
                 </form>
                 <br>
+                <div class="col-lg-6 text-right">
+                    <a href="{{ route('superadmin.complaints.cetak_pdf', ['departmentId' => request('department')]) }}"
+                        class="btn btn-success" target="_blank">Cetak PDF</a>
+                </div>
                 <table class="table table-bordered" style="background-color: #78C1F3">
                     <tr>
                         <th width="auto">No</th>

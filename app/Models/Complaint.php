@@ -13,7 +13,7 @@ class Complaint extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'title', 'complaint_date', 'description', 'status', 'department_id',
+        'user_id', 'title', 'complaint_date', 'description', 'image', 'status', 'department_id',
     ];
 
     public function user()

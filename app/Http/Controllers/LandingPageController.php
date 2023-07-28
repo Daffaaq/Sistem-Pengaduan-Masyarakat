@@ -67,6 +67,13 @@ class LandingPageController extends Controller
         // return view('landingpage.beranda', compact('departements', 'totalComplaints', 'pendingComplaints', 'inProgressComplaints', 'resolvedComplaints'));
     }
 
+    public function getPolls()
+    {
+        // Mendapatkan data polling
+        $polls = polls::all();
+
+        return $polls;
+    }
 
     public function indexTentang()
     {
