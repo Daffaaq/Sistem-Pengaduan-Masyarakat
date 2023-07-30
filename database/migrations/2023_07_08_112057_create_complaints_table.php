@@ -20,7 +20,6 @@ return new class extends Migration
             $table->date('complaint_date');
             $table->longText('description');
             $table->enum('status', ['pending', 'in progress', 'resolved'])->nullable()->default(null);
-            $table->string('image')->nullable();
             $table->unsignedBigInteger('department_id');
             $table->timestamps();
 

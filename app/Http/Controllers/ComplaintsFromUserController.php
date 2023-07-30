@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Complaint;
 use App\Models\Departements;
+use App\Models\Images;
 use Illuminate\Support\Facades\Auth;
 
 class ComplaintsFromUserController extends Controller
@@ -49,6 +50,7 @@ class ComplaintsFromUserController extends Controller
             'title' => 'required|string',
             'description' => 'required|string',
             'department_id' => 'required|exists:departements,id',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi untuk gambar, boleh nullable.
         ]);
 
         // Create the complaint
@@ -60,6 +62,16 @@ class ComplaintsFromUserController extends Controller
         $complaint->status = 'pending';
         $complaint->department_id = $request->input('department_id');
         $complaint->save();
+        // Jika ada gambar yang diunggah, simpan gambar
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $imagePath = $request->file('image')->store('complaint_images', 'public');
+
+            // Create a new image instance and attach to the complaint
+            $image = new Images(); // Use your Images model
+            $image->complaint_id = $complaint->id;
+            $image->image_path = $imagePath;
+            $image->save();
+        }
 
         return redirect()->route('user.complaints.index')->with('success', 'Complaint created successfully.');
     }
@@ -72,9 +84,19 @@ class ComplaintsFromUserController extends Controller
      */
     public function show($id)
     {
-        //
+        // Find the complaint by ID
+        $complaint = Complaint::with('images')->findOrFail($id);
+        // return $complaint;
+    
+        return view('masyarakat.complaints.detail-complaints', compact('complaint'));
     }
 
+
+    public function details($id)
+    {
+        $complaint = Complaint::with('department', 'images')->findOrFail($id);
+        return response()->json($complaint);
+    }
     /**
      * Show the form for editing the specified resource.
      *
