@@ -62,6 +62,7 @@ Route::middleware(['auth', 'check.role:admin'])->prefix('admin')->group(function
         Route::get('/complaints', [ComplaintsToAdminController::class, 'index'])->name('admin.complaints.index');
         Route::get('/complaints/{complaint}/answer/create', [AnswerComplaintfromAdminController::class, 'create'])->name('admin.complaints.answer.create');
         Route::put('/complaints/{complaint}/status/update', [ComplaintsToAdminController::class, 'updateStatus'])->name('admin.complaints.status.update');
+        Route::get('/complaints/{id}/detail', [ComplaintsToAdminController::class, 'showDetailAjax'])->name('admin.complaints.detail.ajax');
         Route::post('/complaints/{complaint}/answer/store', [AnswerComplaintfromAdminController::class, 'store'])->name('admin.complaints.answer.store');
         Route::get('/answercomplaints', [AnswerComplaintfromAdminController::class, 'index'])->name('admin.answercomplaints.index');
     });
@@ -106,6 +107,8 @@ Route::middleware(['auth', 'check.role:user'])->prefix('user')->group(function (
         Route::get('/complaints', [ComplaintsFromUserController::class, 'index'])->name('user.complaints.index');
         Route::get('/complaints/create', [ComplaintsFromUserController::class, 'create'])->name('user.complaints.create');
         Route::post('/complaints', [ComplaintsFromUserController::class, 'store'])->name('user.complaints.store');
+        Route::get('/show/{id}', [ComplaintsFromUserController::class, 'show'])->name('user.complaints.show');
+        Route::get('/complaints/{id}/details', [ComplaintsFromUserController::class, 'details'])->name('complaints.details');
     });
     Route::prefix('user')->group(function () {
         Route::get('/answer_complaints', [AnsweComplaintstoUserController::class, 'index'])->name('user.answercomplaints.index');
