@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Complaint;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View; // Import View facade
 
 class ComplaintsToAdminController extends Controller
 {
@@ -15,11 +16,12 @@ class ComplaintsToAdminController extends Controller
      */
     public function index()
     {
-        $departmentId = Auth::user()->department_id;
+         $departmentId = Auth::user()->department_id;
 
         // Mendapatkan daftar pengaduan dengan departemen yang sesuai
         $complaints = Complaint::where('department_id', $departmentId)->get();
 
+        // Render the view and pass the $complaints variable to it
         return view('admin.complaints.index', compact('complaints'));
     }
 
@@ -53,6 +55,18 @@ class ComplaintsToAdminController extends Controller
     public function show($id)
     {
         //
+    }
+
+    public function showDetailAjax($id)
+    {
+        // Temukan pengaduan berdasarkan ID
+        $complaint = Complaint::findOrFail($id);
+
+        // Return response as JSON
+        return response()->json([
+            'complaint' => $complaint,
+            'images' => $complaint->images, // Include image data in the response
+        ]);
     }
 
     /**
