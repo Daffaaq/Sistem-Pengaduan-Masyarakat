@@ -33,7 +33,10 @@ class ComplaintsFromUserController extends Controller
      */
     public function create()
     {
-        $departments = Departements::all();
+        // $departments = Departements::all();
+        $departments = Departements::whereHas('users', function ($query) {
+        $query->where('role', 'admin');
+        })->get();
         return view('masyarakat.complaints.create-complaints', compact('departments'));
     }
 
