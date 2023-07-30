@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Departements;
 use App\Models\User;
+use App\Models\Images;
 use App\Models\Answercomplaints;
 
 class Complaint extends Model
@@ -13,7 +14,7 @@ class Complaint extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'title', 'complaint_date', 'description', 'image', 'status', 'department_id',
+        'user_id', 'title', 'complaint_date', 'description', 'status', 'department_id',
     ];
 
     public function user()
@@ -29,5 +30,10 @@ class Complaint extends Model
     public function answerComplaint()
     {
         return $this->hasMany(Answercomplaints::class, 'complaint_id');
+    }
+
+    public function images()
+    {
+        return $this->hasOne(Images::class, 'complaint_id')->withDefault();
     }
 }

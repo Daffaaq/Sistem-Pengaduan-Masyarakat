@@ -44,6 +44,16 @@
                     @enderror
                 </div>
                 <div class="mb-3">
+                    <label for="image" class="form-label">Upload Image</label>
+                    <input type="file" class="form-control @error('image') is-invalid @enderror" id="image"
+                        name="image" accept="image/*">
+                    @error('image')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+                <div class="mb-3">
                     <label for="department_id" class="form-label">Department</label>
                     <select class="form-control @error('department_id') is-invalid @enderror" id="department_id"
                         name="department_id" required>
@@ -62,6 +72,10 @@
                     <a href="{{ route('user.complaints.index') }}" class="btn btn-outline-secondary mt-3">Back</a>
                     <button type="submit" class="btn btn-primary mt-3">Create</button>
                 </div>
+                <div class="mb-3">
+                    <label for="imagePreview" class="form-label">Image Preview:</label>
+                    <img id="imagePreview" src="#" alt="your image" style="display: none;" />
+                </div>
             </form>
         </div>
     </div>
@@ -70,6 +84,26 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <!-- Add any additional scripts you want to include here -->
+    <script>
+    $(document).ready(function() {
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('#imagePreview').attr('src', e.target.result);
+                    $('#imagePreview').css('display', 'block');
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#image").change(function() {
+            readURL(this);
+        });
+    });
+</script>
 </body>
 
 </html>
