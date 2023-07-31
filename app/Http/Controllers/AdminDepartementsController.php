@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Departements;
 use App\Http\Requests\UserRequest;
+use App\Http\Requests\AdminUpdateRequest;
 
 class AdminDepartementsController extends Controller
 {
@@ -103,15 +104,26 @@ class AdminDepartementsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        $data = $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required',
-            'department_id' => 'required',
-        ]);
+    // public function update(Request $request, $id)
+    // {
+    //     $data = $request->validate([
+    //         'name' => 'required',
+    //         'email' => 'required|email',
+    //         'password' => 'required',
+    //         'department_id' => 'required',
+    //     ]);
 
+    //     $data['password'] = bcrypt($data['password']);
+    //     $data['role'] = 'admin';
+
+    //     $user = User::findOrFail($id);
+    //     $user->update($data);
+
+    //     return redirect()->route('superadmin.admin.index')->with('success', 'User updated successfully.');
+    // }
+    public function update(AdminUpdateRequest $request, $id)
+    {
+        $data = $request->validated();
         $data['password'] = bcrypt($data['password']);
         $data['role'] = 'admin';
 
