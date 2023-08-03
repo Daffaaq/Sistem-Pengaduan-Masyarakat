@@ -74,7 +74,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="imagePreview" class="form-label">Image Preview:</label>
-                    <img id="imagePreview" src="#" alt="your image" style="display: none;" />
+                    <img id="imagePreview" src="#" alt="your image" style="max-width: 100%; max-height: 300px; display: none;" />
                 </div>
             </form>
         </div>

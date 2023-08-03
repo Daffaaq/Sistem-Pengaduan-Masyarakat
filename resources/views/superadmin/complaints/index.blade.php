@@ -117,7 +117,7 @@
                         </table>
                     </div>
                     <div class="pagination-links">
-                        {{ $complaints->links('pagination::bootstrap-4') }}
+                        {{ $complaints->appends(request()->except(['page', '_token']))->links('pagination::bootstrap-4') }}
                     </div>
                 </div>
             </div>

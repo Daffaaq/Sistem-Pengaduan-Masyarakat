@@ -27,7 +27,7 @@ class ComplaintSuperadminController extends Controller
             }
         }
 
-         $complaints = $complaints->paginate(5); // Paginate with 5 items per page
+        $complaints = $complaints->paginate(5)->appends(request()->query());
         $departments = Departements::all();
         // $id = $departmentId;
 
