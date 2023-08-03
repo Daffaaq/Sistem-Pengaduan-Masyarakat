@@ -14,7 +14,14 @@ class Complaint extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'title', 'complaint_date', 'description', 'status', 'department_id',
+        'user_id', 
+        'title', 
+        'complaint_date', 
+        'description', 
+        'status', 
+        'department_id',
+        'longitude', // Add 'longitude' to the fillable attributes
+        'latitude',  // Add 'latitude' to the fillable attributes
     ];
 
     public function user()

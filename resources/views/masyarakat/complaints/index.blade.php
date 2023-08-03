@@ -112,6 +112,7 @@
                             <p class="complaint-date"></p>
                         </div>
                     </div>
+                    <div id="map-detail" style="height: 400px;"></div>
                     <div class="row mt-3">
                         <div class="col-md-6 offset-md-3">
                             <div class="card" style="width: 18rem; overflow: hidden;">
@@ -134,6 +135,12 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
     <script>
         $(document).ready(function() {
             $('.view-details').click(function() {
@@ -157,6 +164,8 @@
         });
     </script>
     <script>
+        var detailMap;
+
         $(document).ready(function() {
             $('.view-details').click(function() {
                 var button = $(this);
@@ -172,6 +181,25 @@
                     $('#complaintModal .modal-body .complaint-date').html('Complaint Date: ' + data
                         .complaint_date);
 
+                    if (detailMap) {
+                        // If the map already exists, just update its properties.
+                        detailMap.setView([data.latitude, data.longitude], 13);
+
+                        // Clear the existing markers and add a new one at the new location.
+                        detailMap.eachLayer(function(layer) {
+                            detailMap.removeLayer(layer);
+                        });
+                    } else {
+                        // If the map does not exist, create a new one.
+                        detailMap = L.map('map-detail').setView([data.latitude, data.longitude],
+                            13);
+                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                            maxZoom: 19,
+                        }).addTo(detailMap);
+                    }
+
+                    L.marker([data.latitude, data.longitude]).addTo(detailMap);
+
                     if (data.images && data.images.image_path) {
                         $('#complaintModal .modal-body .card-img-top').attr('src', '/storage/' +
                             data.images.image_path);
@@ -183,6 +211,20 @@
 
                     $('#complaintModal').modal('show');
                 });
+            });
+
+            $('#complaintModal').on('shown.bs.modal', function() {
+                if (detailMap) {
+                    setTimeout(function() {
+                        detailMap.invalidateSize();
+                    }, 0);
+                }
+            });
+            $('#complaintModal').on('hidden.bs.modal', function() {
+                if (detailMap) {
+                    detailMap.remove();
+                    detailMap = null; // Reset the detailMap variable
+                }
             });
         });
     </script>

@@ -28,6 +28,8 @@ class StoreComplaintRequest extends FormRequest
             'description' => 'required|string',
             'department_id' => 'required|exists:departements,id',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'longitude' => 'nullable', // Add validation rule for longitude
+            'latitude' => 'nullable',  // Add validation rule for latitude
         ];
     }
 }

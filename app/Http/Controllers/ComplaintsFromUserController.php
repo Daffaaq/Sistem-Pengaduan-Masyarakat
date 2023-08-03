@@ -92,6 +92,8 @@ class ComplaintsFromUserController extends Controller
         $complaint->description = $request->input('description');
         $complaint->status = 'pending';
         $complaint->department_id = $request->input('department_id');
+        $complaint->longitude = $request->input('longitude'); // Save longitude if provided
+        $complaint->latitude = $request->input('latitude');   // Save latitude if provided
         $complaint->save();
 
         // Jika ada gambar yang diunggah, simpan gambar
