@@ -103,6 +103,7 @@
                                 <th width="auto">Description</th>
                                 <th width="auto">Status</th>
                                 <th width="auto">Nama Departemen</th>
+                                <th width="auto">Action</th>
                             </tr>
                             @foreach ($complaints as $cp)
                                 <tr>
