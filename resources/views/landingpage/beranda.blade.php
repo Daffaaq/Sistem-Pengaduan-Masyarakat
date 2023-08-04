@@ -83,7 +83,7 @@
             <div class="row">
                 <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1"
                     data-aos="fade-up" data-aos-delay="200">
-                    <h1>Pelayanan Masyarakat Lebih Baik, SIPMA Siap Melayani!</h1>
+                    <h1>Pengaduan Masyarakat, SIPMA Siap Melayani!</h1>
                     <h2>Ajukan Pengaduanmu</h2>
                     <div class="d-flex justify-content-center justify-content-lg-start">
                         <a href="{{ route('register') }}" class="btn-get-started">Get Started</a>
@@ -923,79 +923,79 @@
                     </div>
 
                     <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
-    <div class="php-email-form">
-        <div class="row">
-            <div id="map" style="width: 100%; height: 290px;"></div>
-            <script>
-                var map = L.map('map', {
-                    center: [-7.609531, 112.828478],
-                    zoom: 15,
-                    attributionControl: false
-                });
+                        <div class="php-email-form">
+                            <div class="row">
+                                <div id="map" style="width: 100%; height: 290px;"></div>
+                                <script>
+                                    var map = L.map('map', {
+                                        center: [-7.609531, 112.828478],
+                                        zoom: 15,
+                                        attributionControl: false
+                                    });
 
-                var streets = L.tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
-                    maxZoom: 100,
-                    subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
-                    attribution: false
-                });
+                                    var streets = L.tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+                                        maxZoom: 100,
+                                        subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+                                        attribution: false
+                                    });
 
-                var satellite = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
-                    maxZoom: 100,
-                    subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
-                    attribution: false
-                });
+                                    var satellite = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+                                        maxZoom: 100,
+                                        subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+                                        attribution: false
+                                    });
 
-                map.addLayer(streets);
+                                    map.addLayer(streets);
 
-                var markerLayer = L.layerGroup().addTo(map);
+                                    var markerLayer = L.layerGroup().addTo(map);
 
-                @foreach ($departements as $departement)
-                    @if ($departement->latitude && $departement->longitude && $departement->name)
-                        var marker = L.marker([{{ $departement->latitude }}, {{ $departement->longitude }}])
-                            .addTo(markerLayer)
-                            .bindPopup("{{ $departement->name }}");
-                    @endif
-                @endforeach
+                                    @foreach ($departements as $departement)
+                                        @if ($departement->latitude && $departement->longitude && $departement->name)
+                                            var marker = L.marker([{{ $departement->latitude }}, {{ $departement->longitude }}])
+                                                .addTo(markerLayer)
+                                                .bindPopup("{{ $departement->name }}");
+                                        @endif
+                                    @endforeach
 
-                var baseLayers = {
-                    "Streets": streets,
-                    "Satellite": satellite
-                };
+                                    var baseLayers = {
+                                        "Streets": streets,
+                                        "Satellite": satellite
+                                    };
 
-                var toggleButton = L.Control.extend({
-                    options: {
-                        position: 'bottomleft'
-                    },
+                                    var toggleButton = L.Control.extend({
+                                        options: {
+                                            position: 'bottomleft'
+                                        },
 
-                    onAdd: function(map) {
-                        var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
-                        container.style.backgroundColor = 'white';
-                        container.style.padding = '5px 10px';
-                        container.style.borderRadius = '5px';
-                        container.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.2)';
-                        container.innerHTML = 'Toggle View';
+                                        onAdd: function(map) {
+                                            var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+                                            container.style.backgroundColor = 'white';
+                                            container.style.padding = '5px 10px';
+                                            container.style.borderRadius = '5px';
+                                            container.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.2)';
+                                            container.innerHTML = 'Toggle View';
 
-                        container.onclick = function() {
-                            if (map.hasLayer(satellite)) {
-                                map.removeLayer(satellite);
-                                streets.addTo(map);
-                                container.innerHTML = 'Toggle View';
-                            } else {
-                                map.removeLayer(streets);
-                                satellite.addTo(map);
-                                container.innerHTML = 'Toggle View';
-                            }
-                        }
+                                            container.onclick = function() {
+                                                if (map.hasLayer(satellite)) {
+                                                    map.removeLayer(satellite);
+                                                    streets.addTo(map);
+                                                    container.innerHTML = 'Toggle View';
+                                                } else {
+                                                    map.removeLayer(streets);
+                                                    satellite.addTo(map);
+                                                    container.innerHTML = 'Toggle View';
+                                                }
+                                            }
 
-                        return container;
-                    }
-                });
+                                            return container;
+                                        }
+                                    });
 
-                map.addControl(new toggleButton());
-            </script>
-        </div>
-    </div>
-</div>
+                                    map.addControl(new toggleButton());
+                                </script>
+                            </div>
+                        </div>
+                    </div>
 
 
                 </div>
@@ -1144,14 +1144,16 @@
 
                     // Perbarui jumlah like dan dislike di tampilan dengan data yang diterima dari backend.
                     $('#likesCount' + pollId).text(data
-                    .likes); // Memperbarui elemen dengan ID "likesCount" dan menampilkan jumlah like yang baru.
+                        .likes
+                        ); // Memperbarui elemen dengan ID "likesCount" dan menampilkan jumlah like yang baru.
                     $('#dislikesCount' + pollId).text(data
-                    .dislikes); // Memperbarui elemen dengan ID "dislikesCount" dan menampilkan jumlah dislike yang baru.
+                        .dislikes
+                        ); // Memperbarui elemen dengan ID "dislikesCount" dan menampilkan jumlah dislike yang baru.
                     location
-                .reload(); // Memuat ulang halaman untuk memastikan perubahan terlihat.
+                        .reload(); // Memuat ulang halaman untuk memastikan perubahan terlihat.
                 },
                 error: function(xhr, status,
-                error) { // Fungsi yang akan dijalankan ketika request mengalami kegagalan.
+                    error) { // Fungsi yang akan dijalankan ketika request mengalami kegagalan.
                     console.error(xhr.responseText); // Log pesan error ke konsol.
                 }
             });
@@ -1160,21 +1162,23 @@
         // Event listener untuk menangkap klik tombol "like".
         $('.btn-like').on('click', function(event) {
             event
-        .preventDefault(); // Mencegah perilaku default dari tautan ketika diklik (misalnya, mengarahkan ke URL).
+                .preventDefault(); // Mencegah perilaku default dari tautan ketika diklik (misalnya, mengarahkan ke URL).
             var pollId = $(this).data(
-            'poll-id'); // Mendapatkan nilai "poll-id" dari data atribut tombol yang diklik.
+                'poll-id'); // Mendapatkan nilai "poll-id" dari data atribut tombol yang diklik.
             doAction('like',
-            pollId); // Memanggil fungsi "doAction" dengan parameter "action" sebagai 'like' dan "pollId" sesuai nilai yang didapatkan dari tombol.
+                pollId
+                ); // Memanggil fungsi "doAction" dengan parameter "action" sebagai 'like' dan "pollId" sesuai nilai yang didapatkan dari tombol.
         });
 
         // Event listener untuk menangkap klik tombol "dislike".
         $('.btn-dislike').on('click', function(event) {
             event
-        .preventDefault(); // Mencegah perilaku default dari tautan ketika diklik (misalnya, mengarahkan ke URL).
+                .preventDefault(); // Mencegah perilaku default dari tautan ketika diklik (misalnya, mengarahkan ke URL).
             var pollId = $(this).data(
-            'poll-id'); // Mendapatkan nilai "poll-id" dari data atribut tombol yang diklik.
+                'poll-id'); // Mendapatkan nilai "poll-id" dari data atribut tombol yang diklik.
             doAction('dislike',
-            pollId); // Memanggil fungsi "doAction" dengan parameter "action" sebagai 'dislike' dan "pollId" sesuai nilai yang didapatkan dari tombol.
+                pollId
+                ); // Memanggil fungsi "doAction" dengan parameter "action" sebagai 'dislike' dan "pollId" sesuai nilai yang didapatkan dari tombol.
         });
     </script>
 

@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Departements;
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\AdminUpdateRequest;
+use Illuminate\Support\Facades\Crypt;
 
 class AdminDepartementsController extends Controller
 {
