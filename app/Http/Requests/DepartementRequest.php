@@ -25,6 +25,9 @@ class DepartementRequest extends FormRequest
     {
         return [
             'name' => 'required|unique:departements,name',
+            'email' => 'required|email',
+            'link_website' => 'required|url', // Validasi format URL untuk link_website
+            'tugas' => 'required', // Tugas harus diisi (tidak boleh kosong)
             'longitude' => 'nullable',
             'latitude' => 'nullable',
         ];
@@ -34,6 +37,11 @@ class DepartementRequest extends FormRequest
         return [
             'name.required' => 'The name field is required.',
             'name.unique' => 'The name has already been taken.',
+            'email.required' => 'The email field is required.',
+            'email.email' => 'Invalid email format.',
+            'link_website.required' => 'The link_website field is required.',
+            'link_website.url' => 'Invalid URL format for link_website.',
+            'tugas.required' => 'The tugas field is required.',
             // Pesan validasi lainnya...
         ];
     }
