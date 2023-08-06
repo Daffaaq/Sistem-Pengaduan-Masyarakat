@@ -16,11 +16,6 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        // Create departments
-        $departmentA = Departements::create(['name' => 'Departemen A']);
-
-        // Create roles
-
         // Create users
         User::create([
             'name' => 'User 1',
@@ -36,14 +31,6 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('password'),
             'department_id' => null,
             'role' => 'superadmin',
-        ]);
-
-        User::create([
-            'name' => 'Admin 1',
-            'email' => 'admin1@gmail.com',
-            'password' => bcrypt('password'),
-            'department_id' => $departmentA->id,
-            'role' => 'admin',
         ]);
         $polls = [
             [

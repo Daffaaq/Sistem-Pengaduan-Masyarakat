@@ -13,6 +13,9 @@ class Departements extends Model
     protected $table = 'departements';
     protected $fillable = [
         'name',
+        'email',
+        'link_website',
+        'tugas',
         'longitude', // Add 'longitude' to the fillable attributes
         'latitude',  // Add 'latitude' to the fillable attributes
     ];
