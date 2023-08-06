@@ -144,6 +144,7 @@ h6 {
 */
 .navbar {
     padding: 0;
+    z-index: 100; /* Angka ini bisa disesuaikan, asalkan lebih rendah dari z-index tombol-tombol */
 }
 
 .navbar ul {
@@ -1986,3 +1987,13 @@ section {
 .btn-dislike i {
     line-height: 50px; /* membuat ikon berada di tengah secara vertikal */
 }
+
+/* maps */
+.leaflet-control {
+    z-index: 101; /* Nilai ini lebih tinggi dari z-index navbar (misalnya: 100) */
+}
+
+.leaflet-control-custom {
+    z-index: 102; /* Nilai ini lebih tinggi dari z-index .leaflet-control (misalnya: 101) */
+}
+

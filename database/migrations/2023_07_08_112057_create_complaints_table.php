@@ -20,6 +20,8 @@ return new class extends Migration
             $table->date('complaint_date');
             $table->longText('description');
             $table->enum('status', ['pending', 'in progress', 'resolved'])->nullable()->default(null);
+            $table->string('longitude')->nullable();
+            $table->string('latitude')->nullable();
             $table->unsignedBigInteger('department_id');
             $table->timestamps();
 

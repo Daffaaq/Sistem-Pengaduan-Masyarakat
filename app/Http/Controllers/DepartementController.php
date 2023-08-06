@@ -45,20 +45,15 @@ class DepartementController extends Controller
 
     //     return redirect()->route('superadmin.departement.index')->with('success', 'Departement created successfully.');
     // }
+
+
+
     public function store(DepartementRequest $request)
     {
-        // $validatedData = $request->validated();
         Departements::create($request->validated());
-
-        // Departements::create([
-        //     'name' => $validatedData['name'],
-        //     'longitude' => $validatedData['longitude'],
-        //     'latitude' => $validatedData['latitude'],
-        // ]);
-
         return redirect()->route('superadmin.departement.index')->with('success', 'Departement created successfully.');
     }
-
+    
     public function edit($id)
     {
         $departement = Departements::findOrFail($id);

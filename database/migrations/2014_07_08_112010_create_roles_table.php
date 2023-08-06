@@ -20,12 +20,6 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        // Once the table is created, we can now insert admin, superadmin and user roles.
-        DB::table('roles')->insert([
-            ['name' => 'admin', 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'superadmin', 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'user', 'created_at' => now(), 'updated_at' => now()],
-        ]);
     }
 
     /**

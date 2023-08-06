@@ -35,21 +35,9 @@
                 </div>
             @endif
             <div class="text-center">
-                {{-- <form action="{{ route('superadmin.complaints.index') }}" method="GET">
-                    <div class="form-group">
-                        <label for="department">Pilih Departemen:</label>
-                        <select name="department" id="department" class="form-control">
-                            <option value="">Semua Departemen</option>
-                            @foreach ($departments as $department)
-                                <option value="{{ $department->id }}"
-                                    {{ request('department') == $department->id ? 'selected' : '' }}>{{ $department->name }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Filter</button>
-                </form> --}}
                 <br>
+                <!-- Bagian konten lainnya -->
+
                 <table class="table table-bordered" style="background-color: #78C1F3">
                     <tr>
                         <th width="auto">No</th>
@@ -59,13 +47,13 @@
                         <th width="auto">Status</th>
                         <th width="auto">Nama Departemen</th>
                         <th width="auto">Action1</th>
-                        <th width="auto">Action2</th>
                     </tr>
                     @foreach ($complaints as $cp)
                         @php
                             $hasImage = $cp->images && $cp->images->image_path;
+                            $hasLocation = isset($cp->latitude) && isset($cp->longitude);
                         @endphp
-                        <tr @if (!$hasImage) class="no-image" @endif>
+                        <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $cp->title }}</td>
                             <td>{{ $cp->complaint_date }}</td>
@@ -74,21 +62,20 @@
                             <td>{{ $cp->department->name }}</td>
                             <td>
                                 <button type="button" class="btn btn-primary view-details" data-id="{{ $cp->id }}"
-                                    data-has-image="{{ $cp->images ? 'true' : 'false' }}">
+                                    data-has-image="{{ $hasImage ? 'true' : 'false' }}"
+                                    data-has-location="{{ $hasLocation ? 'true' : 'false' }}">
                                     View Details
-                                    @if ($cp->images)
+                                    @if ($hasImage || $hasLocation)
                                         <i class="fas fa-exclamation-circle"></i>
                                     @endif
                                 </button>
                             </td>
-                            <td>
-                                <button
-                                    onclick="window.open('{{ route('user.complaints.show', ['id' => $cp->id]) }}', '_blank')"
-                                    class="btn btn-primary">View Details</button>
-                            </td>
                         </tr>
                     @endforeach
                 </table>
+
+                <!-- Bagian lainnya, seperti modal dan script -->
+
             </div>
         </div>
     </div>
@@ -112,6 +99,8 @@
                             <p class="complaint-date"></p>
                         </div>
                     </div>
+                    <div id="map-detail" style="height: 400px;"></div>
+                    <div id="no-map" style="display: none;"></div> <!-- Tambahkan ini -->
                     <div class="row mt-3">
                         <div class="col-md-6 offset-md-3">
                             <div class="card" style="width: 18rem; overflow: hidden;">
@@ -119,6 +108,7 @@
                                     style="height: 15rem; width: 100%; overflow: hidden; display: flex; align-items: center; justify-content: center;">
                                     <img src="" class="card-img-top" alt="Complaint Image"
                                         style="object-fit: contain; max-width: 100%;">
+                                    <div id="no-image" style="display: none;"></div> <!-- Tambahkan ini -->
                                 </div>
                             </div>
                         </div>
@@ -134,6 +124,12 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
     <script>
         $(document).ready(function() {
             $('.view-details').click(function() {
@@ -157,10 +153,14 @@
         });
     </script>
     <script>
+        var detailMap;
+
         $(document).ready(function() {
             $('.view-details').click(function() {
                 var button = $(this);
                 var id = $(this).data('id');
+                var hasImage = button.data('has-image') === 'true';
+                var hasLocation = button.data('has-location') === 'true';
 
                 $.get('/user/user/complaints/' + id + '/details', function(data) {
                     $('#complaintModal .modal-body .card-title').html('Title: ' + data.title);
@@ -171,18 +171,61 @@
                     $('#complaintModal .modal-body .status').html('Status: ' + data.status);
                     $('#complaintModal .modal-body .complaint-date').html('Complaint Date: ' + data
                         .complaint_date);
+                    if (data.latitude && data.longitude) {
+                        if (detailMap) {
+                            // If the map already exists, just update its properties.
+                            detailMap.setView([data.latitude, data.longitude], 13);
 
+                            // Clear the existing markers and add a new one at the new location.
+                            detailMap.eachLayer(function(layer) {
+                                detailMap.removeLayer(layer);
+                            });
+                        } else {
+                            // If the map does not exist, create a new one.
+                            detailMap = L.map('map-detail').setView([data.latitude, data.longitude],
+                                13);
+                            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                maxZoom: 19,
+                            }).addTo(detailMap);
+                        }
+                        L.marker([data.latitude, data.longitude]).addTo(detailMap);
+                        $('#map-detail').show();
+                        $('#no-map').hide(); // hide the "no map" message
+                    } else {
+                        // Handle when no location data is available
+                        $('#map-detail').hide(); // hide the map
+                        $('#no-map').show().html(
+                            "<p>No location data available for this complaint.</p>"
+                        ); // show the "no map" message
+                    }
                     if (data.images && data.images.image_path) {
                         $('#complaintModal .modal-body .card-img-top').attr('src', '/storage/' +
                             data.images.image_path);
-                        button.find('.fas').show();
+                        $('.card-img-top').show(); // show the image
+                        $('#no-image').hide(); // hide the "no image" message
                     } else {
-                        $('#complaintModal .modal-body .card-img-top').attr('src', '');
-                        button.find('.fas').hide();
+                        $('.card-img-top').hide(); // hide the image
+                        $('#no-image').show().html(
+                            "<p>No image available for this complaint.</p>"
+                        ); // show the "no image" message
                     }
 
                     $('#complaintModal').modal('show');
                 });
+            });
+
+            $('#complaintModal').on('shown.bs.modal', function() {
+                if (detailMap) {
+                    setTimeout(function() {
+                        detailMap.invalidateSize();
+                    }, 0);
+                }
+            });
+            $('#complaintModal').on('hidden.bs.modal', function() {
+                if (detailMap) {
+                    detailMap.remove();
+                    detailMap = null; // Reset the detailMap variable
+                }
             });
         });
     </script>

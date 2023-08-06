@@ -16,6 +16,9 @@ return new class extends Migration
         Schema::create('departements', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('email');
+            $table->string('link_website');
+            $table->longText('tugas');
             $table->string('longitude')->nullable();
             $table->string('latitude')->nullable();
             $table->timestamps();

@@ -103,6 +103,7 @@
                                 <th width="auto">Description</th>
                                 <th width="auto">Status</th>
                                 <th width="auto">Nama Departemen</th>
+                                <th width="auto">Action</th>
                             </tr>
                             @foreach ($complaints as $cp)
                                 <tr>
@@ -117,7 +118,7 @@
                         </table>
                     </div>
                     <div class="pagination-links">
-                        {{ $complaints->links('pagination::bootstrap-4') }}
+                        {{ $complaints->appends(request()->except(['page', '_token']))->links('pagination::bootstrap-4') }}
                     </div>
                 </div>
             </div>
