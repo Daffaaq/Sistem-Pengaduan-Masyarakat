@@ -43,27 +43,27 @@ class LandingPageController extends Controller
         //     return response()->json(['error' => 'Invalid ticket number.']);
         // }
         try {
-            $ticketNumber = $request->input('ticket_number');
-            $ticket = Tickets::where('number_ticket', $ticketNumber)->first();
-
-            switch ($ticket) {
-                case null:
-                    return response()->json(['error' => 'Invalid ticket number.']);
-                    break;
-                default:
-                    $ticketStatus = $ticket->complaint->status;
-                    return response()->json(['ticketStatus' => $ticketStatus]);
-                    break;
-            }
-
             // $ticketNumber = $request->input('ticket_number');
             // $ticket = Tickets::where('number_ticket', $ticketNumber)->first();
-            // if ($ticket) {
-            //     $ticketStatus = $ticket->complaint->status; // Accessing status through relationship
-            //     return response()->json(['ticketStatus' => $ticketStatus]);
-            // } else {
-            //     return response()->json(['error' => 'Invalid ticket number.']);
+
+            // switch ($ticket) {
+            //     case null:
+            //         return response()->json(['error' => 'Invalid ticket number.']);
+            //         break;
+            //     default:
+            //         $ticketStatus = $ticket->complaint->status;
+            //         return response()->json(['ticketStatus' => $ticketStatus]);
+            //         break;
             // }
+
+            $ticketNumber = $request->input('ticket_number');
+            $ticket = Tickets::where('number_ticket', $ticketNumber)->first();
+            if ($ticket) {
+                $ticketStatus = $ticket->complaint->status; // Accessing status through relationship
+                return response()->json(['ticketStatus' => $ticketStatus]);
+            } else {
+                return response()->json(['error' => 'Invalid ticket number.']);
+            }
         } catch (\Exception $e) {
             return response()->json(['error' => 'An error occurred while tracking the ticket.']);
         }

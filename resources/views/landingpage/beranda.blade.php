@@ -54,7 +54,7 @@
     <header id="header" class="fixed-top ">
         <div class="container d-flex align-items-center">
 
-            <h1 class="logo me-auto"><a href="{{ route('beranda') }}">SIPMA</a></h1>
+            <h1 class="logo me-auto"><a href="{{ route('beranda') }}"style="text-decoration: none;">SIPMA</a></h1>
             <!-- Uncomment below if you prefer to use an image logo -->
             <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -86,7 +86,8 @@
                     <h1>Pengaduan Masyarakat, SIPMA Siap Melayani!</h1>
                     <h2>Ajukan Pengaduanmu</h2>
                     <div class="d-flex justify-content-center justify-content-lg-start">
-                        <a href="{{ route('register') }}" class="btn-get-started">Get Started</a>
+                        <a href="{{ route('register') }}" class="btn-get-started"style="text-decoration: none;">Get
+                            Started</a>
                         {{-- <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox btn-watch-video"><i
                                 class="bi bi-play-circle"></i><span>Watch Video</span></a> --}}
                     </div>
@@ -158,7 +159,8 @@
                                 untuk terus meningkatkan kualitas dan efisiensi layanan.</li>
                             <li><i class="ri-check-double-line"></i> Kolaborasi: Bekerja sama dengan berbagai pihak
                                 untuk mencapai tujuan bersama dan mendukung kemajuan masyarakat.</li>
-                            <li><i class="ri-check-double-line"></i>Kolaborasi: Bekerja sama dengan berbagai pihak untuk
+                            <li><i class="ri-check-double-line"></i>Kolaborasi: Bekerja sama dengan berbagai pihak
+                                untuk
                                 mencapai tujuan bersama dan mendukung kemajuan masyarakat.</li>
                             <li><i class="ri-check-double-line"></i>Transparansi: Menjaga keterbukaan dalam proses
                                 pelayanan dan pengambilan keputusan.</li>
@@ -433,7 +435,8 @@
                             satisfaction. Thank you for giving us the opportunity to better serve you.</p>
                     </div>
                     <div class="col-lg-3 cta-btn-container text-center">
-                        <a class="cta-btn align-middle" href="{{ route('login') }}">Voice your complaints</a>
+                        <a class="cta-btn align-middle" href="{{ route('login') }}"
+                            style="text-decoration: none;">Voice your complaints</a>
                     </div>
                 </div>
 
@@ -1082,9 +1085,9 @@
                         data: formData,
                         success: function(response) {
                             $('#trackResultModal .modal-body').html(
-                                response.ticketStatus
-                                    ? '<p>Ticket Status: ' + response.ticketStatus + '</p>'
-                                    : '<p>No ticket status found.</p>'
+                                response.ticketStatus ?
+                                '<p>Ticket Status: ' + response.ticketStatus + '</p>' :
+                                '<p>No ticket status found.</p>'
                             );
                         },
                         error: function() {
