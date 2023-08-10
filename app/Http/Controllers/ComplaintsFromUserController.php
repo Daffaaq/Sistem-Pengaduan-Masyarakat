@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Complaint;
 use App\Models\Departements;
 use App\Models\Images;
+use App\Models\Tickets;
 use App\Http\Requests\StoreComplaintRequest;
 use Illuminate\Support\Facades\Auth;
 
@@ -95,6 +96,9 @@ class ComplaintsFromUserController extends Controller
         $complaint->longitude = $request->input('longitude'); // Save longitude if provided
         $complaint->latitude = $request->input('latitude');   // Save latitude if provided
         $complaint->save();
+
+        // Create a new ticket using the createTicket() method
+        $ticket = $complaint->createTicket();
 
         // Jika ada gambar yang diunggah, simpan gambar
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
