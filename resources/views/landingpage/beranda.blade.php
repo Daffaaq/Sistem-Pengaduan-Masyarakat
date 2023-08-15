@@ -1019,7 +1019,7 @@
                             dan keterlibatan dalam proses tersebut.</p>
                         <form id="trackComplaintForm" action="{{ route('track.complaint') }}" method="post">
                             @csrf
-                            <input type="number" name="ticket_number" placeholder="Enter Ticket Number" required>
+                            <input type="text" name="code_ticket" placeholder="Enter Code Number" required>
                             <button type="submit">Track</button>
                         </form>
                     </div>

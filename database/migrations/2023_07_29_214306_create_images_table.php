@@ -16,10 +16,12 @@ return new class extends Migration
         Schema::create('images', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('complaint_id');
+            $table->unsignedBigInteger('article_id');
             $table->string('image_path')->nullable(); // Kolom untuk menyimpan jalur gambar, diatur sebagai nullable agar bisa diisi null jika tidak ada gambar.
             $table->timestamps();
 
             $table->foreign('complaint_id')->references('id')->on('complaints')->onDelete('cascade');
+            $table->foreign('article_id')->references('id')->on('article')->onDelete('cascade');
         });
     }
 

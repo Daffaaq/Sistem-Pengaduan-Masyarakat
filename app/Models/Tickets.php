@@ -10,7 +10,7 @@ class Tickets extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'number_ticket',
+        'code_ticket',
         'complaint_id',
     ];
 
@@ -23,22 +23,32 @@ class Tickets extends Model
     {
         parent::boot();
 
-        // Automatically generate number_ticket before creating a new Complaint
-        static::creating(function ($complaint) {
-            $complaint->number_ticket = self::generateUniqueTicketNumber();
+        // Automatically generate code_ticket before creating a new Ticket
+        static::creating(function ($ticket) {
+            $ticket->code_ticket = self::generateUniqueTicketCode();
         });
     }
 
-    private static function generateUniqueTicketNumber()
+    private static function generateUniqueTicketCode()
     {
-        // Generate a random number for the ticket
-        $randomNumber = rand(10000, 99999);
+        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'; // Karakter yang diizinkan
+        $codeLength = 8; // Panjang kode tiket
 
-        // Check if the number already exists, if so, regenerate until a unique number is found
-        while (self::where('number_ticket', $randomNumber)->exists()) {
-            $randomNumber = rand(10000, 99999);
+        $randomCode = '';
+        $charactersLength = strlen($characters);
+
+        for ($i = 0; $i < $codeLength; $i++) {
+            $randomCode .= $characters[rand(0, $charactersLength - 1)];
         }
 
-        return $randomNumber;
+        // Periksa apakah kode tersebut sudah ada, jika iya, hasilkan ulang hingga ditemukan kode yang unik
+        while (self::where('code_ticket', $randomCode)->exists()) {
+            $randomCode = '';
+            for ($i = 0; $i < $codeLength; $i++) {
+                $randomCode .= $characters[rand(0, $charactersLength - 1)];
+            }
+        }
+
+        return $randomCode;
     }
 }

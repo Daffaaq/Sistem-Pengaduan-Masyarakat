@@ -56,7 +56,7 @@
                         @endphp
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $cp->ticket->number_ticket }}</td>
+                            <td>{{ $cp->ticket->code_ticket }}</td>
                             <td>{{ $cp->title }}</td>
                             <td>{{ $cp->complaint_date }}</td>
                             <td>{{ $cp->description }}</td>
