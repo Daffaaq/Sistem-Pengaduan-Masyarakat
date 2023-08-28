@@ -41,6 +41,7 @@
                 <table class="table table-bordered" style="background-color: #78C1F3">
                     <tr>
                         <th width="auto">No</th>
+                        <th width="auto">Ticket Number</th>
                         <th width="auto">Title</th>
                         <th width="auto">Time</th>
                         <th width="auto">Date</th>
@@ -56,6 +57,7 @@
                         @endphp
                         <tr>
                             <td>{{ $loop->iteration }}</td>
+                            <td>{{ $cp->ticket->number_ticket }}</td>
                             <td>{{ $cp->title }}</td>
                             <td>{{ $cp->time }}</td>
                             <td>{{ $cp->complaint_date }}</td>

@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Complaint;
 use App\Models\Departements;
+use App\Models\Tickets;
 use App\Models\polls;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class LandingPageController extends Controller
 {
@@ -29,6 +31,45 @@ class LandingPageController extends Controller
         // Berikan respons bahwa aksi like berhasil
         return response()->json(['message' => 'Poll liked successfully', 'likes' => $poll->likes]);
     }
+
+    public function trackComplaint(Request $request)
+    {
+        // $ticketNumber = $request->input('ticket_number');
+        // try {
+        //     $ticket = Tickets::where('number_ticket', $ticketNumber)->firstOrFail();
+        //     $ticketStatus = $ticket->complaint->status;
+        //     return response()->json(['ticketStatus' => $ticketStatus]);
+        // } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+        //     return response()->json(['error' => 'Invalid ticket number.']);
+        // }
+        try {
+            // $ticketNumber = $request->input('ticket_number');
+            // $ticket = Tickets::where('number_ticket', $ticketNumber)->first();
+
+            // switch ($ticket) {
+            //     case null:
+            //         return response()->json(['error' => 'Invalid ticket number.']);
+            //         break;
+            //     default:
+            //         $ticketStatus = $ticket->complaint->status;
+            //         return response()->json(['ticketStatus' => $ticketStatus]);
+            //         break;
+            // }
+
+            $ticketNumber = $request->input('ticket_number');
+            $ticket = Tickets::where('number_ticket', $ticketNumber)->first();
+            if ($ticket) {
+                $ticketStatus = $ticket->complaint->status; // Accessing status through relationship
+                return response()->json(['ticketStatus' => $ticketStatus]);
+            } else {
+                return response()->json(['error' => 'Invalid ticket number.']);
+            }
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while tracking the ticket.']);
+        }
+    }
+
+
 
     // Fungsi untuk menangani aksi dislike
     public function dislikePoll($id)
@@ -58,6 +99,10 @@ class LandingPageController extends Controller
 
         // Mendapatkan jumlah complaints dengan status resolved
         $resolvedComplaints = Complaint::where('status', 'resolved')->count();
+
+        // Mendapatkan data tiket (tickets) yang berelasi dengan complaint
+        $tickets = Tickets::with('complaint')->get();
+
         $departements = Departements::all();
         // Mendapatkan data polling
         $polls = polls::all();

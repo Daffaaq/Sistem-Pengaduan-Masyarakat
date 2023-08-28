@@ -54,7 +54,7 @@
     <header id="header" class="fixed-top ">
         <div class="container d-flex align-items-center">
 
-            <h1 class="logo me-auto"><a href="{{ route('beranda') }}">SIPMA</a></h1>
+            <h1 class="logo me-auto"><a href="{{ route('beranda') }}"style="text-decoration: none;">SIPMA</a></h1>
             <!-- Uncomment below if you prefer to use an image logo -->
             <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -86,7 +86,8 @@
                     <h1>Pengaduan Masyarakat, SIPMA Siap Melayani!</h1>
                     <h2>Ajukan Pengaduanmu</h2>
                     <div class="d-flex justify-content-center justify-content-lg-start">
-                        <a href="{{ route('register') }}" class="btn-get-started">Get Started</a>
+                        <a href="{{ route('register') }}" class="btn-get-started"style="text-decoration: none;">Get
+                            Started</a>
                         {{-- <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox btn-watch-video"><i
                                 class="bi bi-play-circle"></i><span>Watch Video</span></a> --}}
                     </div>
@@ -158,7 +159,8 @@
                                 untuk terus meningkatkan kualitas dan efisiensi layanan.</li>
                             <li><i class="ri-check-double-line"></i> Kolaborasi: Bekerja sama dengan berbagai pihak
                                 untuk mencapai tujuan bersama dan mendukung kemajuan masyarakat.</li>
-                            <li><i class="ri-check-double-line"></i>Kolaborasi: Bekerja sama dengan berbagai pihak untuk
+                            <li><i class="ri-check-double-line"></i>Kolaborasi: Bekerja sama dengan berbagai pihak
+                                untuk
                                 mencapai tujuan bersama dan mendukung kemajuan masyarakat.</li>
                             <li><i class="ri-check-double-line"></i>Transparansi: Menjaga keterbukaan dalam proses
                                 pelayanan dan pengambilan keputusan.</li>
@@ -433,7 +435,8 @@
                             satisfaction. Thank you for giving us the opportunity to better serve you.</p>
                     </div>
                     <div class="col-lg-3 cta-btn-container text-center">
-                        <a class="cta-btn align-middle" href="{{ route('login') }}">Voice your complaints</a>
+                        <a class="cta-btn align-middle" href="{{ route('login') }}"
+                            style="text-decoration: none;">Voice your complaints</a>
                     </div>
                 </div>
 
@@ -1012,16 +1015,92 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-6">
-                        <h4>Join Our Newsletter</h4>
-                        <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-                        <form action="" method="post">
-                            <input type="email" name="email"><input type="submit" value="Subscribe">
+                        <h4>Lacak Status Pengaduanmu</h4>
+                        <p style="text-align:justify">Fitur ini memungkinkan pengguna untuk mengikuti dan memantau
+                            perkembangan pengaduan yang telah mereka ajukan. Dengan demikian, pengguna dapat dengan
+                            mudah mengetahui status dan tahapan penanganan pengaduan mereka, menciptakan transparansi
+                            dan keterlibatan dalam proses tersebut.</p>
+                        <form id="trackComplaintForm" action="{{ route('track.complaint') }}" method="post">
+                            @csrf
+                            <input type="number" name="ticket_number" placeholder="Enter Ticket Number" required>
+                            <button type="submit">Track</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
 
+        <div class="modal fade" id="trackResultModal" tabindex="-1" role="dialog"
+            aria-labelledby="trackResultModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="trackResultModalLabel">Ticket Tracking Result</h5>
+                        <button type="button" class="close" data-dismiss="modal" id="closeModalX">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        @if (isset($ticketStatus))
+                            <p>Ticket Status: {{ $ticketStatus }}</p>
+                        @else
+                            <p>No ticket status found.</p>
+                        @endif
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="closeModalButton">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('#trackComplaintForm').submit(function(event) {
+                    // ...
+                    $('#trackResultModal').modal('show'); // Show the modal
+                });
+
+                // Menangani penutupan modal secara manual
+                $('#closeModalButton').click(function() {
+                    $('#trackResultModal').modal('hide');
+                });
+                $('#closeModalX').click(function() {
+                    $('#trackResultModal').modal('hide');
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function() {
+                $('#trackComplaintForm').submit(function(event) {
+                    event.preventDefault(); // Prevent form submission
+
+                    var form = $(this);
+                    var formData = form.serialize();
+
+                    $.ajax({
+                        type: 'POST',
+                        url: form.attr('action'),
+                        data: formData,
+                        success: function(response) {
+                            $('#trackResultModal .modal-body').html(
+                                response.ticketStatus ?
+                                '<p>Ticket Status: ' + response.ticketStatus + '</p>' :
+                                '<p>No ticket status found.</p>'
+                            );
+                        },
+                        error: function() {
+                            $('#trackResultModal .modal-body').html(
+                                '<p>An error occurred while tracking the ticket.</p>');
+                        },
+                        complete: function() {
+                            $('#trackResultModal').modal('show');
+                        }
+                    });
+                });
+            });
+        </script>
         <div class="footer-top">
             <div class="container">
                 <div class="row">
@@ -1124,40 +1203,42 @@
     @endforeach
 
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js">
+        < />
 
-    <script>
-        // Mendefinisikan sebuah fungsi bernama "doAction" dengan dua parameter "action" dan "pollId".
-        // Fungsi ini bertugas untuk melakukan request ke backend dan memperbarui jumlah like atau dislike di tampilan.
-        function doAction(action, pollId) {
-            // Lakukan request ke backend menggunakan AJAX.
-            $.ajax({
-                url: `/poll/${action}/${pollId}`, // URL untuk request ke backend, mengandung tiga bagian yaitu '/poll/', "action" (like/dislike), dan "pollId".
-                type: 'POST', // Metode HTTP untuk request, dalam hal ini adalah POST.
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}' // Set header 'X-CSRF-TOKEN' dengan nilai csrf_token() dari backend untuk melindungi dari serangan CSRF.
-                },
-                dataType: 'json', // Tipe data yang diharapkan dari respon backend, dalam hal ini adalah JSON.
-                success: function(data) { // Fungsi yang akan dijalankan ketika request berhasil.
-                    // Tampilkan pesan sukses dari backend. Baris ini di-komen untuk sementara agar tidak mengganggu tampilan.
-                    // alert(data.message);
+        <
+        script >
+            // Mendefinisikan sebuah fungsi bernama "doAction" dengan dua parameter "action" dan "pollId".
+            // Fungsi ini bertugas untuk melakukan request ke backend dan memperbarui jumlah like atau dislike di tampilan.
+            function doAction(action, pollId) {
+                // Lakukan request ke backend menggunakan AJAX.
+                $.ajax({
+                    url: `/poll/${action}/${pollId}`, // URL untuk request ke backend, mengandung tiga bagian yaitu '/poll/', "action" (like/dislike), dan "pollId".
+                    type: 'POST', // Metode HTTP untuk request, dalam hal ini adalah POST.
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}' // Set header 'X-CSRF-TOKEN' dengan nilai csrf_token() dari backend untuk melindungi dari serangan CSRF.
+                    },
+                    dataType: 'json', // Tipe data yang diharapkan dari respon backend, dalam hal ini adalah JSON.
+                    success: function(data) { // Fungsi yang akan dijalankan ketika request berhasil.
+                        // Tampilkan pesan sukses dari backend. Baris ini di-komen untuk sementara agar tidak mengganggu tampilan.
+                        // alert(data.message);
 
-                    // Perbarui jumlah like dan dislike di tampilan dengan data yang diterima dari backend.
-                    $('#likesCount' + pollId).text(data
-                        .likes
+                        // Perbarui jumlah like dan dislike di tampilan dengan data yang diterima dari backend.
+                        $('#likesCount' + pollId).text(data
+                            .likes
                         ); // Memperbarui elemen dengan ID "likesCount" dan menampilkan jumlah like yang baru.
-                    $('#dislikesCount' + pollId).text(data
-                        .dislikes
+                        $('#dislikesCount' + pollId).text(data
+                            .dislikes
                         ); // Memperbarui elemen dengan ID "dislikesCount" dan menampilkan jumlah dislike yang baru.
-                    location
-                        .reload(); // Memuat ulang halaman untuk memastikan perubahan terlihat.
-                },
-                error: function(xhr, status,
-                    error) { // Fungsi yang akan dijalankan ketika request mengalami kegagalan.
-                    console.error(xhr.responseText); // Log pesan error ke konsol.
-                }
-            });
-        }
+                        location
+                            .reload(); // Memuat ulang halaman untuk memastikan perubahan terlihat.
+                    },
+                    error: function(xhr, status,
+                        error) { // Fungsi yang akan dijalankan ketika request mengalami kegagalan.
+                        console.error(xhr.responseText); // Log pesan error ke konsol.
+                    }
+                });
+            }
 
         // Event listener untuk menangkap klik tombol "like".
         $('.btn-like').on('click', function(event) {
@@ -1167,7 +1248,7 @@
                 'poll-id'); // Mendapatkan nilai "poll-id" dari data atribut tombol yang diklik.
             doAction('like',
                 pollId
-                ); // Memanggil fungsi "doAction" dengan parameter "action" sebagai 'like' dan "pollId" sesuai nilai yang didapatkan dari tombol.
+            ); // Memanggil fungsi "doAction" dengan parameter "action" sebagai 'like' dan "pollId" sesuai nilai yang didapatkan dari tombol.
         });
 
         // Event listener untuk menangkap klik tombol "dislike".
@@ -1178,7 +1259,7 @@
                 'poll-id'); // Mendapatkan nilai "poll-id" dari data atribut tombol yang diklik.
             doAction('dislike',
                 pollId
-                ); // Memanggil fungsi "doAction" dengan parameter "action" sebagai 'dislike' dan "pollId" sesuai nilai yang didapatkan dari tombol.
+            ); // Memanggil fungsi "doAction" dengan parameter "action" sebagai 'dislike' dan "pollId" sesuai nilai yang didapatkan dari tombol.
         });
     </script>
 
