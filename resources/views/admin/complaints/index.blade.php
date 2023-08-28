@@ -38,6 +38,7 @@
                     <tr>
                         <th width="auto">No</th>
                         <th width="auto">Title</th>
+                        <th width="auto">Time</th>
                         <th width="auto">Date</th>
                         <th width="auto">Description</th>
                         <th width="auto">Status</th>
@@ -59,6 +60,7 @@
                         <tr @if (!$hasImage) class="no-image" @endif>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $cp->title }}</td>
+                            <td>{{ $cp->time }}</td>
                             <td>{{ $cp->complaint_date }}</td>
                             <td>{{ $cp->description }}</td>
                             <td>
@@ -102,6 +104,7 @@
                         <tr @if (!$hasImage) class="no-image" @endif>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $cp->title }}</td>
+                            <td>{{ $cp->time }}</td>
                             <td>{{ $cp->complaint_date }}</td>
                             <td>{{ $cp->description }}</td>
                             <td>Resolved</td>

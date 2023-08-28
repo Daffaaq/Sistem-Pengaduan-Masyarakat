@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('title');
+            $table->time('time');
             $table->date('complaint_date');
             $table->longText('description');
             $table->enum('status', ['pending', 'in progress', 'resolved'])->nullable()->default(null);

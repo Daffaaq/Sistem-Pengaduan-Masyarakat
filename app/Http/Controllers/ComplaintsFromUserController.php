@@ -88,6 +88,7 @@ class ComplaintsFromUserController extends Controller
         $complaint = new Complaint();
         $complaint->user_id = Auth::id();
         $complaint->title = $request->input('title');
+        $complaint->time = now()->toTimeString();
         $complaint->complaint_date = now();
         $complaint->description = $request->input('description');
         $complaint->status = 'pending';
