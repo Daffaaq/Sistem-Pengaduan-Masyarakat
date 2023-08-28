@@ -26,6 +26,7 @@
                     <tr>
                         <th width="auto">No</th>
                         <th width="auto">Title</th>
+                        <th width="auto">Time</th>
                         <th width="auto">Date</th>
                         <th width="auto">Description</th>
                         <th width="auto">Status</th>
@@ -36,6 +37,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $answer->complaint->title }}</td>
+                                <td>{{ $answer->complaint->time }}</td>
                                 <td>{{ $answer->complaint->complaint_date }}</td>
                                 <td>{{ $answer->complaint->description }}</td>
                                 <td>
@@ -46,6 +48,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td></td>
+                                <td>{{ $answer->time }}</td>
                                 <td>{{ $answer->answer_complaint_date }}</td>
                                 {{-- <td>{{ $answer->answer }}</td> --}}
                                 <td></td>
