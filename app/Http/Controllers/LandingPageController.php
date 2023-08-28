@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Complaint;
 use App\Models\Departements;
+use App\Models\Tickets;
 use App\Models\polls;
+use App\Http\Requests\TrackComplaintRequest;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class LandingPageController extends Controller
 {
@@ -29,6 +32,32 @@ class LandingPageController extends Controller
         // Berikan respons bahwa aksi like berhasil
         return response()->json(['message' => 'Poll liked successfully', 'likes' => $poll->likes]);
     }
+
+    public function trackComplaint(TrackComplaintRequest $request)
+    {
+        app()->setLocale('id');
+        try {
+            $ticketNumber = $request->input('code_ticket');
+            $ticket = Tickets::where('code_ticket', $ticketNumber)->first();
+            if ($ticket) {
+                $complaint = $ticket->complaint; // Get the associated complaint
+                $ticketStatus = $complaint->status; // Access status through relationship
+                $ticketTitle = $complaint->title; // Access title through relationship
+                $userName = $complaint->user->name; // Access user's name through relationship
+                return response()->json([
+                    'ticketStatus' => $ticketStatus,
+                    'ticketTitle' => $ticketTitle,
+                    'userName' => $userName,
+                ]);
+            } else {
+                return response()->json(['error' => 'Invalid ticket number.']);
+            }
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while tracking the ticket.']);
+        }
+    }
+
+
 
     // Fungsi untuk menangani aksi dislike
     public function dislikePoll($id)
@@ -58,6 +87,10 @@ class LandingPageController extends Controller
 
         // Mendapatkan jumlah complaints dengan status resolved
         $resolvedComplaints = Complaint::where('status', 'resolved')->count();
+
+        // Mendapatkan data tiket (tickets) yang berelasi dengan complaint
+        $tickets = Tickets::with('complaint')->get();
+
         $departements = Departements::all();
         // Mendapatkan data polling
         $polls = polls::all();

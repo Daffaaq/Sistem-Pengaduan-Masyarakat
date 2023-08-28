@@ -41,6 +41,41 @@
                         </div>
                     @enderror
                 </div>
+                <!-- Email field -->
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email"
+                        name="email" value="{{ $departement->email }}" required>
+                    @error('email')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+
+                <!-- Link Website field -->
+                <div class="mb-3">
+                    <label for="link_website" class="form-label">Link Website</label>
+                    <input type="url" class="form-control @error('link_website') is-invalid @enderror"
+                        id="link_website" name="link_website" value="{{ $departement->link_website }}" required>
+                    @error('link_website')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+
+                <!-- Tugas field -->
+                <div class="mb-3">
+                    <label for="tugas" class="form-label">Tugas</label>
+                    <textarea class="form-control @error('tugas') is-invalid @enderror" id="tugas" name="tugas" rows="3"
+                        required>{{ $departement->tugas }}</textarea>
+                    @error('tugas')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
                 <div class="mb-3">
                     <label for="latitude" class="form-label">Latitude (Optional)</label>
                     <input type="text" class="form-control @error('latitude') is-invalid @enderror" id="latitude"

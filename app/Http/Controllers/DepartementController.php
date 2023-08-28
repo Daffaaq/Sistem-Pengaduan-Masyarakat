@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Departements;
 use App\Http\Requests\DepartementRequest;
+use App\Http\Requests\UpdateDepartementRequest;
 use Illuminate\Support\Facades\Validator;
 
 class DepartementController extends Controller
@@ -45,20 +46,15 @@ class DepartementController extends Controller
 
     //     return redirect()->route('superadmin.departement.index')->with('success', 'Departement created successfully.');
     // }
+
+
+
     public function store(DepartementRequest $request)
     {
-        // $validatedData = $request->validated();
         Departements::create($request->validated());
-
-        // Departements::create([
-        //     'name' => $validatedData['name'],
-        //     'longitude' => $validatedData['longitude'],
-        //     'latitude' => $validatedData['latitude'],
-        // ]);
-
         return redirect()->route('superadmin.departement.index')->with('success', 'Departement created successfully.');
     }
-
+    
     public function edit($id)
     {
         $departement = Departements::findOrFail($id);
@@ -76,7 +72,7 @@ class DepartementController extends Controller
 
     //     return redirect()->route('superadmin.departement.index')->with('success', 'Departement updated successfully.');
     // }
-    public function update(DepartementRequest $request, $id)
+    public function update(UpdateDepartementRequest $request, $id)
     {
         $departement = Departements::findOrFail($id);
         $departement->update($request->validated());

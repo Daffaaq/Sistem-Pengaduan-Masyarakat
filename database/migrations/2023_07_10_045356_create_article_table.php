@@ -13,19 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('complaints', function (Blueprint $table) {
+        Schema::create('article', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
             $table->string('title');
-            $table->date('complaint_date');
-            $table->time('complaint_time');
             $table->longText('description');
-            $table->enum('status', ['pending', 'in progress', 'resolved'])->nullable()->default(null);
-            $table->string('longitude')->nullable();
-            $table->string('latitude')->nullable();
-            $table->unsignedBigInteger('department_id');
+            $table->date('article_date');
+            $table->timestamp('published_at')->nullable();
             $table->timestamps();
 
+            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('department_id');
+
+            $table->foreign('category_id')->references('id')->on('category');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('department_id')->references('id')->on('departements');
         });
@@ -38,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('complaints');
+        Schema::dropIfExists('article');
     }
 };

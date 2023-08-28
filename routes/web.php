@@ -38,6 +38,8 @@ Route::group(['prefix' => '/'], function () {
     Route::get('/', [LandingPageController::class, 'indexberanda'])->name('beranda');
     Route::post('/poll/like/{id}', [LandingPageController::class, 'likePoll'])->name('poll.like');
     Route::post('/poll/dislike/{id}', [LandingPageController::class, 'dislikePoll'])->name('poll.dislike');
+    Route::post('/track-complaint', [LandingPageController::class, 'trackComplaint'])->name('track.complaint');
+
     Route::get('/tentang', [LandingPageController::class, 'indexTentang'])->name('tentang');
     Route::get('/statistik', [LandingPageController::class, 'indexStatik'])->name('statistik');
     // Tambahkan route lainnya di sini jika ada

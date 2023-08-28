@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DepartementRequest extends FormRequest
+class UpdateDepartementRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class DepartementRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:departements,name',
+            'name' => 'required',
             'email' => 'required|email',
             'link_website' => 'required|url', // Validasi format URL untuk link_website
             'tugas' => 'required', // Tugas harus diisi (tidak boleh kosong)

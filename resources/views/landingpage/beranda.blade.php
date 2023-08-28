@@ -54,7 +54,7 @@
     <header id="header" class="fixed-top ">
         <div class="container d-flex align-items-center">
 
-            <h1 class="logo me-auto"><a href="index.html">SIPMA</a></h1>
+            <h1 class="logo me-auto"><a href="{{ route('beranda') }}">SIPMA</a></h1>
             <!-- Uncomment below if you prefer to use an image logo -->
             <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -83,7 +83,7 @@
             <div class="row">
                 <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1"
                     data-aos="fade-up" data-aos-delay="200">
-                    <h1>Pelayanan Masyarakat Lebih Baik, SIPMA Siap Melayani!</h1>
+                    <h1>Pengaduan Masyarakat, SIPMA Siap Melayani!</h1>
                     <h2>Ajukan Pengaduanmu</h2>
                     <div class="d-flex justify-content-center justify-content-lg-start">
                         <a href="{{ route('register') }}" class="btn-get-started">Get Started</a>
@@ -305,7 +305,7 @@
                         <img src="assets/img/skills.png" class="img-fluid" alt="">
                     </div>
                     <div class="col-lg-6 pt-4 pt-lg-0 content" data-aos="fade-left" data-aos-delay="100">
-                        <h3>Voluptatem dignissimos provident quasi corporis voluptates</h3>
+                        <h3>ALUR MELAKUKAN PENGADUAN </h3>
                         <p class="fst-italic">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                             labore et dolore
@@ -930,7 +930,7 @@
                                     var map = L.map('map', {
                                         center: [-7.609531, 112.828478],
                                         zoom: 15,
-                                        attributionControl: false // Tambahkan opsi ini
+                                        attributionControl: false
                                     });
 
                                     var streets = L.tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
@@ -945,12 +945,10 @@
                                         attribution: false
                                     });
 
-                                    map.addLayer(streets); // Let's set the street view as default
+                                    map.addLayer(streets);
 
-                                    // Create a separate layer group for the markers
                                     var markerLayer = L.layerGroup().addTo(map);
 
-                                    // Assuming $departements is an array of departement data
                                     @foreach ($departements as $departement)
                                         @if ($departement->latitude && $departement->longitude && $departement->name)
                                             var marker = L.marker([{{ $departement->latitude }}, {{ $departement->longitude }}])
@@ -959,13 +957,11 @@
                                         @endif
                                     @endforeach
 
-                                    // Adding the control to switch between street view and satellite view
                                     var baseLayers = {
                                         "Streets": streets,
                                         "Satellite": satellite
                                     };
 
-                                    // Create a toggle button inside the map
                                     var toggleButton = L.Control.extend({
                                         options: {
                                             position: 'bottomleft'
@@ -983,9 +979,11 @@
                                                 if (map.hasLayer(satellite)) {
                                                     map.removeLayer(satellite);
                                                     streets.addTo(map);
+                                                    container.innerHTML = 'Toggle View';
                                                 } else {
                                                     map.removeLayer(streets);
                                                     satellite.addTo(map);
+                                                    container.innerHTML = 'Toggle View';
                                                 }
                                             }
 
@@ -995,10 +993,10 @@
 
                                     map.addControl(new toggleButton());
                                 </script>
-
                             </div>
                         </div>
                     </div>
+
 
                 </div>
 
@@ -1014,15 +1012,21 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-6">
-                        <h4>Join Our Newsletter</h4>
-                        <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-                        <form action="" method="post">
-                            <input type="email" name="email"><input type="submit" value="Subscribe">
+                        <h4>Lacak Status Pengaduanmu</h4>
+                        <p style="text-align:justify">Fitur ini memungkinkan pengguna untuk mengikuti dan memantau
+                            perkembangan pengaduan yang telah mereka ajukan. Dengan demikian, pengguna dapat dengan
+                            mudah mengetahui status dan tahapan penanganan pengaduan mereka, menciptakan transparansi
+                            dan keterlibatan dalam proses tersebut.</p>
+                        <form id="trackComplaintForm" action="{{ route('track.complaint') }}" method="post">
+                            @csrf
+                            <input type="text" name="code_ticket" placeholder="Enter Code Number" required>
+                            <button type="submit">Track</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
+
 
         <div class="footer-top">
             <div class="container">
@@ -1127,58 +1131,48 @@
 
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // Mendefinisikan sebuah fungsi bernama "doAction" dengan dua parameter "action" dan "pollId".
+    // Fungsi ini bertugas untuk melakukan request ke backend dan memperbarui jumlah like atau dislike di tampilan.
+    function doAction(action, pollId) {
+        // Lakukan request ke backend menggunakan AJAX.
+        $.ajax({
+            url: `/poll/${action}/${pollId}`, // URL untuk request ke backend, mengandung tiga bagian yaitu '/poll/', "action" (like/dislike), dan "pollId".
+            type: 'POST', // Metode HTTP untuk request, dalam hal ini adalah POST.
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}' // Set header 'X-CSRF-TOKEN' dengan nilai csrf_token() dari backend untuk melindungi dari serangan CSRF.
+            },
+            dataType: 'json', // Tipe data yang diharapkan dari respon backend, dalam hal ini adalah JSON.
+            success: function(data) { // Fungsi yang akan dijalankan ketika request berhasil.
+                // Tampilkan pesan sukses dari backend. Baris ini di-komen untuk sementara agar tidak mengganggu tampilan.
+                // alert(data.message);
 
-    <script>
-        // Mendefinisikan sebuah fungsi bernama "doAction" dengan dua parameter "action" dan "pollId".
-        // Fungsi ini bertugas untuk melakukan request ke backend dan memperbarui jumlah like atau dislike di tampilan.
-        function doAction(action, pollId) {
-            // Lakukan request ke backend menggunakan AJAX.
-            $.ajax({
-                url: `/poll/${action}/${pollId}`, // URL untuk request ke backend, mengandung tiga bagian yaitu '/poll/', "action" (like/dislike), dan "pollId".
-                type: 'POST', // Metode HTTP untuk request, dalam hal ini adalah POST.
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}' // Set header 'X-CSRF-TOKEN' dengan nilai csrf_token() dari backend untuk melindungi dari serangan CSRF.
-                },
-                dataType: 'json', // Tipe data yang diharapkan dari respon backend, dalam hal ini adalah JSON.
-                success: function(data) { // Fungsi yang akan dijalankan ketika request berhasil.
-                    // Tampilkan pesan sukses dari backend. Baris ini di-komen untuk sementara agar tidak mengganggu tampilan.
-                    // alert(data.message);
-
-                    // Perbarui jumlah like dan dislike di tampilan dengan data yang diterima dari backend.
-                    $('#likesCount' + pollId).text(data
-                    .likes); // Memperbarui elemen dengan ID "likesCount" dan menampilkan jumlah like yang baru.
-                    $('#dislikesCount' + pollId).text(data
-                    .dislikes); // Memperbarui elemen dengan ID "dislikesCount" dan menampilkan jumlah dislike yang baru.
-                    location
-                .reload(); // Memuat ulang halaman untuk memastikan perubahan terlihat.
-                },
-                error: function(xhr, status,
-                error) { // Fungsi yang akan dijalankan ketika request mengalami kegagalan.
-                    console.error(xhr.responseText); // Log pesan error ke konsol.
-                }
-            });
-        }
-
-        // Event listener untuk menangkap klik tombol "like".
-        $('.btn-like').on('click', function(event) {
-            event
-        .preventDefault(); // Mencegah perilaku default dari tautan ketika diklik (misalnya, mengarahkan ke URL).
-            var pollId = $(this).data(
-            'poll-id'); // Mendapatkan nilai "poll-id" dari data atribut tombol yang diklik.
-            doAction('like',
-            pollId); // Memanggil fungsi "doAction" dengan parameter "action" sebagai 'like' dan "pollId" sesuai nilai yang didapatkan dari tombol.
+                // Perbarui jumlah like dan dislike di tampilan dengan data yang diterima dari backend.
+                $('#likesCount' + pollId).text(data.likes); // Memperbarui elemen dengan ID "likesCount" dan menampilkan jumlah like yang baru.
+                $('#dislikesCount' + pollId).text(data.dislikes); // Memperbarui elemen dengan ID "dislikesCount" dan menampilkan jumlah dislike yang baru.
+                location.reload(); // Memuat ulang halaman untuk memastikan perubahan terlihat.
+            },
+            error: function(xhr, status, error) { // Fungsi yang akan dijalankan ketika request mengalami kegagalan.
+                console.error(xhr.responseText); // Log pesan error ke konsol.
+            }
         });
+    }
 
-        // Event listener untuk menangkap klik tombol "dislike".
-        $('.btn-dislike').on('click', function(event) {
-            event
-        .preventDefault(); // Mencegah perilaku default dari tautan ketika diklik (misalnya, mengarahkan ke URL).
-            var pollId = $(this).data(
-            'poll-id'); // Mendapatkan nilai "poll-id" dari data atribut tombol yang diklik.
-            doAction('dislike',
-            pollId); // Memanggil fungsi "doAction" dengan parameter "action" sebagai 'dislike' dan "pollId" sesuai nilai yang didapatkan dari tombol.
-        });
-    </script>
+    // // Event listener untuk menangkap klik tombol "like".
+    // $('.btn-like').on('click', function(event) {
+    //     event.preventDefault(); // Mencegah perilaku default dari tautan ketika diklik (misalnya, mengarahkan ke URL).
+    //     var pollId = $(this).data('poll-id'); // Mendapatkan nilai "poll-id" dari data atribut tombol yang diklik.
+    //     doAction('like', pollId); // Memanggil fungsi "doAction" dengan parameter "action" sebagai 'like' dan "pollId" sesuai nilai yang didapatkan dari tombol.
+    // });
+
+    // // Event listener untuk menangkap klik tombol "dislike".
+    // $('.btn-dislike').on('click', function(event) {
+    //     event.preventDefault(); // Mencegah perilaku default dari tautan ketika diklik (misalnya, mengarahkan ke URL).
+    //     var pollId = $(this).data('poll-id'); // Mendapatkan nilai "poll-id" dari data atribut tombol yang diklik.
+    //     doAction('dislike', pollId); // Memanggil fungsi "doAction" dengan parameter "action" sebagai 'dislike' dan "pollId" sesuai nilai yang didapatkan dari tombol.
+    // });
+</script>
+
 
     <!-- Vendor JS Files -->
     <script src="assets/vendor/aos/aos.js"></script>
@@ -1191,6 +1185,8 @@
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/polls.js"></script>
+    @include('landingpage.trackticketjs')
 
 </body>
 

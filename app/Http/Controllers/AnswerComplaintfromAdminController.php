@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Complaint;
 use App\Models\Answercomplaints;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\StoreAnswerComplaintRequest;
 
 class AnswerComplaintfromAdminController extends Controller
 {
@@ -47,13 +48,35 @@ class AnswerComplaintfromAdminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $complaintId)
-    {
-        // Validate the request data
-        $request->validate([
-            'answer' => 'required|string',
-        ]);
+    // public function store(Request $request, $complaintId)
+    // {
+    //     // Validate the request data
+    //     $request->validate([
+    //         'answer' => 'required|string',
+    //     ]);
 
+    //     $complaint = Complaint::findOrFail($complaintId);
+
+    //     // Check if the authenticated user has access to the complaint
+    //     if (Auth::user()->department_id == $complaint->department_id) {
+    //         $answer = new Answercomplaints();
+    //         $answer->answer = $request->input('answer');
+    //         $answer->answer_complaint_date = now();
+    //         $answer->department_id = $complaint->department_id;
+    //         $answer->user_id = Auth::id();
+    //         $answer->complaint_id = $complaintId;
+    //         $answer->save();
+
+    //         $complaint->status = 'resolved';
+    //         $complaint->save();
+
+    //         return redirect()->route('admin.complaints.index')->with('success', 'Answer created successfully.');
+    //     } else {
+    //         abort(403); // Forbidden
+    //     }
+    // }
+    public function store(StoreAnswerComplaintRequest $request, $complaintId)
+    {
         $complaint = Complaint::findOrFail($complaintId);
 
         // Check if the authenticated user has access to the complaint
