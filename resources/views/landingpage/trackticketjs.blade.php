@@ -20,6 +20,7 @@
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="assets/js/ticket.js"></script>
 <script>
     $(document).ready(function() {
         // Fungsi yang akan dijalankan ketika halaman selesai dimuat
@@ -71,8 +72,8 @@
             return inputString.substr(0, 3) + '*'.repeat(inputString.length - 3);
         }
 
-        $('#closeModalButton, #closeModalX').click(function() {
-            $('#trackResultModal').modal('hide');
-        });
+        // $('#closeModalButton, #closeModalX').click(function() {
+        //     $('#trackResultModal').modal('hide');
+        // });
     });
 </script>

@@ -44,6 +44,7 @@
                         <th width="auto">Ticket Number</th>
                         <th width="auto">Title</th>
                         <th width="auto">Date</th>
+                        <th width="auto">Time</th>
                         <th width="auto">Description</th>
                         <th width="auto">Status</th>
                         <th width="auto">Nama Departemen</th>
@@ -59,6 +60,7 @@
                             <td>{{ $cp->ticket->code_ticket }}</td>
                             <td>{{ $cp->title }}</td>
                             <td>{{ $cp->complaint_date }}</td>
+                            <td>{{ $cp->complaint_time }}</td>
                             <td>{{ $cp->description }}</td>
                             <td>{{ $cp->status }}</td>
                             <td>{{ $cp->department->name }}</td>
