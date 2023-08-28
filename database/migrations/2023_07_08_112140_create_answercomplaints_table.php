@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('answercomplaints', function (Blueprint $table) {
             $table->id();
             $table->longText('answer');
+            $table->time('time');
             $table->date('answer_complaint_date');
             $table->unsignedBigInteger('department_id');
             $table->unsignedBigInteger('user_id');

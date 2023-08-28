@@ -83,6 +83,7 @@ class AnswerComplaintfromAdminController extends Controller
         if (Auth::user()->department_id == $complaint->department_id) {
             $answer = new Answercomplaints();
             $answer->answer = $request->input('answer');
+            $answer->time = now()->toTimeString();
             $answer->answer_complaint_date = now();
             $answer->department_id = $complaint->department_id;
             $answer->user_id = Auth::id();

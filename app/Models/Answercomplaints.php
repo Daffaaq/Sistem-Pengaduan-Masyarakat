@@ -15,7 +15,7 @@ class Answercomplaints extends Model
     use HasFactory;
 
     protected $fillable = [
-        'answer', 'answer_complaint_date', 'department_id', 'user_id', 'complaint_id',
+        'answer', 'answer_complaint_date', 'department_id', 'user_id', 'complaint_id', 'time',
     ];
 
     public function department()
