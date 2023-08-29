@@ -1203,61 +1203,44 @@
     @endforeach
 
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js">
-        // Mendefinisikan sebuah fungsi bernama "doAction" dengan dua parameter "action" dan "pollId".
-        // Fungsi ini bertugas untuk melakukan request ke backend dan memperbarui jumlah like atau dislike di tampilan.
-        function doAction(action, pollId) {
-            // Lakukan request ke backend menggunakan AJAX.
-            $.ajax({
-                url: `/poll/${action}/${pollId}`, // URL untuk request ke backend, mengandung tiga bagian yaitu '/poll/', "action" (like/dislike), dan "pollId".
-                type: 'POST', // Metode HTTP untuk request, dalam hal ini adalah POST.
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}' // Set header 'X-CSRF-TOKEN' dengan nilai csrf_token() dari backend untuk melindungi dari serangan CSRF.
-                },
-                dataType: 'json', // Tipe data yang diharapkan dari respon backend, dalam hal ini adalah JSON.
-                success: function(data) { // Fungsi yang akan dijalankan ketika request berhasil.
-                    // Tampilkan pesan sukses dari backend. Baris ini di-komen untuk sementara agar tidak mengganggu tampilan.
-                    // alert(data.message);
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            function doAction(action, pollId) {
+                $.ajax({
+                    url: `/poll/${action}/${pollId}`,
+                    type: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    dataType: 'json',
+                    success: function(data) {
+                        $('#likesCount' + pollId).text(data.likes);
+                        $('#dislikesCount' + pollId).text(data.dislikes);
 
-                    // Perbarui jumlah like dan dislike di tampilan dengan data yang diterima dari backend.
-                    $('#likesCount' + pollId).text(data
-                        .likes
-                    ); // Memperbarui elemen dengan ID "likesCount" dan menampilkan jumlah like yang baru.
-                    $('#dislikesCount' + pollId).text(data
-                        .dislikes
-                    ); // Memperbarui elemen dengan ID "dislikesCount" dan menampilkan jumlah dislike yang baru.
-                    location
-                        .reload(); // Memuat ulang halaman untuk memastikan perubahan terlihat.
-                },
-                error: function(xhr, status,
-                    error) { // Fungsi yang akan dijalankan ketika request mengalami kegagalan.
-                    console.error(xhr.responseText); // Log pesan error ke konsol.
-                }
+                        location.reload();
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText);
+                        alert("An error occurred. Please try again.");
+                    }
+                });
+            }
+
+            $(document).on('click', '.btn-like', function(event) {
+                event.preventDefault();
+                var pollId = $(this).data('poll-id');
+                doAction('like', pollId);
             });
-        }
 
-        // Event listener untuk menangkap klik tombol "like".
-        $('.btn-like').on('click', function(event) {
-            event
-                .preventDefault(); // Mencegah perilaku default dari tautan ketika diklik (misalnya, mengarahkan ke URL).
-            var pollId = $(this).data(
-                'poll-id'); // Mendapatkan nilai "poll-id" dari data atribut tombol yang diklik.
-            doAction('like',
-                pollId
-            ); // Memanggil fungsi "doAction" dengan parameter "action" sebagai 'like' dan "pollId" sesuai nilai yang didapatkan dari tombol.
-        });
-
-        // Event listener untuk menangkap klik tombol "dislike".
-        $('.btn-dislike').on('click', function(event) {
-            event
-                .preventDefault(); // Mencegah perilaku default dari tautan ketika diklik (misalnya, mengarahkan ke URL).
-            var pollId = $(this).data(
-                'poll-id'); // Mendapatkan nilai "poll-id" dari data atribut tombol yang diklik.
-            doAction('dislike',
-                pollId
-            ); // Memanggil fungsi "doAction" dengan parameter "action" sebagai 'dislike' dan "pollId" sesuai nilai yang didapatkan dari tombol.
+            $(document).on('click', '.btn-dislike', function(event) {
+                event.preventDefault();
+                var pollId = $(this).data('poll-id');
+                doAction('dislike', pollId);
+            });
         });
     </script>
+
 
     <!-- Vendor JS Files -->
     <script src="assets/vendor/aos/aos.js"></script>
