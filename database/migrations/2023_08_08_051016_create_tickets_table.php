@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('number_ticket')->unique();
+            $table->string('code_ticket')->unique();
             $table->unsignedBigInteger('complaint_id');
             $table->timestamps();
 

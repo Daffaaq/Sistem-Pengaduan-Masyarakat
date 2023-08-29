@@ -23,22 +23,29 @@ class Tickets extends Model
     {
         parent::boot();
 
-        // Automatically generate number_ticket before creating a new Complaint
-        static::creating(function ($complaint) {
-            $complaint->number_ticket = self::generateUniqueTicketNumber();
+        // Saat model Ticket akan dibuat (sebelum disimpan ke database),
+        // kita akan menjalankan tindakan berikut menggunakan event 'creating'.
+        // Automatically generate code_ticket before creating a new Ticket
+        static::creating(function ($ticket) {
+             // Menghasilkan kode unik untuk tiket dengan menggunakan metode generateUniqueTicketCode().
+            $ticket->code_ticket = self::generateUniqueTicketCode();
         });
     }
 
-    private static function generateUniqueTicketNumber()
+    private static function generateUniqueTicketCode()
     {
-        // Generate a random number for the ticket
-        $randomNumber = rand(10000, 99999);
+        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'; // Daftar karakter yang diizinkan untuk kode tiket
+        $codeLength = 8; // Panjang kode tiket yang diinginkan
 
-        // Check if the number already exists, if so, regenerate until a unique number is found
-        while (self::where('number_ticket', $randomNumber)->exists()) {
-            $randomNumber = rand(10000, 99999);
-        }
+        do {
+            $randomCode = ''; // Inisialisasi kode acak awal
+            $charactersLength = strlen($characters); // Jumlah karakter yang diizinkan
 
-        return $randomNumber;
+            for ($i = 0; $i < $codeLength; $i++) {
+                $randomCode .= $characters[rand(0, $charactersLength - 1)];
+            }
+        } while (self::where('code_ticket', $randomCode)->exists());
+
+        return $randomCode;
     }
 }
