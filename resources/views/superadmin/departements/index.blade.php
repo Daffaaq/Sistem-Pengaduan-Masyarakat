@@ -39,7 +39,16 @@
                             <td>{{ $dpt->name }}</td>
                             <td>{{ $dpt->email }}</td>
                             <td>{{ $dpt->link_website }}</td>
-                            <td>{{ $dpt->tugas }}</td>
+                            <td>
+                                @php
+                                    $tasks = explode("\n", $dpt->tugas); // Konversi string tugas menjadi array
+                                @endphp
+                                <ul>
+                                    @foreach ($tasks as $task)
+                                        <li>{!! nl2br(e($task)) !!}</li>
+                                    @endforeach
+                                </ul>
+                            </td>
                             <td>{{ $dpt->longitude }}</td>
                             <td>{{ $dpt->latitude }}</td>
                             <td class="d-flex justify-content-evenly">

@@ -54,9 +54,23 @@ class DepartementController extends Controller
 
     public function store(DepartementRequest $request)
     {
-        Departements::create($request->validated());
+        $validatedData = $request->validated();
+
+        // Convert the tasks array into a JSON string
+        $tasksJson = json_encode($validatedData['tugas']);
+
+        Departements::create([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'link_website' => $validatedData['link_website'],
+            'longitude' => $validatedData['longitude'],
+            'latitude' => $validatedData['latitude'],
+            'tugas' => $tasksJson, // Save the tasks as a JSON string
+        ]);
+
         return redirect()->route('superadmin.departement.index')->with('success', 'Departement created successfully.');
     }
+
     
     public function edit($id)
     {

@@ -16,14 +16,6 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        Departements::create([
-            'name' => 'Department 1',
-            'email' => 'dept1@example.com',
-            'link_website' => 'https://dept1.example.com',
-            'tugas' => 'Description of Department 1',
-            'longitude' => 123.456789, // Example longitude
-            'latitude' => -12.345678, // Example latitude
-        ]);
         // Create users
         User::create([
             'name' => 'User 1',
@@ -40,13 +32,13 @@ class UsersTableSeeder extends Seeder
             'department_id' => null,
             'role' => 'superadmin',
         ]);
-        User::create([
-            'name' => 'AdminTest',
-            'email' => 'admintest@gmail.com',
-            'password' => bcrypt('password'),
-            'department_id' => 1,
-            'role' => 'admin',
-        ]);
+        // User::create([
+        //     'name' => 'AdminTest',
+        //     'email' => 'admintest@gmail.com',
+        //     'password' => bcrypt('password'),
+        //     'department_id' => 1,
+        //     'role' => 'admin',
+        // ]);
         $polls = [
             [
                 'likes' => 0,
