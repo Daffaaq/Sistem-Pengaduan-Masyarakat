@@ -7,6 +7,9 @@ use App\Models\Departements;
 use App\Http\Requests\DepartementRequest;
 use App\Http\Requests\UpdateDepartementRequest;
 use Illuminate\Support\Facades\Validator;
+use App\Imports\DepartementImport; // Import the DepartementImport class
+use Illuminate\Support\Facades\File; // Import the File facade
+use Maatwebsite\Excel\Facades\Excel; // Import the Excel facade
 
 class DepartementController extends Controller
 {
@@ -87,4 +90,26 @@ class DepartementController extends Controller
 
         return redirect()->route('superadmin.departement.index')->with('success', 'Departement deleted successfully.');
     }
+
+    public function import(Request $request)
+    {
+        $file = $request->file('file');
+
+        if ($file) {
+            // Simpan file sementara
+            $tempFilePath = $file->storeAs('temp', $file->getClientOriginalName(), 'public');
+
+            // Proses impor
+            $import = new DepartementImport();
+            Excel::import($import, storage_path('app/public/' . $tempFilePath));
+
+            // Hapus file sementara setelah impor selesai
+            File::delete(storage_path('app/public/' . $tempFilePath));
+
+            return redirect()->route('superadmin.departement.index')->with('success', 'Departements imported successfully.');
+        }
+
+        return redirect()->back()->with('error', 'No file selected.');
+    }
+
 }

@@ -83,6 +83,7 @@ Route::middleware(['auth', 'check.role:superadmin'])->prefix('superadmin')->grou
         Route::get('/departement/{departement}/edit', [DepartementController::class, 'edit'])->name('superadmin.departement.edit');
         Route::put('/departement/{departement}', [DepartementController::class, 'update'])->name('superadmin.departement.update');
         Route::delete('/departement/{departement}', [DepartementController::class, 'destroy'])->name('superadmin.departement.destroy');
+        Route::post('/import-departements', [DepartementController::class, 'import'])->name('superadmin.departement.import');
     });
     Route::prefix('dashboard_superadmin')->group(function () {
         // Rute-rute Admin Departemen di sini

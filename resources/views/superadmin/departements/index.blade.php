@@ -27,7 +27,10 @@
                         <th>No</th>
                         <th>nama Departement</th>
                         <th>email</th>
+                        <th>Link Website</th>
                         <th>Tugas</th>
+                        <th>Longitude</th>
+                        <th>Latitude</th>
                         <th width="auto">Action</th>
                     </tr>
                     @foreach ($departements as $dpt)
@@ -35,7 +38,10 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $dpt->name }}</td>
                             <td>{{ $dpt->email }}</td>
+                            <td>{{ $dpt->link_website }}</td>
                             <td>{{ $dpt->tugas }}</td>
+                            <td>{{ $dpt->longitude }}</td>
+                            <td>{{ $dpt->latitude }}</td>
                             <td class="d-flex justify-content-evenly">
                                 {{-- <a href="/dashboard_superadmin/users/{{ $dpt->id }}" class="badge bg-success"><i
                                         class="bi bi-eye-fill" style="font-size: 18px;"></i></a> --}}
