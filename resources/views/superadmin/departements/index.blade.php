@@ -1,4 +1,16 @@
 @extends('superadmin.layouts.master')
+@section('styles')
+    <style>
+        .table td:nth-child(5) {
+            max-width: 300px;
+            /* Atur lebar maksimal sesuai kebutuhan */
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    </style>
+@endsection
+
 @section('container')
     <div class="row justify-content-end">
         <div class="col-lg-10">
@@ -21,58 +33,53 @@
                     <p>{{ $message }}</p>
                 </div>
             @endif
-            <div class="text-center">
-                <table class="table table-bordered" style="background-color: #78C1F3">
+            <table class="table table-bordered" style="background-color: #78C1F3">
+                <tr>
+                    <th>No</th>
+                    <th width="auto">nama Departement</th>
+                    <th width="auto">email</th>
+                    <th width="auto">Link Website</th>
+                    <th width="auto">Tugas</th>
+                    <th width="auto">Longitude</th>
+                    <th width="auto">Latitude</th>
+                    <th width="auto">Action</th>
+                </tr>
+                @foreach ($departements as $dpt)
                     <tr>
-                        <th>No</th>
-                        <th>nama Departement</th>
-                        <th>email</th>
-                        <th>Link Website</th>
-                        <th>Tugas</th>
-                        <th>Longitude</th>
-                        <th>Latitude</th>
-                        <th width="auto">Action</th>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $dpt->name }}</td>
+                        <td>{{ $dpt->email }}</td>
+                        <td>{{ $dpt->link_website }}</td>
+                        <td>
+                            @php
+                                $tasks = json_decode($dpt->tugas, true);
+                            @endphp
+                            <ol style="padding-left: 0; list-style-position: inside;">
+                                @foreach ($tasks as $task)
+                                    <li>{{ $task }}</li>
+                                @endforeach
+                            </ol>
+                        </td>
+                        <td>{{ $dpt->longitude }}</td>
+                        <td>{{ $dpt->latitude }}</td>
+                        <td class="d-flex justify-content-evenly">
+                            <form action="{{ route('superadmin.departement.edit', $dpt->id) }}" method="GET"
+                                class="d-inline" target="_blank">
+                                @csrf
+                                <button type="submit" class="btn btn-warning">
+                                    <i class="bi bi-pencil-square" style="font-size: 18px;"></i> Edit
+                                </button>
+                            </form>
+                            <form action="{{ route('superadmin.departement.destroy', $dpt->id) }}" method="POST">
+                                @method('DELETE')
+                                @csrf
+                                <button class="btn btn-danger"
+                                    onclick="return confirm('Apakah Anda yakin ingin menghapus?')">Hapus</button>
+                            </form>
+                        </td>
                     </tr>
-                    @foreach ($departements as $dpt)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $dpt->name }}</td>
-                            <td>{{ $dpt->email }}</td>
-                            <td>{{ $dpt->link_website }}</td>
-                            <td>
-                                @php
-                                    $tasks = explode("\n", $dpt->tugas); // Konversi string tugas menjadi array
-                                @endphp
-                                <ul>
-                                    @foreach ($tasks as $task)
-                                        <li>{!! nl2br(e($task)) !!}</li>
-                                    @endforeach
-                                </ul>
-                            </td>
-                            <td>{{ $dpt->longitude }}</td>
-                            <td>{{ $dpt->latitude }}</td>
-                            <td class="d-flex justify-content-evenly">
-                                {{-- <a href="/dashboard_superadmin/users/{{ $dpt->id }}" class="badge bg-success"><i
-                                        class="bi bi-eye-fill" style="font-size: 18px;"></i></a> --}}
-                                <form action="{{ route('superadmin.departement.edit', $dpt->id) }}" method="GET"
-                                    class="d-inline" target="_blank">
-                                    @csrf
-                                    <button type="submit" class="btn btn-warning">
-                                        <i class="bi bi-pencil-square" style="font-size: 18px;"></i> Edit
-                                    </button>
-                                </form>
-                                <form action="{{ route('superadmin.departement.destroy', $dpt->id) }}" method="POST">
-                                    @method('DELETE')
-                                    @csrf
-                                    <button class="btn btn-danger"
-                                        onclick="return confirm('Apakah Anda yakin ingin menghapus?')">Hapus</button>
-                                </form>
-                                {{-- <!-- <a href="barang/{{ $dpt->id }}" class="badge bg-warning"><i class="bi bi-pencil-square" style="font-size: 18px;"></i></a> --> --}}
-                            </td>
-                        </tr>
-                    @endforeach
-                </table>
-            </div>
+                @endforeach
+            </table>
         </div>
     </div>
 @endsection
