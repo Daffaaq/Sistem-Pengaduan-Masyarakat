@@ -118,24 +118,6 @@
   }
 
 
-  const carousel = document.querySelector('.member-carousel');
-  const prevButton = document.querySelector('.prev');
-  const nextButton = document.querySelector('.next');
-
-  prevButton.addEventListener('click', () => {
-    carousel.scrollBy({
-      left: -20, // Sesuaikan jumlah pixel scroll yang diinginkan
-      behavior: 'smooth'
-    });
-  });
-
-  nextButton.addEventListener('click', () => {
-    carousel.scrollBy({
-      left: 20, // Sesuaikan jumlah pixel scroll yang diinginkan
-      behavior: 'smooth'
-    });
-  });
-
 
   /**
    * Mobile nav toggle

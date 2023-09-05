@@ -38,6 +38,7 @@
 
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- =======================================================
   * Template Name: Arsha
@@ -627,26 +628,16 @@
                             <div class="member-carousel">
                                 @foreach ($departements as $departement)
                                     <div class="member">
-                                        <div class="image-box" data-id="{{ $departement->id }}">
+                                        <div class="image-box">
                                             <img src="assets/img/Lambang_Kabupaten_Pasuruan.png" class="img-fluid"
                                                 alt="{{ $departement->name }}">
                                             <div class="member-info">
-                                                <h6 style="color: #fff" align="center">{{ $departement->name }}</h6>
-                                            </div>
-                                        </div>
-
-                                        <div id="customModal{{ $departement->id }}" class="custom-modal">
-                                            <div class="custom-modal-content">
-                                                <span class="close">&times;</span>
-                                                <div id="modalBody"></div>
+                                                <h6 style="color: #fff" , align="center">{{ $departement->name }}</h6>
+                                                {{-- <span>{{ $departement->description }}</span> --}}
                                             </div>
                                         </div>
                                     </div>
                                 @endforeach
-                            </div>
-                            <div class="carousel-buttons">
-                                <button class="carousel-button prev">&#10094;</button>
-                                <button class="carousel-button next">&#10095;</button>
                             </div>
                         </div>
                     </div>
@@ -1058,8 +1049,8 @@
             </div>
         </div>
         {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script>
+        {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
+        {{-- <script>
             $(document).ready(function() {
                 // Fungsi yang akan dijalankan ketika halaman selesai dimuat
 
@@ -1114,7 +1105,7 @@
                     $('#trackResultModal').modal('hide');
                 });
             });
-        </script>
+        </script> --}}
         <div class="footer-top">
             <div class="container">
                 <div class="row">
@@ -1217,7 +1208,7 @@
     @endforeach
 
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
     <script>
         $(document).ready(function() {
             function doAction(action, pollId) {
@@ -1306,6 +1297,7 @@
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
+    @include('landingpage.trackticketjs')
 
 </body>
 

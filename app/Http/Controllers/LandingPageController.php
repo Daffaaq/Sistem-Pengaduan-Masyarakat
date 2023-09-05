@@ -7,6 +7,7 @@ use App\Models\Complaint;
 use App\Models\Departements;
 use App\Models\Tickets;
 use App\Models\polls;
+use App\Http\Requests\TrackComplaintRequest;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class LandingPageController extends Controller
@@ -36,20 +37,22 @@ class LandingPageController extends Controller
     {
         try {
             $ticketNumber = $request->input('code_ticket');
-            $ticket = Tickets::where('code_ticket', $ticketNumber)->first();
-            if ($ticket) {
-                $complaint = $ticket->complaint; // Get the associated complaint
-                $ticketStatus = $complaint->status; // Access status through relationship
-                $ticketTitle = $complaint->title; // Access title through relationship
-                $userName = $complaint->user->name; // Access user's name through relationship
-                return response()->json([
-                    'ticketStatus' => $ticketStatus,
-                    'ticketTitle' => $ticketTitle,
-                    'userName' => $userName,
-                ]);
-            } else {
+            $ticket = Tickets::with('complaint.user')->where('code_ticket', $ticketNumber)->first();
+
+            if (!$ticket) {
                 return response()->json(['error' => 'Invalid ticket number.']);
             }
+
+            $complaint = $ticket->complaint;
+            $ticketStatus = $complaint->status;
+            $ticketTitle = $complaint->title;
+            $userName = $complaint->user->name;
+
+            return response()->json([
+                'ticketStatus' => $ticketStatus,
+                'ticketTitle' => $ticketTitle,
+                'userName' => $userName,
+            ]);
         } catch (\Exception $e) {
             return response()->json(['error' => 'An error occurred while tracking the ticket.']);
         }

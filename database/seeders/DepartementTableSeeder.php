@@ -53,8 +53,8 @@ class DepartementTableSeeder extends Seeder
                     'Promosi dan Pemasaran',
                     'Pemberdayaan UMKM'
                 ],
-                'longitude' => '112.82760822792625',
-                'latitude' => '-7.610079449692041',
+                'longitude' => '112.8277581929433',
+                'latitude' => '-7.609776193558369',
             ],
             // Tambahkan data dinas lainnya di sini
             [
@@ -66,8 +66,8 @@ class DepartementTableSeeder extends Seeder
                     'Pemeliharaan jalan dan jembatan',
                     'Pengembangan dan inovasi teknologi konstruksi',
                 ],
-                'longitude' => '112.81944883786011',
-                'latitude' => '-7.609800247932266',
+                'longitude' => '112.83029735070161',
+                'latitude' => '-7.608990137318933',
             ],
             [
                 'name' => 'Dinas Peternakan Dan Kesehatan Hewan',
@@ -78,8 +78,8 @@ class DepartementTableSeeder extends Seeder
                     'Pengawasan kesehatan hewan',
                     'Peningkatan produksi dan kualitas produk peternakan',
                 ],
-                'longitude' => '112.8331747302114',
-                'latitude' => '-7.614360228634613',
+                'longitude' => '112.82776534588268',
+                'latitude' => '-7.610572291870198',
             ],
             [
                 'name' => 'Dinas Pariwisata',
@@ -91,8 +91,8 @@ class DepartementTableSeeder extends Seeder
                     'Pengelolaan fasilitas pariwisata',
                     'Peningkatan kualitas pelayanan kepada wisatawan',
                 ],
-                'longitude' => '112.82714033624538',
-                'latitude' => '-7.615120812353789',
+                'longitude' => '112.8268003,21',
+                'latitude' => '-7.6106881',
             ],
             [
                 'name' => 'Dinas Pemberdayaan Masyarakat Dan Desa',
@@ -174,8 +174,8 @@ class DepartementTableSeeder extends Seeder
                     'Pemberdayaan ekonomi masyarakat melalui koperasi',
                     'Pengawasan usaha mikro, kecil, dan menengah',
                 ],
-                'longitude' => '112.82657081385956',
-                'latitude' => '-7.645661329370612',
+                'longitude' => '112.82786965359267',
+                'latitude' => '-7.609670736219254',
             ],
             // ... add more departments data if needed
         ];
