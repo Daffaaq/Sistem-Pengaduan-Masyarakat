@@ -32,35 +32,21 @@ class LandingPageController extends Controller
         return response()->json(['message' => 'Poll liked successfully', 'likes' => $poll->likes]);
     }
 
-    public function trackComplaint(Request $request)
+    public function trackComplaint(TrackComplaintRequest $request)
     {
-        // $ticketNumber = $request->input('ticket_number');
-        // try {
-        //     $ticket = Tickets::where('number_ticket', $ticketNumber)->firstOrFail();
-        //     $ticketStatus = $ticket->complaint->status;
-        //     return response()->json(['ticketStatus' => $ticketStatus]);
-        // } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-        //     return response()->json(['error' => 'Invalid ticket number.']);
-        // }
         try {
-            // $ticketNumber = $request->input('ticket_number');
-            // $ticket = Tickets::where('number_ticket', $ticketNumber)->first();
-
-            // switch ($ticket) {
-            //     case null:
-            //         return response()->json(['error' => 'Invalid ticket number.']);
-            //         break;
-            //     default:
-            //         $ticketStatus = $ticket->complaint->status;
-            //         return response()->json(['ticketStatus' => $ticketStatus]);
-            //         break;
-            // }
-
-            $ticketNumber = $request->input('ticket_number');
-            $ticket = Tickets::where('number_ticket', $ticketNumber)->first();
+            $ticketNumber = $request->input('code_ticket');
+            $ticket = Tickets::where('code_ticket', $ticketNumber)->first();
             if ($ticket) {
-                $ticketStatus = $ticket->complaint->status; // Accessing status through relationship
-                return response()->json(['ticketStatus' => $ticketStatus]);
+                $complaint = $ticket->complaint; // Get the associated complaint
+                $ticketStatus = $complaint->status; // Access status through relationship
+                $ticketTitle = $complaint->title; // Access title through relationship
+                $userName = $complaint->user->name; // Access user's name through relationship
+                return response()->json([
+                    'ticketStatus' => $ticketStatus,
+                    'ticketTitle' => $ticketTitle,
+                    'userName' => $userName,
+                ]);
             } else {
                 return response()->json(['error' => 'Invalid ticket number.']);
             }
@@ -68,9 +54,6 @@ class LandingPageController extends Controller
             return response()->json(['error' => 'An error occurred while tracking the ticket.']);
         }
     }
-
-
-
     // Fungsi untuk menangani aksi dislike
     public function dislikePoll($id)
     {
@@ -111,6 +94,18 @@ class LandingPageController extends Controller
 
         // return view('landingpage.beranda', compact('departements', 'totalComplaints', 'pendingComplaints', 'inProgressComplaints', 'resolvedComplaints'));
     }
+    public function getTasks($id) 
+    {
+        $departement = Departements::find($id);
+
+        if ($departement) {
+            $tasks = json_decode($departement->tugas, true);
+            return response()->json(['tasks' => $tasks]);
+        } else {
+            return response()->json(['tasks' => []]);
+        }
+    }
+
 
     public function getPolls()
     {

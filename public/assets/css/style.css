@@ -1674,7 +1674,7 @@ section {
     text-align: left;
 }
 
-#footer .footer-newsletter form input[type="number"] {
+#footer .footer-newsletter form input[type="text"] {
     border: 0;
     padding: 4px 10px;
     position: relative;

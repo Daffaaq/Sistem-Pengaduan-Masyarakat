@@ -627,12 +627,18 @@
                             <div class="member-carousel">
                                 @foreach ($departements as $departement)
                                     <div class="member">
-                                        <div class="image-box">
+                                        <div class="image-box" data-id="{{ $departement->id }}">
                                             <img src="assets/img/Lambang_Kabupaten_Pasuruan.png" class="img-fluid"
                                                 alt="{{ $departement->name }}">
                                             <div class="member-info">
-                                                <h6 style="color: #fff" , align="center">{{ $departement->name }}</h6>
-                                                {{-- <span>{{ $departement->description }}</span> --}}
+                                                <h6 style="color: #fff" align="center">{{ $departement->name }}</h6>
+                                            </div>
+                                        </div>
+
+                                        <div id="customModal{{ $departement->id }}" class="custom-modal">
+                                            <div class="custom-modal-content">
+                                                <span class="close">&times;</span>
+                                                <div id="modalBody"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -1022,7 +1028,7 @@
                             dan keterlibatan dalam proses tersebut.</p>
                         <form id="trackComplaintForm" action="{{ route('track.complaint') }}" method="post">
                             @csrf
-                            <input type="number" name="ticket_number" placeholder="Enter Ticket Number" required>
+                            <input type="text" name="code_ticket" placeholder="Enter Ticket Number" required>
                             <button type="submit">Track</button>
                         </form>
                     </div>
@@ -1041,11 +1047,9 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        @if (isset($ticketStatus))
-                            <p>Ticket Status: {{ $ticketStatus }}</p>
-                        @else
-                            <p>No ticket status found.</p>
-                        @endif
+                        <p id="userName">Nama Pengadu: No user name found.</p>
+                        <p id="ticketStatus">Status Pengaduan: No ticket status found.</p>
+                        <p id="ticketTitle">Judul Pengaduan: No ticket title found.</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" id="closeModalButton">Close</button>
@@ -1053,51 +1057,61 @@
                 </div>
             </div>
         </div>
+        {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
         <script>
             $(document).ready(function() {
+                // Fungsi yang akan dijalankan ketika halaman selesai dimuat
+
                 $('#trackComplaintForm').submit(function(event) {
-                    // ...
-                    $('#trackResultModal').modal('show'); // Show the modal
-                });
+                    event.preventDefault(); // Mencegah pengiriman formulir secara biasa
 
-                // Menangani penutupan modal secara manual
-                $('#closeModalButton').click(function() {
-                    $('#trackResultModal').modal('hide');
-                });
-                $('#closeModalX').click(function() {
-                    $('#trackResultModal').modal('hide');
-                });
-            });
-        </script>
-        <script>
-            $(document).ready(function() {
-                $('#trackComplaintForm').submit(function(event) {
-                    event.preventDefault(); // Prevent form submission
-
-                    var form = $(this);
-                    var formData = form.serialize();
-
+                    var form = $(this); // Mengambil referensi form yang disubmit
+                    var formData = form
+                        .serialize(); // Mengambil data formulir dalam format yang sesuai untuk dikirim
                     $.ajax({
                         type: 'POST',
                         url: form.attr('action'),
                         data: formData,
-                        success: function(response) {
-                            $('#trackResultModal .modal-body').html(
-                                response.ticketStatus ?
-                                '<p>Ticket Status: ' + response.ticketStatus + '</p>' :
-                                '<p>No ticket status found.</p>'
-                            );
-                        },
-                        error: function() {
-                            $('#trackResultModal .modal-body').html(
-                                '<p>An error occurred while tracking the ticket.</p>');
-                        },
-                        complete: function() {
-                            $('#trackResultModal').modal('show');
-                        }
+                        success: handleSuccess,
+                        error: handleError
                     });
+                });
+
+                function handleSuccess(response) {
+                    var userName = response.userName ? maskString(response.userName, 3) :
+                        'No user name found.';
+                    var ticketStatus = response.ticketStatus ? response.ticketStatus :
+                        'No ticket status found.';
+                    var ticketTitle = response.ticketTitle ? maskString(response.ticketTitle, 3) :
+                        'No ticket title found.';
+
+                    updateModalContent(userName, ticketStatus, ticketTitle);
+                    showModal();
+                }
+
+                function handleError() {
+                    var errorMessage = 'An error occurred while tracking the ticket.';
+                    updateModalContent(errorMessage, errorMessage, errorMessage);
+                    showModal();
+                }
+
+                function updateModalContent(userName, ticketStatus, ticketTitle) {
+                    $('#userName').text(`Nama Pengadu: ${userName}`);
+                    $('#ticketStatus').text(`Status Pengaduan: ${ticketStatus}`);
+                    $('#ticketTitle').text(`Judul Pengaduan: ${ticketTitle}`);
+                }
+
+                function showModal() {
+                    $('#trackResultModal').modal('show');
+                }
+
+                function maskString(inputString, visibleChars) {
+                    return inputString.substr(0, 3) + '*'.repeat(inputString.length - 3);
+                }
+
+                $('#closeModalButton, #closeModalX').click(function() {
+                    $('#trackResultModal').modal('hide');
                 });
             });
         </script>
@@ -1240,8 +1254,47 @@
             });
         });
     </script>
+    {{-- <script>
+        $(document).ready(function() {
+            // Mengambil elemen modal dan elemen close
+            $('[data-toggle="modal"]').click(function() {
+                var departementId = $(this).data('id');
+                var modal = document.getElementById('customModal' + departementId);
 
+                $.ajax({
+                    url: '/get-tasks/' + departementId,
+                    method: 'GET',
+                    success: function(response) {
+                        var modalBody = $('#customModal' + departementId).find('#modalBody');
+                        modalBody.empty();
 
+                        if (response.tasks && response.tasks.length > 0) {
+                            response.tasks.forEach(function(task) {
+                                modalBody.append('<p>' + task + '</p>');
+                            });
+                        } else {
+                            modalBody.append('<p>Tidak ada tugas untuk departemen ini.</p>');
+                        }
+
+                        modal.style.display = "block";
+                    }
+                });
+            });
+
+            $('.close').click(function() {
+                var modalId = $(this).closest(".custom-modal").attr("id");
+                var modal = document.getElementById(modalId);
+                modal.style.display = "none";
+            });
+
+            window.onclick = function(event) {
+                if ($(event.target).hasClass('custom-modal')) {
+                    event.target.style.display = "none";
+                }
+            }
+        });
+    </script> --}}
+    {{-- <script src="path_to_bootstrap_js"></script> --}}
     <!-- Vendor JS Files -->
     <script src="assets/vendor/aos/aos.js"></script>
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

@@ -4,9 +4,11 @@ namespace App\Imports;
 
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
+use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use App\Models\Departements;
 
-class DepartementImport implements ToCollection
+class DepartementImport implements ToModel, WithHeadingRow
 {
     /**
     * @param Collection $collection
@@ -14,12 +16,12 @@ class DepartementImport implements ToCollection
     public function model(array $row)
     {
         return new Departements([
-            'name' => $row[0],
-            'email' => $row[1],
-            'link_website' => $row[2],
-            'tugas' => $row[3],
-            'longitude' => $row[4],
-            'latitude' => $row[5],
+            'name' => $row['name'],
+            'email' => $row['email'],
+            'link_website' => $row['link_website'],
+            'tugas' => $row['tugas'],
+            'longitude' => $row['longitude'],
+            'latitude' => $row['latitude'],
             // ... tambahkan field lainnya sesuai dengan urutan kolom dalam file
         ]);
     }

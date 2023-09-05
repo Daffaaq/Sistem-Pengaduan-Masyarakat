@@ -39,6 +39,9 @@ Route::group(['prefix' => '/'], function () {
     Route::post('/poll/like/{id}', [LandingPageController::class, 'likePoll'])->name('poll.like');
     Route::post('/poll/dislike/{id}', [LandingPageController::class, 'dislikePoll'])->name('poll.dislike');
     Route::post('/track-complaint', [LandingPageController::class, 'trackComplaint'])->name('track.complaint');
+    Route::get('/get-tasks/{id}', [LandingPageController::class, 'getTasks']);
+
+
 
     Route::get('/tentang', [LandingPageController::class, 'indexTentang'])->name('tentang');
     Route::get('/statistik', [LandingPageController::class, 'indexStatik'])->name('statistik');
