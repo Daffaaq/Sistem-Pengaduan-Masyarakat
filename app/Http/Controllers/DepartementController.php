@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Imports\DepartementImport; // Import the DepartementImport class
 use Illuminate\Support\Facades\File; // Import the File facade
 use Maatwebsite\Excel\Facades\Excel; // Import the Excel facade
+use Illuminate\Support\Facades\Log;
 
 class DepartementController extends Controller
 {
@@ -111,23 +112,24 @@ class DepartementController extends Controller
 
     public function import(Request $request)
     {
-        $file = $request->file('file');
+        try {
+            $file = $request->file('file');
 
-        if ($file) {
-            // Simpan file sementara
-            $tempFilePath = $file->storeAs('temp', $file->getClientOriginalName(), 'public');
+            if (!$file) {
+                return redirect()->back()->with('error', 'No file selected.');
+            }
 
-            // Proses impor
             $import = new DepartementImport();
-            Excel::import($import, storage_path('app/public/' . $tempFilePath));
 
-            // Hapus file sementara setelah impor selesai
-            File::delete(storage_path('app/public/' . $tempFilePath));
+            Excel::import($import, $file);
 
             return redirect()->route('superadmin.departement.index')->with('success', 'Departements imported successfully.');
+        } catch (\Throwable $e) {
+            \Log::error('Error during import: ' . $e->getMessage());
+            \Log::error('Stack trace: ' . $e->getTraceAsString());
+            return redirect()->back()->with('error', 'An error occurred while importing: ' . $e->getMessage());
         }
 
-        return redirect()->back()->with('error', 'No file selected.');
     }
 
 }

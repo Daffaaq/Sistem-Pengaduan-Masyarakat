@@ -21,6 +21,14 @@
             </div>
             <div class="float-right my-2">
                 <a class="btn btn-success" href="{{ route('superadmin.departement.create') }}"> Input Departemen</a>
+                <form action="{{ route('superadmin.departement.import') }}" method="POST" enctype="multipart/form-data" class="d-inline">
+    @csrf
+    <label for="file" class="btn btn-primary" style="margin-left: 10px;">
+        <input type="file" id="file" name="file" style="display:none;">
+        Import Excel
+    </label>
+    <button type="submit">Submit</button> <!-- Add a submit button -->
+</form>
             </div>
 
             @if ($message = Session::get('success'))
