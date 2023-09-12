@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Complaint;
 
 class DashboardUserController extends Controller
 {
@@ -17,8 +18,19 @@ class DashboardUserController extends Controller
         // Get the authenticated user's ID
         $userId = Auth::id();
 
-        // Get all complaints created by the authenticated user
-        return view('masyarakat.dashboard.index');
+        // Mendapatkan jumlah total complaints yang dimiliki oleh pengguna yang sedang login
+        $totalComplaints = Complaint::where('user_id', $userId)->count();
+
+        // Mendapatkan jumlah complaints dengan status pending yang dimiliki oleh pengguna yang sedang login
+        $pendingComplaints = Complaint::where('user_id', $userId)->where('status', 'pending')->count();
+
+        // Mendapatkan jumlah complaints dengan status in progress yang dimiliki oleh pengguna yang sedang login
+        $inProgressComplaints = Complaint::where('user_id', $userId)->where('status', 'in progress')->count();
+
+        // Mendapatkan jumlah complaints dengan status resolved yang dimiliki oleh pengguna yang sedang login
+        $resolvedComplaints = Complaint::where('user_id', $userId)->where('status', 'resolved')->count();
+
+        return view('masyarakat.dashboard.index', compact('totalComplaints', 'pendingComplaints', 'inProgressComplaints', 'resolvedComplaints'));
     }
 
     /**
