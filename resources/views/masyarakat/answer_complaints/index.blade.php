@@ -1,7 +1,7 @@
-@extends('masyarakat.layouts.master')
+@extends('masyarakat.layouts_baru.index')
 
 @section('container')
-    <div class="row justify-content-end">
+    {{-- <div class="row justify-content-end"> --}}
         <div class="col-lg-10">
             <div class="text-center">
                 <h2>List of Complaints and Answers</h2>

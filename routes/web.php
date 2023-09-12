@@ -30,7 +30,7 @@ use Illuminate\Support\Facades\Auth;
 */
 
 // Route::get('/', function () {
-//     return view('Welcome');
+//     return view('masyarakat.layouts_baru.index');
 // });
 
 // route buat landingpage

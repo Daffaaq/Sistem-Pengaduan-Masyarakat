@@ -18,7 +18,7 @@ class DashboardUserController extends Controller
         $userId = Auth::id();
 
         // Get all complaints created by the authenticated user
-        return view('masyarakat.layouts.master');
+        return view('masyarakat.dashboard.index');
     }
 
     /**

@@ -1,4 +1,5 @@
-@extends('masyarakat.layouts.master')
+@extends('masyarakat.layouts_baru.index')
+{{-- @extends('masyarakat.layouts.master') --}}
 @section('container')
     <style>
         .modal-backdrop.show {
@@ -14,7 +15,7 @@
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <div class="row justify-content-end">
+    {{-- <div class="row justify-content-end"> --}}
         <div class="col-lg-10">
             <div class="row">
                 <div class="col-lg-12 margin-tb">
