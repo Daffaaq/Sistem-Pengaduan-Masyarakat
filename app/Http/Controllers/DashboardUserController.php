@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Complaint;
+use Illuminate\Support\Facades\DB;
 
 class DashboardUserController extends Controller
 {
@@ -30,8 +31,31 @@ class DashboardUserController extends Controller
         // Mendapatkan jumlah complaints dengan status resolved yang dimiliki oleh pengguna yang sedang login
         $resolvedComplaints = Complaint::where('user_id', $userId)->where('status', 'resolved')->count();
 
-        return view('masyarakat.dashboard.index', compact('totalComplaints', 'pendingComplaints', 'inProgressComplaints', 'resolvedComplaints'));
+        // Mendapatkan data komplain berdasarkan bulan komplain
+        $complaintsByMonth = Complaint::where('user_id', $userId)
+            ->select(
+                DB::raw('YEAR(complaint_date) as year'),
+                DB::raw('MONTH(complaint_date) as month'),
+                DB::raw('COUNT(*) as count')
+            )
+            ->groupBy('year', 'month')
+            ->orderBy('year', 'ASC')
+            ->orderBy('month', 'ASC')
+            ->get();
+
+        // Menginisialisasi array untuk data bulan dan jumlah komplain
+        $complaintMonths = [];
+        $complaintCounts = [];
+
+        foreach ($complaintsByMonth as $complaint) {
+            $complaintMonths[] = date('M Y', mktime(0, 0, 0, $complaint->month, 1, $complaint->year));
+            $complaintCounts[] = $complaint->count;
+        }
+
+        return view('masyarakat.dashboard.index', compact('totalComplaints', 'pendingComplaints', 'inProgressComplaints', 'resolvedComplaints', 'complaintMonths', 'complaintCounts'));
+
     }
+
 
     /**
      * Show the form for creating a new resource.

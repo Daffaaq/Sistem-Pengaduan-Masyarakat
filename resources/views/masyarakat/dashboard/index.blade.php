@@ -347,5 +347,7 @@
         var pendingComplaints = {!! json_encode($pendingComplaints) !!};
         var inProgressComplaints = {!! json_encode($inProgressComplaints) !!};
         var resolvedComplaints = {!! json_encode($resolvedComplaints) !!};
+        var monthlyComplaints = {!! json_encode($complaintMonths) !!};
+        var monthlyComplaintsCounts = {!! json_encode($complaintCounts) !!};
     </script>
 @endsection
