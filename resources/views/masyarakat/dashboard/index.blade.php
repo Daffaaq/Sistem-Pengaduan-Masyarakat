@@ -175,13 +175,16 @@
                         </div>
                         <div class="mt-4 text-center small">
                             <span class="mr-2">
-                                <i class="fas fa-circle text-primary"></i> Direct
+                                <i class="fas fa-circle text-primary"></i> Total Pengaduan
                             </span>
                             <span class="mr-2">
-                                <i class="fas fa-circle text-success"></i> Social
+                                <i class="fas fa-circle text-success"></i> Pending
                             </span>
                             <span class="mr-2">
-                                <i class="fas fa-circle text-info"></i> Referral
+                                <i class="fas fa-circle text-info"></i> On Progress
+                            </span>
+                            <span class="mr-2">
+                                <i class="fas fa-circle text-warning"></i> Referral
                             </span>
                         </div>
                     </div>
@@ -339,4 +342,10 @@
 
     </div>
     <!-- /.container-fluid -->
+    <script>
+        var totalComplaints = {!! json_encode($totalComplaints) !!};
+        var pendingComplaints = {!! json_encode($pendingComplaints) !!};
+        var inProgressComplaints = {!! json_encode($inProgressComplaints) !!};
+        var resolvedComplaints = {!! json_encode($resolvedComplaints) !!};
+    </script>
 @endsection
