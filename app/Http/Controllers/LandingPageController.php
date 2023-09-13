@@ -37,7 +37,9 @@ class LandingPageController extends Controller
     {
         try {
             $ticketNumber = $request->input('code_ticket');
-            $ticket = Tickets::with('complaint.user')->where('code_ticket', $ticketNumber)->first();
+            $ticket = Tickets::with('complaint.user')
+                ->where('code_ticket', $ticketNumber)
+                ->first();
 
             if (!$ticket) {
                 return response()->json(['error' => 'Invalid ticket number.']);

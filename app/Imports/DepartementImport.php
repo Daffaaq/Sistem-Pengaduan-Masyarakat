@@ -15,7 +15,7 @@ class DepartementImport implements ToModel
     public function model(array $row)
     {
         $longitude = str_replace(["E+16", "000000000"], "", $row[5]);
-    $longitude = doubleval($longitude);
+        $longitude = doubleval($longitude);
         if (!empty($row[1])) {
             return new Departements([
                 'name' => $row[1],
