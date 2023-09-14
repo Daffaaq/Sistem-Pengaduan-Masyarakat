@@ -149,8 +149,9 @@
                 <div class="row content">
                     <div class="col-lg-6">
                         <p style="text-align: justify;">
-                            sistem pelayanan masyarakat yang berkomitmen untuk memberikan layanan terbaik kepada seluruh
-                            warga negara. Dengan semangat pelayanan yang unggul, kami bertekad untuk meningkatkan
+                            sistem pengaduan masyarakat yang berkomitmen untuk memberikan layanan terbaik kepada seluruh
+                            warga Kabupaten Pasuruan. Dengan semangat pelayanan yang unggul, kami bertekad untuk
+                            meningkatkan
                             kualitas hidup masyarakat melalui aksesibilitas, efisiensi, dan kepedulian.
                         </p>
                         <ul>
@@ -169,22 +170,21 @@
                     </div>
                     <div class="col-lg-6 pt-4 pt-lg-0">
                         <p style="text-align: justify;">
-                            Kami percaya bahwa pelayanan masyarakat yang berkualitas adalah kunci untuk membangun
-                            masyarakat yang lebih maju dan sejahtera. Setiap langkah kecil yang kami ambil untuk
-                            memberikan layanan yang lebih baik merupakan kontribusi nyata bagi kemajuan masyarakat
-                            secara keseluruhan.Kami berkomitmen untuk berkelanjutan dalam usaha kami. Dengan menjaga
-                            lingkungan yang sehat dan berkelanjutan, kami berusaha memberikan dampak positif bagi
-                            masyarakat dan lingkungan di sekitar kami. Kami selalu terbuka untuk mendengar masukan,
-                            kritik, dan saran dari masyarakat. Komunikasi yang jujur dan terbuka merupakan dasar bagi
-                            hubungan yang kuat antara kami dan masyarakat yang kami layani. Perubahan yang kami ciptakan
-                            hari ini adalah
-                            investasi bagi masa depan yang lebih baik. Kami bangga menjadi bagian dari perubahan positif
-                            dalam kehidupan masyarakat dan berkomitmen
-                            untuk terus berusaha meningkatkan kualitas layanan kami. Bersama-sama, mari bangun
+                            Kami yakin bahwa menangani pengaduan masyarakat dengan baik adalah kunci untuk membangun
+                            masyarakat yang lebih maju dan sejahtera. Setiap pengaduan yang kami tangani adalah
+                            kontribusi nyata bagi kemajuan masyarakat secara keseluruhan. Kami berkomitmen untuk
+                            berkelanjutan dalam upaya kami untuk memastikan setiap pengaduan diterima dan ditangani
+                            dengan baik. Dengan menjaga lingkungan yang sehat dan berkelanjutan, kami berusaha
+                            memberikan dampak positif bagi masyarakat dan lingkungan di sekitar kami. Kami selalu
+                            terbuka untuk mendengar masukan, kritik, dan saran dari masyarakat. Komunikasi yang jujur
+                            dan terbuka merupakan dasar bagi hubungan yang kuat antara kami dan masyarakat yang kami
+                            layani. Perubahan yang kami ciptakan hari ini adalah investasi bagi masa depan yang lebih
+                            baik. Kami bangga menjadi bagian dari solusi dalam menangani pengaduan masyarakat dan
+                            berkomitmen untuk terus meningkatkan kualitas layanan kami. Bersama-sama, mari membangun
                             masyarakat yang lebih baik dan sejahtera untuk generasi mendatang. Terima kasih atas
-                            dukungan dan kepercayaan Anda. Bersama-sama, mari kita bahu-membahu membangun pelayanan
-                            masyarakat yang lebih baik dan memberdayakan seluruh masyarakat untuk mencapai kesejahteraan
-                            dan kemajuan bersama.
+                            dukungan dan kepercayaan Anda dalam sistem pengaduan masyarakat ini. Mari bersama-sama
+                            menciptakan sistem pengaduan masyarakat yang lebih baik dan memberdayakan seluruh masyarakat
+                            untuk mencapai kesejahteraan dan kemajuan bersama.
                         </p>
                         {{-- <a href="#" class="btn-learn-more">Learn More</a> --}}
                     </div>
@@ -214,8 +214,8 @@
                         <div class="accordion-list">
                             <ul>
                                 <li>
-                                    <a data-bs-toggle="collapse" class="collapse"
-                                        data-bs-target="#accordion-list-1"><span>01</span> Meningkatkan Transparansi <i
+                                    <a data-bs-toggle="collapse" class="collapse" data-bs-target="#accordion-list-1"
+                                        style="text-decoration: none;"><span>01</span> Meningkatkan Transparansi <i
                                             class="bx bx-chevron-down icon-show"></i><i
                                             class="bx bx-chevron-up icon-close"></i></a>
                                     <div id="accordion-list-1" class="collapse show"
@@ -229,8 +229,8 @@
                                 </li>
 
                                 <li>
-                                    <a data-bs-toggle="collapse" data-bs-target="#accordion-list-2"
-                                        class="collapsed"><span>02</span> Memperkuat Akuntabilitas
+                                    <a data-bs-toggle="collapse" data-bs-target="#accordion-list-2" class="collapsed"
+                                        style="text-decoration: none;"><span>02</span> Memperkuat Akuntabilitas
                                         <i class="bx bx-chevron-down icon-show"></i><i
                                             class="bx bx-chevron-up icon-close"></i></a>
                                     <div id="accordion-list-2" class="collapse" data-bs-parent=".accordion-list">
@@ -244,8 +244,8 @@
                                 </li>
 
                                 <li>
-                                    <a data-bs-toggle="collapse" data-bs-target="#accordion-list-3"
-                                        class="collapsed"><span>03</span> Memberdayakan Masyarakat
+                                    <a data-bs-toggle="collapse" data-bs-target="#accordion-list-3" class="collapsed"
+                                        style="text-decoration: none;"><span>03</span> Memberdayakan Masyarakat
                                         <i class="bx bx-chevron-down icon-show"></i><i
                                             class="bx bx-chevron-up icon-close"></i></a>
                                     <div id="accordion-list-3" class="collapse" data-bs-parent=".accordion-list">
@@ -258,8 +258,9 @@
                                     </div>
                                 </li>
                                 <li>
-                                    <a data-bs-toggle="collapse" data-bs-target="#accordion-list-4"
-                                        class="collapsed"><span>04</span> Meningkatkan Kualitas Pelayanan Publik
+                                    <a data-bs-toggle="collapse" data-bs-target="#accordion-list-4" class="collapsed"
+                                        style="text-decoration: none;"><span>04</span> Meningkatkan Kualitas Pelayanan
+                                        Publik
                                         <i class="bx bx-chevron-down icon-show"></i><i
                                             class="bx bx-chevron-up icon-close"></i></a>
                                     <div id="accordion-list-4" class="collapse" data-bs-parent=".accordion-list">
@@ -272,8 +273,9 @@
                                     </div>
                                 </li>
                                 <li>
-                                    <a data-bs-toggle="collapse" data-bs-target="#accordion-list-5"
-                                        class="collapsed"><span>05</span> Mendukung Pemantauan dan Evaluasi
+                                    <a data-bs-toggle="collapse" data-bs-target="#accordion-list-5" class="collapsed"
+                                        style="text-decoration: none;"><span>05</span> Mendukung Pemantauan dan
+                                        Evaluasi
                                         <i class="bx bx-chevron-down icon-show"></i><i
                                             class="bx bx-chevron-up icon-close"></i></a>
                                     <div id="accordion-list-5" class="collapse" data-bs-parent=".accordion-list">
@@ -373,7 +375,7 @@
                         data-aos-delay="100">
                         <div class="icon-box">
                             <div class="icon"><i class="bx bx-cast"></i></div>
-                            <h4><a href="">Aksesibilitas Online</a></h4>
+                            <h4><a>Aksesibilitas Online</a></h4>
                             <p style="text-align: justify;">Pelayanan SIPMA memberikan kemudahan akses bagi masyarakat
                                 untuk mengakses layanan
                                 publik secara online dari perangkat mereka, seperti komputer atau ponsel pintar, kapan
@@ -632,8 +634,8 @@
                                             <img src="assets/img/Lambang_Kabupaten_Pasuruan.png" class="img-fluid"
                                                 alt="{{ $departement->name }}">
                                             <div class="member-info">
-                                                <a href="#" data-id="{{ $departement->id }}"
-                                                    class="show-tugas">
+                                                <a href="#" style="text-decoration: none;"
+                                                    data-id="{{ $departement->id }}" class="show-tugas">
                                                     <h6 style="color: #fff" , align="center">{{ $departement->name }}
                                                     </h6>
                                                 </a>
