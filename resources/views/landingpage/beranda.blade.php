@@ -1234,88 +1234,108 @@
     {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
     <script>
         $(document).ready(function() {
+            // Fungsi doAction() digunakan untuk melakukan tindakan (like atau dislike) pada suatu polling.
             function doAction(action, pollId) {
                 $.ajax({
+                    // Mengirim permintaan AJAX ke URL yang sesuai dengan tindakan dan ID polling.
                     url: `/poll/${action}/${pollId}`,
-                    type: 'POST',
+                    type: 'POST', // Menggunakan metode HTTP POST.
                     headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}' // Mengirim token CSRF untuk keamanan.
                     },
-                    dataType: 'json',
+                    dataType: 'json', // Mengharapkan respons berupa JSON.
                     success: function(data) {
-                        $('#likesCount' + pollId).text(data.likes);
-                        $('#dislikesCount' + pollId).text(data.dislikes);
+                        // Ketika permintaan berhasil, pembaruan tampilan dilakukan.
+                        $('#likesCount' + pollId).text(data.likes); // Memperbarui jumlah suka.
+                        $('#dislikesCount' + pollId).text(data
+                        .dislikes); // Memperbarui jumlah tidak suka.
 
+                        // Memuat ulang halaman (reloading) untuk menampilkan pembaruan secara lengkap.
                         location.reload();
                     },
                     error: function(xhr, status, error) {
-                        console.error(xhr.responseText);
-                        alert("An error occurred. Please try again.");
+                        // Ketika terjadi kesalahan, pesan kesalahan ditampilkan.
+                        console.error(xhr.responseText); // Menampilkan pesan kesalahan di konsol.
+                        alert(
+                        "An error occurred. Please try again."); // Menampilkan pesan kesalahan kepada pengguna.
                     }
                 });
             }
 
+            // Mengatur event click untuk tombol "Like" pada polling.
             $(document).on('click', '.btn-like', function(event) {
-                event.preventDefault();
-                var pollId = $(this).data('poll-id');
-                doAction('like', pollId);
+                event.preventDefault(); // Mencegah tindakan default dari tautan.
+                var pollId = $(this).data('poll-id'); // Mendapatkan ID polling dari atribut data.
+                doAction('like', pollId); // Memanggil fungsi doAction() dengan tindakan 'like'.
             });
 
+            // Mengatur event click untuk tombol "Dislike" pada polling.
             $(document).on('click', '.btn-dislike', function(event) {
-                event.preventDefault();
-                var pollId = $(this).data('poll-id');
-                doAction('dislike', pollId);
+                event.preventDefault(); // Mencegah tindakan default dari tautan.
+                var pollId = $(this).data('poll-id'); // Mendapatkan ID polling dari atribut data.
+                doAction('dislike', pollId); // Memanggil fungsi doAction() dengan tindakan 'dislike'.
             });
         });
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+        // Ketika halaman telah sepenuhnya dimuat, kita akan menjalankan kode berikutnya.
         document.addEventListener("DOMContentLoaded", function() {
+            // Mencari tombol yang akan menutup modal dan menyimpannya dalam variabel.
             let closeModalButton1 = document.querySelector('#closeModalButton');
+
+            // Mencari semua tautan dengan kelas CSS "show-tugas" dan menyimpannya dalam variabel.
             let links = document.querySelectorAll('.show-tugas');
+
+            // Mencari elemen modal dengan ID "tugasModal" dan menyimpannya dalam variabel.
             let modal = document.querySelector('#tugasModal');
+
+            // Mencari judul modal di dalam elemen modal dan menyimpannya dalam variabel.
             let modalTitle = modal.querySelector('.modal-title');
 
+            // Mengatur event click untuk tombol-tutup-modal dan tombol "X".
             $('#closeModalButton1, #closeModalX1').click(function() {
+                // Ketika tombol ini diklik, modal akan disembunyikan.
                 $('#tugasModal').modal('hide');
             });
-            // closeModalButton1.addEventListener('click', function() {
-            //     $(modal).modal('hide');
-            // });
 
+            // Mengatur event click untuk setiap tautan yang memicu modal.
             links.forEach(link => {
                 link.addEventListener('click', function(e) {
+                    // Mencegah tindakan default (navigasi tautan).
                     e.preventDefault();
+
+                    // Mengambil ID departemen dari data atribut tautan yang diklik.
                     let departementId = this.getAttribute('data-id');
 
-                    // Fetch duties from your backend API
+                    // Mengambil informasi tentang departemen dari API backend.
+                    // Data ini berisi daftar tugas departemen.
                     fetch('/api/departements/' + departementId)
                         .then(response => response.json())
                         .then(data => {
-                            console.log(data);
+                            // Mengosongkan konten modal.
                             let modalBody = modal.querySelector('.modal-body');
                             modalBody.innerHTML = '';
 
-                            // Assuming tugas is an array of duties
+                            // Menambahkan tugas-tugas departemen ke dalam modal.
                             data.tugas.forEach(tugas => {
                                 modalBody.innerHTML += '<p>' + tugas + '</p>';
                             });
 
-                            // Update the modal title with the department name
+                            // Memperbarui judul modal dengan nama departemen.
                             modalTitle.textContent = 'TUGAS DINAS (' + data.name + ')';
 
-                            // Show the modal
+                            // Menampilkan modal kepada pengguna.
                             $(modal).modal('show');
                         });
                 });
             });
 
-            // Function to close the modal
+            // Fungsi ini seharusnya digunakan jika ingin menutup modal secara program,
+            // meskipun tidak digunakan dalam kode ini.
             function closeModal() {
                 $(modal).modal('hide');
             }
-
-            // You can call closeModal() to close the modal programmatically
         });
     </script>
     {{-- <script src="path_to_bootstrap_js"></script> --}}
