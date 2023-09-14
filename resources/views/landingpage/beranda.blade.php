@@ -476,7 +476,7 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="tugasModalLabel">TUGAS DINAS</h5>
+                                    <h5 class="modal-title" id="tugasModalLabel">TUGAS</h5>
                                     <button type="button" class="close" data-dismiss="modal" id="closeModalX1">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -940,7 +940,7 @@
                             });
 
                             // Memperbarui judul modal dengan nama departemen.
-                            modalTitle.textContent = 'TUGAS DINAS (' + data.name + ')';
+                            modalTitle.textContent = 'TUGAS (' + data.name + ')';
 
                             // Menampilkan modal kepada pengguna.
                             $(modal).modal('show');
