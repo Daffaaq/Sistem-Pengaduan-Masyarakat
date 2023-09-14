@@ -36,27 +36,46 @@ class LandingPageController extends Controller
     public function trackComplaint(TrackComplaintRequest $request)
     {
         try {
+            // Mencoba melakukan operasi berikut ini
+
             $ticketNumber = $request->input('code_ticket');
+            // Mengambil nomor tiket dari input yang diterima
+
             $ticket = Tickets::with('complaint.user')
                 ->where('code_ticket', $ticketNumber)
                 ->first();
+            // Mengambil data tiket berdasarkan nomor tiket yang diberikan
 
             if (!$ticket) {
+                // Jika tiket tidak ditemukan
+
                 return response()->json(['error' => 'Invalid ticket number.']);
+                // Membalas dengan pesan kesalahan "Nomor tiket tidak valid."
             }
 
             $complaint = $ticket->complaint;
+            // Mengambil data pengaduan terkait dengan tiket
+
             $ticketStatus = $complaint->status;
+            // Mengambil status pengaduan
+
             $ticketTitle = $complaint->title;
+            // Mengambil judul pengaduan
+
             $userName = $complaint->user->name;
+            // Mengambil nama pengguna yang membuat pengaduan
 
             return response()->json([
                 'ticketStatus' => $ticketStatus,
                 'ticketTitle' => $ticketTitle,
                 'userName' => $userName,
             ]);
+            // Mengembalikan respons JSON berisi informasi status tiket, judul tiket, dan nama pengguna
         } catch (\Exception $e) {
+            // Menangani pengecualian (kesalahan) jika terjadi
+
             return response()->json(['error' => 'An error occurred while tracking the ticket.']);
+            // Membalas dengan pesan kesalahan "Terjadi kesalahan saat melacak tiket."
         }
     }
     // Fungsi untuk menangani aksi dislike
@@ -99,18 +118,6 @@ class LandingPageController extends Controller
 
         // return view('landingpage.beranda', compact('departements', 'totalComplaints', 'pendingComplaints', 'inProgressComplaints', 'resolvedComplaints'));
     }
-    public function getTasks($id) 
-    {
-        $departement = Departements::find($id);
-
-        if ($departement) {
-            $tasks = json_decode($departement->tugas, true);
-            return response()->json(['tasks' => $tasks]);
-        } else {
-            return response()->json(['tasks' => []]);
-        }
-    }
-
 
     public function getPolls()
     {

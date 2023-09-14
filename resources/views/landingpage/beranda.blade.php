@@ -39,14 +39,6 @@
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <!-- =======================================================
-  * Template Name: Arsha
-  * Updated: Jul 05 2023 with Bootstrap v5.3.0
-  * Template URL: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body>
@@ -64,12 +56,10 @@
                     <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
                     <li><a class="nav-link scrollto" href="#about">About</a></li>
                     <li><a class="nav-link scrollto" href="#services">Services</a></li>
-                    {{-- <li><a class="nav-link   scrollto" href="#portfolio">Portfolio</a></li> --}}
                     <li><a class="nav-link scrollto" href="#team">Team</a></li>
                     <li><a class="nav-link   scrollto" href="#statistik">Statistik</a></li>
                     <li><a class="nav-link" href="{{ route('login') }}">Login</a></li>
                     <li><a class="nav-link" href="{{ route('register') }}">Register</a></li>
-                    {{-- <li><a class="getstarted scrollto" href="#about">Get Started</a></li> --}}
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
@@ -108,30 +98,6 @@
             <div class="container">
 
                 <div class="row" data-aos="zoom-in">
-
-                    {{-- <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                        <img src="assets/img/clients/client-1.png" class="img-fluid" alt="">
-                    </div>
-
-                    <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                        <img src="assets/img/clients/client-2.png" class="img-fluid" alt="">
-                    </div>
-
-                    <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                        <img src="assets/img/clients/client-3.png" class="img-fluid" alt="">
-                    </div>
-
-                    <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                        <img src="assets/img/clients/client-4.png" class="img-fluid" alt="">
-                    </div>
-
-                    <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                        <img src="assets/img/clients/client-5.png" class="img-fluid" alt="">
-                    </div>
-
-                    <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                        <img src="assets/img/clients/client-6.png" class="img-fluid" alt="">
-                    </div> --}}
 
                 </div>
 
@@ -447,147 +413,6 @@
         </section><!-- End Cta Section -->
 
         <!-- ======= Portfolio Section ======= -->
-        {{-- <section id="portfolio" class="portfolio">
-            <div class="container" data-aos="fade-up">
-
-                <div class="section-title">
-                    <h2>Portfolio</h2>
-                    <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit
-                        sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias
-                        ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-                </div>
-
-                <ul id="portfolio-flters" class="d-flex justify-content-center" data-aos="fade-up"
-                    data-aos-delay="100">
-                    <li data-filter="*" class="filter-active">All</li>
-                    <li data-filter=".filter-app">App</li>
-                    <li data-filter=".filter-card">Card</li>
-                    <li data-filter=".filter-web">Web</li>
-                </ul>
-
-                <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
-
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                        <div class="portfolio-img"><img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid"
-                                alt=""></div>
-                        <div class="portfolio-info">
-                            <h4>App 1</h4>
-                            <p>App</p>
-                            <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery"
-                                class="portfolio-lightbox preview-link" title="App 1"><i class="bx bx-plus"></i></a>
-                            <a href="portfolio-details.html" class="details-link" title="More Details"><i
-                                    class="bx bx-link"></i></a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-                        <div class="portfolio-img"><img src="assets/img/portfolio/portfolio-2.jpg" class="img-fluid"
-                                alt=""></div>
-                        <div class="portfolio-info">
-                            <h4>Web 3</h4>
-                            <p>Web</p>
-                            <a href="assets/img/portfolio/portfolio-2.jpg" data-gallery="portfolioGallery"
-                                class="portfolio-lightbox preview-link" title="Web 3"><i class="bx bx-plus"></i></a>
-                            <a href="portfolio-details.html" class="details-link" title="More Details"><i
-                                    class="bx bx-link"></i></a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                        <div class="portfolio-img"><img src="assets/img/portfolio/portfolio-3.jpg" class="img-fluid"
-                                alt=""></div>
-                        <div class="portfolio-info">
-                            <h4>App 2</h4>
-                            <p>App</p>
-                            <a href="assets/img/portfolio/portfolio-3.jpg" data-gallery="portfolioGallery"
-                                class="portfolio-lightbox preview-link" title="App 2"><i class="bx bx-plus"></i></a>
-                            <a href="portfolio-details.html" class="details-link" title="More Details"><i
-                                    class="bx bx-link"></i></a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-                        <div class="portfolio-img"><img src="assets/img/portfolio/portfolio-4.jpg" class="img-fluid"
-                                alt=""></div>
-                        <div class="portfolio-info">
-                            <h4>Card 2</h4>
-                            <p>Card</p>
-                            <a href="assets/img/portfolio/portfolio-4.jpg" data-gallery="portfolioGallery"
-                                class="portfolio-lightbox preview-link" title="Card 2"><i class="bx bx-plus"></i></a>
-                            <a href="portfolio-details.html" class="details-link" title="More Details"><i
-                                    class="bx bx-link"></i></a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-                        <div class="portfolio-img"><img src="assets/img/portfolio/portfolio-5.jpg" class="img-fluid"
-                                alt=""></div>
-                        <div class="portfolio-info">
-                            <h4>Web 2</h4>
-                            <p>Web</p>
-                            <a href="assets/img/portfolio/portfolio-5.jpg" data-gallery="portfolioGallery"
-                                class="portfolio-lightbox preview-link" title="Web 2"><i class="bx bx-plus"></i></a>
-                            <a href="portfolio-details.html" class="details-link" title="More Details"><i
-                                    class="bx bx-link"></i></a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                        <div class="portfolio-img"><img src="assets/img/portfolio/portfolio-6.jpg" class="img-fluid"
-                                alt=""></div>
-                        <div class="portfolio-info">
-                            <h4>App 3</h4>
-                            <p>App</p>
-                            <a href="assets/img/portfolio/portfolio-6.jpg" data-gallery="portfolioGallery"
-                                class="portfolio-lightbox preview-link" title="App 3"><i class="bx bx-plus"></i></a>
-                            <a href="portfolio-details.html" class="details-link" title="More Details"><i
-                                    class="bx bx-link"></i></a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-                        <div class="portfolio-img"><img src="assets/img/portfolio/portfolio-7.jpg" class="img-fluid"
-                                alt=""></div>
-                        <div class="portfolio-info">
-                            <h4>Card 1</h4>
-                            <p>Card</p>
-                            <a href="assets/img/portfolio/portfolio-7.jpg" data-gallery="portfolioGallery"
-                                class="portfolio-lightbox preview-link" title="Card 1"><i class="bx bx-plus"></i></a>
-                            <a href="portfolio-details.html" class="details-link" title="More Details"><i
-                                    class="bx bx-link"></i></a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-                        <div class="portfolio-img"><img src="assets/img/portfolio/portfolio-8.jpg" class="img-fluid"
-                                alt=""></div>
-                        <div class="portfolio-info">
-                            <h4>Card 3</h4>
-                            <p>Card</p>
-                            <a href="assets/img/portfolio/portfolio-8.jpg" data-gallery="portfolioGallery"
-                                class="portfolio-lightbox preview-link" title="Card 3"><i class="bx bx-plus"></i></a>
-                            <a href="portfolio-details.html" class="details-link" title="More Details"><i
-                                    class="bx bx-link"></i></a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-                        <div class="portfolio-img"><img src="assets/img/portfolio/portfolio-9.jpg" class="img-fluid"
-                                alt=""></div>
-                        <div class="portfolio-info">
-                            <h4>Web 3</h4>
-                            <p>Web</p>
-                            <a href="assets/img/portfolio/portfolio-9.jpg" data-gallery="portfolioGallery"
-                                class="portfolio-lightbox preview-link" title="Web 3"><i class="bx bx-plus"></i></a>
-                            <a href="portfolio-details.html" class="details-link" title="More Details"><i
-                                    class="bx bx-link"></i></a>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-        </section><!-- End Portfolio Section --> --}}
 
         <!-- ======= Team Section ======= -->
         <section id="team" class="team section-bg">
@@ -689,69 +514,7 @@
         </section><!-- End Team Section -->
 
         <!-- ======= Pricing Section ======= -->
-        {{-- <section id="pricing" class="pricing">
-            <div class="container" data-aos="fade-up">
-
-                <div class="section-title">
-                    <h2>Pricing</h2>
-                    <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit
-                        sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias
-                        ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-                </div>
-
-                <div class="row">
-
-                    <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
-                        <div class="box">
-                            <h3>Free Plan</h3>
-                            <h4><sup>$</sup>0<span>per month</span></h4>
-                            <ul>
-                                <li><i class="bx bx-check"></i> Quam adipiscing vitae proin</li>
-                                <li><i class="bx bx-check"></i> Nec feugiat nisl pretium</li>
-                                <li><i class="bx bx-check"></i> Nulla at volutpat diam uteera</li>
-                                <li class="na"><i class="bx bx-x"></i> <span>Pharetra massa massa ultricies</span>
-                                </li>
-                                <li class="na"><i class="bx bx-x"></i> <span>Massa ultricies mi quis
-                                        hendrerit</span></li>
-                            </ul>
-                            <a href="#" class="buy-btn">Get Started</a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="200">
-                        <div class="box featured">
-                            <h3>Business Plan</h3>
-                            <h4><sup>$</sup>29<span>per month</span></h4>
-                            <ul>
-                                <li><i class="bx bx-check"></i> Quam adipiscing vitae proin</li>
-                                <li><i class="bx bx-check"></i> Nec feugiat nisl pretium</li>
-                                <li><i class="bx bx-check"></i> Nulla at volutpat diam uteera</li>
-                                <li><i class="bx bx-check"></i> Pharetra massa massa ultricies</li>
-                                <li><i class="bx bx-check"></i> Massa ultricies mi quis hendrerit</li>
-                            </ul>
-                            <a href="#" class="buy-btn">Get Started</a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="300">
-                        <div class="box">
-                            <h3>Developer Plan</h3>
-                            <h4><sup>$</sup>49<span>per month</span></h4>
-                            <ul>
-                                <li><i class="bx bx-check"></i> Quam adipiscing vitae proin</li>
-                                <li><i class="bx bx-check"></i> Nec feugiat nisl pretium</li>
-                                <li><i class="bx bx-check"></i> Nulla at volutpat diam uteera</li>
-                                <li><i class="bx bx-check"></i> Pharetra massa massa ultricies</li>
-                                <li><i class="bx bx-check"></i> Massa ultricies mi quis hendrerit</li>
-                            </ul>
-                            <a href="#" class="buy-btn">Get Started</a>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-        </section><!-- End Pricing Section --> --}}
+        <!-- End Pricing Section -->
 
         <!-- ======= Services Section ======= -->
         <section id="statistik" class="services section-bg" style="background-color: #37517E;">
@@ -816,64 +579,6 @@
         </section><!-- End Services Section -->
 
         <!-- ======= Frequently Asked Questions Section ======= -->
-        {{-- <section class="block block-counter" id="statistik"
-            style="color: red; padding: 40px 0; background-color: #f3f5fa;">
-            <div class="container" style="max-width: 800px; margin: 0 auto;">
-                <div class="section-title">
-                    <h2>Jumlah Laporan Sekarang</h2>
-                    <div class="container">
-                        <div class="row-flex flex-tablet text-center">
-                            <div class="post post-counter" style="margin-left: auto; margin-right: auto;">
-                                <div class="counter-count">
-                                    <h1 style="font-size: 100px; text-align: center;">{{ $totalComplaints }}</h1>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container"
-                style="max-width: 800px; margin: 0 auto; display: flex; justify-content: space-between;">
-                <div class="section-title">
-                    <h2>Jumlah Complaints Pending</h2>
-                    <div class="container">
-                        <div class="row-flex flex-tablet text-center">
-                            <div class="post post-counter" style="margin-left: auto; margin-right: auto;">
-                                <div class="counter-count">
-                                    <h1 style="font-size: 100px; text-align: center;">{{ $pendingComplaints }}</h1>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="section-title">
-                    <h2>Jumlah Complaints In Progress</h2>
-                    <div class="container">
-                        <div class="row-flex flex-tablet text-center">
-                            <div class="post post-counter" style="margin-left: auto; margin-right: auto;">
-                                <div class="counter-count">
-                                    <h1 style="font-size: 100px; text-align: center;">{{ $inProgressComplaints }}</h1>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="section-title">
-                    <h2>Jumlah Complaints Resolved</h2>
-                    <div class="container">
-                        <div class="row-flex flex-tablet text-center">
-                            <div class="post post-counter" style="margin-left: auto; margin-right: auto;">
-                                <div class="counter-count">
-                                    <h1 style="font-size: 100px; text-align: center;">{{ $resolvedComplaints }}</h1>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-        </section> --}}
 
 
 
@@ -910,37 +615,6 @@
                                 <h4>Call:</h4>
                                 <p>(0343) 429064</p>
                             </div>
-
-                            {{-- <div id="map" style="width: 100%; height: 290px;"></div>
-                            <script>
-                                // Initialize the map
-                                var map = L.map('map').setView([-7.609531, 112.828478], 15);
-
-                                // Add the tile layer (you can use any other tile layer as well)
-                                L.tileLayer("https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}", {
-                                    maxZoom: 100,
-                                    subdomains: ["mt0", "mt1", "mt2", "mt3"],
-                                }).addTo(map);
-
-                                // Create a separate layer group for the markers
-                                var markerLayer = L.layerGroup().addTo(map);
-
-                                // Add a marker for each departement to the markerLayer
-                                @foreach ($departements as $departement)
-                                    @if ($departement->latitude && $departement->longitude && $departement->name)
-                                        var marker = L.marker([{{ $departement->latitude }}, {{ $departement->longitude }}])
-                                            .addTo(markerLayer)
-                                            .bindPopup("{{ $departement->name }}");
-                                    @endif
-                                @endforeach
-                            </script> --}}
-
-
-
-                            {{-- <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7909.355553928362!2d112.82271425691395!3d-7.609998628479007!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7c562865d17b5%3A0x45cd669378aa9e84!2sDinas%20Komunikasi%20dan%20Informatika%20Kabupaten%20Pasuruan!5e0!3m2!1sid!2sid!4v1690172591982!5m2!1sid!2sid"
-                                frameborder="0" style="border:0; width: 100%; height: 290px;"
-                                allowfullscreen></iframe> --}}
                         </div>
 
                     </div>
@@ -1071,64 +745,6 @@
                 </div>
             </div>
         </div>
-        {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
-        {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
-        {{-- <script>
-            $(document).ready(function() {
-                // Fungsi yang akan dijalankan ketika halaman selesai dimuat
-
-                $('#trackComplaintForm').submit(function(event) {
-                    event.preventDefault(); // Mencegah pengiriman formulir secara biasa
-
-                    var form = $(this); // Mengambil referensi form yang disubmit
-                    var formData = form
-                        .serialize(); // Mengambil data formulir dalam format yang sesuai untuk dikirim
-                    $.ajax({
-                        type: 'POST',
-                        url: form.attr('action'),
-                        data: formData,
-                        success: handleSuccess,
-                        error: handleError
-                    });
-                });
-
-                function handleSuccess(response) {
-                    var userName = response.userName ? maskString(response.userName, 3) :
-                        'No user name found.';
-                    var ticketStatus = response.ticketStatus ? response.ticketStatus :
-                        'No ticket status found.';
-                    var ticketTitle = response.ticketTitle ? maskString(response.ticketTitle, 3) :
-                        'No ticket title found.';
-
-                    updateModalContent(userName, ticketStatus, ticketTitle);
-                    showModal();
-                }
-
-                function handleError() {
-                    var errorMessage = 'An error occurred while tracking the ticket.';
-                    updateModalContent(errorMessage, errorMessage, errorMessage);
-                    showModal();
-                }
-
-                function updateModalContent(userName, ticketStatus, ticketTitle) {
-                    $('#userName').text(`Nama Pengadu: ${userName}`);
-                    $('#ticketStatus').text(`Status Pengaduan: ${ticketStatus}`);
-                    $('#ticketTitle').text(`Judul Pengaduan: ${ticketTitle}`);
-                }
-
-                function showModal() {
-                    $('#trackResultModal').modal('show');
-                }
-
-                function maskString(inputString, visibleChars) {
-                    return inputString.substr(0, 3) + '*'.repeat(inputString.length - 3);
-                }
-
-                $('#closeModalButton, #closeModalX').click(function() {
-                    $('#trackResultModal').modal('hide');
-                });
-            });
-        </script> --}}
         <div class="footer-top">
             <div class="container">
                 <div class="row">
@@ -1248,7 +864,7 @@
                         // Ketika permintaan berhasil, pembaruan tampilan dilakukan.
                         $('#likesCount' + pollId).text(data.likes); // Memperbarui jumlah suka.
                         $('#dislikesCount' + pollId).text(data
-                        .dislikes); // Memperbarui jumlah tidak suka.
+                            .dislikes); // Memperbarui jumlah tidak suka.
 
                         // Memuat ulang halaman (reloading) untuk menampilkan pembaruan secara lengkap.
                         location.reload();
@@ -1257,7 +873,8 @@
                         // Ketika terjadi kesalahan, pesan kesalahan ditampilkan.
                         console.error(xhr.responseText); // Menampilkan pesan kesalahan di konsol.
                         alert(
-                        "An error occurred. Please try again."); // Menampilkan pesan kesalahan kepada pengguna.
+                            "An error occurred. Please try again."
+                        ); // Menampilkan pesan kesalahan kepada pengguna.
                     }
                 });
             }

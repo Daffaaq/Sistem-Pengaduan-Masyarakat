@@ -33,15 +33,22 @@ class DashboardUserController extends Controller
 
         // Mendapatkan data komplain berdasarkan bulan komplain
         $complaintsByMonth = Complaint::where('user_id', $userId)
+            // Memilih model Complaint dengan kondisi where 'user_id' sama dengan $userId
             ->select(
                 DB::raw('YEAR(complaint_date) as year'),
                 DB::raw('MONTH(complaint_date) as month'),
                 DB::raw('COUNT(*) as count')
             )
+            // Memilih kolom 'year', 'month', dan menghitung jumlah komplain
             ->groupBy('year', 'month')
+            // Mengelompokkan data berdasarkan 'year' dan 'month'
             ->orderBy('year', 'ASC')
+            // Mengurutkan hasil berdasarkan tahun (asc = ascending)
             ->orderBy('month', 'ASC')
+            // Mengurutkan hasil berdasarkan bulan (asc = ascending)
             ->get();
+            // Mengambil hasil query dan menyimpannya dalam variabel $complaintsByMonth
+
 
         // Menginisialisasi array untuk data bulan dan jumlah komplain
         $complaintMonths = [];
