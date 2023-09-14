@@ -39,6 +39,7 @@ Route::group(['prefix' => '/'], function () {
     Route::post('/poll/like/{id}', [LandingPageController::class, 'likePoll'])->name('poll.like');
     Route::post('/poll/dislike/{id}', [LandingPageController::class, 'dislikePoll'])->name('poll.dislike');
     Route::post('/track-complaint', [LandingPageController::class, 'trackComplaint'])->name('track.complaint');
+    Route::get('/api/departements/{id}', [LandingPageController::class, 'show']);
     Route::get('/get-tasks/{id}', [LandingPageController::class, 'getTasks']);
 
 

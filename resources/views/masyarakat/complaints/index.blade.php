@@ -16,73 +16,71 @@
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     {{-- <div class="row justify-content-end"> --}}
-        <div class="col-lg-10">
-            <div class="row">
-                <div class="col-lg-12 margin-tb">
-                    <!-- Content -->
-                </div>
-            </div>
-            <div class="float-right my-2">
-                <a class="btn btn-success" href="{{ route('user.complaints.create') }}"> Ajukan Complaints</a>
-            </div>
-            @if ($message = Session::get('success'))
-                <div class="alert alert-success">
-                    <p>{{ $message }}</p>
-                </div>
-            @endif
-            @if ($message = Session::get('error'))
-                <div class="alert alert-error">
-                    <p>{{ $message }}</p>
-                </div>
-            @endif
-            <div class="text-center">
-                <br>
-                <!-- Bagian konten lainnya -->
-
-                <table class="table table-bordered" style="background-color: #78C1F3">
-                    <tr>
-                        <th width="auto">No</th>
-                        <th width="auto">Ticket Number</th>
-                        <th width="auto">Title</th>
-                        <th width="auto">Time</th>
-                        <th width="auto">Date</th>
-                        <th width="auto">Description</th>
-                        <th width="auto">Status</th>
-                        <th width="auto">Nama Departemen</th>
-                        <th width="auto">Action1</th>
-                    </tr>
-                    @foreach ($complaints as $cp)
-                        @php
-                            $hasImage = $cp->images && $cp->images->image_path;
-                            $hasLocation = isset($cp->latitude) && isset($cp->longitude);
-                        @endphp
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $cp->ticket->code_ticket }}</td>
-                            <td>{{ $cp->title }}</td>
-                            <td>{{ $cp->time }}</td>
-                            <td>{{ $cp->complaint_date }}</td>
-                            <td>{{ $cp->description }}</td>
-                            <td>{{ $cp->status }}</td>
-                            <td>{{ $cp->department->name }}</td>
-                            <td>
-                                <button type="button" class="btn btn-primary view-details" data-id="{{ $cp->id }}"
-                                    data-has-image="{{ $hasImage ? 'true' : 'false' }}"
-                                    data-has-location="{{ $hasLocation ? 'true' : 'false' }}">
-                                    View Details
-                                    @if ($hasImage || $hasLocation)
-                                        <i class="fas fa-exclamation-circle"></i>
-                                    @endif
-                                </button>
-                            </td>
-                        </tr>
-                    @endforeach
-                </table>
-
-                <!-- Bagian lainnya, seperti modal dan script -->
-
+    <div class="col-lg-10">
+        <div class="row">
+            <div class="col-lg-12 margin-tb">
+                <!-- Content -->
             </div>
         </div>
+        <div class="float-right my-2">
+            <a class="btn btn-success" href="{{ route('user.complaints.create') }}"> Ajukan Complaints</a>
+        </div>
+        @if ($message = Session::get('success'))
+            <div class="alert alert-success">
+                <p>{{ $message }}</p>
+            </div>
+        @endif
+        @if ($message = Session::get('error'))
+            <div class="alert alert-error">
+                <p>{{ $message }}</p>
+            </div>
+        @endif
+        <div class="text-center">
+            <br>
+            <!-- Bagian konten lainnya -->
+
+            <table class="table table-bordered" style="background-color: #78C1F3">
+                <tr>
+                    <th width="auto">No</th>
+                    <th width="auto">Ticket Number</th>
+                    <th width="auto">Title</th>
+                    <th width="auto">Time</th>
+                    <th width="auto">Date</th>
+                    <th width="auto">Description</th>
+                    <th width="auto">Nama Departemen</th>
+                    <th width="auto">Action1</th>
+                </tr>
+                @foreach ($complaints as $cp)
+                    @php
+                        $hasImage = $cp->images && $cp->images->image_path;
+                        $hasLocation = isset($cp->latitude) && isset($cp->longitude);
+                    @endphp
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $cp->ticket->code_ticket }}</td>
+                        <td>{{ $cp->title }}</td>
+                        <td>{{ $cp->time }}</td>
+                        <td>{{ $cp->complaint_date }}</td>
+                        <td>{{ $cp->description }}</td>
+                        <td>{{ $cp->department->name }}</td>
+                        <td>
+                            <button type="button" class="btn btn-primary view-details" data-id="{{ $cp->id }}"
+                                data-has-image="{{ $hasImage ? 'true' : 'false' }}"
+                                data-has-location="{{ $hasLocation ? 'true' : 'false' }}">
+                                View Details
+                                @if ($hasImage || $hasLocation)
+                                    <i class="fas fa-exclamation-circle"></i>
+                                @endif
+                            </button>
+                        </td>
+                    </tr>
+                @endforeach
+            </table>
+
+            <!-- Bagian lainnya, seperti modal dan script -->
+
+        </div>
+    </div>
     </div>
     <div class="modal fade animate__animated animate__zoomIn" id="complaintModal" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalLabel" aria-hidden="true">

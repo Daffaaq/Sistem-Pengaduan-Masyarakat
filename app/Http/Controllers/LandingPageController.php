@@ -167,9 +167,21 @@ class LandingPageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
+    public function show($id) {
+        $departement = Departements::find($id);
+        if (!$departement) {
+            return response()->json(['error' => 'Department not found'], 404);
+        }
+        // Decode the JSON string to an array
+        $tugasArray = json_decode($departement->tugas);
+        
+        // Include the department name in the response
+        $response = [
+            'name' => $departement->name,
+            'tugas' => $tugasArray,
+        ];
+
+        return response()->json($response);
     }
 
     /**

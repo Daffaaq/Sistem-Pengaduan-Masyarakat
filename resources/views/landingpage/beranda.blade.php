@@ -632,8 +632,11 @@
                                             <img src="assets/img/Lambang_Kabupaten_Pasuruan.png" class="img-fluid"
                                                 alt="{{ $departement->name }}">
                                             <div class="member-info">
-                                                <h6 style="color: #fff" , align="center">{{ $departement->name }}</h6>
-                                                {{-- <span>{{ $departement->description }}</span> --}}
+                                                <a href="#" data-id="{{ $departement->id }}"
+                                                    class="show-tugas">
+                                                    <h6 style="color: #fff" , align="center">{{ $departement->name }}
+                                                    </h6>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -641,6 +644,24 @@
                             </div>
                         </div>
                     </div>
+                    <div class="modal fade" id="tugasModal" tabindex="-1" role="dialog"
+                        aria-labelledby="tugasModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="tugasModalLabel">TUGAS DINAS</h5>
+                                    <button type="button" class="close" data-dismiss="modal" id="closeModalX1">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Duties will be loaded here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
 
                     {{-- <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="400">
                         <div class="member d-flex align-items-start">
@@ -1245,46 +1266,56 @@
             });
         });
     </script>
-    {{-- <script>
-        $(document).ready(function() {
-            // Mengambil elemen modal dan elemen close
-            $('[data-toggle="modal"]').click(function() {
-                var departementId = $(this).data('id');
-                var modal = document.getElementById('customModal' + departementId);
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let closeModalButton1 = document.querySelector('#closeModalButton');
+            let links = document.querySelectorAll('.show-tugas');
+            let modal = document.querySelector('#tugasModal');
+            let modalTitle = modal.querySelector('.modal-title');
 
-                $.ajax({
-                    url: '/get-tasks/' + departementId,
-                    method: 'GET',
-                    success: function(response) {
-                        var modalBody = $('#customModal' + departementId).find('#modalBody');
-                        modalBody.empty();
+            $('#closeModalButton1, #closeModalX1').click(function() {
+                $('#tugasModal').modal('hide');
+            });
+            // closeModalButton1.addEventListener('click', function() {
+            //     $(modal).modal('hide');
+            // });
 
-                        if (response.tasks && response.tasks.length > 0) {
-                            response.tasks.forEach(function(task) {
-                                modalBody.append('<p>' + task + '</p>');
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    let departementId = this.getAttribute('data-id');
+
+                    // Fetch duties from your backend API
+                    fetch('/api/departements/' + departementId)
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log(data);
+                            let modalBody = modal.querySelector('.modal-body');
+                            modalBody.innerHTML = '';
+
+                            // Assuming tugas is an array of duties
+                            data.tugas.forEach(tugas => {
+                                modalBody.innerHTML += '<p>' + tugas + '</p>';
                             });
-                        } else {
-                            modalBody.append('<p>Tidak ada tugas untuk departemen ini.</p>');
-                        }
 
-                        modal.style.display = "block";
-                    }
+                            // Update the modal title with the department name
+                            modalTitle.textContent = 'TUGAS DINAS (' + data.name + ')';
+
+                            // Show the modal
+                            $(modal).modal('show');
+                        });
                 });
             });
 
-            $('.close').click(function() {
-                var modalId = $(this).closest(".custom-modal").attr("id");
-                var modal = document.getElementById(modalId);
-                modal.style.display = "none";
-            });
-
-            window.onclick = function(event) {
-                if ($(event.target).hasClass('custom-modal')) {
-                    event.target.style.display = "none";
-                }
+            // Function to close the modal
+            function closeModal() {
+                $(modal).modal('hide');
             }
+
+            // You can call closeModal() to close the modal programmatically
         });
-    </script> --}}
+    </script>
     {{-- <script src="path_to_bootstrap_js"></script> --}}
     <!-- Vendor JS Files -->
     <script src="assets/vendor/aos/aos.js"></script>
