@@ -11,9 +11,6 @@
 @include('superadmin.layouts.sidebar')
 {{-- @include('superadmin.layouts.content') --}}
 
-<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-    @yield('container')
-    @yield('scripts')
-</main>
+@yield('container')
 
 @include('superadmin.layouts.footer')

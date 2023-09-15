@@ -267,8 +267,23 @@
             </div>
         </section><!-- End Why Us Section -->
 
+
+        <!-- ======= About Us Section ======= -->
+        <section id="complaint_flow" class="complaint_flow">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>Alur Pengaduan</h2>
+                </div>
+
+                <div class="row content" data-aos="zoom-in" data-aos-delay="400" style="text-align: center;">
+                    <img src="assets/img/alur.png" class="img-fluid animated" alt=""
+                        style="width: 870px; height: 698px; margin: 0 auto;">
+                </div>
+            </div>
+        </section><!-- End About Us Section -->
         <!-- ======= Skills Section ======= -->
-        <section id="skills" class="skills">
+        {{-- <section id="skills" class="skills">
             <div class="container" data-aos="fade-up">
 
                 <div class="row">
@@ -323,7 +338,7 @@
                 </div>
 
             </div>
-        </section><!-- End Skills Section -->
+        </section><!-- End Skills Section --> --}}
 
         <!-- ======= Services Section ======= -->
         <section id="services" class="services section-bg">

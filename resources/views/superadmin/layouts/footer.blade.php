@@ -1,5 +1,3 @@
-
-
 <!-- Control Sidebar -->
 <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->
@@ -41,7 +39,8 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('AdminLTE') }}/dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-{{-- <script src="{{ asset('AdminLTE') }}/dist/js/pages/dashboard.js"></script> --}}
+<script src="{{ asset('AdminLTE') }}/dist/js/pages/dashboard_sp.js"></script>
+{{-- <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script> --}}
 </body>
 
 </html>

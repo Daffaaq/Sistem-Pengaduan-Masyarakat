@@ -113,7 +113,34 @@ $(function () {
 
   /* Chart.js Charts */
   // Sales chart
-  // var salesChartCanvas = document.getElementById('revenue-chart-canvas').getContext('2d')
+  var salesChartCanvas = document.getElementById('revenue-chart-canvas').getContext('2d')
+
+  var pieData = {
+    labels: [
+      "Likes", "Dislikes",
+    ],
+    datasets: [
+      {
+        data: [totalLikes, totalDislikes],
+        backgroundColor: ['#00a65a', '#f39c12']
+      }
+    ]
+  };
+
+  var pieOptions = {
+    legend: {
+      display: false
+    },
+    maintainAspectRatio: false,
+    responsive: true
+  };
+
+  var pieChart2 = new Chart(salesChartCanvas, {
+    type: 'doughnut',
+    data: pieData,
+    options: pieOptions
+  });
+
   // $('#revenue-chart').get(0).getContext('2d');
 
   // var salesChartData = {
@@ -172,7 +199,7 @@ $(function () {
   //   options: salesChartOptions
   // })
 
-  // Donut Chart
+  // Donut Chart 1
   var pieChartCanvas = $('#sales-chart-canvas').get(0).getContext('2d')
   var pieData = {
     labels: [
@@ -200,6 +227,9 @@ $(function () {
     data: pieData,
     options: pieOptions
   })
+  
+
+
 
   // Sales graph chart
   var salesGraphChartCanvas = $('#line-chart').get(0).getContext('2d')

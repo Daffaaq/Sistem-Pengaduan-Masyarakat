@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Complaint;
 use App\Models\Answercomplaints;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class DashboardAdminController extends Controller
 {
@@ -40,7 +41,35 @@ class DashboardAdminController extends Controller
         // Mendapatkan jumlah complaints dengan jawaban berdasarkan department
         $answeredComplaints = Answercomplaints::where('department_id', $user->department->id)->count();
 
-        return view('admin.dashboard_admin.index', compact('departmentName', 'totalComplaints', 'pendingComplaints', 'inProgressComplaints', 'resolvedComplaints', 'answeredComplaints'));
+        // Mendapatkan data komplain berdasarkan bulan komplain
+        $complaintsByMonth = Complaint::where('department_id', $user->department->id)
+            // Memilih model Complaint dengan kondisi where 'user_id' sama dengan $userId
+            ->select(
+                DB::raw('YEAR(complaint_date) as year'),
+                DB::raw('MONTH(complaint_date) as month'),
+                DB::raw('COUNT(*) as count')
+            )
+            // Memilih kolom 'year', 'month', dan menghitung jumlah komplain
+            ->groupBy('year', 'month')
+            // Mengelompokkan data berdasarkan 'year' dan 'month'
+            ->orderBy('year', 'ASC')
+            // Mengurutkan hasil berdasarkan tahun (asc = ascending)
+            ->orderBy('month', 'ASC')
+            // Mengurutkan hasil berdasarkan bulan (asc = ascending)
+            ->get();
+            // Mengambil hasil query dan menyimpannya dalam variabel $complaintsByMonth
+
+
+        // Menginisialisasi array untuk data bulan dan jumlah komplain
+        $complaintMonths = [];
+        $complaintCounts = [];
+
+        foreach ($complaintsByMonth as $complaint) {
+            $complaintMonths[] = date('M Y', mktime(0, 0, 0, $complaint->month, 1, $complaint->year));
+            $complaintCounts[] = $complaint->count;
+        }
+
+        return view('admin.dashboard_admin.index', compact('departmentName', 'totalComplaints', 'pendingComplaints', 'inProgressComplaints', 'resolvedComplaints', 'answeredComplaints', 'complaintMonths', 'complaintCounts'));
 
         // return view('admin.layouts.master');
     }

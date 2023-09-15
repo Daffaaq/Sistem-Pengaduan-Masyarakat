@@ -1,209 +1,272 @@
 @extends('superadmin.layouts.master')
 
 @section('container')
-    <style>
-        /* Center the card headers */
-        .card-header {
-            text-align: center;
-        }
+@section('container')
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">Dashboard</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Dashboard v1</li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
 
-        /* Add some spacing between the cards and the row */
-        .row {
-            margin-bottom: 20px;
-        }
-
-        /* Adjust the width of the charts to fit the columns */
-        canvas {
-            width: 100% !important;
-            height: auto !important;
-        }
-    </style>
-
-    <div class="row justify-content-end">
-        <div class="col-lg-10">
-            <div class="row">
-                <div class="col-lg-12 margin-tb">
-                    <!-- Content -->
-                    {{-- <h1>Selamat Datang {{ $departmentName }}</h1> --}}
-                </div>
-            </div>
-            @if ($message = Session::get('success'))
-                <div class="alert alert-success">
-                    <p>{{ $message }}</p>
-                </div>
-            @endif
-            @if ($message = Session::get('error'))
-                <div class="alert alert-error">
-                    <p>{{ $message }}</p>
-                </div>
-            @endif
-            <div class="text-center">
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <!-- Small boxes (Stat box) -->
                 <div class="row">
-                    <!-- Total Complaints -->
-                    <div class="col-sm-3">
-                        <div class="card bg-primary text-white">
-                            <div class="card-body">
-                                <h5 class="card-title">Total Complaints</h5>
-                                <p class="card-text">{{ $totalComplaints }}</p>
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-info">
+                            <div class="inner">
+                                <h3>{{ $totalComplaints }}</h3>
+
+                                <p>Total Pengaduan</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-stats-bars"></i>
                             </div>
                         </div>
                     </div>
-                    <!-- Pending Complaints -->
-                    <div class="col-sm-3">
-                        <div class="card bg-danger text-white">
-                            <div class="card-body">
-                                <h5 class="card-title">Pending Complaints</h5>
-                                <p class="card-text">{{ $pendingComplaints }}</p>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-danger">
+                            <div class="inner">
+                                <h3>{{ $pendingComplaints }}</h3>
+
+                                <p>Complaint Pending</p>
                             </div>
+                            <div class="icon">
+                                <i class="ion ion-information"></i>
+                            </div>
+
                         </div>
                     </div>
-                    <!-- In Progress Complaints -->
-                    <div class="col-sm-3">
-                        <div class="card bg-warning text-dark">
-                            <div class="card-body">
-                                <h5 class="card-title">In Progress Complaints</h5>
-                                <p class="card-text">{{ $inProgressComplaints }}</p>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-warning">
+                            <div class="inner">
+                                <h3>{{ $inProgressComplaints }}</h3>
+
+                                <p>Complaint In Progress</p>
                             </div>
+                            <div class="icon">
+                                <i class="ion ion-navigate"></i>
+                            </div>
+
                         </div>
                     </div>
-                    <!-- Resolved Complaints -->
-                    <div class="col-sm-3">
-                        <div class="card bg-success text-white">
-                            <div class="card-body">
-                                <h5 class="card-title">Resolved Complaints</h5>
-                                <p class="card-text">{{ $resolvedComplaints }}</p>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h3>{{ $resolvedComplaints }}</h3>
+
+                                <p>Complaint Resolved</p>
                             </div>
+                            <div class="icon">
+                                <i class="ion ion-checkmark"></i>
+                            </div>
+
                         </div>
                     </div>
+                    <!-- ./col -->
                 </div>
+                <!-- /.row -->
                 <div class="row">
-                    <!-- Total Likes -->
-                    <div class="col-sm-3">
-                        <div class="card bg-primary text-white">
-                            <div class="card-body">
-                                <h5 class="card-title">Total Like</h5>
-                                <p class="card-text">{{ $totalLikes }}</p>
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-info">
+                            <div class="inner">
+                                <h3>{{ $totalLikes + $totalDislikes }}</h3>
+
+                                <p>Total Polling</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-stats-bars"></i>
                             </div>
                         </div>
                     </div>
-                    <!-- Total Dislikes -->
-                    <div class="col-sm-3">
-                        <div class="card bg-danger text-white">
-                            <div class="card-body">
-                                <h5 class="card-title">Total Dislike</h5>
-                                <p class="card-text">{{ $totalDislikes }}</p>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h3>{{ $totalLikes }}</h3>
+
+                                <p>Total Like</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-heart"></i>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-warning">
+                            <div class="inner">
+                                <h3>{{ $totalDislikes }}</h3>
+
+                                <p>Total Dislike</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-sad"></i>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-3">
-                        {{-- <div class="card bg-warning text-dark">
-                            <div class="card-body">
-                                <h5 class="card-title">Total Likes & Dislikes</h5>
-                                <p class="card-text">{{ $totalLikes + $totalDislikes }}</p>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        {{-- <div class="small-box bg-danger">
+                            <div class="inner">
+                                <h3>{{ $resolvedComplaints }}</h3>
+
+                                <p>Complaint Resolved</p>
                             </div>
+                            <div class="icon">
+                                <i class="ion ion-pie-graph"></i>
+                            </div>
+
                         </div> --}}
                     </div>
-                    <!-- Total Likes & Dislikes -->
-                    <div class="col-sm-3">
-                        <div class="card bg-success text-dark">
-                            <div class="card-body">
-                                <h5 class="card-title">Total Likes & Dislikes</h5>
-                                <p class="card-text">{{ $totalLikes + $totalDislikes }}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Empty Placeholder -->
+                    <!-- ./col -->
                 </div>
+                <!-- /.row -->
+                <!-- Main row -->
                 <div class="row">
-                    <div class="col-lg-5">
+                    <!-- Left col -->
+                    <section class="col-lg-7 connectedSortable">
+                        <!-- Custom tabs (Charts with tabs)-->
                         <div class="card">
-                            <div class="card-header text-center">
-                                Complaints Chart (Pie Chart)
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    <i class="fas fa-chart-pie mr-1"></i>
+                                    Sales
+                                </h3>
+                                <div class="card-tools">
+                                    <ul class="nav nav-pills ml-auto">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" href="#sales-chart" data-toggle="tab">Pengaduan</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link " href="#revenue-chart" data-toggle="tab">Polling</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div><!-- /.card-header -->
+                            <div class="card-body">
+                                <div class="tab-content p-0">
+                                    <!-- Morris chart - Sales -->
+                                    <div class="chart tab-pane" id="revenue-chart"
+                                        style="position: relative; height: 300px;">
+                                        <canvas id="revenue-chart-canvas" height="300" style="height: 300px;"></canvas>
+                                    </div>
+                                    <div class="chart tab-pane active" id="sales-chart"
+                                        style="position: relative; height: 300px;">
+                                        <canvas id="sales-chart-canvas" height="300" style="height: 300px;"></canvas>
+                                    </div>
+                                </div>
+                            </div><!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </section>
+                    <!-- /.Left col -->
+                    <!-- right col (We are only adding the ID to make the widgets sortable)-->
+                    <section class="col-lg-5 connectedSortable">
+
+                        <!-- solid sales graph -->
+                        <div class="card bg-gradient-info">
+                            <div class="card-header border-0">
+                                <h3 class="card-title">
+                                    <i class="fas fa-th mr-1"></i>
+                                    Sales Graph
+                                </h3>
+
+                                <div class="card-tools">
+                                    <button type="button" class="btn bg-info btn-sm" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn bg-info btn-sm" data-card-widget="remove">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
                             </div>
                             <div class="card-body">
-                                <canvas id="complaintsPieChart"></canvas>
+                                <canvas class="chart" id="line-chart"
+                                    style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
                             </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer bg-transparent">
+                                <div class="row">
+                                    {{-- <div class="col-4 text-center">
+                                        <input type="text" class="knob" data-readonly="true"
+                                            value="{{ $totalComplaints }}" data-width="60" data-height="60"
+                                            data-fgColor="#39CCCC">
+
+                                        <div class="text-white">Total Pengaduan</div>
+                                    </div> --}}
+                                    <!-- ./col -->
+                                    <div class="col-4 text-center">
+                                        <input type="text" class="knob" data-readonly="true"
+                                            value="{{ $pendingComplaints }}" data-width="60" data-height="60"
+                                            data-fgColor="#39CCCC">
+
+                                        <div class="text-white">Pengaduan Pending</div>
+                                    </div>
+                                    <!-- ./col -->
+                                    <div class="col-4 text-center">
+                                        <input type="text" class="knob" data-readonly="true"
+                                            value="{{ $inProgressComplaints }}" data-width="60" data-height="60"
+                                            data-fgColor="#39CCCC">
+
+                                        <div class="text-white">Pengaduan In Progress</div>
+                                    </div>
+                                    <div class="col-4 text-center">
+                                        <input type="text" class="knob" data-readonly="true"
+                                            value="{{ $resolvedComplaints }}" data-width="60" data-height="60"
+                                            data-fgColor="#39CCCC">
+
+                                        <div class="text-white">Pengaduan Resolved</div>
+                                    </div>
+                                    <!-- ./col -->
+                                </div>
+                                <!-- /.row -->
+                            </div>
+                            <!-- /.card-footer -->
                         </div>
-                    </div>
-                    <div class="col-lg-5">
-                        <div class="card">
-                            <div class="card-header text-center">
-                                Poling Chart (Pie Chart)
-                            </div>
-                            <div class="card-body">
-                                <canvas id="pollingPieChart"></canvas>
-                            </div>
-                        </div>
-                    </div>
+                        <!-- /.card -->
+                    </section>
+                    <!-- right col -->
                 </div>
-            </div>
-        </div>
+                <!-- /.row (main row) -->
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
     </div>
-@endsection
-
-@section('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/chart.js/dist/Chart.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.1/xlsx.full.min.js"></script>
+    <!-- /.content-wrapper -->
     <script>
-        // Function to generate random color
-        function getRandomColor() {
-            // Menghasilkan nilai acak dalam format RGB
-            const r = Math.floor(Math.random() * 256);
-            const g = Math.floor(Math.random() * 256);
-            const b = Math.floor(Math.random() * 256);
-            return `rgba(${r}, ${g}, ${b}, 1)`; // Gunakan nilai alpha 0.5 untuk transparansi
-        }
-
-        // Function to convert hex to RGB
-        function hexToRgb(hex) {
-            var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-            return result ? 'rgba(' + parseInt(result[1], 16) + ',' + parseInt(result[2], 16) + ',' + parseInt(result[3],
-                16) + ',1)' : null;
-        }
-        // Chart data
-        var totalComplaints = {{ $totalComplaints }};
-        var pendingComplaints = {{ $pendingComplaints }};
-        var inProgressComplaints = {{ $inProgressComplaints }};
-        var resolvedComplaints = {{ $resolvedComplaints }};
-        // Pie Chart
-        var complaintsPieChart = document.getElementById('complaintsPieChart').getContext('2d');
-        var pieChart = new Chart(complaintsPieChart, {
-            type: 'pie',
-            data: {
-                labels: ['Pending', 'In Progress', 'Resolved'],
-                datasets: [{
-                    label: 'Complaints',
-                    data: [pendingComplaints, inProgressComplaints, resolvedComplaints],
-                    backgroundColor: ['rgba(255, 0, 0, 0.8)',
-                        'rgba(255, 193, 7, 0.8)', 'rgba(40, 167, 69, 0.8)'
-                    ]
-                }]
-            },
-            options: {
-                responsive: true
-            }
-        });
-    </script>
-    <script>
-        // Chart data
-        var totalLikes = {{ $totalLikes }};
-        var totalDislikes = {{ $totalDislikes }};
-        // Pie Chart
-        var pollingPieChart = document.getElementById('pollingPieChart').getContext('2d');
-        var pieChart = new Chart(pollingPieChart, {
-            type: 'pie',
-            data: {
-                labels: ['Likes', 'Dislikes'],
-                datasets: [{
-                    label: 'Likes & Dislikes',
-                    data: [totalLikes, totalDislikes],
-                    backgroundColor: [getRandomColor(), getRandomColor()],
-                }]
-            },
-            options: {
-                responsive: true
-            }
-        });
+        var totalComplaints = {!! json_encode($totalComplaints) !!};
+        var pendingComplaints = {!! json_encode($pendingComplaints) !!};
+        var inProgressComplaints = {!! json_encode($inProgressComplaints) !!};
+        var resolvedComplaints = {!! json_encode($resolvedComplaints) !!};
+        var totalLikes = {!! json_encode($totalLikes) !!};
+        var totalDislikes = {!! json_encode($totalDislikes) !!};
+        var totalpolls = {!! json_encode($totalLikes + $totalDislikes) !!};
     </script>
 @endsection
