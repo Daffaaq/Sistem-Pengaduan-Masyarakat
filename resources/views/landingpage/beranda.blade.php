@@ -589,53 +589,56 @@
                     </div>
 
                     <script>
-                        function startCounting(targetElement, initialValue, finalValue, duration) {
-                            let current = initialValue;
-                            const increment = (finalValue - initialValue) / duration;
+                        // Fungsi untuk memulai penghitungan dari 0 ke nilai akhir (finalValue) dengan durasi yang ditentukan
+                        function startCounting(targetElement, finalValue, duration) {
+                            let currentValue = 0;
+                            const incrementValue = finalValue / duration;
                             const element = document.getElementById(targetElement);
 
-                            const updateCounter = () => {
-                                current += increment;
-                                element.textContent = Math.round(current);
+                            // Fungsi untuk memperbarui nilai hitungan
+                            function updateCounter() {
+                                currentValue += incrementValue;
+                                element.textContent = Math.round(currentValue);
 
-                                if (current < finalValue) {
+                                // Memeriksa apakah mencapai finalValue, jika belum, lanjutkan pembaruan
+                                if (currentValue < finalValue) {
                                     requestAnimationFrame(updateCounter);
                                 } else {
-                                    element.textContent = finalValue; // Ensure finalValue is reached
+                                    element.textContent = finalValue; // Pastikan finalValue tercapai
                                 }
-                            };
+                            }
 
-                            updateCounter();
+                            updateCounter(); // Memulai animasi penghitungan
                         }
 
-                        function setupCounting(targetElement, value) {
+                        // Fungsi untuk mengatur penghitungan saat elemen berada dalam tampilan
+                        function setupCounting(targetElement, value, duration) {
                             let hasStarted = false;
                             const element = document.getElementById(targetElement);
 
-                            const scrollHandler = () => {
+                            // Fungsi untuk menangani peristiwa scroll dan memulai penghitungan
+                            function scrollHandler() {
                                 const rect = element.getBoundingClientRect();
                                 if (rect.top < window.innerHeight && rect.bottom >= 0) {
-                                    // Element is in the viewport
+                                    // Elemen berada dalam tampilan
                                     if (!hasStarted) {
                                         hasStarted = true;
-                                        startCounting(targetElement, 0, value, 600); // Adjust the duration as needed
+                                        startCounting(targetElement, value, duration);
                                     }
                                 } else {
                                     hasStarted = false;
                                 }
-                            };
+                            }
 
                             window.addEventListener('scroll', scrollHandler);
-
-                            // Initial check in case element is already in the viewport
-                            scrollHandler();
+                            scrollHandler(); // Pengecekan awal jika elemen sudah berada dalam tampilan
                         }
 
-                        // Call the setupCounting function for each element
-                        setupCounting("pendingCounter", {{ $pendingComplaints }});
-                        setupCounting("inProgressCounter", {{ $inProgressComplaints }});
-                        setupCounting("resolvedCounter", {{ $resolvedComplaints }});
-                        setupCounting("totalCounter", {{ $totalComplaints }});
+                        // Panggil fungsi setupCounting untuk setiap elemen dengan durasi 600ms
+                        setupCounting("pendingCounter", {{ $pendingComplaints }}, 600);
+                        setupCounting("inProgressCounter", {{ $inProgressComplaints }}, 600);
+                        setupCounting("resolvedCounter", {{ $resolvedComplaints }}, 600);
+                        setupCounting("totalCounter", {{ $totalComplaints }}, 600);
                     </script>
                 </div>
             </div>
