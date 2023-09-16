@@ -690,28 +690,34 @@
                             <div class="row">
                                 <div id="map" style="width: 100%; height: 290px;"></div>
                                 <script>
+                                    // Inisialisasi peta dengan properti pusat dan zoom awal
                                     var map = L.map('map', {
                                         center: [-7.609531, 112.828478],
                                         zoom: 15,
                                         attributionControl: false
                                     });
 
+                                    // Inisialisasi lapisan peta jalanan
                                     var streets = L.tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
                                         maxZoom: 100,
                                         subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
                                         attribution: false
                                     });
 
+                                    // Inisialisasi lapisan peta satelit
                                     var satellite = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
                                         maxZoom: 100,
                                         subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
                                         attribution: false
                                     });
 
+                                    // Menambahkan lapisan jalanan ke peta
                                     map.addLayer(streets);
 
+                                    // Inisialisasi grup marker untuk departemen-departemen
                                     var markerLayer = L.layerGroup().addTo(map);
 
+                                    // Iterasi melalui data departemen dan menambahkan marker jika koordinat dan nama tersedia
                                     @foreach ($departements as $departement)
                                         @if ($departement->latitude && $departement->longitude && $departement->name)
                                             var marker = L.marker([{{ $departement->latitude }}, {{ $departement->longitude }}])
@@ -720,17 +726,20 @@
                                         @endif
                                     @endforeach
 
+                                    // Menentukan pilihan lapisan peta
                                     var baseLayers = {
                                         "Streets": streets,
                                         "Satellite": satellite
                                     };
 
+                                    // Membuat tombol "Toggle View" untuk beralih antara lapisan peta
                                     var toggleButton = L.Control.extend({
                                         options: {
                                             position: 'bottomleft'
                                         },
 
                                         onAdd: function(map) {
+                                            // Membuat elemen tombol
                                             var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
                                             container.style.backgroundColor = 'white';
                                             container.style.padding = '5px 10px';
@@ -738,6 +747,7 @@
                                             container.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.2)';
                                             container.innerHTML = 'Toggle View';
 
+                                            // Menangani klik pada tombol untuk mengganti lapisan peta
                                             container.onclick = function() {
                                                 if (map.hasLayer(satellite)) {
                                                     map.removeLayer(satellite);
@@ -754,6 +764,7 @@
                                         }
                                     });
 
+                                    // Menambahkan tombol "Toggle View" sebagai kontrol peta
                                     map.addControl(new toggleButton());
                                 </script>
                             </div>
