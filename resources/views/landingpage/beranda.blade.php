@@ -550,45 +550,93 @@
                             <div class="text-center">
                                 <div class="icon"><i class="bx bx-envelope"></i></div>
                             </div>
-                            <h4 style="font-size:25px", align="center"><a>Complaints
-                                    Pending</a></h4>
-                            <p style="font-size:40px", align="center">{{ $pendingComplaints }}</p>
+                            <h4 style="font-size:25px" align="center"><a>Complaints Pending</a></h4>
+                            <p style="font-size:40px" align="center"><span id="pendingCounter">0</span></p>
                         </div>
                     </div>
+
                     <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in"
                         data-aos-delay="200">
                         <div class="icon-box">
                             <div class="text-center">
                                 <div class="icon"><i class="bx bx-time"></i></div>
                             </div>
-                            <h4 style="font-size:22px", align="center"><a>Complaints In
-                                    Progress</a></h4>
-                            <p style="font-size:40px", align="center">{{ $inProgressComplaints }}</p>
+                            <h4 style="font-size:22px" align="center"><a>Complaints In Progress</a></h4>
+                            <p style="font-size:40px" align="center"><span id="inProgressCounter">0</span></p>
                         </div>
                     </div>
+
                     <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in"
                         data-aos-delay="300">
                         <div class="icon-box">
                             <div class="text-center">
                                 <div class="icon"><i class="bx bx-task"></i></div>
                             </div>
-                            <h4 style="font-size:24px", align="center"><a>Complaints
-                                    Resolved</a></h4>
-                            <p style="font-size:40px", align="center">{{ $resolvedComplaints }}</p>
+                            <h4 style="font-size:24px" align="center"><a>Complaints Resolved</a></h4>
+                            <p style="font-size:40px" align="center"><span id="resolvedCounter">0</span></p>
                         </div>
                     </div>
+
                     <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in"
                         data-aos-delay="400">
                         <div class="icon-box">
                             <div class="text-center">
                                 <div class="icon"><i class="bx bx-file"></i></div>
                             </div>
-                            {{-- <div class="icon"><i class="bx bxl-dribbble"></i></div> --}}
-                            <h4 style="font-size:20px", align="center"><a>Jumlah Laporan Sekarang</a>
-                            </h4>
-                            <p style="font-size:40px", align="center">{{ $totalComplaints }}</p>
+                            <h4 style="font-size:20px" align="center"><a>Jumlah Laporan Sekarang</a></h4>
+                            <p style="font-size:40px" align="center"><span id="totalCounter">0</span></p>
                         </div>
                     </div>
+
+                    <script>
+                        function startCounting(targetElement, initialValue, finalValue, duration) {
+                            let current = initialValue;
+                            const increment = (finalValue - initialValue) / duration;
+                            const element = document.getElementById(targetElement);
+
+                            const updateCounter = () => {
+                                current += increment;
+                                element.textContent = Math.round(current);
+
+                                if (current < finalValue) {
+                                    requestAnimationFrame(updateCounter);
+                                } else {
+                                    element.textContent = finalValue; // Ensure finalValue is reached
+                                }
+                            };
+
+                            updateCounter();
+                        }
+
+                        function setupCounting(targetElement, value) {
+                            let hasStarted = false;
+                            const element = document.getElementById(targetElement);
+
+                            const scrollHandler = () => {
+                                const rect = element.getBoundingClientRect();
+                                if (rect.top < window.innerHeight && rect.bottom >= 0) {
+                                    // Element is in the viewport
+                                    if (!hasStarted) {
+                                        hasStarted = true;
+                                        startCounting(targetElement, 0, value, 600); // Adjust the duration as needed
+                                    }
+                                } else {
+                                    hasStarted = false;
+                                }
+                            };
+
+                            window.addEventListener('scroll', scrollHandler);
+
+                            // Initial check in case element is already in the viewport
+                            scrollHandler();
+                        }
+
+                        // Call the setupCounting function for each element
+                        setupCounting("pendingCounter", {{ $pendingComplaints }});
+                        setupCounting("inProgressCounter", {{ $inProgressComplaints }});
+                        setupCounting("resolvedCounter", {{ $resolvedComplaints }});
+                        setupCounting("totalCounter", {{ $totalComplaints }});
+                    </script>
                 </div>
             </div>
         </section><!-- End Services Section -->

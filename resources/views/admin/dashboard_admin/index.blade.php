@@ -34,7 +34,7 @@
                                 <p>Total Pengaduan</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-bag"></i>
+                                <i class="ion ion-stats-bars"></i>
                             </div>
                         </div>
                     </div>
@@ -48,7 +48,7 @@
                                 <p>Complaint Pending</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-stats-bars"></i>
+                                <i class="ion ion-information"></i>
                             </div>
 
                         </div>
@@ -63,7 +63,7 @@
                                 <p>Complaint In Progress</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-person-add"></i>
+                                <i class="ion ion-navigate"></i>
                             </div>
 
                         </div>
@@ -78,7 +78,7 @@
                                 <p>Complaint Resolved</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-pie-graph"></i>
+                                <i class="ion ion-checkmark"></i>
                             </div>
 
                         </div>
