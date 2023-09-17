@@ -24,10 +24,12 @@ class LandingPageController extends Controller
         $poll = polls::findOrFail($id);
 
         // Tingkatkan jumlah likes
-        $poll->likes++;
+        $poll->increment('likes');
+        // // Tingkatkan jumlah likes
+        // $poll->likes++;
 
-        // Simpan perubahan ke database
-        $poll->save();
+        // // Simpan perubahan ke database
+        // $poll->save();
 
         // Berikan respons bahwa aksi like berhasil
         return response()->json(['message' => 'Poll liked successfully', 'likes' => $poll->likes]);
@@ -85,10 +87,13 @@ class LandingPageController extends Controller
         $poll = polls::findOrFail($id);
 
         // Tingkatkan jumlah dislikes
-        $poll->dislikes++;
+        $poll->increment('dislikes');
 
-        // Simpan perubahan ke database
-        $poll->save();
+        // // Tingkatkan jumlah dislikes
+        // $poll->dislikes++;
+
+        // // Simpan perubahan ke database
+        // $poll->save();
 
         // Berikan respons bahwa aksi dislike berhasil
         return response()->json(['message' => 'Poll disliked successfully', 'dislikes' => $poll->dislikes]);
