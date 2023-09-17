@@ -1,4 +1,5 @@
 @extends('superadmin.layouts.master')
+
 @section('styles')
     <style>
         .table td:nth-child(5) {
@@ -7,6 +8,36 @@
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
+        }
+
+        /* Remove arrow icons from Bootstrap pagination */
+        .pagination .page-item {
+            border-radius: 0 !important;
+        }
+
+        .pagination .page-link {
+            padding: 0.5rem 0.75rem !important;
+        }
+
+        .pagination .page-item .page-link:hover,
+        .pagination .page-item.active .page-link {
+            background-color: greenyellow !important;
+            border-color: #78C1F3 !important;
+        }
+
+        .buttons {
+            margin-left: 1070px;
+        }
+
+        /* Custom styles for pagination container */
+        .pagination-container {
+            position: relative;
+        }
+
+        .pagination-links {
+            position: right;
+            margin-top: 20px;
+            /* Give some space above the pagination links */
         }
     </style>
 @endsection
@@ -21,14 +52,15 @@
             </div>
             <div class="float-right my-2">
                 <a class="btn btn-success" href="{{ route('superadmin.departement.create') }}"> Input Departemen</a>
-                <form action="{{ route('superadmin.departement.import') }}" method="POST" enctype="multipart/form-data" class="d-inline">
-    @csrf
-    <label for="file" class="btn btn-primary" style="margin-left: 10px;">
-        <input type="file" id="file" name="file" style="display:none;">
-        Import Excel
-    </label>
-    <button type="submit">Submit</button> <!-- Add a submit button -->
-</form>
+                <form action="{{ route('superadmin.departement.import') }}" method="POST" enctype="multipart/form-data"
+                    class="d-inline">
+                    @csrf
+                    <label for="file" class="btn btn-primary" style="margin-left: 10px;">
+                        <input type="file" id="file" name="file" style="display:none;">
+                        Import Excel
+                    </label>
+                    <button type="submit">Submit</button> <!-- Add a submit button -->
+                </form>
             </div>
 
             @if ($message = Session::get('success'))
@@ -41,6 +73,7 @@
                     <p>{{ $message }}</p>
                 </div>
             @endif
+
             <table class="table table-bordered" style="background-color: #78C1F3">
                 <tr>
                     <th>No</th>
@@ -52,9 +85,9 @@
                     <th width="auto">Latitude</th>
                     <th width="auto">Action</th>
                 </tr>
-                @foreach ($departements as $dpt)
+                @foreach ($departements as $key => $dpt)
                     <tr>
-                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $departements->firstItem() + $key }}</td>
                         <td>{{ $dpt->name }}</td>
                         <td>{{ $dpt->email }}</td>
                         <td>{{ $dpt->link_website }}</td>
@@ -88,6 +121,12 @@
                     </tr>
                 @endforeach
             </table>
+
+            {{-- {{ $departements->links() }} --}}
+            <!-- Pagination Links -->
+            <div class="pagination-links">
+                {{ $departements->appends(request()->except(['page', '_token']))->links('pagination::bootstrap-4') }}
+            </div>
         </div>
     </div>
 @endsection

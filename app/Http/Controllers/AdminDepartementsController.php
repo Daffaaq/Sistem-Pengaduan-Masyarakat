@@ -21,7 +21,7 @@ class AdminDepartementsController extends Controller
         $admins = User::where('role', 'admin')
             ->whereNotNull('department_id')
             ->with('department') // Load the related department
-            ->get();
+            ->paginate(5);
 
         return view('superadmin.admin.index', compact('admins'));
     }

@@ -16,7 +16,8 @@ class DepartementController extends Controller
 {
     public function index()
     {
-        $departements = Departements::all();
+        // $departements = Departements::all();
+        $departements = Departements::paginate(5)->appends(request()->query());
         return view('superadmin.departements.index', compact('departements'));
     }
 

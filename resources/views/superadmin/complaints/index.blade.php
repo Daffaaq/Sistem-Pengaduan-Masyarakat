@@ -104,9 +104,9 @@
                                 <th width="auto">Status</th>
                                 <th width="auto">Nama Departemen</th>
                             </tr>
-                            @foreach ($complaints as $cp)
+                            @foreach ($complaints as $key => $cp)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $complaints->firstItem() + $key }}</td>
                                     <td>{{ $cp->title }}</td>
                                     <td>{{ $cp->complaint_date }}</td>
                                     <td>{{ $cp->description }}</td>
