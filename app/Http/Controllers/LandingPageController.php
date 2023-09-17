@@ -119,9 +119,17 @@ class LandingPageController extends Controller
         // Mendapatkan data polling
         $polls = polls::all();
         // dd($polls);
-        return view('landingpage.beranda', compact('departements', 'totalComplaints', 'pendingComplaints', 'inProgressComplaints', 'resolvedComplaints', 'polls'));
-
-        // return view('landingpage.beranda', compact('departements', 'totalComplaints', 'pendingComplaints', 'inProgressComplaints', 'resolvedComplaints'));
+        // return view('landingpage.beranda', compact('departements', 'totalComplaints', 'pendingComplaints', 'inProgressComplaints', 'resolvedComplaints', 'polls'));
+        // Mengirim data ke view menggunakan array
+        return view('landingpage.beranda', [
+            'departements' => $departements,
+            'totalComplaints' => $totalComplaints,
+            'pendingComplaints' => $pendingComplaints,
+            'inProgressComplaints' => $inProgressComplaints,
+            'resolvedComplaints' => $resolvedComplaints,
+            'polls' => $polls,
+            // 'tickets' => $tickets   // Jangan lupa untuk menambahkan ini jika Anda ingin mengirim $tickets ke view
+        ]);
     }
 
     public function getPolls()
