@@ -346,9 +346,10 @@
 
                 <div class="section-title">
                     <h2>Pelayanan</h2>
-                    <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit
-                        sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias
-                        ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+                    <p>Sistem Pengaduan Masyarakat (SIPMA)! Kami menyediakan berbagai layanan untuk
+                        mempermudah Anda dalam mengajukan pengaduan dan mendapatkan bantuan yang Anda butuhkan. Di bawah
+                        ini, Anda dapat menemukan berbagai fitur yang kami tawarkan. Kami siap melayani dengan sepenuh
+                        hati.❤️</p>
                 </div>
 
                 <div class="row">
@@ -654,9 +655,14 @@
 
                 <div class="section-title">
                     <h2>Contact</h2>
-                    <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit
-                        sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias
-                        ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+                    <p>Kami menghargai setiap pertanyaan, umpan balik, atau permintaan bantuan yang Anda sampaikan
+                        kepada kami. Kami ingin memastikan bahwa pengalaman Anda dengan layanan kami adalah yang
+                        terbaik. Oleh karena itu, jika Anda membutuhkan bantuan tambahan atau informasi lebih lanjut
+                        tentang layanan kami, jangan ragu untuk memberi tahu kami. Tim kami selalu siap dan berkomitmen
+                        untuk memberikan dukungan terbaik kepada Anda. Semoga ini memenuhi harapan Anda. Jika Anda
+                        membutuhkan perubahan lebih lanjut atau memiliki permintaan lainnya, beri tahu saya. Kami siap
+                        untuk membantu Anda. Kami ingin menjadikan interaksi dengan kami sebaik mungkin, jadi jangan
+                        ragu untuk menghubungi kami dengan menggunakan rincian kontak di bawah ini.</p>
                 </div>
 
                 <div class="row">

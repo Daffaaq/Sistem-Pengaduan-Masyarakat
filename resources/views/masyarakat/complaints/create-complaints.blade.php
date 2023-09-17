@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-     <!-- Leaflet CSS -->
+    <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
 
     <!-- Leaflet JavaScript -->
@@ -48,6 +48,25 @@
                         </div>
                     @enderror
                 </div>
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        var descriptionTextarea = document.getElementById('description');
+                        var jamSekarang = new Date().getHours();
+                        var salam = "";
+
+                        if (jamSekarang >= 0 && jamSekarang < 12) {
+                            salam = "Selamat Pagi";
+                        } else if (jamSekarang >= 12 && jamSekarang < 18) {
+                            salam = "Selamat Siang";
+                        } else {
+                            salam = "Selamat Malam";
+                        }
+
+                        var format = "Assalamualaikum Wr. Wb\n" + salam + "\n\n\n\nTerimakasih Wasalamuaalikum Wr. Wb";
+                        descriptionTextarea.value = format;
+                    });
+                </script>
                 <div class="mb-3">
                     <label for="image" class="form-label">Upload Image</label>
                     <input type="file" class="form-control @error('image') is-invalid @enderror" id="image"
@@ -99,9 +118,10 @@
                 </div>
                 <div class="mb-3">
                     <label for="imagePreview" class="form-label">Image Preview:</label>
-                    <img id="imagePreview" src="#" alt="your image" style="max-width: 100%; max-height: 300px; display: none;" />
+                    <img id="imagePreview" src="#" alt="your image"
+                        style="max-width: 100%; max-height: 300px; display: none;" />
                 </div>
-                 <div id="map" style="height: 400px;"></div>
+                <div id="map" style="height: 400px;"></div>
             </form>
         </div>
     </div>
@@ -146,25 +166,25 @@
         setMarkerPosition();
     </script>
     <script>
-    $(document).ready(function() {
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
+        $(document).ready(function() {
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
 
-                reader.onload = function(e) {
-                    $('#imagePreview').attr('src', e.target.result);
-                    $('#imagePreview').css('display', 'block');
+                    reader.onload = function(e) {
+                        $('#imagePreview').attr('src', e.target.result);
+                        $('#imagePreview').css('display', 'block');
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
                 }
-
-                reader.readAsDataURL(input.files[0]);
             }
-        }
 
-        $("#image").change(function() {
-            readURL(this);
+            $("#image").change(function() {
+                readURL(this);
+            });
         });
-    });
-</script>
+    </script>
 </body>
 
 </html>

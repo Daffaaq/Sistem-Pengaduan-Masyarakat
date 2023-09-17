@@ -59,15 +59,19 @@ class ComplaintsToAdminController extends Controller
 
     public function showDetailAjax($id)
     {
-        // Temukan pengaduan berdasarkan ID
+        // Cari complaint berdasarkan ID
         $complaint = Complaint::findOrFail($id);
 
-        // Return response as JSON
+        // Anda perlu mengembalikan data dalam bentuk JSON atau dalam tampilan Blade sesuai kebutuhan Anda
+        // Sebagai contoh, Anda dapat mengembalikan data JSON
         return response()->json([
             'complaint' => $complaint,
-            'images' => $complaint->images, // Include image data in the response
+            'images' => $complaint->images, // Jika Anda memiliki relasi images pada model Complaint
+            'latitude' => $complaint->latitude, // Gantilah dengan nama atribut yang sesuai pada model Anda
+            'longitude' => $complaint->longitude, // Gantilah dengan nama atribut yang sesuai pada model Anda
         ]);
     }
+
 
     /**
      * Show the form for editing the specified resource.

@@ -13,6 +13,7 @@
             display: none;
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <div class="row justify-content-end">
         <div class="col-lg-10">
             <div class="row">
@@ -56,6 +57,7 @@
                         @endif
                         @php
                             $hasImage = $cp->images && $cp->images->image_path;
+                            $hasLocation = isset($cp->latitude) && isset($cp->longitude);
                         @endphp
                         <tr @if (!$hasImage) class="no-image" @endif>
                             <td>{{ $loop->iteration }}</td>
@@ -84,10 +86,14 @@
                                 @endif
                             </td>
                             <td>
-                                <button class="btn btn-info btn-detail btn-sm" data-id="{{ $cp->id }}"
-                                    data-has-image="{{ $cp->images ? 'true' : 'false' }}">Detail @if ($cp->images)
+                                <button type="button" class="btn btn-primary view-details" data-id="{{ $cp->id }}"
+                                    data-has-image="{{ $hasImage ? 'true' : 'false' }}"
+                                    data-has-location="{{ $hasLocation ? 'true' : 'false' }}">
+                                    View Details
+                                    @if ($hasImage || $hasLocation)
                                         <i class="fas fa-exclamation-circle"></i>
-                                    @endif </button>
+                                    @endif
+                                </button>
                                 @if ($cp->status != 'resolved')
                                     <a href="{{ route('admin.complaints.answer.create', ['complaint' => $cp->id]) }}"
                                         class="btn btn-primary btn-sm">Tambah Jawaban</a>
@@ -115,7 +121,13 @@
                                         <i class="fas fa-exclamation-circle"></i>
                                     @endif
                                 </button>
-                                <button class="btn btn-primary btn-sm" disabled>Tambah Jawaban</button>
+                                @if ($cp->status != 'resolved')
+                                    <a href="{{ route('admin.complaints.answer.create', ['complaint' => $cp->id]) }}"
+                                        class="btn btn-primary btn-sm">Tambah Jawaban</a>
+                                @else
+                                    <button class="btn btn-primary btn-sm" disabled>Tambah Jawaban</button>
+                                @endif
+                                {{-- <button class="btn btn-primary btn-sm" disabled>Tambah Jawaban</button> --}}
                             </td>
                         </tr>
                     @endforeach
@@ -124,7 +136,7 @@
         </div>
     </div>
     <!-- Modal -->
-    <div class="modal fade animate__animated animate__zoomIn" id="complaintModal" tabindex="-1" role="dialog"
+    <div class="modal fade animate__animated animate__zoomIn" id="complaintModaladmin" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -143,6 +155,8 @@
                             <p class="complaint-date"></p>
                         </div>
                     </div>
+                    <div id="map-detail" style="height: 400px;"></div>
+                    <div id="no-map" style="display: none;"></div> <!-- Tambahkan ini -->
                     <div class="row mt-3">
                         <div class="col-md-6 offset-md-3">
                             <div class="card" style="width: 18rem; overflow: hidden;">
@@ -161,58 +175,117 @@
             </div>
         </div>
     </div>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
     <script>
-        // Function to close the modal
-        function closeModal() {
-            var modal = document.getElementById('complaintModal');
-            modal.classList.remove('animate__zoomIn');
-            modal.classList.add('animate__zoomOut');
-            setTimeout(function() {
-                modal.classList.remove('animate__zoomOut');
-                modal.classList.add('animate__zoomIn');
-                $('#complaintModal').modal('hide');
-            }, 100); // Adjust the delay time as needed (300ms in this example)
-        }
+        $(document).ready(function() {
+            console.log($('.btn-primary.view-details'));
+            $('.view-details').click(function() {
+                // existing code...
+            });
 
+            $('#complaintModaladmin').on('hide.bs.modal', function() {
+                var modal = $(this);
+                modal.removeClass('animate__zoomIn');
+                modal.addClass('animate__zoomOut');
+            });
+
+            $('#complaintModaladmin').on('hidden.bs.modal', function() {
+                var modal = $(this);
+                modal.removeClass('animate__zoomOut');
+                modal.addClass('animate__zoomIn');
+            });
+
+            // Hide the icon for rows without images
+            $('.table tbody tr.no-image .fas').hide();
+        });
+    </script>
+    <script>
+        var detailMap;
         // Handle the view details button click
-        document.querySelectorAll('.btn-detail').forEach(function(button) {
-            button.addEventListener('click', function() {
-                var id = this.getAttribute('data-id');
-                var xhr = new XMLHttpRequest();
-                xhr.onreadystatechange = function() {
-                    if (xhr.readyState === 4 && xhr.status === 200) {
-                        var data = JSON.parse(xhr.responseText);
-                        document.querySelector('#complaintModal .modal-body .card-title').textContent =
-                            'Title: ' + data.complaint.title;
-                        document.querySelector('#complaintModal .modal-body .description').textContent =
-                            'Description: ' + data.complaint.description;
-                        document.querySelector('#complaintModal .modal-body .status').textContent =
-                            'Status: ' + data.complaint.status;
-                        document.querySelector('#complaintModal .modal-body .complaint-date')
-                            .textContent = 'Complaint Date: ' + data.complaint.complaint_date;
-                        if (data.images) {
-                            $('#complaintModal .modal-body .card-img-top').attr('src', '/storage/' +
-                                data.images.image_path);
-                        } else {
-                            $('#complaintModal .modal-body .card-img-top').attr('src', '');
-                        }
-                        $('#complaintModal').modal('show');
-                    }
-                };
-                xhr.open('GET', '/admin/dashboard_admin/complaints/' + id + '/detail', true);
-                xhr.send();
-                // If the button has an image, remove the exclamation icon after it's clicked
-                if (this.getAttribute('data-has-image') === 'true') {
-                    this.querySelector('i').remove();
+        $(document).ready(function() {
+            $('.view-details').click(function() {
+                var id = $(this).data('id');
+                var hasImage = $(this).data('has-image') === 'true';
+                var hasLocation = $(this).data('has-location') === 'true';
 
-                    // Show the exclamation icon again after 5 seconds
+                $.get('/admin/dashboard_admin/complaints/' + id + '/detail', function(data) {
+                    console.log(data);
+                    $('#complaintModaladmin .modal-body .card-title').text('Title: ' + data
+                        .complaint.title);
+                    $('#complaintModaladmin .modal-body .description').text('Description: ' + data
+                        .complaint
+                        .description);
+                    $('#complaintModaladmin .modal-body .status').text('Status: ' + data.complaint
+                        .status);
+                    $('#complaintModaladmin .modal-body .complaint-date').text('Complaint Date: ' +
+                        data
+                        .complaint
+                        .complaint_date);
+
+                    // Show or hide the image and location details based on availability
+                    if (data.images) {
+                        $('#complaintModaladmin .modal-body .card-img-top').attr('src',
+                            '/storage/' + data
+                            .images
+                            .image_path);
+                        $('.card-img-top').show();
+                        $('#no-image').hide();
+                    } else {
+                        $('.card-img-top').hide();
+                        $('#no-image').show().html("<p>No image available for this complaint.</p>");
+                    }
+
+                    if (data.latitude && data.longitude) {
+                        if (detailMap) {
+                            // If the map already exists, just update its properties.
+                            detailMap.setView([data.latitude, data.longitude], 13);
+
+                            // Clear the existing markers and add a new one at the new location.
+                            detailMap.eachLayer(function(layer) {
+                                detailMap.removeLayer(layer);
+                            });
+                        } else {
+                            // If the map does not exist, create a new one.
+                            detailMap = L.map('map-detail').setView([data.latitude, data.longitude],
+                                13);
+                            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                maxZoom: 19,
+                            }).addTo(detailMap);
+                        }
+                        L.marker([data.latitude, data.longitude]).addTo(detailMap);
+                        $('#map-detail').show();
+                        $('#no-map').hide(); // hide the "no map" message
+                    } else {
+                        // Handle when no location data is available
+                        $('#map-detail').hide(); // hide the map
+                        $('#no-map').show().html(
+                            "<p>No location data available for this complaint.</p>"
+                        ); // show the "no map" message
+                    }
+
+                    $('#complaintModaladmin').modal('show');
+                });
+            });
+
+            $('#complaintModaladmin').on('shown.bs.modal', function() {
+                if (detailMap) {
                     setTimeout(function() {
-                        button.insertAdjacentHTML('beforeend',
-                            '<i class="fas fa-exclamation-circle"></i>');
-                    }, 5000);
+                        detailMap.invalidateSize();
+                    }, 0);
+                }
+            });
+
+            $('#complaintModaladmin').on('hidden.bs.modal', function() {
+                if (detailMap) {
+                    detailMap.remove();
+                    detailMap = null;
                 }
             });
         });
