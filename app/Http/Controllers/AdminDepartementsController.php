@@ -81,8 +81,8 @@ class AdminDepartementsController extends Controller
      */
     public function show($id)
     {
-        $user = User::findOrFail($id);
-        return view('admin.show', compact('user'));
+        $admin = User::findOrFail($id);
+        return view('admin.show', compact('admin'));
     }
 
     /**
