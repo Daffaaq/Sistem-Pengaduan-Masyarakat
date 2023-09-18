@@ -124,7 +124,23 @@
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+        $(document).ready(function () {
+            $('input[name="search"]').on('input', function () {
+                clearTimeout(this.timer);
+                this.timer = setTimeout(function () {
+                    $('#searchForm').submit();
+                }, 1000); // Ubah angka ini sesuai dengan preferensi Anda
+            });
+        });
+    </script>
+    @if (session('no-result'))
+        <script>
+            alert('{{ session('no-result') }}');
+        </script>
+    @endif
+    {{-- <script>
         // Tangkap elemen input pencarian
         const searchInput = document.querySelector('input[name="search"]');
 
@@ -138,5 +154,5 @@
                 document.getElementById('searchForm').submit(); // Kirim formulir pencarian
             }, 1000); // Ubah angka ini sesuai dengan preferensi Anda
         });
-    </script>
+    </script> --}}
 @endsection

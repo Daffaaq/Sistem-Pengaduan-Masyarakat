@@ -36,6 +36,10 @@ class AdminDepartementsController extends Controller
 
         $admins = $query->paginate(5);
 
+        if ($admins->isEmpty()) {
+            session()->flash('no-result', 'Pencarian Anda tidak menghasilkan hasil apapun.');
+        }
+
         return view('superadmin.admin.index', compact('admins'));
     }
 
