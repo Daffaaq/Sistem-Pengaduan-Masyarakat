@@ -1,6 +1,6 @@
 @extends('superadmin.layouts.master')
 @section('container')
-<style>
+    <style>
         /* Remove arrow icons from Bootstrap pagination */
         .pagination .page-item {
             border-radius: 0 !important;
@@ -61,6 +61,14 @@
                     <!-- Content -->
                 </div>
             </div>
+            <form action="{{ route('superadmin.admin.index') }}" method="GET" id="searchForm">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" name="search" placeholder="Cari admin...">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit">Cari</button>
+                    </div>
+                </div>
+            </form>
             <div class="float-right my-2">
                 <a class="btn btn-success" href="{{ route('superadmin.admin.create') }}"> Input admin</a>
             </div>
@@ -86,7 +94,7 @@
                     </tr>
                     @foreach ($admins as $key => $admin)
                         <tr>
-                            <td>{{ $admins->firstItem() + $key  }}</td>
+                            <td>{{ $admins->firstItem() + $key }}</td>
                             <td>{{ $admin->name }}</td>
                             <td>{{ $admin->email }}</td>
                             <td>{{ $admin->department->name }}</td>
@@ -111,9 +119,24 @@
                     @endforeach
                 </table>
                 <div class="pagination-links">
-                        {{ $admins->appends(request()->except(['page', '_token']))->links('pagination::bootstrap-4') }}
-                    </div>
+                    {{ $admins->appends(request()->except(['page', '_token']))->links('pagination::bootstrap-4') }}
+                </div>
             </div>
         </div>
     </div>
+    <script>
+        // Tangkap elemen input pencarian
+        const searchInput = document.querySelector('input[name="search"]');
+
+        // Tambahkan event listener untuk input
+        searchInput.addEventListener('input', function() {
+            // Set timeout untuk menunda pengiriman permintaan pencarian
+            clearTimeout(this.timer);
+
+            // Mulai hitung ulang setelah pengguna selesai mengetik
+            this.timer = setTimeout(() => {
+                document.getElementById('searchForm').submit(); // Kirim formulir pencarian
+            }, 1000); // Ubah angka ini sesuai dengan preferensi Anda
+        });
+    </script>
 @endsection

@@ -16,12 +16,25 @@ class AdminDepartementsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $admins = User::where('role', 'admin')
-            ->whereNotNull('department_id')
-            ->with('department') // Load the related department
-            ->paginate(5);
+        $query = User::where('role', 'admin')
+        ->whereNotNull('department_id')
+        ->with('department');
+
+        // Cek apakah ada parameter pencarian dalam permintaan
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', '%' . $search . '%')
+                    ->orWhere('email', 'like', '%' . $search . '%')
+                    ->orWhereHas('department', function ($d) use ($search) {
+                        $d->where('name', 'like', '%' . $search . '%');
+                    });
+            });
+        }
+
+        $admins = $query->paginate(5);
 
         return view('superadmin.admin.index', compact('admins'));
     }
