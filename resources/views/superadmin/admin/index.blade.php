@@ -72,6 +72,11 @@
             <div class="float-right my-2">
                 <a class="btn btn-success" href="{{ route('superadmin.admin.create') }}"> Input admin</a>
             </div>
+            <div class="float-right my-2">
+                @if ($hasSearch)
+                    <a href="{{ route('superadmin.admin.index') }}" class="btn btn-primary">Bersihkan Pencarian</a>
+                @endif
+            </div>
 
             @if ($message = Session::get('success'))
                 <div class="alert alert-success">
@@ -126,10 +131,16 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function () {
-            $('input[name="search"]').on('input', function () {
+        // Jalankan kode setelah dokumen HTML dimuat sepenuhnya
+        $(document).ready(function() {
+            // Menambahkan event listener untuk input dengan nama "search"
+            $('input[name="search"]').on('input', function() {
+                // Hapus timeout yang mungkin sudah ada
                 clearTimeout(this.timer);
-                this.timer = setTimeout(function () {
+
+                // Set timeout baru untuk pengiriman pencarian setelah 1 detik
+                this.timer = setTimeout(function() {
+                    // Kirim formulir pencarian dengan ID "searchForm"
                     $('#searchForm').submit();
                 }, 1000); // Ubah angka ini sesuai dengan preferensi Anda
             });
@@ -137,9 +148,15 @@
     </script>
     @if (session('no-result'))
         <script>
+            // Tampilkan pesan kesalahan jika tidak ada hasil pencarian
             alert('{{ session('no-result') }}');
+            @php
+                session()->forget('no-result');
+            @endphp
         </script>
     @endif
+
+
     {{-- <script>
         // Tangkap elemen input pencarian
         const searchInput = document.querySelector('input[name="search"]');
