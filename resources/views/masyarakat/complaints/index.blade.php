@@ -39,7 +39,7 @@
             <br>
             <!-- Bagian konten lainnya -->
 
-            <table class="table table-bordered" style="background-color: #78C1F3">
+            <table class="table table-bordered" style="background-color: #F3E99F">
                 <tr>
                     <th width="auto">No</th>
                     <th width="auto">Ticket Number</th>
