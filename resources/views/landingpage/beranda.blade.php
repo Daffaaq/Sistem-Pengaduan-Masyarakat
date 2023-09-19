@@ -12,6 +12,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
+
 
     <!-- Favicons -->
     <link href="assets/img/favicon.png" rel="icon">
@@ -39,6 +45,48 @@
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+    <style>
+        .card-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .card {
+            flex: 1;
+            max-width: 300px;
+            /* Lebar maksimum kartu */
+            margin: 10px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            /* Perbesar kartu saat hover */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            /* Tambahkan bayangan saat hover */
+        }
+
+        .card-body {
+            text-align: center;
+        }
+
+        .card i {
+            font-size: 36px;
+            margin-bottom: 10px;
+            color: #007BFF;
+        }
+
+        .btn {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
@@ -269,77 +317,69 @@
         </section><!-- End Why Us Section -->
 
 
-        <!-- ======= About Us Section ======= -->
-        <section id="complaint_flow" class="complaint_flow">
-            <div class="container" data-aos="fade-up">
-
-                <div class="section-title">
-                    <h2>Alur Pengaduan</h2>
-                </div>
-
-                <div class="row content" data-aos="zoom-in" data-aos-delay="400" style="text-align: center;">
-                    <img src="assets/img/alur.png" class="img-fluid animated" alt=""
-                        style="width: 870px; height: 698px; margin: 0 auto;">
-                </div>
-            </div>
-        </section><!-- End About Us Section -->
-        <!-- ======= Skills Section ======= -->
-        {{-- <section id="skills" class="skills">
-            <div class="container" data-aos="fade-up">
-
+        <!-- ======= Alur Pengaduan ======= -->
+        <section class="bg-light py-5">
+            <div class="container">
                 <div class="row">
-                    <div class="col-lg-6 d-flex align-items-center" data-aos="fade-right" data-aos-delay="100">
-                        <img src="assets/img/skills.png" class="img-fluid" alt="">
-                    </div>
-                    <div class="col-lg-6 pt-4 pt-lg-0 content" data-aos="fade-left" data-aos-delay="100">
-                        <h3>ALUR MELAKUKAN PENGADUAN </h3>
-                        <p class="fst-italic">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore
-                            magna aliqua.
-                        </p>
-
-                        <div class="skills-content">
-
-                            <div class="progress">
-                                <span class="skill">HTML <i class="val">100%</i></span>
-                                <div class="progress-bar-wrap">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="100"
-                                        aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-
-                            <div class="progress">
-                                <span class="skill">CSS <i class="val">90%</i></span>
-                                <div class="progress-bar-wrap">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="90"
-                                        aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-
-                            <div class="progress">
-                                <span class="skill">JavaScript <i class="val">75%</i></span>
-                                <div class="progress-bar-wrap">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="75"
-                                        aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-
-                            <div class="progress">
-                                <span class="skill">Photoshop <i class="val">55%</i></span>
-                                <div class="progress-bar-wrap">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="55"
-                                        aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-
-                        </div>
-
+                    <div class="col-lg-12 text-center">
+                        <h2 class="section-title" data-aos="fade-up" style="color: blue;">Alur Urutan Pengaduan
+                            Masyarakat</h2>
                     </div>
                 </div>
-
+                <div class="card-container">
+                    <div class="card" data-aos="fade-up" data-aos-easing="ease" data-aos-duration="1000"
+                        data-aos-delay="0">
+                        <div class="card-body">
+                            <i class="fas fa-pencil fa-2x mx-auto mt-4"></i>
+                            <h5 class="card-title">Langkah 1</h5>
+                            <p class="card-text">Warga mnginputkan pengaduan melalui website SIPMA.</p>
+                            <button class="btn" onclick="location.href='#'">Mulai Pengaduan</button>
+                        </div>
+                    </div>
+                    <div class="card" data-aos="fade-up" data-aos-easing="ease" data-aos-duration="1000"
+                        data-aos-delay="100">
+                        <div class="card-body">
+                            <i class="fas fa-pencil fa-2x mx-auto mt-4"></i>
+                            <h5 class="card-title">Langkah 2</h5>
+                            <p class="card-text">Dalam waktu 3 hari, laporan Anda akan kami verifikasi dan selanjutnya
+                                akan disampaikan kepada instansi berwenang.</p>
+                            <button class="btn" onclick="location.href='#'">Selengkapnya</button>
+                        </div>
+                    </div>
+                    <div class="card" data-aos="fade-up" data-aos-easing="ease" data-aos-duration="1000"
+                        data-aos-delay="200">
+                        <div class="card-body">
+                            <i class="fas fa-home fa-2x mx-auto mt-4"></i>
+                            <h5 class="card-title">Langkah 3</h5>
+                            <p class="card-text">Tindak lanjuti oleh pihak berwenang.</p>
+                            <button class="btn" onclick="location.href='#'">Selengkapnya</button>
+                        </div>
+                    </div>
+                    <div class="card" data-aos="fade-up" data-aos-easing="ease" data-aos-duration="1000"
+                        data-aos-delay="300">
+                        <div class="card-body">
+                            <i class="fas fa-check-circle fa-2x mx-auto mt-4"></i>
+                            <h5 class="card-title">Langkah 4</h5>
+                            <p class="card-text">Laporan diverifikasi oleh tim kami.</p>
+                            <button class="btn" onclick="location.href='#'">Selengkapnya</button>
+                        </div>
+                    </div>
+                    <div class="card" data-aos="fade-up" data-aos-easing="ease" data-aos-duration="1000"
+                        data-aos-delay="400">
+                        <div class="card-body">
+                            <i class="fas fa-check-circle fa-2x mx-auto mt-4"></i>
+                            <h5 class="card-title">Langkah 5</h5>
+                            <p class="card-text">Laporan diteruskan kepada instansi terkait untuk tindak lanjut.</p>
+                            <button class="btn" onclick="location.href='#'">Selengkapnya</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </section><!-- End Skills Section --> --}}
+        </section>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+        <script>
+            AOS.init();
+        </script>
 
         <!-- ======= Services Section ======= -->
         <section id="services" class="services section-bg">
