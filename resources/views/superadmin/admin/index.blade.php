@@ -67,16 +67,19 @@
                     <div class="input-group-append">
                         <button class="btn btn-outline-secondary" type="submit">Cari</button>
                     </div>
+                    <div class="input-group-append">
+                        <span class="input-group-text" id="clearSearch"><i class="bi bi-x"></i></span>
+                    </div>
                 </div>
             </form>
             <div class="float-right my-2">
                 <a class="btn btn-success" href="{{ route('superadmin.admin.create') }}"> Input admin</a>
             </div>
-            <div class="float-right my-2">
+            {{-- <div class="float-right my-2">
                 @if ($hasSearch)
                     <a href="{{ route('superadmin.admin.index') }}" class="btn btn-primary">Bersihkan Pencarian</a>
                 @endif
-            </div>
+            </div> --}}
 
             @if ($message = Session::get('success'))
                 <div class="alert alert-success">
@@ -131,20 +134,47 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        // Jalankan kode setelah dokumen HTML dimuat sepenuhnya
-        $(document).ready(function() {
-            // Menambahkan event listener untuk input dengan nama "search"
-            $('input[name="search"]').on('input', function() {
-                // Hapus timeout yang mungkin sudah ada
-                clearTimeout(this.timer);
+        $(document).ready(() => { // Ketika dokumen selesai dimuat.
+            const searchInput = $('input[name="search"]'); // Referensi ke input dengan nama "search".
+            const searchForm = $('#searchForm'); // Referensi ke form dengan id "searchForm".
 
-                // Set timeout baru untuk pengiriman pencarian setelah 1 detik
-                this.timer = setTimeout(function() {
-                    // Kirim formulir pencarian dengan ID "searchForm"
-                    $('#searchForm').submit();
-                }, 1000); // Ubah angka ini sesuai dengan preferensi Anda
+            // Event handler untuk tombol dengan id "clearSearch".
+            $('#clearSearch').on('click', () => {
+                searchInput.val(''); // Kosongkan input pencarian.
+                // Ambil URL saat ini
+                const currentURL = window.location.href;
+                // Buat URL tanpa parameter "search"
+                const newURL = removeURLParameter(currentURL, 'search');
+
+                // Cek apakah URL saat ini berbeda dari URL tanpa parameter "search"
+                if (currentURL !== newURL) {
+                    window.location.href = newURL;
+                }
+            });
+
+            // Event handler untuk setiap perubahan input pada "searchInput".
+            searchInput.on('input', function() {
+                clearTimeout(this.timer); // Batalkan timeout sebelumnya (jika ada).
+                // Setel timer untuk mengirim form dalam 1 detik setelah user berhenti mengetik.
+                this.timer = setTimeout(() => searchForm.submit(), 1000);
             });
         });
+
+        // Fungsi untuk menghapus parameter tertentu dari URL.
+        function removeURLParameter(url, parameter) {
+            const urlParts = url.split('?'); // Pisahkan URL menjadi dua bagian: sebelum dan sesudah "?".
+
+            // Jika tidak ada bagian setelah "?", kembalikan URL asli.
+            if (urlParts.length < 2) return url;
+
+            // Pisahkan parameter URL menjadi array, lalu filter parameter yang tidak diinginkan.
+            const params = urlParts[1]
+                .split(/[&;]/g)
+                .filter(param => !param.startsWith(`${encodeURIComponent(parameter)}=`));
+
+            // Gabungkan kembali URL dengan parameter yang tersisa.
+            return urlParts[0] + (params.length ? `?${params.join('&')}` : '');
+        }
     </script>
     @if (session('no-result'))
         <script>
@@ -155,8 +185,6 @@
             @endphp
         </script>
     @endif
-
-
     {{-- <script>
         // Tangkap elemen input pencarian
         const searchInput = document.querySelector('input[name="search"]');

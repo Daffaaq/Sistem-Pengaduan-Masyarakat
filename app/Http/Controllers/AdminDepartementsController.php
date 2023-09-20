@@ -18,52 +18,49 @@ class AdminDepartementsController extends Controller
      */
     public function index(Request $request)
     {
-        // Mulai dengan membuat query dasar untuk mendapatkan User dengan role 'admin' dan memiliki department_id
+        // Mulai query untuk mengambil data User dengan role "admin"
+        // dan memiliki nilai "department_id" (bukan NULL).
         $query = User::where('role', 'admin')
-                ->whereNotNull('department_id') // Pastikan bahwa department_id bukan NULL
-                ->with('department'); // Ambil relasi "department" bersamaan untuk mengurangi jumlah query ke database (Optimalisasi)
+                    ->whereNotNull('department_id')
+                    // Memuat relasi "department" dari setiap User sekaligus
+                    // untuk mengurangi jumlah query ke database (eager loading).
+                    ->with('department');
 
-        // Cek apakah ada parameter pencarian di dalam permintaan dari user
-        if ($request->has('search')) {
-            $search = $request->input('search'); // Ambil kata kunci pencarian dari permintaan
-
-            // Modifikasi query untuk mencari berdasarkan kata kunci
-            $query->where(function ($q) use ($search) {
-                // Cari User berdasarkan nama atau email yang cocok dengan kata kunci pencarian
-                $q->where('name', 'like', '%' . $search . '%')
-                    ->orWhere('email', 'like', '%' . $search . '%')
-
-                    // Juga cek apakah ada department dengan nama yang cocok dengan kata kunci pencarian
-                    ->orWhereHas('department', function ($d) use ($search) {
-                        $d->where('name', 'like', '%' . $search . '%');
-                    });
-            });
+        // Cek apakah ada parameter pencarian ("search") di permintaan dari user.
+        if ($request->filled('search')) {
+            // Ambil nilai dari parameter "search".
+            $search = $request->input('search');
+            // Terapkan logika pencarian pada query yang sudah ada.
+            $this->applySearchToQuery($query, $search);
         }
 
-        // Eksekusi query dan ambil hasilnya dengan paginasi (5 hasil per halaman)
+        // Eksekusi query dan ambil hasil dengan paginasi (5 hasil per halaman).
         $admins = $query->paginate(5);
 
-        // Jika hasil pencarian kosong, ambil semua admin
+        // Cek apakah hasil pencarian kosong DAN ada parameter pencarian dalam request.
         if ($admins->isEmpty() && $request->filled('search')) {
-            // Dalam kondisi ini, $admins->isEmpty() memeriksa apakah hasil dari query sebelumnya (dengan kata kunci pencarian) tidak menghasilkan data apapun.
-            // $request->has('search') memastikan bahwa kondisi ini hanya berlaku jika ada permintaan pencarian yang dilakukan.
-
-            // Jika kedua kondisi di atas terpenuhi, maka:
-
-            $admins = User::where('role', 'admin')      // Ambil semua user dengan role 'admin'
-                    ->whereNotNull('department_id')   // Pastikan bahwa department_id bukan NULL
-                    ->with('department')              // Ambil relasi "department" bersamaan untuk mengurangi jumlah query ke database (Optimalisasi)
-                    ->paginate(5);                    // Eksekusi query dan ambil hasilnya dengan paginasi (5 hasil per halaman)
-
-            // Setelah melakukan query di atas, Anda akan mendapatkan daftar semua admin (tanpa filter pencarian) untuk ditampilkan.
-
-            // Beri notifikasi kepada pengguna bahwa pencarian yang mereka lakukan tidak menghasilkan data apapun.
+            // Jika ya, tambahkan pesan ke session untuk memberitahu user bahwa
+            // pencariannya tidak menghasilkan apa-apa.
             session()->flash('no-result', 'Pencarian Anda tidak menghasilkan hasil apapun.');
         }
 
-        $hasSearch = $request->has('search');
-        // Tampilkan hasil ke dalam view 'superadmin.admin.index' dengan variabel $admins
-        return view('superadmin.admin.index', compact('admins','hasSearch'));
+        // Mengembalikan view "superadmin.admin.index" dengan data "admins".
+        return view('superadmin.admin.index', compact('admins'));
+    }
+
+    private function applySearchToQuery($query, $search)
+    {
+        // Modifikasi query untuk memfilter User berdasarkan kata kunci pencarian.
+        $query->where(function ($q) use ($search) {
+            // Mencari User yang nama atau email-nya cocok dengan kata kunci pencarian.
+            $q->where('name', 'like', '%' . $search . '%')
+                ->orWhere('email', 'like', '%' . $search . '%')
+                // Mencari User yang memiliki department dengan nama yang cocok
+                // dengan kata kunci pencarian.
+                ->orWhereHas('department', function ($d) use ($search) {
+                    $d->where('name', 'like', '%' . $search . '%');
+                });
+        });
     }
 
     /**
