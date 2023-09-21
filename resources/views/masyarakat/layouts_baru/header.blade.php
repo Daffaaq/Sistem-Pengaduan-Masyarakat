@@ -12,6 +12,12 @@
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('SbAdmin/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <!-- Add any additional CSS files or stylesheets you want to include here -->
 
 
     <link

@@ -1,20 +1,5 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>Create Complaint</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-
-    <!-- Leaflet JavaScript -->
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <!-- Add any additional CSS files or stylesheets you want to include here -->
-</head>
-
-<body>
+@extends('masyarakat.layouts_baru.index')
+@section('container')
     <div class="container mt-5 mb-5 d-flex justify-content-center">
         @if ($message = Session::get('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -185,6 +170,4 @@
             });
         });
     </script>
-</body>
-
-</html>
+@endsection
