@@ -86,6 +86,28 @@
             border-radius: 5px;
             cursor: pointer;
         }
+
+        /* Gaya CSS untuk tombol "Clear" */
+        #trackComplaintForm button[type="reset"] {
+            background: transparent;
+            /* Latar belakang transparan */
+            border: none;
+            /* Hapus border */
+            cursor: pointer;
+            /* Tampilkan cursor pointer saat mengarahkan ke tombol */
+            margin-left: 10px;
+            /* Jarak antara tombol "Track" dan "Clear" */
+            font-size: 16px;
+            /* Ukuran font teks */
+            color: red;
+            /* Warna teks (misalnya, merah) */
+        }
+
+        /* Gaya CSS untuk menghilangkan efek klik pada tombol "Clear" */
+        #trackComplaintForm button[type="reset"]:focus {
+            outline: none;
+            /* Hapus efek outline saat tombol ditekan */
+        }
     </style>
 </head>
 
@@ -841,6 +863,8 @@
                         <form id="trackComplaintForm" action="{{ route('track.complaint') }}" method="post">
                             @csrf
                             <input type="text" name="code_ticket" placeholder="Enter Code Number" required>
+                            <button type="reset"><i class="fas fa-times"></i></button>
+                            <!-- Tombol Clear dengan ikon Font Awesome "times" -->
                             <button type="submit">Track</button>
                         </form>
                     </div>
