@@ -119,4 +119,8 @@ Route::middleware(['auth', 'check.role:user'])->prefix('user')->group(function (
     Route::prefix('user')->group(function () {
         Route::get('/answer_complaints', [AnsweComplaintstoUserController::class, 'index'])->name('user.answercomplaints.index');
     });
+    Route::prefix('user')->group(function () {
+        Route::get('/profiles/edit', [UserController::class, 'edit'])->name('user.profiles.edit');
+        Route::put('/profiles/{id}', [UserController::class, 'update'])->name('user.profiles.update'); // Perbaiki nama rute menjadi 'user.profiles.update'
+    });
 });
