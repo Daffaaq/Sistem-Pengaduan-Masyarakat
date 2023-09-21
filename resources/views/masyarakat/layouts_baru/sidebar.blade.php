@@ -42,7 +42,7 @@
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('user.answercomplaints.index') }}">
-                    <i class="fas fa-fw fa-building"></i>
+                    <i class="fas fa-fw fa-check"></i>
                     <span>Answer Complaints</span></a>
             </li>
             <!-- Tambahkan tautan "Logout" di luar div dengan class "collapse" -->
