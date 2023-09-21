@@ -17,19 +17,21 @@ class AnsweComplaintstoUserController extends Controller
      */
     public function index()
     {
-        // Get the authenticated user's ID
-        $userId = Auth::id();
-
-        // Get all complaints created by the authenticated user along with their answers
-        $complaints = Complaint::with('department',
-            'answerComplaint'
-        )
-        ->where('user_id', $userId)
-        ->get();
-
+        $complaints = $this->getUserComplaintsWithAnswers()->paginate(10); // Ganti 10 dengan jumlah item per halaman yang Anda inginkan
 
         return view('masyarakat.answer_complaints.index', compact('complaints'));
     }
+
+    private function getUserComplaintsWithAnswers()
+    {
+        $userId = Auth::id();
+
+        return Complaint::with('department', 'answerComplaint')
+            ->where('user_id', $userId)
+            ->whereHas('answerComplaint');
+    }
+
+
 
     /**
      * Show the form for creating a new resource.
