@@ -23,7 +23,7 @@ class ComplaintsFromUserController extends Controller
         $userId = Auth::id();
 
         // Get all complaints created by the authenticated user
-        $complaints = Complaint::where('user_id', $userId)->get();
+        $complaints = Complaint::where('user_id', $userId)->paginate(5)->appends(request()->except(['page', '_token']));
 
         return view('masyarakat.complaints.index', compact('complaints'));
     }

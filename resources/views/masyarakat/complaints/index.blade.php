@@ -2,6 +2,59 @@
 {{-- @extends('masyarakat.layouts.master') --}}
 @section('container')
     <style>
+        /* Remove arrow icons from Bootstrap pagination */
+        .pagination .page-item {
+            border-radius: 0 !important;
+        }
+
+        .pagination .page-link {
+            padding: 0.5rem 0.75rem !important;
+        }
+
+        .pagination .page-item .page-link:hover,
+        .pagination .page-item.active .page-link {
+            background-color: greenyellow !important;
+            border-color: #78C1F3 !important;
+        }
+
+        .buttons {
+            margin-left: 1070px;
+        }
+
+        /* Custom styles for pagination container */
+        .pagination-container {
+            position: relative;
+        }
+
+        .pagination-links {
+            position: relative;
+            margin-left: 1000px;
+            bottom: 0;
+            right: 0;
+        }
+
+        /* Button style */
+        .custom-button {
+            display: inline-block;
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            border: 1px solid #78C1F3;
+            border-radius: 0.25rem;
+            background-color: greenyellow;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .custom-button:hover {
+            background-color: #38a169;
+            border-color: #38a169;
+        }
+
         .modal-backdrop.show {
             opacity: .8;
             /* Adjust this value to change the opacity */
@@ -50,13 +103,13 @@
                     <th width="auto">Nama Departemen</th>
                     <th width="auto">Action1</th>
                 </tr>
-                @foreach ($complaints as $cp)
+                @forelse ($complaints as $key => $cp)
                     @php
                         $hasImage = $cp->images && $cp->images->image_path;
                         $hasLocation = isset($cp->latitude) && isset($cp->longitude);
                     @endphp
                     <tr>
-                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ ($complaints->currentPage() - 1) * $complaints->perPage() + $key + 1 }}</td>
                         <td>{{ $cp->ticket->code_ticket }}</td>
                         <td>{{ $cp->title }}</td>
                         <td>{{ $cp->time }}</td>
@@ -74,9 +127,15 @@
                             </button>
                         </td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td colspan="8" class="text-center">Anda belum melakukan pengaduan.</td>
+                    </tr>
+                @endforelse
             </table>
-
+            <div class="pagination-links">
+                {{ $complaints->appends(request()->except(['page', '_token']))->links('pagination::bootstrap-4') }}
+            </div>
             <!-- Bagian lainnya, seperti modal dan script -->
 
         </div>

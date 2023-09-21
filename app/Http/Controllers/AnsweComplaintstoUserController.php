@@ -17,7 +17,7 @@ class AnsweComplaintstoUserController extends Controller
      */
     public function index()
     {
-        $complaints = $this->getUserComplaintsWithAnswers()->paginate(10); // Ganti 10 dengan jumlah item per halaman yang Anda inginkan
+        $complaints = $this->getUserComplaintsWithAnswers()->paginate(5); // Ganti 10 dengan jumlah item per halaman yang Anda inginkan
 
         return view('masyarakat.answer_complaints.index', compact('complaints'));
     }
