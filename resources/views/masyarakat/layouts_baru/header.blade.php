@@ -208,8 +208,19 @@
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span
                                 class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Str::titleCase(Auth::user()->name) }}</span>
-                            <img class="img-profile rounded-circle"
-                                src="{{ asset('SbAdmin/img/undraw_profile.svg') }}">
+                            @php
+                                if (session()->has('random_profile_image')) {
+                                    $randomImageUrl = session('random_profile_image');
+                                } else {
+                                    $profileImages = [asset('SbAdmin/img/undraw_profile.svg'), asset('SbAdmin/img/undraw_profile_1.svg'), asset('SbAdmin/img/undraw_profile_2.svg'), asset('SbAdmin/img/undraw_profile_3.svg')];
+                                    $randomIndex = array_rand($profileImages);
+                                    $randomImageUrl = $profileImages[$randomIndex];
+                                
+                                    // Simpan URL gambar ke dalam sesi
+                                    session(['random_profile_image' => $randomImageUrl]);
+                                }
+                            @endphp
+                            <img class="img-profile rounded-circle" src="{{ $randomImageUrl }}">
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
