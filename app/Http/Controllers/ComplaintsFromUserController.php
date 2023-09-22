@@ -9,6 +9,8 @@ use App\Models\Images;
 use App\Models\Tickets;
 use App\Http\Requests\StoreComplaintRequest;
 use Illuminate\Support\Facades\Auth;
+use Alert;
+use Illuminate\Support\Facades\Response; // Tambahkan ini pada bagian atas file controller
 
 class ComplaintsFromUserController extends Controller
 {
@@ -112,7 +114,9 @@ class ComplaintsFromUserController extends Controller
             $image->save();
         }
 
-        return redirect()->route('user.complaints.index')->with('success', 'Complaint created successfully.');
+        // return response()->json(['success' => true]);
+        return Response::json(['success' => true]);
+        // return redirect()->route('user.complaints.index')->with('success', 'Complaint created successfully.');
     }
 
     /**

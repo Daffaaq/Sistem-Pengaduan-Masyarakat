@@ -11,7 +11,7 @@
         @endif
         <div class="col-lg-6 shadow p-4 bg-light" id="form-all">
             <h2 class="h3 text-center mb-4">Create Complaint</h2>
-            <form action="{{ route('user.complaints.store') }}" method="POST" enctype="multipart/form-data">
+            <form id="complaint-create-form" action="{{ route('user.complaints.store') }}" method="POST" enctype="multipart/form-data" onsubmit="event.preventDefault(); handleComplaintCreate();">
                 @csrf
                 <div class="mb-3">
                     <label for="title" class="form-label">Complaint Title</label>
@@ -115,6 +115,46 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <!-- Add any additional scripts you want to include here -->
+    <script>
+       // Fungsi untuk menampilkan SweetAlert
+        function showSweetAlert(title, text, icon) {
+            Swal.fire({
+                title: title,
+                text: text,
+                icon: icon,
+            });
+        }
+         // Fungsi untuk menangani permintaan HTTP dengan menggunakan Fetch API
+        function handleComplaintCreate() {
+            const form = document.getElementById('complaint-create-form');
+            const formData = new FormData(form);
+
+            fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    }
+                })
+                .then(response => response.json()) // Parse respons sebagai JSON
+                .then(data => {
+                    if (data.success) {
+                        // Tampilkan SweetAlert dengan pesan sukses
+                        showSweetAlert('Hore!', 'Pengaduan Berhasil Dibuat', 'success');
+                        // Redirect to the dashboard after a short delay
+                        setTimeout(() => {
+                            window.location.href = '{{ route('user.complaints.index') }}'; 
+                        }, 2000); // 2000 milidetik = 2 detik
+                    } else {
+                        // Tampilkan SweetAlert dengan pesan error jika ada kesalahan
+                        showSweetAlert('Oops!', 'Terjadi kesalahan saat Mengajukan Pengaduan.', 'error');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+    </script>
     <script>
         var defaultLatitude = -7.609531; // Latitude default
         var defaultLongitude = 112.828478; // Longitude default

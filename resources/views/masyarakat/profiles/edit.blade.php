@@ -94,13 +94,14 @@
     {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script> --}}
     <script>
         // Fungsi untuk menampilkan SweetAlert
-    function showSweetAlert(title, text, icon) {
-        Swal.fire({
-            title: title,
-            text: text,
-            icon: icon,
-        });
-    }
+        function showSweetAlert(title, text, icon) {
+            Swal.fire({
+                title: title,
+                text: text,
+                icon: icon,
+            });
+        }
+
         function showDashboardSuccessPopup() {
             const popup = document.getElementById('dashboard-success-popup');
             popup.style.display = 'block';
