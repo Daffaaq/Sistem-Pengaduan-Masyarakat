@@ -1,13 +1,28 @@
 @extends('masyarakat.layouts_baru.index')
 @section('container')
+    <style>
+        /* Tambahkan gaya untuk pop-up di sini */
+        .popup {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: #fff;
+            border-radius: 5px;
+            z-index: 9999;
+        }
+    </style>
     <!-- Begin Page Content -->
     <div class="container-fluid">
 
+        <div id="dashboard-success-popup" class="popup">
+            Profil berhasil diperbarui.
+        </div>
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                    class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
         </div>
 
         <!-- Content Row -->
@@ -339,7 +354,29 @@
 
             </div>
         </div>
+        <!-- Add this script to your dashboard.blade.php file -->
+        <script>
+            // Function to show the popup
+            function showDashboardSuccessPopup() {
+                const popup = document.getElementById('dashboard-success-popup');
+                popup.style.display = 'block';
 
+                // Hide the popup after some time (e.g., 3 seconds)
+                setTimeout(() => {
+                    popup.style.display = 'none';
+                }, 3000); // 3000 milliseconds = 3 seconds
+            }
+        </script>
+
+        <!-- Check if a success message exists in the URL and show the popup -->
+        <script>
+            const urlParams = new URLSearchParams(window.location.search);
+            const successMessage = urlParams.get('success');
+
+            if (successMessage) {
+                showDashboardSuccessPopup();
+            }
+        </script>
     </div>
     <!-- /.container-fluid -->
     <script>
