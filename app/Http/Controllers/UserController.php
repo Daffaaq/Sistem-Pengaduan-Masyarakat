@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\userUpdateRequest;
+use Alert;
+use Illuminate\Support\Facades\Response; // Tambahkan ini pada bagian atas file controller
 
 class UserController extends Controller
 {
@@ -36,10 +38,16 @@ class UserController extends Controller
         // Memperbarui data profil pengguna dengan data yang telah diubah
         $user->update($data);
 
-        $request->session()->flash('success', 'Profil berhasil diperbarui.');
-        
-        // Mengarahkan pengguna ke halaman dasbor pengguna dengan pesan sukses
-        return redirect()->route('user.dashboard')->with('success', 'Profil berhasil diperbarui.');
+        // Memperbarui data profil pengguna dengan data yang telah diubah
+        $user->update($data);
+
+        // Jika perubahan profil berhasil, kirimkan respons JSON ke klien
+        return Response::json(['success' => true]);
+
+        // Alert::success('Hore!', 'Profil berhasil diperbarui.');
+
+        // // Mengarahkan pengguna ke halaman dasbor pengguna dengan pesan sukses
+        // return redirect()->route('user.dashboard')->with('success', 'Profil berhasil diperbarui.');
     }
 
 }

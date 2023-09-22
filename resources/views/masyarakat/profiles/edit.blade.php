@@ -91,7 +91,16 @@
     </div>
     </section> <!-- Pastikan penutup section ada di sini -->
 
+    {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script> --}}
     <script>
+        // Fungsi untuk menampilkan SweetAlert
+    function showSweetAlert(title, text, icon) {
+        Swal.fire({
+            title: title,
+            text: text,
+            icon: icon,
+        });
+    }
         function showDashboardSuccessPopup() {
             const popup = document.getElementById('dashboard-success-popup');
             popup.style.display = 'block';
@@ -113,10 +122,18 @@
                         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                     }
                 })
-                .then(response => {
-                    if (response.ok) {
-                        // Redirect to the dashboard with a success message in the URL
-                        window.location.href = '{{ route('user.dashboard') }}?success=1';
+                .then(response => response.json()) // Parse respons sebagai JSON
+                .then(data => {
+                    if (data.success) {
+                        // Tampilkan SweetAlert dengan pesan sukses
+                        showSweetAlert('Hore!', 'Profil berhasil diperbarui.', 'success');
+                        // Redirect to the dashboard after a short delay
+                        setTimeout(() => {
+                            window.location.href = '{{ route('user.dashboard') }}';
+                        }, 2000); // 2000 milidetik = 2 detik
+                    } else {
+                        // Tampilkan SweetAlert dengan pesan error jika ada kesalahan
+                        showSweetAlert('Oops!', 'Terjadi kesalahan saat memperbarui profil.', 'error');
                     }
                 })
                 .catch(error => {
