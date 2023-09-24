@@ -11,7 +11,8 @@
         @endif
         <div class="col-lg-6 shadow p-4 bg-light" id="form-all">
             <h2 class="h3 text-center mb-4">Create Complaint</h2>
-            <form id="complaint-create-form" action="{{ route('user.complaints.store') }}" method="POST" enctype="multipart/form-data" onsubmit="event.preventDefault(); handleComplaintCreate();">
+            <form id="complaint-create-form" action="{{ route('user.complaints.store') }}" method="POST"
+                enctype="multipart/form-data" onsubmit="event.preventDefault(); handleComplaintCreate();">
                 @csrf
                 <div class="mb-3">
                     <label for="title" class="form-label">Complaint Title</label>
@@ -116,7 +117,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <!-- Add any additional scripts you want to include here -->
     <script>
-       // Fungsi untuk menampilkan SweetAlert
+        // Fungsi untuk menampilkan SweetAlert
         function showSweetAlert(title, text, icon) {
             Swal.fire({
                 title: title,
@@ -124,29 +125,33 @@
                 icon: icon,
             });
         }
-         // Fungsi untuk menangani permintaan HTTP dengan menggunakan Fetch API
+
+        // Fungsi untuk menangani permintaan HTTP dengan menggunakan Fetch API
         function handleComplaintCreate() {
-            const form = document.getElementById('complaint-create-form');
-            const formData = new FormData(form);
+            const form = document.getElementById(
+                'complaint-create-form'); // Mendapatkan elemen form dengan ID 'complaint-create-form'
+            const formData = new FormData(form); // Membuat objek FormData dari form
 
             fetch(form.action, {
-                    method: 'POST',
-                    body: formData,
+                    method: 'POST', // Menggunakan metode HTTP POST untuk mengirim data
+                    body: formData, // Mengirim data formulir menggunakan objek FormData
                     headers: {
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
+                                'content'
+                                ) // Mengirim token CSRF yang diperlukan untuk melindungi aplikasi dari serangan CSRF
                     }
                 })
-                .then(response => response.json()) // Parse respons sebagai JSON
+                .then(response => response.json()) // Menguraikan respons HTTP sebagai JSON
                 .then(data => {
                     if (data.success) {
-                        // Tampilkan SweetAlert dengan pesan sukses
+                        // Tampilkan SweetAlert dengan pesan sukses jika permintaan berhasil
                         showSweetAlert('Hore!', 'Pengaduan Berhasil Dibuat', 'success');
-                        // Redirect to the dashboard after a short delay
+                        // Redirect ke dashboard setelah penundaan singkat (2 detik)
                         setTimeout(() => {
-                            window.location.href = '{{ route('user.complaints.index') }}'; 
+                            window.location.href = '{{ route('user.complaints.index') }}';
                         }, 2000); // 2000 milidetik = 2 detik
                     } else {
-                        // Tampilkan SweetAlert dengan pesan error jika ada kesalahan
+                        // Tampilkan SweetAlert dengan pesan kesalahan jika ada kesalahan dalam permintaan
                         showSweetAlert('Oops!', 'Terjadi kesalahan saat Mengajukan Pengaduan.', 'error');
                     }
                 })
@@ -192,20 +197,26 @@
     </script>
     <script>
         $(document).ready(function() {
+            // Fungsi untuk membaca URL gambar yang dipilih oleh pengguna
             function readURL(input) {
                 if (input.files && input.files[0]) {
                     var reader = new FileReader();
 
                     reader.onload = function(e) {
+                        // Mengatur atribut 'src' dari elemen dengan ID 'imagePreview' ke URL gambar yang dipilih
                         $('#imagePreview').attr('src', e.target.result);
+                        // Mengubah tampilan elemen dengan ID 'imagePreview' menjadi terlihat ('display: block')
                         $('#imagePreview').css('display', 'block');
                     }
 
+                    // Membaca data URL dari gambar yang dipilih
                     reader.readAsDataURL(input.files[0]);
                 }
             }
 
+            // Menambahkan event listener pada elemen dengan ID 'image' untuk memantau perubahan dalam input berkas
             $("#image").change(function() {
+                // Memanggil fungsi readURL() ketika pengguna memilih gambar
                 readURL(this);
             });
         });

@@ -88,16 +88,20 @@ class ComplaintsFromUserController extends Controller
         // No need to manually call $request->validate()
 
         // Check for duplicate complaints
-        $existingComplaint = Complaint::where('user_id', Auth::id())
-            ->whereRaw('LOWER(title) = ?', [strtolower($request->input('title'))])
-            ->where('complaint_date', now()->toDateString())
-            ->where('department_id', $request->input('department_id'))
-            ->first();
+        $existingComplaint = Complaint::where('user_id', Auth::id()) // Memeriksa complaint yang sudah ada dengan user yang sedang login
+            ->whereRaw('LOWER(title) = ?', [strtolower($request->input('title'))]) // Memeriksa judul complaint secara case-insensitive
+            ->where('complaint_date', now()->toDateString()) // Memeriksa complaint yang dibuat pada tanggal yang sama
+            ->where('department_id', $request->input('department_id')) // Memeriksa complaint pada departemen yang sama
+            ->first(); // Mengambil complaint pertama yang sesuai dengan kriteria di atas
 
         if ($existingComplaint) {
             // Duplicate complaint found, return an error response
-            return response()->json(['success' => false, 'error' => 'Duplicate complaint. You have already submitted a complaint with the same title and date today.']);
+            return response()->json([
+                'success' => false,
+                'error' => 'Duplicate complaint. You have already submitted a complaint with the same title and date today.'
+            ]); // Mengembalikan respon JSON yang berisi pesan kesalahan karena complaint duplikat
         }
+
 
         // Create the complaint
         $complaint = new Complaint();
