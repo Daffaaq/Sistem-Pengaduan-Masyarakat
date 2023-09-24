@@ -1,5 +1,24 @@
 @extends('masyarakat.layouts_baru.index')
 @section('container')
+    <style>
+        .complaint-info {
+            cursor: pointer;
+            color: blue;
+            text-decoration: underline;
+        }
+
+        .question-mark:hover {
+            color: blue;
+        }
+
+        .question-mark {
+            cursor: pointer;
+            color: red;
+            font-weight: bold;
+            font-size: 20px;
+            margin-left: 5px;
+        }
+    </style>
     <div class="container mt-5 mb-5 d-flex justify-content-center">
         @if ($message = Session::get('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -11,6 +30,44 @@
         @endif
         <div class="col-lg-6 shadow p-4 bg-light" id="form-all">
             <h2 class="h3 text-center mb-4">Create Complaint</h2>
+            <div class="mb-3" style="text-align: center;">
+                <label for="complaint_info" class="form-label" style="font-weight: bold;"">Cara Menyampaikan Pengaduan yang
+                    Baik dan Benar <span id="showModal" class="question-mark">?</span></label>
+                <div id="complaint_info" class="complaint-info">
+                </div>
+            </div>
+
+
+            <!-- Modal Cara Menyampaikan Pengaduan yang Baik dan Benar -->
+            <div class="modal fade" id="caraPengaduanModal" tabindex="-1" role="dialog"
+                aria-labelledby="caraPengaduanModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="caraPengaduanModalLabel">Cara Menyampaikan Pengaduan yang Baik dan
+                                Benar</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Isi modal -->
+                            <p>Berikut adalah beberapa tips untuk menyampaikan pengaduan yang baik dan benar:</p>
+                            <ul>
+                                <li>Tuliskan judul pengaduan yang jelas dan singkat.</li>
+                                <li>Deskripsikan masalah dengan detail yang memadai.</li>
+                                <li>Sertakan bukti atau gambar jika diperlukan.</li>
+                                <li>Pilih dinas yang sesuai untuk pengaduan Anda.</li>
+                                <li>Periksa kembali informasi sebelum mengirim pengaduan.</li>
+                            </ul>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <form id="complaint-create-form" action="{{ route('user.complaints.store') }}" method="POST"
                 enctype="multipart/form-data" onsubmit="event.preventDefault(); handleComplaintCreate();">
                 @csrf
@@ -137,8 +194,8 @@
                     body: formData, // Mengirim data formulir menggunakan objek FormData
                     headers: {
                         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
-                                'content'
-                                ) // Mengirim token CSRF yang diperlukan untuk melindungi aplikasi dari serangan CSRF
+                            'content'
+                        ) // Mengirim token CSRF yang diperlukan untuk melindungi aplikasi dari serangan CSRF
                     }
                 })
                 .then(response => response.json()) // Menguraikan respons HTTP sebagai JSON
@@ -159,6 +216,19 @@
                     console.error('Error:', error);
                 });
         }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Ambil elemen tanda tanya (?) dan modal
+            var showModal = document.getElementById('showModal');
+            var modal = document.getElementById('caraPengaduanModal');
+
+            // Tambahkan event click ke tanda tanya (?)
+            showModal.addEventListener('click', function() {
+                // Tampilkan modal saat tanda tanya (?) diklik
+                $(modal).modal('show');
+            });
+        });
     </script>
     <script>
         var defaultLatitude = -7.609531; // Latitude default
