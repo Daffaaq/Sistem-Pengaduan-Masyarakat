@@ -55,46 +55,46 @@
             border-color: #38a169;
         }
     </style>
-    {{-- <div class="row justify-content-end"> --}}
-    <div class="col-lg-10">
-        <div class="text-center">
-            <h2>List Jawaban Pengaduan</h2>
-            <table class="table table-bordered" style="background-color: #F3E99F">
-                <tr>
-                    <th width="auto">No</th>
-                    <th width="auto">Title</th>
-                    <th width="auto">Complaint Time</th>
-                    <th width="auto">Complaint Date</th>
-                    <th width="auto">Description</th>
-                    <th width="auto">Status</th>
-                    <th width="auto">Department</th>
-                    <th width="auto">Answer</th>
-                    <th width="auto">Answer Date</th>
-                    <th width="auto">Answer Time</th>
-                </tr>
-                @forelse ($complaints as $key => $complaint)
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="text-center">
+                <h2>List Jawaban Pengaduan</h2>
+                <table class="table table-bordered" style="background-color: #F3E99F">
                     <tr>
-                        <td>{{ ($complaints->currentPage() - 1) * $complaints->perPage() + $key + 1 }}</td>
-                        <td>{{ $complaint->title }}</td>
-                        <td>{{ $complaint->time }}</td>
-                        <td>{{ $complaint->complaint_date }}</td>
-                        <td>{{ $complaint->description }}</td>
-                        <td>{{ $complaint->status }}</td>
-                        <td>{{ $complaint->department->name }}</td>
-                        <td>{{ $complaint->answerComplaint[0]->answer }}</td>
-                        <td>{{ $complaint->answerComplaint[0]->answer_complaint_date }}</td>
-                        <td>{{ $complaint->answerComplaint[0]->time }}</td>
+                        <th width="auto">No</th>
+                        <th width="auto">Title</th>
+                        <th width="auto">Complaint Time</th>
+                        <th width="auto">Complaint Date</th>
+                        <th width="auto">Description</th>
+                        <th width="auto">Status</th>
+                        <th width="auto">Department</th>
+                        <th width="auto">Answer</th>
+                        <th width="auto">Answer Date</th>
+                        <th width="auto">Answer Time</th>
                     </tr>
-                @empty
-                    <tr>
-                        <td colspan="10" class="text-center">Mohon maaf, pengaduan Anda belum dijawab.</td>
-                    </tr>
-                @endforelse
-            </table>
-            <div class="pagination-links">
-                {{ $complaints->appends(request()->except(['page', '_token']))->links('pagination::bootstrap-4') }}
+                    @forelse ($complaints as $key => $complaint)
+                        <tr>
+                            <td>{{ ($complaints->currentPage() - 1) * $complaints->perPage() + $key + 1 }}</td>
+                            <td>{{ $complaint->title }}</td>
+                            <td>{{ $complaint->time }}</td>
+                            <td>{{ $complaint->complaint_date }}</td>
+                            <td>{{ $complaint->description }}</td>
+                            <td>{{ $complaint->status }}</td>
+                            <td>{{ $complaint->department->name }}</td>
+                            <td>{{ $complaint->answerComplaint[0]->answer }}</td>
+                            <td>{{ $complaint->answerComplaint[0]->answer_complaint_date }}</td>
+                            <td>{{ $complaint->answerComplaint[0]->time }}</td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="10" class="text-center">Mohon maaf, pengaduan Anda belum dijawab.</td>
+                        </tr>
+                    @endforelse
+                </table>
+                <div class="pagination-links">
+                    {{ $complaints->appends(request()->except(['page', '_token']))->links('pagination::bootstrap-4') }}
+                </div>
             </div>
         </div>
-    </div>
     </div>
 @endsection

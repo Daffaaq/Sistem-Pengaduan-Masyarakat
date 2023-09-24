@@ -1,23 +1,44 @@
 @extends('masyarakat.layouts_baru.index')
 @section('container')
     <style>
-        /* Tambahkan gaya untuk pop-up di sini */
-        .popup {
-            display: none;
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            padding: 10px 20px;
-            background-color: #28a745;
+        /* Gaya untuk card */
+        .card {
+            border: none;
+            box-shadow: 0 10px 12px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Gaya untuk card header */
+        .card-header {
+            background-color: #365DCD;
             color: #fff;
-            border-radius: 5px;
-            z-index: 9999;
+        }
+
+        /* Gaya untuk tombol "Kembali" */
+        .btn-secondary {
+            background-color: #6c757d;
+            color: #fff;
+        }
+
+        .btn-secondary:hover {
+            background-color: #545b62;
+        }
+
+        /* Gaya untuk tombol "Simpan Perubahan" */
+        .btn-primary {
+            background-color: #007BFF;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        /* Gaya untuk checkbox "Tampilkan Password" */
+        #showPassword {
+            margin-left: 10px;
         }
     </style>
     <div class="container">
-        <div id="dashboard-success-popup" class="popup" style="display: none;">
-            Profil berhasil diperbarui.
-        </div>
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
