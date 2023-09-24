@@ -56,8 +56,12 @@
                                 <label class="mb-1">
                                     <h6 class="mb-0 text-sm">Password</h6>
                                 </label>
-                                <input class="mb-4 form-control @error('password') is-invalid @enderror" type="password"
-                                    name="password" required autocomplete="new-password">
+                                <input id="password" class="mb-4 form-control @error('password') is-invalid @enderror"
+                                    type="password" name="password" required autocomplete="new-password">
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input type="checkbox" class="custom-control-input" id="showPassword">
+                                    <label class="custom-control-label" for="showPassword">Tampilkan Password</label>
+                                </div>
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -68,8 +72,13 @@
                                 <label class="mb-1">
                                     <h6 class="mb-0 text-sm">Confirm Password</h6>
                                 </label>
-                                <input class="mb-4 form-control" type="password" name="password_confirmation" required
-                                    autocomplete="new-password">
+                                <input id="confirmPassword" class="mb-4 form-control" type="password"
+                                    name="password_confirmation" required autocomplete="new-password">
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input type="checkbox" class="custom-control-input" id="showConfirmPassword">
+                                    <label class="custom-control-label" for="showConfirmPassword">Tampilkan
+                                        Password</label>
+                                </div>
                             </div>
                             <div class="row px-3 mb-4">
                                 <div class="custom-control custom-checkbox custom-control-inline">
@@ -95,6 +104,17 @@
     {{-- <script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'>
     </script> --}}
     <script type='text/javascript'></script>
+    <script>
+        document.getElementById('showPassword').addEventListener('change', function() {
+            const passwordInput = document.getElementById('password');
+            passwordInput.type = this.checked ? 'text' : 'password';
+        });
+
+        document.getElementById('showConfirmPassword').addEventListener('change', function() {
+            const confirmPasswordInput = document.getElementById('confirmPassword');
+            confirmPasswordInput.type = this.checked ? 'text' : 'password';
+        });
+    </script>
 </body>
 
 </html>

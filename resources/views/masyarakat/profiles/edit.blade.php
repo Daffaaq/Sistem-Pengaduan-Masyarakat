@@ -67,6 +67,9 @@
                                         class="form-control @error('password') is-invalid @enderror" name="password"
                                         autocomplete="new-password">
 
+                                    <!-- Checkbox untuk menampilkan/sembunyikan password -->
+                                    <input type="checkbox" id="showPassword"> Tampilkan Password
+
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -141,5 +144,13 @@
                     console.error('Error:', error);
                 });
         }
+        document.getElementById('showPassword').addEventListener('change', function() {
+            const passwordInput = document.getElementById('password');
+            if (this.checked) {
+                passwordInput.type = 'text'; // Tampilkan password
+            } else {
+                passwordInput.type = 'password'; // Sembunyikan password
+            }
+        });
     </script>
 @endsection

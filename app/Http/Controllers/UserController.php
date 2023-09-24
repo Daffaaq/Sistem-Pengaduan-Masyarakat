@@ -24,6 +24,21 @@ class UserController extends Controller
         // Mendapatkan data yang valid dari permintaan (request) pengguna
         $data = $request->validated();
 
+        // Mendapatkan pengguna yang saat ini terotentikasi
+        $user = auth()->user();
+
+        // Cek apakah name dan email yang diberikan sama dengan yang ada di database
+        $nameUnchanged = (!isset($data['name']) || $data['name'] === $user->name);
+        $emailUnchanged = (!isset($data['email']) || $data['email'] === $user->email);
+
+        // Kita perlu memeriksa apakah password dari request setelah di-hash sama dengan yang ada di database
+        $passwordUnchanged = (!isset($data['password']) || \Hash::check($data['password'], $user->password));
+
+        if ($nameUnchanged && $emailUnchanged && $passwordUnchanged) {
+            // Semuanya tidak berubah, kembalikan respons false
+            return Response::json(['success' => false]);
+        }
+
         // Memeriksa apakah ada perubahan password dan mengenkripsi password baru jika ada
         if (isset($data['password'])) {
             $data['password'] = bcrypt($data['password']);
@@ -32,22 +47,10 @@ class UserController extends Controller
         // Mengatur peran pengguna sebagai "user"
         $data['role'] = 'user';
 
-        // Mendapatkan pengguna yang saat ini terotentikasi
-        $user = auth()->user();
-
-        // Memperbarui data profil pengguna dengan data yang telah diubah
-        $user->update($data);
-
         // Memperbarui data profil pengguna dengan data yang telah diubah
         $user->update($data);
 
         // Jika perubahan profil berhasil, kirimkan respons JSON ke klien
         return Response::json(['success' => true]);
-
-        // Alert::success('Hore!', 'Profil berhasil diperbarui.');
-
-        // // Mengarahkan pengguna ke halaman dasbor pengguna dengan pesan sukses
-        // return redirect()->route('user.dashboard')->with('success', 'Profil berhasil diperbarui.');
     }
-
 }
