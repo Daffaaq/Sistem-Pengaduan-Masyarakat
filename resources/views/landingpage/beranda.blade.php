@@ -108,6 +108,11 @@
             outline: none;
             /* Hapus efek outline saat tombol ditekan */
         }
+
+        .website-link {
+            color: #ffD700;
+            text-decoration: none;
+        }
     </style>
 </head>
 
@@ -1087,6 +1092,19 @@
                                 modalBody.innerHTML += '<p>' + tugas + '</p>';
                             });
 
+                            // Add the website link to the modal body
+                            // if (data.link_website) {
+                            //     modalBody.innerHTML +=
+                            //         '<div class="text-center mt-3"><a href="' + data
+                            //         .link_website + '" target="_blank">Visit Website</a></div>';
+                            // }
+                            // Menambahkan class CSS ke elemen HTML yang Anda buat
+                            if (data.linkWebsite) {
+                                modalBody.innerHTML +=
+                                    '<div class="text-center mt-3"><a href="' + data
+                                    .linkWebsite +
+                                    '" target="_blank" class="website-link">Visit Website</a></div>';
+                            }
                             // Memperbarui judul modal dengan nama departemen.
                             modalTitle.textContent = 'TUGAS (' + data.name + ')';
 

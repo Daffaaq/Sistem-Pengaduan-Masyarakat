@@ -199,6 +199,8 @@ class LandingPageController extends Controller
         $response = [
             'name' => $departement->name,
             'tugas' => $tugasArray,
+            // 'link_website' => $departement->link_website,
+            'linkWebsite' => $departement->link_website,
         ];
 
         return response()->json($response);
