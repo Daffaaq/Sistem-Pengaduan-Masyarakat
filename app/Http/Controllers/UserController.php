@@ -27,15 +27,17 @@ class UserController extends Controller
         // Mendapatkan pengguna yang saat ini terotentikasi
         $user = auth()->user();
 
-        // Cek apakah name dan email yang diberikan sama dengan yang ada di database
-        $nameUnchanged = (!isset($data['name']) || $data['name'] === $user->name);
-        $emailUnchanged = (!isset($data['email']) || $data['email'] === $user->email);
+        // Membuat koleksi dari field yang ingin kita cek.
+        $unchanged = collect(['name', 'email', 'password'])->every(function ($field) use ($data, $user) {
+            // Untuk setiap field, periksa apakah field tersebut tidak ada dalam data yang diberikan
+            // atau jika field tersebut sama dengan yang ada di database.
+            // Jika field adalah 'password', kita perlu memeriksa apakah password dari request setelah di-hash sama dengan yang ada di database.
+            return !isset($data[$field]) || ($field === 'password' ? \Hash::check($data[$field], $user->$field) : $data[$field] === $user->$field);
+        });
 
-        // Kita perlu memeriksa apakah password dari request setelah di-hash sama dengan yang ada di database
-        $passwordUnchanged = (!isset($data['password']) || \Hash::check($data['password'], $user->password));
-
-        if ($nameUnchanged && $emailUnchanged && $passwordUnchanged) {
-            // Semuanya tidak berubah, kembalikan respons false
+        // Jika semua field tidak berubah (yaitu, semua field sama dengan yang ada di database),
+        // kembalikan respons dengan 'success' => false.
+        if ($unchanged) {
             return Response::json(['success' => false]);
         }
 
