@@ -113,11 +113,14 @@
                         descriptionTextarea.value = format;
                     });
                 </script>
-                <div class="mb-3">
+                <div class="mb-3 position-relative">
                     <label for="image" class="form-label">Upload Image</label>
                     <input type="file" class="form-control @error('image') is-invalid @enderror" id="image"
                         name="image" accept="image/*">
-                    <button type="button" id="clearImage" class="btn btn-warning mt-2">Clear Image</button>
+                    <span id="clearImage" class="position-absolute top-50 end-0 translate-middle-y pe-2 cursor-pointer"
+                        style="top: calc(75% - 10px); right: 10px; color: red;">
+                        <i class="fas fa-times"></i>
+                    </span>
                     @error('image')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -148,22 +151,29 @@
                         </div>
                     @enderror
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 position-relative"">
                     <label for="latitude" class="form-label">Latitude (Optional)</label>
                     <input type="text" class="form-control @error('latitude') is-invalid @enderror" id="latitude"
                         name="latitude" value="{{ old('latitude') }}" oninput="setMarkerPosition()">
-                    <button type="button" id="clearLatitude" class="btn btn-warning mt-2">Clear Latitude</button>
+                    <span id="clearLatitude" class="position-absolute top-50 end-0 translate-middle-y pe-2 cursor-pointer"
+                        style="top: calc(75% - 10px); right: 10px; color: red;">
+                        <i class="fas fa-times"></i>
+                    </span>
                     @error('latitude')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
                     @enderror
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 position-relative"">
                     <label for="longitude" class="form-label">Longitude (Optional)</label>
                     <input type="text" class="form-control @error('longitude') is-invalid @enderror" id="longitude"
                         name="longitude" value="{{ old('longitude') }}" oninput="setMarkerPosition()">
-                    <button type="button" id="clearLongitude" class="btn btn-warning mt-2">Clear Longitude</button>
+                    <span id="clearLongitude"
+                        class="position-absolute top-50 end-0 translate-middle-y pe-2 cursor-pointer"
+                        style="top: calc(75% - 10px); right: 10px; color: red;">
+                        <i class="fas fa-times"></i>
+                    </span>
                     @error('longitude')
                         <div class="invalid-feedback">
                             {{ $message }}
