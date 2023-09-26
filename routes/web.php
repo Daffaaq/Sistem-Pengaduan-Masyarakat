@@ -16,6 +16,7 @@ use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DepartementController;
+use App\Http\Controllers\ForgotPasswordController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -47,6 +48,19 @@ Route::group(['prefix' => '/'], function () {
     Route::get('/statistik', [LandingPageController::class, 'indexStatik'])->name('statistik');
     // Tambahkan route lainnya di sini jika ada
 });
+
+// Menambahkan rute forgot password
+Route::get('/password/forgot', [ForgotPasswordController::class, 'showForgotForm'])->name('password.forgot');
+Route::post('/password/forgot', [ForgotPasswordController::class, 'handleForgot']);
+
+// Menambahkan rute reset password
+Route::get('/password/reset/{email}', [ForgotPasswordController::class, 'showResetForm'])->name('password.showreset');
+Route::post('/password/submit-reset', [ForgotPasswordController::class, 'handleReset'])->name('password.handleReset');
+
+
+
+
+
 
 Auth::routes();
 

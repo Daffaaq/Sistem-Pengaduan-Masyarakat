@@ -83,6 +83,10 @@
                                         href="{{ route('register') }}">Register</a></small>
                             </div>
                             <div class="row mb-4 px-3">
+                                <small class="font-weight-bold">Don't have an account? <a class="text-danger"
+                                        href="{{ route('password.forgot') }}">Forgot Password</a></small>
+                            </div>
+                            <div class="row mb-4 px-3">
                                 <a href="{{ route('beranda') }}" class="btn btn-danger font-weight-bold">Back To Landing
                                     Page</a>
                             </div>
