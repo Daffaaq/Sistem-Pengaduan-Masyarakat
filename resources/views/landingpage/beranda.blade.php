@@ -153,7 +153,8 @@
                     <h1>Pengaduan Masyarakat, SIPMA Siap Melayani!</h1>
                     <h2>Ajukan Pengaduanmu</h2>
                     <div class="d-flex justify-content-center justify-content-lg-start">
-                        <a href="{{ route('register') }}" class="btn-get-started"style="text-decoration: none;">Get
+                        <a href="{{ route('register') }}"
+                            class="btn-get-started"style="text-decoration: none; margin-right: 10px;">Get
                             Started</a>
                         <a href="#" class="btn-get-started" style="text-decoration: none;" data-bs-toggle="modal"
                             data-bs-target="#trackComplaintModal">Track Complaint</a>
