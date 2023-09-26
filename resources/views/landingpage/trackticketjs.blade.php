@@ -45,7 +45,7 @@
 
             var form = $(this); // Mengambil referensi form yang disubmit
             var formData = form
-        .serialize(); // Mengambil data formulir dalam format yang sesuai untuk dikirim
+                .serialize(); // Mengambil data formulir dalam format yang sesuai untuk dikirim
             $.ajax({
                 type: 'POST',
                 url: form.attr('action'),
@@ -54,6 +54,19 @@
                 error: handleError
             });
         });
+
+        // Tambahkan event listener untuk modal disembunyikan di sini
+        $('#trackComplaintModal').on('hidden.bs.modal', function(e) {
+            // Fungsi yang akan dijalankan ketika modal disembunyikan
+            resetForm();
+        });
+
+        // ... (Fungsi handleSuccess, handleError, updateModalContent, dan showModal Anda)
+
+        function resetForm() {
+            // Fungsi untuk mereset form
+            $('#trackComplaintForm').trigger("reset");
+        }
 
         function handleSuccess(response) {
             // Menangani respons sukses dari permintaan AJAX

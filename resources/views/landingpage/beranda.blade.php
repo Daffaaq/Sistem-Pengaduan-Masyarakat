@@ -155,8 +155,8 @@
                     <div class="d-flex justify-content-center justify-content-lg-start">
                         <a href="{{ route('register') }}" class="btn-get-started"style="text-decoration: none;">Get
                             Started</a>
-                        {{-- <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox btn-watch-video"><i
-                                class="bi bi-play-circle"></i><span>Watch Video</span></a> --}}
+                        <a class="btn-get-started" style="text-decoration: none;" data-bs-toggle="modal"
+                            data-bs-target="#trackComplaintModal">Track Complaint</a>
                     </div>
                 </div>
                 <div class="col-lg-6 order-1 order-lg-2 hero-img text-center" data-aos="zoom-in" data-aos-delay="400">
@@ -166,6 +166,28 @@
         </div>
 
     </section><!-- End Hero -->
+
+    <!-- Modal Structure -->
+    <div class="modal fade" id="trackComplaintModal" tabindex="-1" aria-labelledby="trackComplaintModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="trackComplaintModalLabel">Track Complaint</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="trackComplaintForm" action="{{ route('track.complaint') }}" method="post">
+                        @csrf
+                        <input type="text" name="code_ticket" placeholder="Enter Code Number" required>
+                        <button type="reset"><i class="fas fa-times"></i></button>
+                        <button type="submit">Track</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <main id="main">
 
