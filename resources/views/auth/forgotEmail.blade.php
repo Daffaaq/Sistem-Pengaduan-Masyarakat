@@ -6,7 +6,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Lupa Password</div>
+                    <div class="card-header">Lupa Email</div>
 
                     <div class="card-body">
                         @if ($errors->any())
@@ -19,17 +19,16 @@
                             </div>
                         @endif
 
-                        <form action="{{ route('password.forgot') }}" method="post">
+                        <form method="POST" action="{{ route('email.forgot') }}">
                             @csrf
-
                             <div class="form-group">
                                 <label for="name">Nama:</label>
                                 <input type="text" id="name" name="name" class="form-control" required>
                             </div>
 
                             <div class="form-group">
-                                <label for="email">Alamat Email:</label>
-                                <input type="email" id="email" name="email" class="form-control" required>
+                                <label for="password">Password:</label>
+                                <input type="password" id="password" name="password" class="form-control" required>
                             </div>
 
                             <div class="form-group">

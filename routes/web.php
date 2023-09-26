@@ -17,6 +17,8 @@ use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DepartementController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\ForgotEmailController;
+use App\Http\Controllers\ChangeEmailController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -56,6 +58,15 @@ Route::post('/password/forgot', [ForgotPasswordController::class, 'handleForgot'
 // Menambahkan rute reset password
 Route::get('/password/reset/{email}', [ForgotPasswordController::class, 'showResetForm'])->name('password.showreset');
 Route::post('/password/submit-reset', [ForgotPasswordController::class, 'handleReset'])->name('password.handleReset');
+
+// menambahkan rute show email
+Route::get('/forgot-email', [ForgotEmailController::class, 'showForgotForm'])->name('email.forgot');
+Route::post('/forgot-email', [ForgotEmailController::class, 'handleForgot']);
+
+// menambahkan rute change email
+Route::get('/verify-identity', [ChangeEmailController::class, 'showVerifyForm'])->name('identity.verifyForm');
+Route::post('/verify-identity', [ChangeEmailController::class, 'verifyIdentity'])->name('identity.verify');
+Route::post('/change-email', [ChangeEmailController::class, 'handleChangeEmail'])->name('email.change');
 
 
 

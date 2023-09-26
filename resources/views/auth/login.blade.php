@@ -7,6 +7,10 @@
     <title>Login - Your Website</title>
     <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
     <link href='/css/login.css' rel='stylesheet'>
 </head>
 
@@ -83,8 +87,9 @@
                                         href="{{ route('register') }}">Register</a></small>
                             </div>
                             <div class="row mb-4 px-3">
-                                <small class="font-weight-bold">Don't have an account? <a class="text-danger"
-                                        href="{{ route('password.forgot') }}">Forgot Password</a></small>
+                                <small class="font-weight-bold">Lupa?<a href="#" class="text-danger"
+                                        data-toggle="modal" data-target="#forgotModal"> Forgot</a>
+                                </small>
                             </div>
                             <div class="row mb-4 px-3">
                                 <a href="{{ route('beranda') }}" class="btn btn-danger font-weight-bold">Back To Landing
@@ -99,6 +104,31 @@
     </form>
     {{-- <script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'>
     </script> --}}
+
+    <!-- Modal -->
+    <div class="modal fade" id="forgotModal" tabindex="-1" aria-labelledby="forgotModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="forgotModalLabel">Forgot Something?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Please choose one of the options below:
+                </div>
+                <div class="modal-footer">
+                    <a href="{{ route('password.forgot') }}" class="btn btn-primary">Forgot Password</a>
+                    <a href="{{ route('email.forgot') }}" class="btn btn-secondary">Forgot Email</a>
+                    <a href="{{ route('identity.verifyForm') }}" class="btn btn-info">Change Email</a>
+                    <!-- New Button -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </body>
 
 </html>
