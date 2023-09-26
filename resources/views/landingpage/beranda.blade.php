@@ -155,7 +155,7 @@
                     <div class="d-flex justify-content-center justify-content-lg-start">
                         <a href="{{ route('register') }}" class="btn-get-started"style="text-decoration: none;">Get
                             Started</a>
-                        <a class="btn-get-started" style="text-decoration: none;" data-bs-toggle="modal"
+                        <a href="#" class="btn-get-started" style="text-decoration: none;" data-bs-toggle="modal"
                             data-bs-target="#trackComplaintModal">Track Complaint</a>
                     </div>
                 </div>
