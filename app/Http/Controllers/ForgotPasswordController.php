@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Cache;
+use Carbon\Carbon;
 
 class ForgotPasswordController extends Controller
 {
@@ -26,8 +28,31 @@ class ForgotPasswordController extends Controller
     // Mencari pengguna berdasarkan email dan nama dari input
     $user = User::where('email', $request->email)->where('name', $request->name)->first();
 
+    $cacheKey = 'attempts_' . $request->ip(); // gunakan IP untuk mengidentifikasi pengguna
+    $lockoutKey = 'lockout_' . $request->ip();
+    $totalLockoutKey = 'total_lockout_' . $request->ip();
     // Jika pengguna tidak ditemukan
     if (!$user) {
+        $attempts = Cache::get($cacheKey, 0) + 1;
+        Cache::put($cacheKey, $attempts, 60); // simpan upaya selama 60 detik
+        
+        if ($attempts % 5 == 0) {
+            $lockoutTime = Carbon::now()->addSeconds(10); // 10 detik lockout
+            Cache::put($lockoutKey, $lockoutTime, 10); // simpan waktu lockout
+            
+            $totalAttempts = Cache::get($totalLockoutKey, 0) + $attempts;
+            Cache::forever($totalLockoutKey, $totalAttempts); // simpan total upaya
+            
+            if ($totalAttempts >= 15) {
+                // Menghapus nilai cache untuk mengatur ulang upaya pengguna
+                Cache::forget($cacheKey); // Menghapus upaya saat ini
+                Cache::forget($lockoutKey); // Menghapus waktu lockout
+                Cache::forget($totalLockoutKey); // Menghapus total upaya
+                return redirect()->route('login')->with('error', 'Anda telah mencoba terlalu banyak, silahkan login kembali.');
+            } else {
+                return redirect()->back()->with('lockoutTime', $lockoutTime);
+            }
+        }
         // Jika email ada dalam database tetapi nama tidak sesuai
         if (User::where('email', $request->email)->exists()) {
             // Jika email ada dalam database tetapi nama tidak sesuai
