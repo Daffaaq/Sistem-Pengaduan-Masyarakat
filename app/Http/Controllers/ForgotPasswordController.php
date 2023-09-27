@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ForgotPasswordController extends Controller
 {
@@ -77,6 +78,11 @@ class ForgotPasswordController extends Controller
         // Jika pengguna tidak ditemukan atau rolenya tidak sesuai
         if (!$user || !in_array($user->role, ['superadmin', 'user'])) {
             return redirect()->back()->withErrors(['email' => 'Email tidak valid atau tidak memiliki izin.']);
+        }
+
+        // Jika password baru sama dengan password lama
+        if (Hash::check($request->password, $user->password)) {
+            return redirect()->back()->withErrors(['Password' => 'Password Sama.']);
         }
 
         // Mengubah password pengguna dengan password baru yang di-hash

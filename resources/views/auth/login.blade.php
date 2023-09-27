@@ -80,22 +80,17 @@
                                 </div>
                             </div>
                             <div class="row mb-3 px-3">
-                                <button type="submit" class="btn btn-blue text-center">Login</button>
-                            </div>
-                            <div class="row mb-4 px-3">
-                                <small class="font-weight-bold">Don't have an account? <a class="text-danger"
+                                <small class="font-weight-bold">Belum Punya Akun? <a class="text-danger mr-3"
                                         href="{{ route('register') }}">Register</a></small>
-                            </div>
-                            <div class="row mb-4 px-3">
                                 <small class="font-weight-bold">Lupa?<a href="#" class="text-danger"
                                         data-toggle="modal" data-target="#forgotModal"> Forgot</a>
                                 </small>
                             </div>
                             <div class="row mb-4 px-3">
+                                <button type="submit" class="btn btn-blue text-center mr-2">Login</button>
                                 <a href="{{ route('beranda') }}" class="btn btn-danger font-weight-bold">Back To Landing
                                     Page</a>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -119,9 +114,11 @@
                     Please choose one of the options below:
                 </div>
                 <div class="modal-footer">
-                    <a href="{{ route('password.forgot') }}" class="btn btn-primary">Forgot Password</a>
-                    <a href="{{ route('email.forgot') }}" class="btn btn-secondary">Forgot Email</a>
-                    <a href="{{ route('identity.verifyForm') }}" class="btn btn-info">Change Email</a>
+                    <a href="{{ route('password.forgot') }}" class="btn btn-primary d-block mx-auto">Forgot Password</a>
+                    <a href="{{ route('email.forgot') }}" class="btn btn-secondary d-block mx-auto">Forgot
+                        Email</a>
+                    <a href="{{ route('identity.verifyForm') }}" class="btn btn-info d-block mx-auto">Change
+                        Email</a>
                     <!-- New Button -->
                 </div>
             </div>
