@@ -27,7 +27,7 @@
 
         .pagination-links {
             position: relative;
-            margin-left: 1000px;
+            margin-left: 850px;
             bottom: 0;
             right: 0;
         }

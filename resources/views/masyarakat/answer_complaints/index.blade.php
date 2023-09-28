@@ -28,7 +28,7 @@
 
         .pagination-links {
             position: relative;
-            margin-left: 1000px;
+            margin-left: 850px;
             bottom: 0;
             right: 0;
         }
@@ -68,9 +68,9 @@
                         <th width="auto">Description</th>
                         <th width="auto">Status</th>
                         <th width="auto">Department</th>
-                        <th width="auto">Answer</th>
                         <th width="auto">Answer Date</th>
                         <th width="auto">Answer Time</th>
+                        <th width="auto">Action1</th>
                     </tr>
                     @forelse ($complaints as $key => $complaint)
                         <tr>
@@ -81,10 +81,39 @@
                             <td>{{ $complaint->description }}</td>
                             <td>{{ $complaint->status }}</td>
                             <td>{{ $complaint->department->name }}</td>
-                            <td>{{ $complaint->answerComplaint[0]->answer }}</td>
                             <td>{{ $complaint->answerComplaint[0]->answer_complaint_date }}</td>
                             <td>{{ $complaint->answerComplaint[0]->time }}</td>
+                            <td>
+                                <button type="button" class="btn btn-primary view-answer" data-toggle="modal"
+                                    data-target="#answerModal{{ $complaint->id }}">
+                                    View Answer
+                                </button>
+                            </td>
                         </tr>
+                        <!-- Modal untuk Jawaban -->
+                        <div class="modal fade" id="answerModal{{ $complaint->id }}" tabindex="-1" role="dialog"
+                            aria-labelledby="answerModalLabel{{ $complaint->id }}" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="answerModalLabel{{ $complaint->id }}">Jawaban Pengaduan
+                                        </h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!-- Tampilkan jawaban pengaduan di sini -->
+                                        <div style="text-align: justify; margin: 20px;">
+                                            {{ $complaint->answerComplaint[0]->answer }}
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     @empty
                         <tr>
                             <td colspan="10" class="text-center">Mohon maaf, pengaduan Anda belum dijawab.</td>
