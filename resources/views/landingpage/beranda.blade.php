@@ -113,6 +113,107 @@
             color: #ffD700;
             text-decoration: none;
         }
+
+        .map-controls {
+            position: absolute;
+            top: 1px;
+            right: 1px;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.8);
+            /* Atur opacity background */
+            padding: 2px;
+            border-radius: 3px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            max-width: 200px;
+            /* Atur maksimal lebar kontrol */
+        }
+
+        #toggleControls {
+            font-size: 0.8rem;
+            /* Atur ukuran font tombol */
+            padding: 1px 1px;
+        }
+
+        .input-group,
+        .form-check {
+            font-size: 0.7rem;
+            /* Atur ukuran font elemen input dan label */
+        }
+
+        .form-check-input {
+            transform: scale(0.7);
+            /* Atur ukuran checkbox */
+        }
+
+        .d-none {
+            display: none;
+        }
+
+        .btn i {
+            font-size: 1rem;
+            margin: 2px;
+        }
+
+        /* Styling Container Checkbox */
+        .custom-checkbox {
+            position: relative;
+            padding-left: 25px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            user-select: none;
+        }
+
+        /* Hide Checkbox default */
+        .custom-checkbox input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+        /* Style untuk kotak checkbox */
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 20px;
+            width: 20px;
+            background-color: #eee;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        /* Ketika user meng-hover cursor */
+        .custom-checkbox:hover input~.checkmark {
+            background-color: #ccc;
+        }
+
+        /* Style untuk checkbox ketika dicentang */
+        .custom-checkbox input:checked~.checkmark {
+            background-color: #2196F3;
+        }
+
+        /* Membuat tanda centang */
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+        .custom-checkbox input:checked~.checkmark:after {
+            display: block;
+        }
+
+        .custom-checkbox .checkmark:after {
+            left: 7px;
+            top: 3px;
+            width: 7px;
+            height: 13px;
+            border: solid white;
+            border-width: 0 3px 3px 0;
+            transform: rotate(45deg);
+        }
     </style>
 </head>
 
@@ -785,8 +886,43 @@
                     <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
                         <div class="php-email-form">
                             <div class="row">
-                                <div id="map" style="width: 100%; height: 290px;"></div>
+                                <div id="map" style="width: 100%; height: 290px; position: relative;">
+                                    <!-- Menempatkan kontrol di dalam div peta agar dapat diletakkan di atas peta -->
+                                    <div class="map-controls">
+                                        <button id="toggleControls" class="btn btn-info">Toggle Controls</button>
+                                        <div id="controls" class="d-none">
+                                            <div class="input-group mb-3">
+                                                <input type="text" id="search" class="form-control"
+                                                    placeholder="Cari Departemen">
+                                                <button onclick="searchDepartment()" class="btn btn-primary">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                                <button onclick="clearSearch()" class="btn btn-secondary">
+                                                    <i class="fas fa-times"></i>
+                                                    <!-- Ini adalah icon untuk 'clear' atau 'close', Anda dapat menggantinya sesuai kebutuhan -->
+                                                </button>
+                                            </div>
+                                            <label class="custom-checkbox">Tampilkan Marker
+                                                <input type="checkbox" id="toggleMarker" checked
+                                                    onchange="toggleMarker()">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
                                 <script>
+                                    document.getElementById('toggleControls').addEventListener('click', function() {
+                                        var controls = document.getElementById('controls');
+                                        if (controls.classList.contains('d-none')) {
+                                            controls.classList.remove('d-none');
+                                        } else {
+                                            controls.classList.add('d-none');
+                                        }
+                                    });
+
+                                    function clearSearch() {
+                                        document.getElementById('search').value = ''; // Mengatur nilai dari kotak pencarian menjadi string kosong
+                                    }
                                     // Inisialisasi peta dengan properti pusat dan zoom awal
                                     var map = L.map('map', {
                                         center: [-7.609531, 112.828478],
@@ -814,15 +950,41 @@
                                     // Inisialisasi grup marker untuk departemen-departemen
                                     var markerLayer = L.layerGroup().addTo(map);
 
+
+                                    function searchDepartment() {
+                                        var searchValue = document.getElementById('search').value.toLowerCase();
+                                        markerLayer.eachLayer(function(layer) {
+                                            var popupContent = layer.getPopup().getContent().toLowerCase();
+                                            if (popupContent.includes(searchValue)) {
+                                                map.setView(layer.getLatLng(), map.getZoom());
+                                                layer.openTooltip(); // Buka tooltip saat pencarian cocok.
+                                            } else {
+                                                layer.closeTooltip(); // Tutup tooltip untuk marker lain yang tidak cocok.
+                                            }
+                                        });
+                                    }
+
+
+                                    // Fungsi untuk menampilkan/menyembunyikan marker
+                                    function toggleMarker() {
+                                        var isChecked = document.getElementById('toggleMarker').checked;
+                                        if (isChecked) {
+                                            markerLayer.addTo(map);
+                                        } else {
+                                            map.removeLayer(markerLayer);
+                                        }
+                                    }
                                     // Iterasi melalui data departemen dan menambahkan marker jika koordinat dan nama tersedia
                                     @foreach ($departements as $departement)
                                         @if ($departement->latitude && $departement->longitude && $departement->name)
                                             var marker = L.marker([{{ $departement->latitude }}, {{ $departement->longitude }}])
                                                 .addTo(markerLayer)
-                                                .bindPopup("{{ $departement->name }}");
+                                                .bindPopup("{{ $departement->name }}")
+                                                .bindTooltip("{{ $departement->name }}", {
+                                                    direction: "top"
+                                                }); // Tambahkan tooltip di atas marker.
                                         @endif
                                     @endforeach
-
                                     // Menentukan pilihan lapisan peta
                                     var baseLayers = {
                                         "Streets": streets,
