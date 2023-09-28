@@ -214,6 +214,16 @@
             border-width: 0 3px 3px 0;
             transform: rotate(45deg);
         }
+
+        .btn-transparent {
+            background-color: transparent;
+            border: 2px solid #fff;
+            padding: 0;
+            /* Menghilangkan padding */
+            color: #fff;
+            /* Warna teks untuk tombol transparan */
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -612,12 +622,82 @@
 
                 <div class="row">
                     <div class="col-lg-9 text-center text-lg-start">
-                        <h3>Voice your complaints</h3>
-                        <p style="text-align: justify;"> Your complaints are essential to us. If you have any concerns
-                            or issues to address, our department is here to listen and take appropriate action. Please
-                            don't hesitate to voice your feedback, as it helps us improve our services and ensure your
-                            satisfaction. Thank you for giving us the opportunity to better serve you.</p>
+                        <h3 id="complaintsTitle">Voice your complaints</h3>
+                        <p id="complaintsContent" style="text-align: justify;">
+                            Your complaints are essential to us. If you have any concerns or issues to address, our
+                            department is here
+                            to listen and take appropriate action. Please don't hesitate to voice your feedback, as it
+                            helps us improve
+                            our services and ensure your satisfaction. Thank you for giving us the opportunity to better
+                            serve you.
+                        </p>
+                        <button id="translateButton" class="btn btn-transparent"
+                            onclick="translateText()">Translate</button>
                     </div>
+
+                    <script>
+                        // Variabel untuk menyimpan teks asli
+                        var originalText = {
+                            'complaintsTitle': 'Voice your complaints',
+                            'complaintsContent': 'Your complaints are essential to us. If you have any concerns or issues to address, our department is here to listen and take appropriate action. Please don\'t hesitate to voice your feedback, as it helps us improve our services and ensure your satisfaction. Thank you for giving us the opportunity to better serve you.'
+                        };
+
+                        // Fungsi untuk mengganti bahasa konten
+                        function translateText() {
+                            // Anda dapat menentukan versi terjemahan di sini
+                            var translations = {
+                                'en': {
+                                    'complaintsTitle': 'Voice your complaints',
+                                    'complaintsContent': 'Your complaints are essential to us. If you have any concerns or issues to address, our department is here to listen and take appropriate action. Please don\'t hesitate to voice your feedback, as it helps us improve our services and ensure your satisfaction. Thank you for giving us the opportunity to better serve you.'
+                                },
+                                'id': {
+                                    'complaintsTitle': 'Sampaikan Keluhan Anda',
+                                    'complaintsContent': 'Keluhan Anda sangat penting bagi kami. Jika Anda memiliki kekhawatiran atau masalah yang perlu diatasi, departemen kami siap mendengarkan dan mengambil tindakan yang sesuai. Jangan ragu untuk menyampaikan masukan Anda, karena hal ini membantu kami meningkatkan layanan kami dan memastikan kepuasan Anda. Terima kasih telah memberikan kami kesempatan untuk melayani Anda dengan lebih baik.'
+                                }
+                            };
+
+                            // Ganti 'id-bahasa-tujuan' dengan kode bahasa yang Anda inginkan (misalnya, 'en' untuk bahasa Inggris, 'id' untuk bahasa Indonesia)
+                            var targetLanguage = 'id';
+
+                            // Mendapatkan semua elemen yang perlu diterjemahkan
+                            var elementsToTranslate = document.querySelectorAll('[id^="complaints"]');
+
+                            // Mendapatkan teks tombol terjemahkan
+                            var translateButton = document.getElementById('translateButton');
+
+                            // Cek apakah teks tombol adalah 'Translate' atau 'Kembali' dan sesuaikan tindakan berdasarkan itu
+                            if (translateButton.textContent === 'Translate') {
+                                // Menyimpan teks asli
+                                var originalTextContent = {};
+                                for (var i = 0; i < elementsToTranslate.length; i++) {
+                                    var id = elementsToTranslate[i].id;
+                                    originalTextContent[id] = elementsToTranslate[i].textContent;
+                                }
+
+                                // Mengganti teks di setiap elemen dengan versi terjemahan yang sesuai
+                                for (var i = 0; i < elementsToTranslate.length; i++) {
+                                    var id = elementsToTranslate[i].id;
+                                    if (translations[targetLanguage] && translations[targetLanguage][id]) {
+                                        elementsToTranslate[i].textContent = translations[targetLanguage][id];
+                                    }
+                                }
+
+                                // Mengganti teks tombol menjadi 'Kembali'
+                                translateButton.textContent = 'Asil';
+                            } else {
+                                // Mengembalikan teks ke bahasa asli
+                                for (var i = 0; i < elementsToTranslate.length; i++) {
+                                    var id = elementsToTranslate[i].id;
+                                    if (originalText[id]) {
+                                        elementsToTranslate[i].textContent = originalText[id];
+                                    }
+                                }
+
+                                // Mengganti teks tombol menjadi 'Translate'
+                                translateButton.textContent = 'Translate';
+                            }
+                        }
+                    </script>
                     <div class="col-lg-3 cta-btn-container text-center">
                         <a class="cta-btn align-middle" href="{{ route('login') }}"
                             style="text-decoration: none;">Voice your complaints</a>
