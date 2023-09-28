@@ -63,9 +63,14 @@ Route::post('/password/submit-reset', [ForgotPasswordController::class, 'handleR
 Route::get('/forgot-email', [ForgotEmailController::class, 'showForgotForm'])->name('email.forgot');
 Route::post('/forgot-email', [ForgotEmailController::class, 'handleForgot']);
 
-// menambahkan rute change email
+// Menambahkan rute untuk verifikasi identitas
 Route::get('/verify-identity', [ChangeEmailController::class, 'showVerifyForm'])->name('identity.verifyForm');
 Route::post('/verify-identity', [ChangeEmailController::class, 'verifyIdentity'])->name('identity.verify');
+
+// Menambahkan rute untuk menampilkan formulir perubahan email
+Route::get('/change-email/{name}', [ChangeEmailController::class, 'showChangeEmailForm'])->name('email.showChangeForm');
+
+// Menambahkan rute untuk menangani perubahan email
 Route::post('/change-email', [ChangeEmailController::class, 'handleChangeEmail'])->name('email.change');
 
 

@@ -8,11 +8,13 @@ use Illuminate\Support\Facades\Hash;
 
 class ChangeEmailController extends Controller
 {
+    // Menampilkan formulir verifikasi identitas
     public function showVerifyForm()
     {
         return view('auth.verifyIdentity');
     }
 
+    // Meng-handle permintaan verifikasi identitas
     public function verifyIdentity(Request $request)
     {
         // Validasi input dari formulir
@@ -47,9 +49,25 @@ class ChangeEmailController extends Controller
             ]);
         }
 
+        // Redirect ke halaman perubahan email dengan nama sebagai parameter
+        return redirect()->route('email.showChangeForm', ['name' => $user->name]);
+    }
+
+    // Menampilkan formulir perubahan email
+    public function showChangeEmailForm($name)
+    {
+        // Temukan pengguna berdasarkan nama
+        $user = User::where('name', $name)->first();
+
+        // Jika pengguna tidak ditemukan, arahkan ke halaman sebelumnya dengan pesan error
+        if (!$user) {
+            return redirect()->back()->withErrors(['name' => 'Nama pengguna tidak valid.']);
+        }
+
         return view('auth.changeEmail', ['user' => $user]);
     }
 
+    // Meng-handle permintaan perubahan email
     public function handleChangeEmail(Request $request)
     {
         $request->validate([
@@ -58,7 +76,7 @@ class ChangeEmailController extends Controller
 
         $user = User::find($request->user_id);
 
-        if($user->email == $request->new_email){
+        if ($user->email == $request->new_email) {
             // Redirect kembali ke halaman sebelumnya dengan pesan error
             return redirect()->back()->withErrors(['new_email' => 'Email baru tidak boleh sama dengan email yang saat ini terdaftar.']);
         }
@@ -66,7 +84,7 @@ class ChangeEmailController extends Controller
         $user->save();
 
         // Redirect ke halaman login dengan pesan sukses
-        return redirect()->route('login')->with('status', 'email berhasil diubah!');
+        return redirect()->route('login')->with('status', 'Email berhasil diubah!');
     }
 }
 
