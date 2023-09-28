@@ -1041,7 +1041,7 @@
     <!-- ======= Footer ======= -->
     <footer id="footer">
 
-        <div class="footer-newsletter">
+        {{-- <div class="footer-newsletter">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-6">
@@ -1060,7 +1060,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         <div class="modal fade" id="trackResultModal" tabindex="-1" role="dialog"
             aria-labelledby="trackResultModalLabel" aria-hidden="true">
