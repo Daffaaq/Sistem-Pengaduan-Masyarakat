@@ -57,6 +57,11 @@ class ChangeEmailController extends Controller
         ]);
 
         $user = User::find($request->user_id);
+
+        if($user->email == $request->new_email){
+            // Redirect kembali ke halaman sebelumnya dengan pesan error
+            return redirect()->back()->withErrors(['new_email' => 'Email baru tidak boleh sama dengan email yang saat ini terdaftar.']);
+        }
         $user->email = $request->new_email;
         $user->save();
 
