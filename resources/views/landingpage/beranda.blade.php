@@ -481,47 +481,54 @@
                     <div class="card" data-aos="fade-up" data-aos-easing="ease" data-aos-duration="1000"
                         data-aos-delay="0">
                         <div class="card-body">
-                            <i class="fas fa-pencil fa-2x mx-auto mt-4"></i>
+                            <i class="fas fa-id-card fa-2x mx-auto mt-4"></i>
                             <h5 class="card-title">Langkah 1</h5>
-                            <p class="card-text">Warga mnginputkan pengaduan melalui website SIPMA.</p>
-                            <button class="btn" onclick="location.href='#'">Mulai Pengaduan</button>
+                            <p class="card-text">Warga Registrasi terlebih dahulu.</p>
+                        </div>
+                    </div>
+                    <div class="card" data-aos="fade-up" data-aos-easing="ease" data-aos-duration="1000"
+                        data-aos-delay="0">
+                        <div class="card-body">
+                            <i class="fas fa-pencil fa-2x mx-auto mt-4"></i>
+                            <h5 class="card-title">Langkah 2</h5>
+                            <p class="card-text">Warga menginputkan pengaduan melalui website SIPMA.</p>
                         </div>
                     </div>
                     <div class="card" data-aos="fade-up" data-aos-easing="ease" data-aos-duration="1000"
                         data-aos-delay="100">
                         <div class="card-body">
-                            <i class="fas fa-pencil fa-2x mx-auto mt-4"></i>
-                            <h5 class="card-title">Langkah 2</h5>
-                            <p class="card-text">Dalam waktu 3 hari, laporan Anda akan kami verifikasi dan selanjutnya
-                                akan disampaikan kepada instansi berwenang.</p>
-                            <button class="btn" onclick="location.href='#'">Selengkapnya</button>
+                            <i class="fas fa-clock fa-2x mx-auto mt-4"></i>
+                            <h5 class="card-title">Langkah 3</h5>
+                            <p class="card-text">Warga Menunggu Pengaduannya di tidak lanjuti untuk memantau progress
+                                penagduannya melalui trackComplaint.</p>
                         </div>
                     </div>
                     <div class="card" data-aos="fade-up" data-aos-easing="ease" data-aos-duration="1000"
                         data-aos-delay="200">
                         <div class="card-body">
-                            <i class="fas fa-home fa-2x mx-auto mt-4"></i>
-                            <h5 class="card-title">Langkah 3</h5>
-                            <p class="card-text">Tindak lanjuti oleh pihak berwenang.</p>
-                            <button class="btn" onclick="location.href='#'">Selengkapnya</button>
+                            <i class="fas fa-truck-droplet fa-2x mx-auto mt-4"></i>
+                            <h5 class="card-title">Langkah 4</h5>
+                            <p class="card-text">Pengaduan akan ditindak lanjuti oleh dinas yang dituju saat melakukan
+                                pengaduan.</p>
                         </div>
                     </div>
                     <div class="card" data-aos="fade-up" data-aos-easing="ease" data-aos-duration="1000"
                         data-aos-delay="300">
                         <div class="card-body">
-                            <i class="fas fa-check-circle fa-2x mx-auto mt-4"></i>
-                            <h5 class="card-title">Langkah 4</h5>
-                            <p class="card-text">Laporan diverifikasi oleh tim kami.</p>
-                            <button class="btn" onclick="location.href='#'">Selengkapnya</button>
+                            <i class="fas fa-circle-info fa-2x mx-auto mt-4"></i>
+                            <h5 class="card-title">Langkah 5</h5>
+                            <p class="card-text">Pengaduan Jika Statusnya Pending Artinya Baru dikirim Statusnya In
+                                Progress Sudah ditindak lanjuti namun belum Dijawab statusnya sudah Resolved Maka
+                                pengaduan selesai dijawab.</p>
                         </div>
                     </div>
                     <div class="card" data-aos="fade-up" data-aos-easing="ease" data-aos-duration="1000"
                         data-aos-delay="400">
                         <div class="card-body">
-                            <i class="fas fa-check-circle fa-2x mx-auto mt-4"></i>
-                            <h5 class="card-title">Langkah 5</h5>
-                            <p class="card-text">Laporan diteruskan kepada instansi terkait untuk tindak lanjut.</p>
-                            <button class="btn" onclick="location.href='#'">Selengkapnya</button>
+                            <i class="fas fa-envelope-circle-check fa-2x mx-auto mt-4"></i>
+                            <h5 class="card-title">Langkah 6</h5>
+                            <p class="card-text">Warga Bisa melihat Jawaban dari pengaduan Jika Statusnya sudah
+                                Resolved.</p>
                         </div>
                     </div>
                 </div>
