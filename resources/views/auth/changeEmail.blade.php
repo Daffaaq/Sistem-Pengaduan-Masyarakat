@@ -45,7 +45,7 @@
         <span></span> <span></span> <span></span> <span></span> <span></span>
         <div class="signin">
             <div class="content">
-                <h2>Reset Password</h2>
+                <h2>Reset Email</h2>
                 <form action="{{ route('email.change') }}" method="post">
                     @csrf
                     <div class="form">

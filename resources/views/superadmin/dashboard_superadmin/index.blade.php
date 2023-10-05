@@ -207,10 +207,10 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="card-body">
+                            {{-- <div class="card-body">
                                 <canvas class="chart" id="line-chart"
                                     style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                            </div>
+                            </div> --}}
                             <!-- /.card-body -->
                             <div class="card-footer bg-transparent">
                                 <div class="row">
@@ -224,7 +224,7 @@
                                     <!-- ./col -->
                                     <div class="col-4 text-center">
                                         <input type="text" class="knob" data-readonly="true"
-                                            value="{{ $pendingComplaints }}" data-width="60" data-height="60"
+                                            value="{{ $pendingComplaints }}" data-width="100" data-height="100"
                                             data-fgColor="#39CCCC">
 
                                         <div class="text-white">Pengaduan Pending</div>
@@ -232,17 +232,51 @@
                                     <!-- ./col -->
                                     <div class="col-4 text-center">
                                         <input type="text" class="knob" data-readonly="true"
-                                            value="{{ $inProgressComplaints }}" data-width="60" data-height="60"
+                                            value="{{ $inProgressComplaints }}" data-width="100" data-height="100"
                                             data-fgColor="#39CCCC">
 
                                         <div class="text-white">Pengaduan In Progress</div>
                                     </div>
                                     <div class="col-4 text-center">
                                         <input type="text" class="knob" data-readonly="true"
-                                            value="{{ $resolvedComplaints }}" data-width="60" data-height="60"
+                                            value="{{ $resolvedComplaints }}" data-width="100" data-height="100"
                                             data-fgColor="#39CCCC">
 
                                         <div class="text-white">Pengaduan Resolved</div>
+                                    </div>
+                                    <!-- ./col -->
+                                </div>
+                                <!-- /.row -->
+                                <div class="row">
+                                    {{-- <div class="col-4 text-center">
+                                        <input type="text" class="knob" data-readonly="true"
+                                            value="{{ $totalComplaints }}" data-width="60" data-height="60"
+                                            data-fgColor="#39CCCC">
+
+                                        <div class="text-white">Total Pengaduan</div>
+                                    </div> --}}
+                                    <!-- ./col -->
+                                    <div class="col-4 text-center">
+                                        <input type="text" class="knob" data-readonly="true"
+                                            value="{{ $totalLikes }}" data-width="100" data-height="100"
+                                            data-fgColor="#39CCCC">
+
+                                        <div class="text-white">Pengaduan Pending</div>
+                                    </div>
+                                    <!-- ./col -->
+                                    <div class="col-4 text-center">
+                                        {{-- <input type="text" class="knob" data-readonly="true"
+                                            value="{{ $totalDislikes }}" data-width="100" data-height="100"
+                                            data-fgColor="#39CCCC">
+
+                                        <div class="text-white">Pengaduan In Progress</div> --}}
+                                    </div>
+                                    <div class="col-4 text-center">
+                                        <input type="text" class="knob" data-readonly="true"
+                                            value="{{ $totalDislikes }}" data-width="100" data-height="100"
+                                            data-fgColor="#39CCCC">
+
+                                        <div class="text-white">Pengaduan In Progress</div>
                                     </div>
                                     <!-- ./col -->
                                 </div>
