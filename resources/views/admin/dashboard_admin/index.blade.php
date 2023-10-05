@@ -95,7 +95,7 @@
                             <div class="card-header">
                                 <h3 class="card-title">
                                     <i class="fas fa-chart-pie mr-1"></i>
-                                    Sales
+                                    Charts
                                 </h3>
                                 <div class="card-tools">
                                     <ul class="nav nav-pills ml-auto">
@@ -133,7 +133,7 @@
                             <div class="card-header border-0">
                                 <h3 class="card-title">
                                     <i class="fas fa-th mr-1"></i>
-                                    Sales Graph
+                                    Data Log
                                 </h3>
 
                                 <div class="card-tools">
@@ -145,10 +145,10 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="card-body">
+                            {{-- <div class="card-body">
                                 <canvas class="chart" id="line-chart"
                                     style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                            </div>
+                            </div> --}}
                             <!-- /.card-body -->
                             <div class="card-footer bg-transparent">
                                 <div class="row">
@@ -162,7 +162,7 @@
                                     <!-- ./col -->
                                     <div class="col-4 text-center">
                                         <input type="text" class="knob" data-readonly="true"
-                                            value="{{ $pendingComplaints }}" data-width="60" data-height="60"
+                                            value="{{ $pendingComplaints }}" data-width="120" data-height="120"
                                             data-fgColor="#39CCCC">
 
                                         <div class="text-white">Pengaduan Pending</div>
@@ -170,14 +170,14 @@
                                     <!-- ./col -->
                                     <div class="col-4 text-center">
                                         <input type="text" class="knob" data-readonly="true"
-                                            value="{{ $inProgressComplaints }}" data-width="60" data-height="60"
+                                            value="{{ $inProgressComplaints }}" data-width="120" data-height="120"
                                             data-fgColor="#39CCCC">
 
                                         <div class="text-white">Pengaduan In Progress</div>
                                     </div>
                                     <div class="col-4 text-center">
                                         <input type="text" class="knob" data-readonly="true"
-                                            value="{{ $resolvedComplaints }}" data-width="60" data-height="60"
+                                            value="{{ $resolvedComplaints }}" data-width="120" data-height="120"
                                             data-fgColor="#39CCCC">
 
                                         <div class="text-white">Pengaduan Resolved</div>
