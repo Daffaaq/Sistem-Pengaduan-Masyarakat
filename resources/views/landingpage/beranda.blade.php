@@ -1173,19 +1173,18 @@
         <div class="footer-top">
             <div class="container">
                 <div class="row">
-
-                    <div class="col-lg-3 col-md-6 footer-contact">
-                        <h3>Arsha</h3>
+                    <div class="col-lg-3 col-md-6 mx-auto text-center">
+                        <h4>SIPMA Pasuruan</h4>
                         <p>
-                            A108 Adam Street <br>
-                            New York, NY 535022<br>
-                            United States <br><br>
-                            <strong>Phone:</strong> +1 5589 55488 55<br>
-                            <strong>Email:</strong> info@example.com<br>
+                            Jl. Raya Raci Km. 09 <br>
+                            Pasuruan - Bangil Dinas Komunikasi dan Informatika Kabupaten Pasuruan 671115<br>
+                            Indonesia <br><br>
+                            <strong>Telepon/Fax:</strong> 0343429064<br>
+                            <strong>Email:</strong> diskominfo@pasuruankab.go.id<br>
                         </p>
                     </div>
 
-                    <div class="col-lg-3 col-md-6 footer-links">
+                    {{-- <div class="col-lg-3 col-md-6 footer-links">
                         <h4>Useful Links</h4>
                         <ul>
                             <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
@@ -1205,11 +1204,11 @@
                             <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
                             <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
                         </ul>
-                    </div>
+                    </div> --}}
 
-                    <div class="col-lg-3 col-md-6 footer-links">
-                        <h4>Our Social Networks</h4>
-                        <p>Cras fermentum odio eu feugiat lide par naso tierra videa magna derita valies</p>
+                    <div class="col-lg-3 col-md-6 mx-auto text-center">
+                        <h4>Temukan Kami di Media Sosial</h4>
+                        <p>Ikuti kami untuk informasi terbaru dan interaksi lebih lanjut.</p>
                         <div class="social-links mt-3">
                             <a href="https://www.twitter.com/pemkabpasuruan_" class="twitter"><i
                                     class="bx bxl-twitter"></i></a>
